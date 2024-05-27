@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/font.dart';
 import 'package:just_music/core/styling/icons.dart';
 import 'package:just_music/core/helpers/spacer.dart';
@@ -32,14 +33,7 @@ class CardSong extends StatelessWidget {
                 .copyWith(color: AppColor.white.withAlpha(120)),
           ),
           spaceWidth(5),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(
-              AppIcon.threeDotVertical,
-              color: AppColor.white,
-              size: 20.h,
-            ),
-          ),
+          CustomIconButton(onPressed: () {}, icon: AppIcon.threeDotVertical),
         ],
       ),
 

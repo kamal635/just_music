@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/colors.dart';
 import 'package:just_music/core/styling/font.dart';
 import 'package:just_music/core/styling/icons.dart';
@@ -55,14 +56,9 @@ class MusicTrackPlayer extends StatelessWidget {
               // Buttons
               Row(
                 children: [
-                  IconButton(
-                    // Previous button
-                    icon: Icon(
-                      Icons.skip_previous,
-                      size: 22.h,
-                    ),
-                    onPressed: () {},
-                  ),
+                  // Previous Button
+                  CustomIconButton(
+                      onPressed: () {}, icon: AppIcon.skipPrevious),
 
                   // Stop button
                   IconButton.filled(
@@ -77,13 +73,7 @@ class MusicTrackPlayer extends StatelessWidget {
                   ),
 
                   // Next button
-                  IconButton(
-                    icon: Icon(
-                      Icons.skip_next,
-                      size: 22.h,
-                    ),
-                    onPressed: () {},
-                  ),
+                  CustomIconButton(onPressed: () {}, icon: AppIcon.skipNext),
                 ],
               ),
             ],
@@ -97,7 +87,7 @@ class MusicTrackPlayer extends StatelessWidget {
             data: SliderTheme.of(context).copyWith(
               thumbShape: SliderComponentShape.noThumb,
               overlayShape: SliderComponentShape.noOverlay,
-              activeTrackColor: AppColor.secondary,
+              activeTrackColor: AppColor.orange,
               inactiveTrackColor: AppColor.white.withAlpha(140),
             ),
             child: Slider(

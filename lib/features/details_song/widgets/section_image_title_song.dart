@@ -16,8 +16,8 @@ class SectionImageAndTitlsSong extends StatelessWidget {
           borderRadius: BorderRadius.circular(8.r),
           child: Image.asset(
             "assets/images/PedriMobile-1.jpg",
-            width: 230.r,
-            height: 230.r,
+            width: 260.r,
+            height: 300.r,
           ),
         ),
 
