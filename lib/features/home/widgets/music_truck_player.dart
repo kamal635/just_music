@@ -16,7 +16,7 @@ class MusicTrackPlayer extends StatelessWidget {
         Container(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
           color: AppColor.primary,
-          height: 60.h,
+          height: kToolbarHeight + 5.h,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -83,10 +83,29 @@ class MusicTrackPlayer extends StatelessWidget {
                       size: 22.h,
                     ),
                     onPressed: () {},
-                  )
+                  ),
                 ],
-              )
+              ),
             ],
+          ),
+        ),
+
+        // Slider truck
+        SizedBox(
+          height: 4.h,
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              thumbShape: SliderComponentShape.noThumb,
+              overlayShape: SliderComponentShape.noOverlay,
+              activeTrackColor: AppColor.secondary,
+              inactiveTrackColor: AppColor.white.withAlpha(140),
+            ),
+            child: Slider(
+              min: 0,
+              max: 1000,
+              value: 200,
+              onChanged: (onChanged) {},
+            ),
           ),
         ),
       ],
