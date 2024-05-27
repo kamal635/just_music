@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/styling/font.dart';
 import 'package:just_music/core/styling/icons.dart';
 import 'package:just_music/core/helpers/spacer.dart';
@@ -22,7 +23,8 @@ class CustomSliverAppBar extends StatelessWidget {
         children: [
           IconButton(
             color: AppColor.orange,
-            icon: const Icon(
+            icon: Icon(
+              size: 24.h,
               AppIcon.menu,
             ),
             onPressed: () {},
@@ -39,15 +41,17 @@ class CustomSliverAppBar extends StatelessWidget {
       actions: [
         IconButton(
           color: AppColor.orange,
-          icon: const Icon(
+          icon: Icon(
             AppIcon.search,
+            size: 24.h,
           ),
           onPressed: () {},
         ),
         IconButton(
           color: AppColor.orange,
-          icon: const Icon(
+          icon: Icon(
             AppIcon.settings,
+            size: 24.h,
           ),
           onPressed: () {},
         ),

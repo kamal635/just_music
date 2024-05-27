@@ -7,4 +7,6 @@ abstract class AppIcon {
   static const IconData threeDotVertical = Icons.more_vert;
   static const IconData menu = Icons.notes;
   static const IconData settings = Icons.settings;
+  static const IconData arrowBack = Icons.arrow_back;
+  static const IconData favoriteBorder = Icons.favorite_border;
 }

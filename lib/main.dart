@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/features/home/home_view.dart';
-import "package:flutter_screenutil/flutter_screenutil.dart";
+import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/styling/colors.dart';
+import 'package:just_music/just_music_app.dart';
 
-void main() {
+Future<void> main() async {
+  await ScreenUtil.ensureScreenSize();
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    systemNavigationBarColor: AppColor.primary,
+  ));
   runApp(const JustMusicApp());
 }
 
@@ -24,4 +31,3 @@ class JustMusicApp extends StatelessWidget {
     );
   }
 }
-// add new branch

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:just_music/core/helpers/navigation.dart';
+import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/features/home/widgets/card_song.dart';
 
 class ListViewCardSong extends StatelessWidget {
@@ -10,10 +12,12 @@ class ListViewCardSong extends StatelessWidget {
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 40,
+        itemCount: 3,
         itemBuilder: (context, i) {
           return InkWell(
-            onTap: () {},
+            onTap: () {
+              context.pushNamed(RouterName.detailsSongView);
+            },
             child: const CardSong(),
           );
         });
