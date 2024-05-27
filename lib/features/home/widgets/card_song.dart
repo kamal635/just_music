@@ -34,9 +34,10 @@ class CardSong extends StatelessWidget {
           spaceWidth(5),
           IconButton(
             onPressed: () {},
-            icon: const Icon(
+            icon: Icon(
               AppIcon.threeDotVertical,
               color: AppColor.white,
+              size: 20.h,
             ),
           ),
         ],

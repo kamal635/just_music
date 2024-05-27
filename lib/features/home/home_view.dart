@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:just_music/features/home/widgets/home_view_body.dart';
+import 'package:just_music/features/home/widgets/music_truck_player.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -7,7 +8,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      // bottomSheet: BottomSheet(onClosing: (){}, builder: (context){}),
+      bottomNavigationBar: MusicTrackPlayer(),
       body: HomeViewBody(),
     );
   }

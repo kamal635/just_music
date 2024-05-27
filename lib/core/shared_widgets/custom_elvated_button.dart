@@ -35,12 +35,12 @@ class CustomElvatedButton extends StatelessWidget {
           Icon(
             icon,
             color: AppColor.white,
-            size: 28.h,
+            size: 24.h,
           ),
           spaceWidth(10),
           Text(
             title,
-            style: AppFonts.medium_16.copyWith(color: AppColor.white),
+            style: AppFonts.medium_14.copyWith(color: AppColor.white),
           ),
         ],
       ),
