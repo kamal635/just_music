@@ -5,8 +5,8 @@ import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/colors.dart';
 import 'package:just_music/core/styling/icons.dart';
 
-class ButtonsTransationsDetailsSong extends StatelessWidget {
-  const ButtonsTransationsDetailsSong({super.key});
+class SectionControlButtonSong extends StatelessWidget {
+  const SectionControlButtonSong({super.key});
 
   @override
   Widget build(BuildContext context) {
