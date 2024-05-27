@@ -12,7 +12,7 @@ class ListViewCardSong extends StatelessWidget {
         padding: EdgeInsets.zero,
         shrinkWrap: true,
         physics: const NeverScrollableScrollPhysics(),
-        itemCount: 3,
+        itemCount: 15,
         itemBuilder: (context, i) {
           return InkWell(
             onTap: () {

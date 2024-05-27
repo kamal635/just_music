@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/styling/colors.dart';
-import 'package:just_music/just_music_app.dart';
+import 'package:just_music/features/home/home_view.dart';
 
 Future<void> main() async {
   await ScreenUtil.ensureScreenSize();
