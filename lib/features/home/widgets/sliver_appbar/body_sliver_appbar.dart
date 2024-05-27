@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/font.dart';
 import 'package:just_music/core/styling/icons.dart';
 import 'package:just_music/core/helpers/spacer.dart';
@@ -21,13 +21,10 @@ class CustomSliverAppBar extends StatelessWidget {
       // here: leading icons
       leading: Row(
         children: [
-          IconButton(
-            color: AppColor.orange,
-            icon: Icon(
-              size: 24.h,
-              AppIcon.menu,
-            ),
+          CustomIconButton(
             onPressed: () {},
+            icon: AppIcon.menu,
+            color: AppColor.orange,
           ),
           spaceWidth(12),
           Text(
@@ -39,21 +36,15 @@ class CustomSliverAppBar extends StatelessWidget {
 
       //  here: action icons
       actions: [
-        IconButton(
-          color: AppColor.orange,
-          icon: Icon(
-            AppIcon.search,
-            size: 24.h,
-          ),
+        CustomIconButton(
           onPressed: () {},
+          icon: AppIcon.search,
+          color: AppColor.orange,
         ),
-        IconButton(
-          color: AppColor.orange,
-          icon: Icon(
-            AppIcon.settings,
-            size: 24.h,
-          ),
+        CustomIconButton(
           onPressed: () {},
+          icon: AppIcon.settings,
+          color: AppColor.orange,
         ),
         spaceWidth(12)
       ],

@@ -9,4 +9,8 @@ abstract class AppIcon {
   static const IconData settings = Icons.settings;
   static const IconData arrowBack = Icons.arrow_back;
   static const IconData favoriteBorder = Icons.favorite_border;
+  static const IconData musicQueue = Icons.queue_music;
+  static const IconData skipNext = Icons.skip_next;
+  static const IconData skipPrevious = Icons.skip_previous;
+  static const IconData repeat = Icons.repeat;
 }
