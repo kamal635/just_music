@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/shared_widgets/background_linear.dart';
 import 'package:just_music/features/details_song/widgets/section_image_title_song.dart';
 import 'package:just_music/features/details_song/widgets/section_slider_track.dart';
-import 'package:just_music/features/details_song/widgets/section_transations_buttons.dart';
+import 'package:just_music/features/details_song/widgets/section_control_button_song.dart';
 
 class DetailsSongViewBody extends StatelessWidget {
   const DetailsSongViewBody({super.key});
@@ -27,7 +27,7 @@ class DetailsSongViewBody extends StatelessWidget {
                     SectionSliderTrack(),
 
                     // Section Buttons Transations
-                    ButtonsTransationsDetailsSong(),
+                    SectionControlButtonSong(),
                   ],
                 ),
               )
