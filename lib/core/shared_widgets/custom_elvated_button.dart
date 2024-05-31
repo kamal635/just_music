@@ -7,12 +7,16 @@ import 'package:just_music/core/styling/font.dart';
 class CustomElvatedButton extends StatelessWidget {
   const CustomElvatedButton(
       {super.key,
-      required this.title,
-      required this.icon,
-      required this.onPressed});
-  final String title;
-  final IconData icon;
+      this.titleWithIcon,
+      this.icon,
+      required this.onPressed,
+      this.title,
+      this.isIcon = true});
+  final String? titleWithIcon;
+  final String? title;
+  final IconData? icon;
   final VoidCallback onPressed;
+  final bool isIcon;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -29,21 +33,26 @@ class CustomElvatedButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 12.w),
       ),
       onPressed: onPressed,
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            icon,
-            color: AppColor.white,
-            size: 24.h,
-          ),
-          spaceWidth(10),
-          Text(
-            title,
-            style: AppFonts.medium_14.copyWith(color: AppColor.white),
-          ),
-        ],
-      ),
+      child: isIcon
+          ? Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  icon,
+                  color: AppColor.white,
+                  size: 24.h,
+                ),
+                spaceWidth(10),
+                Text(
+                  titleWithIcon ?? "",
+                  style: AppFonts.medium_14.copyWith(color: AppColor.white),
+                ),
+              ],
+            )
+          : Text(
+              title ?? "",
+              style: AppFonts.medium_14.copyWith(color: AppColor.white),
+            ),
     );
   }
 }

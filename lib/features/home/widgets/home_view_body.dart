@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/background_linear.dart';
+import 'package:just_music/features/home/logic/check_permission/check_permission_bloc.dart';
+import 'package:just_music/features/home/widgets/grant_permission.dart';
 import 'package:just_music/features/home/widgets/list_view_card_song.dart';
 import 'package:just_music/features/home/widgets/section_double_button.dart';
 import 'package:just_music/features/home/widgets/section_text_form_field.dart';
@@ -13,29 +17,46 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackgroundLinearGradiant(
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          // Sliver AppBar
-          const CustomSliverAppBar(),
+      child: BlocProvider(
+        create: (context) =>
+            di<CheckPermissionBloc>()..add(TappedPermissionEvent()),
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            // Sliver AppBar
+            const CustomSliverAppBar(),
 
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.all(14.r),
-              child: Column(children: [
-                //Form Field
-                const SectionTextFormField(),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Padding(
+                padding: EdgeInsets.all(14.r),
+                child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(
+                  builder: (context, state) {
+                    if (state.permissionStatus == PermissionStatus.denied) {
+                      return const GrantPermission();
+                    }
 
-                spaceHeight(10),
+                    if (state.permissionStatus == PermissionStatus.granted) {
+                      return Column(children: [
+                        //Form Field
+                        const SectionTextFormField(),
 
-                // Double Button
-                const SectionDoubleButton(),
+                        spaceHeight(10),
 
-                const ListViewCardSong(),
-              ]),
+                        // Double Button
+                        const SectionDoubleButton(),
+
+                        const ListViewCardSong(),
+                      ]);
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
+                ),
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
