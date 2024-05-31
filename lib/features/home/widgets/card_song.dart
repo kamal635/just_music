@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/font.dart';
 import 'package:just_music/core/styling/icons.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/styling/colors.dart';
+import 'package:on_audio_query/on_audio_query.dart';
 
 class CardSong extends StatelessWidget {
-  const CardSong({super.key});
-
+  const CardSong({super.key, required this.songModel});
+  final SongModel songModel;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       contentPadding: EdgeInsets.zero,
 
       // leading ( image )
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(12.r),
-        child: Image.asset(
-          "assets/images/PedriMobile-1.jpg",
-          height: 42.h,
-        ),
+      leading: QueryArtworkWidget(
+        id: songModel.id,
+        type: ArtworkType.AUDIO,
       ),
 
       // trailing ( icon )
@@ -28,7 +25,7 @@ class CardSong extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "01:22",
+            "${songModel.duration}",
             style: AppFonts.normal_12
                 .copyWith(color: AppColor.white.withAlpha(120)),
           ),
@@ -38,11 +35,15 @@ class CardSong extends StatelessWidget {
       ),
 
       // title
-      title: const Text("Desperado"),
+      title: Text(
+        songModel.title,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       titleTextStyle: AppFonts.medium_16,
 
       // subtitle
-      subtitle: const Text("Unknown Artist"),
+      subtitle: Text(songModel.artist ?? "no artist"),
       subtitleTextStyle:
           AppFonts.normal_12.copyWith(color: AppColor.white.withAlpha(120)),
     );

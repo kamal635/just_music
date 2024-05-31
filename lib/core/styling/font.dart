@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 abstract class AppFonts {
+  //==================== bold ============================
+  static final TextStyle bold_20 =
+      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold);
+
   //==================== medium ============================
   static final TextStyle medium_14 =
       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500);

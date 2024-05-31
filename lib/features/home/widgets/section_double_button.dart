@@ -12,12 +12,12 @@ class SectionDoubleButton extends StatelessWidget {
       children: [
         CustomElvatedButton(
           icon: AppIcon.play,
-          title: "Play All",
+          titleWithIcon: "Play All",
           onPressed: () {},
         ),
         CustomElvatedButton(
           icon: AppIcon.shuffle,
-          title: "Shuffle",
+          titleWithIcon: "Shuffle",
           onPressed: () {},
         ),
       ],
