@@ -13,10 +13,10 @@ class GetAllSongsRepoImpl implements GetAllSongsRepo {
   @override
   Future<List<SongModel>> getAllSongs() async {
     return await _audioQuery.querySongs(
-        sortType: null,
-        orderType: OrderType.ASC_OR_SMALLER,
-        uriType: UriType.EXTERNAL,
-        ignoreCase: true,
-        path: "/storage/emulated/0/Download");
+      sortType: SongSortType.DATE_ADDED,
+      orderType: OrderType.ASC_OR_SMALLER,
+      uriType: UriType.EXTERNAL,
+      ignoreCase: true,
+    );
   }
 }

@@ -8,7 +8,9 @@ import 'package:on_audio_query/on_audio_query.dart';
 
 class CardSong extends StatelessWidget {
   const CardSong({super.key, required this.songModel});
+
   final SongModel songModel;
+
   @override
   Widget build(BuildContext context) {
     return ListTile(

@@ -7,6 +7,9 @@ import 'package:on_audio_query/on_audio_query.dart';
 part 'get_all_songs_event.dart';
 part 'get_all_songs_state.dart';
 
+// BlocProvider instance in :
+// lib\features\home\widgets\list_view_card_song.dart
+
 class GetAllSongsBloc extends Bloc<GetAllSongsEvent, GetAllSongsState> {
   final GetAllSongsRepoImpl getAllSongsRepoImpl;
 

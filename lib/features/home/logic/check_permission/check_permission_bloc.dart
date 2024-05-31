@@ -5,6 +5,9 @@ import 'package:on_audio_query/on_audio_query.dart';
 part 'check_permission_event.dart';
 part 'check_permission_state.dart';
 
+// BlocProvider instance in :
+// lib\features\home\widgets\home_view_body.dart
+
 class CheckPermissionBloc
     extends Bloc<CheckPermissionEvent, CheckPermissionState> {
   final OnAudioQuery _onAudioQuery;
