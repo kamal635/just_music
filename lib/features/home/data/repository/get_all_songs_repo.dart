@@ -4,10 +4,10 @@ abstract class GetAllSongsRepo {
   Future<List<SongModel>> getAllSongs();
 }
 
-class GetAllSongsRepoImpl implements GetAllSongsRepo {
+class GetSongsFromDeviceRepoImpl implements GetAllSongsRepo {
   final OnAudioQuery _audioQuery;
 
-  GetAllSongsRepoImpl({required OnAudioQuery audioQuery})
+  GetSongsFromDeviceRepoImpl({required OnAudioQuery audioQuery})
       : _audioQuery = audioQuery;
 
   @override

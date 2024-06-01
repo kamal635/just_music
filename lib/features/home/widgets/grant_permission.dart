@@ -29,7 +29,7 @@ class GrantPermission extends StatelessWidget {
             title: " Allow ",
             isIcon: false,
             onPressed: () {
-              context.read<CheckPermissionBloc>().add(TappedPermissionEvent());
+              context.read<CheckPermissionBloc>().add(StatusPermissionEvent());
             }),
       ],
     );
