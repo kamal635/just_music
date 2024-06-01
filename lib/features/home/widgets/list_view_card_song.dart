@@ -8,7 +8,7 @@ import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/core/styling/colors.dart';
 import 'package:just_music/core/styling/font.dart';
-import 'package:just_music/features/home/logic/get_all_songs/get_all_songs_bloc.dart';
+import 'package:just_music/features/home/logic/get_songs_from_device/get_songs_from_device_bloc.dart';
 import 'package:just_music/features/home/widgets/card_song.dart';
 
 class ListViewCardSong extends StatelessWidget {
@@ -18,8 +18,8 @@ class ListViewCardSong extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          di<GetAllSongsBloc>()..add(TriggerGetAllSongsEvent()),
-      child: BlocConsumer<GetAllSongsBloc, GetAllSongsState>(
+          di<GetSongsFromDevice>()..add(TriggerGetSongsFromDeviceEvent()),
+      child: BlocConsumer<GetSongsFromDevice, GetSongsFromDeviceState>(
         listener: (context, state) async {
           if (state.getSongsStatus == GetSongsStatus.failure) {
             await flutterToast(
@@ -28,6 +28,7 @@ class ListViewCardSong extends StatelessWidget {
           }
         },
         builder: (context, state) {
+          // when list of songs is Empty
           if (state.songModel?.isEmpty ?? true) {
             return Expanded(
               child: Column(

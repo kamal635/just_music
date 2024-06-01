@@ -1,25 +1,25 @@
-part of 'get_all_songs_bloc.dart';
+part of 'get_songs_from_device_bloc.dart';
 
 enum GetSongsStatus { initial, loading, loaded, failure }
 
 @immutable
-class GetAllSongsState extends Equatable {
+class GetSongsFromDeviceState extends Equatable {
   final GetSongsStatus getSongsStatus;
   final List<SongModel>? songModel;
   final String? errorMessage;
 
-  const GetAllSongsState({
+  const GetSongsFromDeviceState({
     this.getSongsStatus = GetSongsStatus.initial,
     this.songModel,
     this.errorMessage,
   });
 
-  GetAllSongsState copyWith({
+  GetSongsFromDeviceState copyWith({
     GetSongsStatus? getSongsStatus,
     List<SongModel>? songModel,
     String? errorMessage,
   }) {
-    return GetAllSongsState(
+    return GetSongsFromDeviceState(
       getSongsStatus: getSongsStatus ?? this.getSongsStatus,
       songModel: songModel ?? this.songModel,
       errorMessage: errorMessage ?? this.errorMessage,

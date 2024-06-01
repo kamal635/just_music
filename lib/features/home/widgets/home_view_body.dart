@@ -19,7 +19,7 @@ class HomeViewBody extends StatelessWidget {
     return BackgroundLinearGradiant(
       child: BlocProvider(
         create: (context) =>
-            di<CheckPermissionBloc>()..add(TappedPermissionEvent()),
+            di<CheckPermissionBloc>()..add(StatusPermissionEvent()),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
@@ -27,7 +27,6 @@ class HomeViewBody extends StatelessWidget {
             const CustomSliverAppBar(),
 
             SliverFillRemaining(
-              hasScrollBody: false,
               child: Padding(
                 padding: EdgeInsets.all(14.r),
                 child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(

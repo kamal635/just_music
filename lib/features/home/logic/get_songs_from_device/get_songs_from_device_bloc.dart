@@ -4,23 +4,24 @@ import 'package:just_music/features/home/data/repository/get_all_songs_repo.dart
 import 'package:meta/meta.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-part 'get_all_songs_event.dart';
-part 'get_all_songs_state.dart';
+part 'get_songs_from_device_event.dart';
+part 'get_songs_from_device_state.dart';
 
 // BlocProvider instance in :
 // lib\features\home\widgets\list_view_card_song.dart
 
-class GetAllSongsBloc extends Bloc<GetAllSongsEvent, GetAllSongsState> {
-  final GetAllSongsRepoImpl getAllSongsRepoImpl;
+class GetSongsFromDevice
+    extends Bloc<GetSongsFromDeviceEvent, GetSongsFromDeviceState> {
+  final GetSongsFromDeviceRepoImpl getAllSongsRepoImpl;
 
-  GetAllSongsBloc({required this.getAllSongsRepoImpl})
-      : super(const GetAllSongsState()) {
-    on<TriggerGetAllSongsEvent>(_onTriggerGetAllSongsEvent);
+  GetSongsFromDevice({required this.getAllSongsRepoImpl})
+      : super(const GetSongsFromDeviceState()) {
+    on<TriggerGetSongsFromDeviceEvent>(_onTriggerGetAllSongsEvent);
   }
 
   void _onTriggerGetAllSongsEvent(
-    TriggerGetAllSongsEvent event,
-    Emitter<GetAllSongsState> emit,
+    TriggerGetSongsFromDeviceEvent event,
+    Emitter<GetSongsFromDeviceState> emit,
   ) async {
     emit(state.copyWith(getSongsStatus: GetSongsStatus.loading));
 

@@ -11,14 +11,15 @@ part 'check_permission_state.dart';
 class CheckPermissionBloc
     extends Bloc<CheckPermissionEvent, CheckPermissionState> {
   final OnAudioQuery _onAudioQuery;
+
   CheckPermissionBloc({required OnAudioQuery onAudioQuery})
       : _onAudioQuery = onAudioQuery,
         super(const CheckPermissionState()) {
-    on<TappedPermissionEvent>(_onTappedPermissionEvent);
+    on<StatusPermissionEvent>(_onTappedPermissionEvent);
   }
 
   void _onTappedPermissionEvent(
-    TappedPermissionEvent event,
+    StatusPermissionEvent event,
     Emitter<CheckPermissionState> emit,
   ) async {
     final hasPermission = await _onAudioQuery.checkAndRequest();

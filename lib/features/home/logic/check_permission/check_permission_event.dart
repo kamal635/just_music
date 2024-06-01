@@ -7,4 +7,4 @@ sealed class CheckPermissionEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class TappedPermissionEvent extends CheckPermissionEvent {}
+class StatusPermissionEvent extends CheckPermissionEvent {}
