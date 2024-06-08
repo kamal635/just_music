@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/helpers/duration.dart';
 import 'package:just_music/core/shared_widgets/icon_buttons.dart';
-import 'package:just_music/core/styling/font.dart';
-import 'package:just_music/core/styling/icons.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
+import 'package:just_music/core/utils/app_images.dart';
+import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/styling/colors.dart';
+import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/utils/app_strings.dart';
+import 'package:just_music/features/home/data/model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class CardSong extends StatelessWidget {
-  const CardSong({super.key, required this.songModel});
+  const CardSong({super.key, required this.song});
 
-  final SongModel songModel;
+  final Song song;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +23,12 @@ class CardSong extends StatelessWidget {
 
       // leading ( image )
       leading: QueryArtworkWidget(
-        id: songModel.id,
+        id: song.id,
         type: ArtworkType.AUDIO,
+        nullArtworkWidget: ClipRRect(
+          borderRadius: BorderRadius.circular(40.r),
+          child: Image.asset(AppImages.image1),
+        ),
       ),
 
       // trailing ( icon )
@@ -27,8 +36,10 @@ class CardSong extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            "${songModel.duration}",
-            style: AppFonts.normal_12
+            song.duration! > const Duration(milliseconds: 3600000)
+                ? song.duration!.toFormattedStringWithHours()
+                : song.duration!.toFormattedStringWithoutHours(),
+            style: AppFonts.normal_10
                 .copyWith(color: AppColor.white.withAlpha(120)),
           ),
           spaceWidth(5),
@@ -38,16 +49,20 @@ class CardSong extends StatelessWidget {
 
       // title
       title: Text(
-        songModel.title,
+        song.title,
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
       ),
-      titleTextStyle: AppFonts.medium_16,
+      titleTextStyle: AppFonts.medium_14,
 
       // subtitle
-      subtitle: Text(songModel.artist ?? "no artist"),
+      subtitle: Text(
+        song.artist ?? AppStrings.unknown,
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
+      ),
       subtitleTextStyle:
-          AppFonts.normal_12.copyWith(color: AppColor.white.withAlpha(120)),
+          AppFonts.normal_10.copyWith(color: AppColor.white.withAlpha(120)),
     );
   }
 }

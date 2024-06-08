@@ -22,6 +22,7 @@ class CheckPermissionBloc
     StatusPermissionEvent event,
     Emitter<CheckPermissionState> emit,
   ) async {
+    emit(state.copyWith(permissionStatus: PermissionStatus.initial));
     final hasPermission = await _onAudioQuery.checkAndRequest();
 
     if (hasPermission == true) {

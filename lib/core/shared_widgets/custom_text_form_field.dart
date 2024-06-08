@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/styling/colors.dart';
-import 'package:just_music/core/styling/font.dart';
+import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({super.key, this.hintText, this.prefixIcon});
@@ -30,7 +30,7 @@ class CustomTextFormField extends StatelessWidget {
           contentPadding: EdgeInsets.all(10.r),
           hintText: hintText,
           hintStyle:
-              AppFonts.medium_14.copyWith(color: AppColor.white.withAlpha(140)),
+              AppFonts.medium_12.copyWith(color: AppColor.white.withAlpha(140)),
           hintFadeDuration: Durations.extralong2,
           prefixIcon: prefixIcon,
         ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/styling/colors.dart';
-import 'package:just_music/core/styling/font.dart';
+import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
 
 class CustomElvatedButton extends StatelessWidget {
   const CustomElvatedButton(
@@ -45,13 +45,13 @@ class CustomElvatedButton extends StatelessWidget {
                 spaceWidth(10),
                 Text(
                   titleWithIcon ?? "",
-                  style: AppFonts.medium_14.copyWith(color: AppColor.white),
+                  style: AppFonts.medium_12.copyWith(color: AppColor.white),
                 ),
               ],
             )
           : Text(
               title ?? "",
-              style: AppFonts.medium_14.copyWith(color: AppColor.white),
+              style: AppFonts.medium_12.copyWith(color: AppColor.white),
             ),
     );
   }

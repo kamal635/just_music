@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/core/styling/colors.dart';
+import 'package:just_music/core/styling/app_colors.dart';
 
 class BackgroundLinearGradiant extends StatelessWidget {
   const BackgroundLinearGradiant({super.key, this.child});

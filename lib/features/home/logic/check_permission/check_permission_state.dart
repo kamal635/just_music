@@ -1,12 +1,12 @@
 part of 'check_permission_bloc.dart';
 
-enum PermissionStatus { granted, denied }
+enum PermissionStatus { initial, granted, denied }
 
 class CheckPermissionState extends Equatable {
   final PermissionStatus permissionStatus;
 
   const CheckPermissionState({
-    this.permissionStatus = PermissionStatus.denied,
+    this.permissionStatus = PermissionStatus.initial,
   });
 
   CheckPermissionState copyWith({

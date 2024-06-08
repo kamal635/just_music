@@ -4,16 +4,17 @@ import 'package:just_music/core/shared_widgets/background_linear.dart';
 import 'package:just_music/features/details_song/widgets/section_image_title_song.dart';
 import 'package:just_music/features/details_song/widgets/section_slider_track.dart';
 import 'package:just_music/features/details_song/widgets/section_control_button_song.dart';
+import 'package:just_music/features/home/data/model/song.dart';
 
 class DetailsSongViewBody extends StatelessWidget {
-  const DetailsSongViewBody({super.key});
-
+  const DetailsSongViewBody({super.key, required this.song});
+  final Song song;
   @override
   Widget build(BuildContext context) {
     return BackgroundLinearGradiant(
       child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 10.h),
-          child: const CustomScrollView(
+          child: CustomScrollView(
             slivers: [
               SliverFillRemaining(
                 hasScrollBody: false,
@@ -21,13 +22,15 @@ class DetailsSongViewBody extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     // section image and title
-                    SectionImageAndTitlsSong(),
+                    SectionImageAndTitlsSong(
+                      song: song,
+                    ),
 
                     //Section slider track
-                    SectionSliderTrack(),
+                    const SectionSliderTrack(),
 
                     // Section Buttons Transations
-                    SectionControlButtonSong(),
+                    const SectionControlButtonSong(),
                   ],
                 ),
               )
