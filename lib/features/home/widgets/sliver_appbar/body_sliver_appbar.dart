@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:just_music/core/shared_widgets/icon_buttons.dart';
-import 'package:just_music/core/styling/font.dart';
-import 'package:just_music/core/styling/icons.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
+import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/styling/colors.dart';
+import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/home/widgets/sliver_appbar/custom_tab_bar.dart';
 
 class CustomSliverAppBar extends StatelessWidget {
@@ -28,8 +29,8 @@ class CustomSliverAppBar extends StatelessWidget {
           ),
           spaceWidth(12),
           Text(
-            "Library",
-            style: AppFonts.medium_20,
+            AppStrings.library,
+            style: AppFonts.medium_18,
           ),
         ],
       ),

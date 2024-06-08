@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/core/styling/colors.dart';
-import 'package:just_music/core/styling/font.dart';
+import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
+import 'package:just_music/core/utils/app_strings.dart';
 
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({super.key});
@@ -35,7 +36,7 @@ class _CustomTabBarState extends State<CustomTabBar>
         indicatorColor: AppColor.orange,
         labelColor: AppColor.orange,
         tabAlignment: TabAlignment.start,
-        labelStyle: AppFonts.normal_14,
+        labelStyle: AppFonts.normal_12,
         tabs: [
           ...List.generate(TabBarModel.tabBarList.length, (index) {
             final titleTabBar = TabBarModel.tabBarList[index];
@@ -52,10 +53,10 @@ class TabBarModel {
   TabBarModel({required this.title});
 
   static List<TabBarModel> tabBarList = [
-    TabBarModel(title: "Songs"),
-    TabBarModel(title: "Albums"),
-    TabBarModel(title: "Playlists"),
-    TabBarModel(title: "Folders"),
-    TabBarModel(title: "Favorits"),
+    TabBarModel(title: AppStrings.songs),
+    TabBarModel(title: AppStrings.albums),
+    TabBarModel(title: AppStrings.playlists),
+    TabBarModel(title: AppStrings.folders),
+    TabBarModel(title: AppStrings.favorits),
   ];
 }

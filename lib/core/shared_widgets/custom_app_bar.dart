@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/icon_buttons.dart';
-import 'package:just_music/core/styling/colors.dart';
-import 'package:just_music/core/styling/font.dart';
-import 'package:just_music/core/styling/icons.dart';
+import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
+import 'package:just_music/core/utils/app_icon.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -25,14 +26,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       leading: Row(
         children: [
           CustomIconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.pop();
+            },
             icon: AppIcon.arrowBack,
             color: AppColor.orange,
           ),
           spaceWidth(12),
           Text(
             "Songs",
-            style: AppFonts.medium_20,
+            style: AppFonts.medium_18,
           ),
         ],
       ),

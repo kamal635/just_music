@@ -26,11 +26,14 @@ class HomeViewBody extends StatelessWidget {
             // Sliver AppBar
             const CustomSliverAppBar(),
 
-            SliverFillRemaining(
+            SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.all(14.r),
                 child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(
                   builder: (context, state) {
+                    if (state.permissionStatus == PermissionStatus.initial) {
+                      return const CircularProgressIndicator();
+                    }
                     if (state.permissionStatus == PermissionStatus.denied) {
                       return const GrantPermission();
                     }

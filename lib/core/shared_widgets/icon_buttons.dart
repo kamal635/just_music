@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/styling/colors.dart';
+import 'package:just_music/core/styling/app_colors.dart';
 
 class CustomIconButton extends StatelessWidget {
   const CustomIconButton(
@@ -18,11 +18,12 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        onPressed: onPressed,
-        icon: Icon(
-          icon,
-          color: color ?? AppColor.white,
-          size: size ?? 22.h,
-        ));
+      onPressed: onPressed,
+      icon: Icon(
+        icon,
+        color: color ?? AppColor.white,
+        size: size ?? 20.h,
+      ),
+    );
   }
 }

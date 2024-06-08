@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/core/styling/icons.dart';
+import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
+import 'package:just_music/core/utils/app_strings.dart';
 
 class SectionDoubleButton extends StatelessWidget {
   const SectionDoubleButton({super.key});
@@ -12,12 +13,12 @@ class SectionDoubleButton extends StatelessWidget {
       children: [
         CustomElvatedButton(
           icon: AppIcon.play,
-          titleWithIcon: "Play All",
+          titleWithIcon: AppStrings.playAll,
           onPressed: () {},
         ),
         CustomElvatedButton(
           icon: AppIcon.shuffle,
-          titleWithIcon: "Shuffle",
+          titleWithIcon: AppStrings.shuffle,
           onPressed: () {},
         ),
       ],
