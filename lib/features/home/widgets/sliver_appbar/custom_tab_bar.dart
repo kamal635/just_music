@@ -33,8 +33,9 @@ class _CustomTabBarState extends State<CustomTabBar>
         physics: const BouncingScrollPhysics(),
         isScrollable: true,
         controller: _tabController,
-        indicatorColor: AppColor.orange,
-        labelColor: AppColor.orange,
+        indicatorColor: AppColor.white,
+        labelColor: AppColor.white,
+        unselectedLabelColor: AppColor.white.withAlpha(120),
         tabAlignment: TabAlignment.start,
         labelStyle: AppFonts.normal_12,
         tabs: [

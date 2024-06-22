@@ -20,8 +20,8 @@ class SectionSliderTrack extends StatelessWidget {
         SliderTheme(
           data: SliderTheme.of(context).copyWith(
             overlayShape: SliderComponentShape.noOverlay,
-            thumbColor: AppColor.orange,
-            activeTrackColor: AppColor.orange,
+            // thumbColor: AppColor.orange,
+            // activeTrackColor: AppColor.orange,
             inactiveTrackColor: AppColor.white.withAlpha(140),
           ),
           child: Slider(

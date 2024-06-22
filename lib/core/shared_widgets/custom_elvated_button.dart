@@ -19,40 +19,43 @@ class CustomElvatedButton extends StatelessWidget {
   final bool isIcon;
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        // color
-        backgroundColor: AppColor.orange,
-
-        // radius
-        shape: RoundedRectangleBorder(
+    return Container(
+      decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
+          gradient: const LinearGradient(
+              begin: Alignment.centerLeft,
+              end: Alignment.centerRight,
+              colors: [
+                AppColor.blue,
+                AppColor.pink,
+              ])),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
         ),
-
-        //padding
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        onPressed: onPressed,
+        child: isIcon
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    icon,
+                    color: AppColor.white,
+                    size: 24.h,
+                  ),
+                  spaceWidth(10),
+                  Text(
+                    titleWithIcon ?? "",
+                    style: AppFonts.medium_12.copyWith(color: AppColor.white),
+                  ),
+                ],
+              )
+            : Text(
+                title ?? "",
+                style: AppFonts.medium_12.copyWith(color: AppColor.white),
+              ),
       ),
-      onPressed: onPressed,
-      child: isIcon
-          ? Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(
-                  icon,
-                  color: AppColor.white,
-                  size: 24.h,
-                ),
-                spaceWidth(10),
-                Text(
-                  titleWithIcon ?? "",
-                  style: AppFonts.medium_12.copyWith(color: AppColor.white),
-                ),
-              ],
-            )
-          : Text(
-              title ?? "",
-              style: AppFonts.medium_12.copyWith(color: AppColor.white),
-            ),
     );
   }
 }

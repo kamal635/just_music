@@ -25,7 +25,6 @@ class CustomSliverAppBar extends StatelessWidget {
           CustomIconButton(
             onPressed: () {},
             icon: AppIcon.menu,
-            color: AppColor.orange,
           ),
           spaceWidth(12),
           Text(
@@ -40,19 +39,18 @@ class CustomSliverAppBar extends StatelessWidget {
         CustomIconButton(
           onPressed: () {},
           icon: AppIcon.search,
-          color: AppColor.orange,
         ),
         CustomIconButton(
           onPressed: () {},
           icon: AppIcon.settings,
-          color: AppColor.orange,
+          // color: AppColor.orange,
         ),
         spaceWidth(12)
       ],
 
       // to give sliver appbar color
       flexibleSpace: Container(
-        color: AppColor.primary.withAlpha(240),
+        color: AppColor.primary.withAlpha(230),
       ),
 
       // here : TabBar
