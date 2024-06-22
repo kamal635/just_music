@@ -91,8 +91,8 @@ class MusicTrackPlayer extends StatelessWidget {
                           size: 22.h,
                         ),
                         onPressed: () {},
-                        style: IconButton.styleFrom(
-                            backgroundColor: AppColor.orange),
+                        // style: IconButton.styleFrom(
+                        //     backgroundColor: AppColor.w),
                       ),
 
                       // Next button
@@ -111,7 +111,7 @@ class MusicTrackPlayer extends StatelessWidget {
                 data: SliderTheme.of(context).copyWith(
                   thumbShape: SliderComponentShape.noThumb,
                   overlayShape: SliderComponentShape.noOverlay,
-                  activeTrackColor: AppColor.orange,
+                  // activeTrackColor: AppColor.orange,
                   inactiveTrackColor: AppColor.white.withAlpha(140),
                 ),
                 child: Slider(

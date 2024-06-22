@@ -13,8 +13,8 @@ Future<void> initMethod() async {
   await setUpDependincy();
   await initMyAudioHandler();
   Bloc.observer = MyBlocObserver();
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
-    systemNavigationBarColor: AppColor.primary,
+    systemNavigationBarColor: AppColor.primary.withAlpha(230),
   ));
 }

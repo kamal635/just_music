@@ -33,7 +33,7 @@ class SectionControlButtonSong extends StatelessWidget {
             // Play Icon
             IconButton.filled(
                 iconSize: 30.h,
-                style: IconButton.styleFrom(backgroundColor: AppColor.orange),
+                // style: IconButton.styleFrom(backgroundColor: AppColor.orange),
                 onPressed: () {},
                 icon: const Icon(
                   AppIcon.play,

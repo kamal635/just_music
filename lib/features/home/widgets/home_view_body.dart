@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/background_linear.dart';
 import 'package:just_music/features/home/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/features/home/widgets/grant_permission.dart';
 import 'package:just_music/features/home/widgets/list_view_card_song.dart';
@@ -16,49 +15,47 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BackgroundLinearGradiant(
-      child: BlocProvider(
-        create: (context) =>
-            di<CheckPermissionBloc>()..add(StatusPermissionEvent()),
-        child: CustomScrollView(
-          physics: const BouncingScrollPhysics(),
-          slivers: [
-            // Sliver AppBar
-            const CustomSliverAppBar(),
+    return BlocProvider(
+      create: (context) =>
+          di<CheckPermissionBloc>()..add(StatusPermissionEvent()),
+      child: CustomScrollView(
+        physics: const BouncingScrollPhysics(),
+        slivers: [
+          // Sliver AppBar
+          const CustomSliverAppBar(),
 
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: EdgeInsets.all(14.r),
-                child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(
-                  builder: (context, state) {
-                    if (state.permissionStatus == PermissionStatus.initial) {
-                      return const CircularProgressIndicator();
-                    }
-                    if (state.permissionStatus == PermissionStatus.denied) {
-                      return const GrantPermission();
-                    }
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.all(14.r),
+              child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(
+                builder: (context, state) {
+                  if (state.permissionStatus == PermissionStatus.initial) {
+                    return const CircularProgressIndicator();
+                  }
+                  if (state.permissionStatus == PermissionStatus.denied) {
+                    return const GrantPermission();
+                  }
 
-                    if (state.permissionStatus == PermissionStatus.granted) {
-                      return Column(children: [
-                        //Form Field
-                        const SectionTextFormField(),
+                  if (state.permissionStatus == PermissionStatus.granted) {
+                    return Column(children: [
+                      //Form Field
+                      const SectionTextFormField(),
 
-                        spaceHeight(10),
+                      spaceHeight(10),
 
-                        // Double Button
-                        const SectionDoubleButton(),
+                      // Double Button
+                      const SectionDoubleButton(),
 
-                        const ListViewCardSong(),
-                      ]);
-                    } else {
-                      return const SizedBox();
-                    }
-                  },
-                ),
+                      const ListViewCardSong(),
+                    ]);
+                  } else {
+                    return const SizedBox();
+                  }
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

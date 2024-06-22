@@ -282,6 +282,10 @@ xdg_directories
 3.0
 file:///C:/Users/kamal/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.4/
 file:///C:/Users/kamal/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.4/lib/
+just_music
+3.2
+file:///C:/Users/kamal/Desktop/just_music-development/
+file:///C:/Users/kamal/Desktop/just_music-development/lib/
 sky_engine
 3.2
 file:///C:/src/flutter/bin/cache/pkg/sky_engine/
@@ -298,8 +302,4 @@ flutter_web_plugins
 3.2
 file:///C:/src/flutter/packages/flutter_web_plugins/
 file:///C:/src/flutter/packages/flutter_web_plugins/lib/
-just_music
-3.2
-file:///D:/My%20Project/just_music/
-file:///D:/My%20Project/just_music/lib/
 2

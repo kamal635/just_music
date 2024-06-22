@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               context.pop();
             },
             icon: AppIcon.arrowBack,
-            color: AppColor.orange,
+            // color: AppColor.orange,
           ),
           spaceWidth(12),
           Text(
@@ -45,12 +45,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         CustomIconButton(
           onPressed: () {},
           icon: AppIcon.favoriteBorder,
-          color: AppColor.orange,
+          // color: AppColor.orange,
         ),
         CustomIconButton(
           onPressed: () {},
           icon: AppIcon.threeDotVertical,
-          color: AppColor.orange,
+          // color: AppColor.orange,
         ),
         spaceWidth(12)
       ],
