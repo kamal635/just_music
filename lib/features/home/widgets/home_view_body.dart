@@ -46,6 +46,8 @@ class HomeViewBody extends StatelessWidget {
                       // Double Button
                       const SectionDoubleButton(),
 
+                      spaceHeight(10),
+
                       const ListViewCardSong(),
                     ]);
                   } else {
