@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,13 +19,20 @@ class MusicTrackPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
+      //Every time the position of the song changes you will build,
+      //this is to avoid this from happening
       buildWhen: (previous, current) {
         return previous.audioPlayerData?.audio !=
             current.audioPlayerData?.audio;
       },
       builder: (context, state) {
         final song = state.audioPlayerData?.audio;
-
+        final duration =
+            state.audioPlayerData?.audio!.duration!.inMilliseconds.toDouble();
+        final position = state
+            .audioPlayerData?.currentAudioPosition!.inMilliseconds
+            .toDouble();
+        // to check if song is playing or not
         if (state.status == AudioPlayerStatus.initial ||
             state.audioPlayerData?.audio == null) {
           return const SizedBox();
@@ -45,6 +54,7 @@ class MusicTrackPlayer extends StatelessWidget {
                       // image
 
                       QueryArtworkWidget(
+                        keepOldArtwork: true,
                         id: song!.id,
                         type: ArtworkType.AUDIO,
                         nullArtworkWidget: ClipRRect(
@@ -116,11 +126,8 @@ class MusicTrackPlayer extends StatelessWidget {
                 ),
                 child: Slider(
                   min: 0,
-                  max: state.audioPlayerData!.audio!.duration!.inMilliseconds
-                      .toDouble(),
-                  value: state
-                      .audioPlayerData!.currentAudioPosition!.inMilliseconds
-                      .toDouble(),
+                  max: duration!,
+                  value: min(duration, position!),
                   onChanged: (onChanged) {},
                 ),
               ),

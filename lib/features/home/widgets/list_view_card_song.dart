@@ -65,15 +65,11 @@ class ListViewCardSong extends StatelessWidget {
                 itemCount: state.songModel!.length,
                 itemBuilder: (context, i) {
                   final song = state.songModel![i];
-                  return InkWell(
-                      onTap: () async {
-                        context
-                            .read<AudioPlayerBloc>()
-                            .add(SetAudioEvent(song: song));
-                        // context.pushNamed(RouterName.detailsSongView,
-                        //     arguments: song);
-                      },
-                      child: CardSong(song: song));
+                  return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
+                    builder: (context, state) {
+                      return CardSong(song: song);
+                    },
+                  );
                 });
           } else {
             return const SizedBox();
