@@ -15,9 +15,9 @@ Future<AudioHandler> initMyAudioHandler() async {
 
 class MyAudioHandler extends BaseAudioHandler {
   final _player = AudioPlayer();
-
   final _queue = ConcatenatingAudioSource(children: []);
 
+// constractor
   MyAudioHandler() {
     _loadEmptyPlaylist();
     _listenForDurationChanges();
@@ -35,24 +35,31 @@ class MyAudioHandler extends BaseAudioHandler {
   Future<void> stop() => _player.stop();
 
   @override
-  Future<void> addQueueItem(MediaItem mediaItem) async {
-    final audioSource = AudioSource.uri(
-      Uri.parse(mediaItem.extras!['audioUrl'] as String),
-      tag: mediaItem,
-    );
-    _queue.add(audioSource);
-
-    final newQueue = queue.value..add(mediaItem);
-    queue.add(newQueue);
-  }
+  Future<void> skipToNext() => _player.seekToNext();
 
   @override
-  Future<void> removeQueueItemAt(int index) async {
-    if (_queue.length > index) {
-      _queue.removeAt(index);
-      final newQueue = queue.value..removeAt(index);
-      queue.add(newQueue);
-    }
+  Future<void> skipToPrevious() => _player.seekToPrevious();
+
+  @override
+  Future<void> seek(Duration position) => _player.seek(position);
+
+  @override
+  Future<void> skipToQueueItem(int index) =>
+      _player.seek(Duration.zero, index: index);
+
+  @override
+  Future<void> addQueueItems(List<MediaItem> mediaItems) async {
+    final audioSources = mediaItems
+        .map((mediaItem) => AudioSource.uri(
+              Uri.parse(mediaItem.extras!['audioUrl'] as String),
+              tag: mediaItem,
+            ))
+        .toList();
+
+    _queue.addAll(audioSources);
+
+    final newQueue = queue.value..addAll(mediaItems);
+    queue.add(newQueue);
   }
 
   Future<void> _loadEmptyPlaylist() async {
