@@ -1,31 +1,31 @@
 part of 'fetch_songs_from_device_bloc.dart';
 
-enum GetSongsStatus { initial, loading, loaded, failure }
+enum FetchSongsStatus { initial, loading, loaded, failure }
 
 @immutable
 class FetchSongsFromDeviceState extends Equatable {
-  final GetSongsStatus getSongsStatus;
+  final FetchSongsStatus fetchSongsStatus;
   final List<Song>? songModel;
   final String? errorMessage;
 
   const FetchSongsFromDeviceState({
-    this.getSongsStatus = GetSongsStatus.initial,
+    this.fetchSongsStatus = FetchSongsStatus.initial,
     this.songModel,
     this.errorMessage,
   });
 
   FetchSongsFromDeviceState copyWith({
-    GetSongsStatus? getSongsStatus,
+    FetchSongsStatus? fetchSongsStatus,
     List<Song>? songModel,
     String? errorMessage,
   }) {
     return FetchSongsFromDeviceState(
-      getSongsStatus: getSongsStatus ?? this.getSongsStatus,
+      fetchSongsStatus: fetchSongsStatus ?? this.fetchSongsStatus,
       songModel: songModel ?? this.songModel,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [getSongsStatus, songModel, errorMessage];
+  List<Object?> get props => [fetchSongsStatus, songModel, errorMessage];
 }

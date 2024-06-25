@@ -30,7 +30,7 @@ class HomeViewBody extends StatelessWidget {
               child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(
                 builder: (context, state) {
                   if (state.permissionStatus == PermissionStatus.initial) {
-                    return const CircularProgressIndicator();
+                    return const Center(child: CircularProgressIndicator());
                   }
                   if (state.permissionStatus == PermissionStatus.denied) {
                     return const GrantPermission();

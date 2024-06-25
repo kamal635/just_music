@@ -22,7 +22,7 @@ class ListViewCardSong extends StatelessWidget {
           di<FetchSongsFromDeviceBloc>()..add(LoadSongsFromDeviceEvent()),
       child: BlocConsumer<FetchSongsFromDeviceBloc, FetchSongsFromDeviceState>(
         listener: (context, state) async {
-          if (state.getSongsStatus == GetSongsStatus.failure) {
+          if (state.fetchSongsStatus == FetchSongsStatus.failure) {
             await flutterToast(
                 message: state.errorMessage ?? AppStrings.unexpectedError);
           }
@@ -50,14 +50,14 @@ class ListViewCardSong extends StatelessWidget {
             );
           }
 
-          if (state.getSongsStatus == GetSongsStatus.loading ||
-              state.getSongsStatus == GetSongsStatus.initial) {
+          if (state.fetchSongsStatus == FetchSongsStatus.loading ||
+              state.fetchSongsStatus == FetchSongsStatus.initial) {
             return SizedBox(
                 height: MediaQuery.of(context).size.height / 1.8,
                 child: const Center(child: CircularProgressIndicator()));
           }
 
-          if (state.getSongsStatus == GetSongsStatus.loaded) {
+          if (state.fetchSongsStatus == FetchSongsStatus.loaded) {
             return ListView.builder(
                 padding: EdgeInsets.zero,
                 shrinkWrap: true,
@@ -65,11 +65,13 @@ class ListViewCardSong extends StatelessWidget {
                 itemCount: state.songModel!.length,
                 itemBuilder: (context, i) {
                   final song = state.songModel![i];
-                  return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
-                    builder: (context, state) {
-                      return CardSong(song: song);
-                    },
-                  );
+                  return InkWell(
+                      borderRadius: BorderRadius.circular(10.r),
+                      onTap: () {
+                        context.read<AudioPlayerBloc>().add(
+                            SetAudioEvent(songs: state.songModel!, index: i));
+                      },
+                      child: CardSong(song: song, index: i));
                 });
           } else {
             return const SizedBox();

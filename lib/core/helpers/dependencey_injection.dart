@@ -1,5 +1,5 @@
 import 'package:get_it/get_it.dart';
-import 'package:just_music/features/home/data/repository/get_all_songs_repo.dart';
+import 'package:just_music/features/home/data/repository/fetch_songs_repo.dart';
 import 'package:just_music/features/home/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/features/home/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';

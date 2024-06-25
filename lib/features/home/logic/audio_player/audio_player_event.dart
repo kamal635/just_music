@@ -13,11 +13,24 @@ class PlayAudioEvent extends AudioPlayerEvent {}
 
 class PauseAudioEvent extends AudioPlayerEvent {}
 
-class SetAudioEvent extends AudioPlayerEvent {
-  final Song song;
+class SkipToNextAudioEvent extends AudioPlayerEvent {}
 
-  const SetAudioEvent({required this.song});
+class SkipToPreviousAudioEvent extends AudioPlayerEvent {}
+
+class SeekToPositionAudioEvent extends AudioPlayerEvent {
+  final Duration position;
+
+  const SeekToPositionAudioEvent({required this.position});
+  @override
+  List<Object> get props => [position];
+}
+
+class SetAudioEvent extends AudioPlayerEvent {
+  final List<Song> songs;
+  final int index;
+
+  const SetAudioEvent({required this.songs, required this.index});
 
   @override
-  List<Object> get props => [song];
+  List<Object> get props => [songs, index];
 }
