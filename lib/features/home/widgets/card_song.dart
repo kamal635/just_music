@@ -10,73 +10,117 @@ import 'package:just_music/features/home/data/model/song.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class CardSong extends StatelessWidget {
+class CardSong extends StatefulWidget {
   const CardSong({super.key, required this.song, required this.index});
 
   final Song song;
   final int index;
 
   @override
+  State<CardSong> createState() => _CardSongState();
+}
+
+class _CardSongState extends State<CardSong> {
+  // This ValueNotifier is used to store the state of the audio player
+  // and whether the current song is being played or not
+  final _valueNotifier = ValueNotifier<bool>(false);
+
+  @override
+  void initState() {
+    // Listen to the AudioPlayerBloc stream to update the _valueNotifier
+    // whenever the audio player state changes
+    listenStateAudioPlayer();
+    super.initState();
+  }
+
+  void listenStateAudioPlayer() {
+    context.read<AudioPlayerBloc>().stream.listen((state) {
+      if (state.audioPlayerData?.playbackState.queueIndex == widget.index &&
+          state.audioPlayerData!.playbackState.playing) {
+        _valueNotifier.value = true;
+      } else {
+        _valueNotifier.value = false;
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    // Dispose the ValueNotifier to avoid memory leaks
+    _valueNotifier.dispose();
+    super.dispose();
+  }
+
+  ///*********/
+  /// [ValueListenableBuilder] was usedTo listen to the change in the playing status of the song
+  /// and apply to change the background color of the song when it is played
+  /// When using BlocBuilder it led to many construction operations,
+  /// which led to a significant slowdown in the application when playing the song,
+  /// and scrolling within the application became not smooth.
+  ///*******/
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
-      builder: (context, state) {
+    // Use the ValueListenableBuilder to update the UI based on the
+    // value of the _valueNotifier
+    return ValueListenableBuilder(
+      valueListenable: _valueNotifier,
+      builder: (context, valueNotifier, child) {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
-            color: state.audioPlayerData!.playbackState.queueIndex == index &&
-                    state.audioPlayerData!.playbackState.playing
-                ? AppColor.white.withAlpha(60)
-                : null,
+            color: valueNotifier ? AppColor.white.withAlpha(60) : null,
             borderRadius: BorderRadius.circular(10.r),
           ),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-
-            // leading ( image )
-            leading: QueryArtworkWidget(
-              id: song.id,
-              type: ArtworkType.AUDIO,
-              keepOldArtwork: true,
-              nullArtworkWidget: ClipRRect(
-                borderRadius: BorderRadius.circular(40.r),
-                child: Image.asset(AppImages.image1),
-              ),
-            ),
-
-            // trailing ( icon )
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  song.duration! > const Duration(milliseconds: 3600000)
-                      ? song.duration!.toFormattedStringWithHoursWithCharacter()
-                      : song.duration!
-                          .toFormattedStringWithoutHoursWithCharacter(),
-                  style: AppFonts.normal_10
-                      .copyWith(color: AppColor.white.withAlpha(120)),
-                ),
-              ],
-            ),
-
-            // title
-            title: Text(
-              song.title,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            titleTextStyle: AppFonts.medium_14,
-
-            // subtitle
-            subtitle: Text(
-              song.artist ?? AppStrings.unknown,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-            subtitleTextStyle: AppFonts.normal_10
-                .copyWith(color: AppColor.white.withAlpha(120)),
-          ),
+          child: child,
         );
       },
+      child: ListTile(
+        contentPadding: EdgeInsets.zero,
+
+        // leading ( image )
+        leading: QueryArtworkWidget(
+          id: widget.song.id,
+          type: ArtworkType.AUDIO,
+          keepOldArtwork: true,
+          nullArtworkWidget: ClipRRect(
+            borderRadius: BorderRadius.circular(40.r),
+            child: Image.asset(AppImages.image1),
+          ),
+        ),
+
+        // trailing ( icon )
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              widget.song.duration! > const Duration(milliseconds: 3600000)
+                  ? widget.song.duration!
+                      .toFormattedStringWithHoursWithCharacter()
+                  : widget.song.duration!
+                      .toFormattedStringWithoutHoursWithCharacter(),
+              style: AppFonts.normal_10
+                  .copyWith(color: AppColor.white.withAlpha(120)),
+            ),
+          ],
+        ),
+
+        // title
+        title: Text(
+          widget.song.title,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        titleTextStyle: AppFonts.medium_14,
+
+        // subtitle
+        subtitle: Text(
+          widget.song.artist ?? AppStrings.unknown,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        subtitleTextStyle:
+            AppFonts.normal_10.copyWith(color: AppColor.white.withAlpha(120)),
+      ),
     );
   }
 }

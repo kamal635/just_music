@@ -108,6 +108,11 @@ class MyAudioHandler extends BaseAudioHandler {
         MediaControl.stop,
         MediaControl.skipToNext,
       ],
+      systemActions: {
+        MediaAction.seek,
+        MediaAction.seekForward,
+        MediaAction.seekBackward,
+      },
     );
   }
 }
