@@ -32,6 +32,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "audio_video_progress_bar",
+      "rootUri": "file:///C:/Users/kamal/AppData/Local/Pub/Cache/hosted/pub.dev/audio_video_progress_bar-2.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "bloc",
       "rootUri": "file:///C:/Users/kamal/AppData/Local/Pub/Cache/hosted/pub.dev/bloc-8.1.4",
       "packageUri": "lib/",
@@ -458,7 +464,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-06-22T09:01:29.855273Z",
+  "generated": "2024-06-25T15:11:45.542802Z",
   "generator": "pub",
   "generatorVersion": "3.4.1",
   "flutterRoot": "file:///C:/src/flutter",
