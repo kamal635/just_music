@@ -7,7 +7,6 @@ Future<void> main() async {
   // All necessary methods are in main.dart
   await initMethod();
 
-  // singleton instance audio handler
   final audioHandler = await initMyAudioHandler();
 
   runApp(JustMusicApp(audioHandler: audioHandler));

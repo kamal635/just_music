@@ -33,7 +33,7 @@ class Song {
       title: songModel.title,
       album: songModel.album ?? "<Not Album SongModel>",
       artist: songModel.artist ?? "<Not Artist SongModel>",
-      audioUrl: songModel.uri ?? "<Not Url SongModel>",
+      audioUrl: songModel.data,
       fileExtension: songModel.fileExtension,
       duration: Duration(milliseconds: songModel.duration ?? 0),
     );

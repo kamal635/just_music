@@ -5,7 +5,7 @@ import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/features/home/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/features/home/widgets/grant_permission.dart';
-import 'package:just_music/features/home/widgets/list_view_card_song.dart';
+import 'package:just_music/features/home/widgets/list_view_song_card.dart';
 import 'package:just_music/features/home/widgets/section_double_button.dart';
 import 'package:just_music/features/home/widgets/section_text_form_field.dart';
 import 'package:just_music/features/home/widgets/sliver_appbar/body_sliver_appbar.dart';
@@ -29,14 +29,14 @@ class HomeViewBody extends StatelessWidget {
               padding: EdgeInsets.all(14.r),
               child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(
                 builder: (context, state) {
-                  if (state.permissionStatus == PermissionStatus.initial) {
+                  if (state.permissionStatus == PermissionStatuss.initial) {
                     return const Center(child: CircularProgressIndicator());
                   }
-                  if (state.permissionStatus == PermissionStatus.denied) {
+                  if (state.permissionStatus == PermissionStatuss.denied) {
                     return const GrantPermission();
                   }
 
-                  if (state.permissionStatus == PermissionStatus.granted) {
+                  if (state.permissionStatus == PermissionStatuss.granted) {
                     return Column(children: [
                       //Form Field
                       const SectionTextFormField(),
@@ -48,7 +48,7 @@ class HomeViewBody extends StatelessWidget {
 
                       spaceHeight(10),
 
-                      const ListViewCardSong(),
+                      const ListViewSongCard(),
                     ]);
                   } else {
                     return const SizedBox();

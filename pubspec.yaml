@@ -48,17 +48,22 @@ dependencies:
   # To Dependency injection
   get_it: ^7.7.0
 
-
-  
   # To query audios/songs infos [title, artist, album, etc..] from device storage.
   on_audio_query: ^2.9.0
+
   # A feature-rich audio player for Flutter. Loop, clip and concatenate any sound from any source (asset/file/URL/stream) in a variety of audio formats with gapless playback
   just_audio: ^0.9.38
+
   # Flutter plugin to play audio in the background while the screen is off.
   audio_service: ^0.18.13
-  
+
+  # To combine multiple streams to output a single stream
   rxdart: ^0.27.7
+ 
+  # A progress bar widget to show or change the position of an audio or video stream.
   audio_video_progress_bar: ^2.0.3
+
+
  
 
 
