@@ -34,9 +34,9 @@ class SeekBar extends StatelessWidget {
         timeLabelTextStyle: AppFonts.normal_12,
         timeLabelPadding: 12,
         baseBarColor: AppColor.white.withAlpha(140),
-        thumbColor: AppColor.white,
+        thumbColor: AppColor.blue,
         progressBarColor: AppColor.blue,
-        thumbGlowColor: AppColor.blue,
+        thumbGlowColor: AppColor.white.withAlpha(140),
       ),
     );
   }

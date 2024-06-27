@@ -32,7 +32,9 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
       final file = File(song.data);
 
       // check if file is exists or not
-      if (await file.exists() && song.fileExtension == "mp3") {
+      if (await file.exists() &&
+          song.fileExtension == "mp3" &&
+          song.duration != 0) {
         //add song to list of songs
         listSongsMp3.add(Song.fromDevice(song));
       }
