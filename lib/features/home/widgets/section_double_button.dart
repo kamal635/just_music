@@ -25,8 +25,10 @@ class SectionDoubleButton extends StatelessWidget {
                 icon: AppIcon.play,
                 titleWithIcon: AppStrings.playAll,
                 onPressed: () {
-                  context.read<AudioPlayerBloc>().add(
-                      SetAudioEvent(songs: state.songModel ?? [], index: 0));
+                  state.songModel!.isEmpty
+                      ? null
+                      : context.read<AudioPlayerBloc>().add(SetAudioEvent(
+                          songs: state.songModel ?? [], index: 0));
                 },
               ),
               CustomElvatedButton(

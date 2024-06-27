@@ -10,17 +10,17 @@ import 'package:just_music/features/home/data/model/song.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class CardSong extends StatefulWidget {
-  const CardSong({super.key, required this.song, required this.index});
+class SongCard extends StatefulWidget {
+  const SongCard({super.key, required this.song, required this.index});
 
   final Song song;
   final int index;
 
   @override
-  State<CardSong> createState() => _CardSongState();
+  State<SongCard> createState() => _SongCardState();
 }
 
-class _CardSongState extends State<CardSong> {
+class _SongCardState extends State<SongCard> {
   // This ValueNotifier is used to store the state of the audio player
   // and whether the current song is being played or not
   final _valueNotifier = ValueNotifier<bool>(false);
@@ -115,7 +115,7 @@ class _CardSongState extends State<CardSong> {
         // subtitle
         subtitle: Text(
           widget.song.artist ?? AppStrings.unknown,
-          maxLines: 1,
+          maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
         subtitleTextStyle:

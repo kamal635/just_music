@@ -10,10 +10,10 @@ import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/home/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
-import 'package:just_music/features/home/widgets/card_song.dart';
+import 'package:just_music/features/home/widgets/song_card.dart';
 
-class ListViewCardSong extends StatelessWidget {
-  const ListViewCardSong({super.key});
+class ListViewSongCard extends StatelessWidget {
+  const ListViewSongCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +71,7 @@ class ListViewCardSong extends StatelessWidget {
                       context.read<AudioPlayerBloc>().add(
                           SetAudioEvent(songs: state.songModel!, index: i));
                     },
-                    child: CardSong(
+                    child: SongCard(
                       song: song,
                       index: i,
                     ),
