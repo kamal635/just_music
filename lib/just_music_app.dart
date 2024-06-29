@@ -27,7 +27,7 @@ class JustMusicApp extends StatelessWidget {
           theme: ThemeData.dark().copyWith(
             scaffoldBackgroundColor: AppColor.primary,
           ),
-          initialRoute: RouterName.homeView,
+          initialRoute: RouterName.changedView,
           onGenerateRoute: AppRouter.onGenerateRoute,
         ),
       ),
