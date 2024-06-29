@@ -80,11 +80,13 @@ class MyAudioHandler extends BaseAudioHandler {
 
       if (index == null || newQueue.isEmpty) return; // there is no song
 
-      final oldMediaItem = newQueue[index];
-      final newMediaItem = oldMediaItem.copyWith(duration: duration);
-      newQueue[index] = newMediaItem;
-      queue.add(newQueue);
-      mediaItem.add(newMediaItem);
+      if (index <= newQueue.length) {
+        final oldMediaItem = newQueue[index];
+        final newMediaItem = oldMediaItem.copyWith(duration: duration);
+        newQueue[index] = newMediaItem;
+        queue.add(newQueue);
+        mediaItem.add(newMediaItem);
+      }
     });
   }
 

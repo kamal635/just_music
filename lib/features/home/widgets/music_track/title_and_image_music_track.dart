@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/home/data/model/song.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
 class TitleAndImageMusicTrack extends StatelessWidget {
   const TitleAndImageMusicTrack({super.key, required this.song});
@@ -17,24 +15,12 @@ class TitleAndImageMusicTrack extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          // image
-
-          QueryArtworkWidget(
-            keepOldArtwork: true,
-            id: song.id,
-            type: ArtworkType.AUDIO,
-            nullArtworkWidget: ClipRRect(
-              borderRadius: BorderRadius.circular(40.r),
-              child: Image.asset(
-                AppImages.image1,
-                height: 40.r,
-              ),
-            ),
-          ),
+          //* image
+          CustomArtWork(id: song.id),
 
           spaceWidth(10),
 
-          // Title
+          //* Title
           Flexible(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

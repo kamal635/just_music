@@ -49,6 +49,8 @@ class HomeViewBody extends StatelessWidget {
                       spaceHeight(10),
 
                       const ListViewSongCard(),
+
+                      spaceHeight(110),
                     ]);
                   } else {
                     return const SizedBox();

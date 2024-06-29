@@ -8,9 +8,14 @@ import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 
 class SeekBar extends StatelessWidget {
-  const SeekBar({super.key, required this.position, required this.duration});
+  const SeekBar(
+      {super.key,
+      required this.position,
+      required this.duration,
+      this.timeLabelLocation});
   final Duration? position;
   final Duration? duration;
+  final TimeLabelLocation? timeLabelLocation;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -30,13 +35,13 @@ class SeekBar extends StatelessWidget {
         barHeight: 4,
         thumbRadius: 5.r,
         thumbGlowRadius: 15.r,
-        timeLabelLocation: TimeLabelLocation.below,
+        timeLabelLocation: timeLabelLocation ?? TimeLabelLocation.below,
         timeLabelTextStyle: AppFonts.normal_12,
         timeLabelPadding: 12,
-        baseBarColor: AppColor.white.withAlpha(140),
-        thumbColor: AppColor.blue,
-        progressBarColor: AppColor.blue,
-        thumbGlowColor: AppColor.white.withAlpha(140),
+        baseBarColor: AppColor.white.withAlpha(55),
+        thumbGlowColor: AppColor.white.withAlpha(55),
+        thumbColor: AppColor.white,
+        progressBarColor: AppColor.white,
       ),
     );
   }

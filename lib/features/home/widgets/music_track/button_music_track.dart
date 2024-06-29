@@ -23,14 +23,9 @@ class ButtonMusicTrack extends StatelessWidget {
         // Stop button
         Container(
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(40.r),
-              gradient: const LinearGradient(
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                  colors: [
-                    AppColor.blue,
-                    AppColor.pink,
-                  ])),
+            borderRadius: BorderRadius.circular(40.r),
+            color: AppColor.primary,
+          ),
           child: IconButton(
             icon: Icon(
               isPlaying! ? AppIcon.pause : AppIcon.play,

@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/duration.dart';
+import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/home/data/model/song.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
 class SongCard extends StatefulWidget {
   const SongCard({super.key, required this.song, required this.index});
@@ -21,14 +20,14 @@ class SongCard extends StatefulWidget {
 }
 
 class _SongCardState extends State<SongCard> {
-  // This ValueNotifier is used to store the state of the audio player
-  // and whether the current song is being played or not
+  //** This ValueNotifier is used to store the state of the audio player
+  //** and whether the current song is being played or not
   final _valueNotifier = ValueNotifier<bool>(false);
 
   @override
   void initState() {
-    // Listen to the AudioPlayerBloc stream to update the _valueNotifier
-    // whenever the audio player state changes
+    //** Listen to the AudioPlayerBloc stream to update the _valueNotifier
+    //** whenever the audio player state changes
     listenStateAudioPlayer();
     super.initState();
   }
@@ -46,7 +45,7 @@ class _SongCardState extends State<SongCard> {
 
   @override
   void dispose() {
-    // Dispose the ValueNotifier to avoid memory leaks
+    //** Dispose the ValueNotifier to avoid memory leaks
     _valueNotifier.dispose();
     super.dispose();
   }
@@ -60,8 +59,8 @@ class _SongCardState extends State<SongCard> {
   ///*******/
   @override
   Widget build(BuildContext context) {
-    // Use the ValueListenableBuilder to update the UI based on the
-    // value of the _valueNotifier
+    //** Use the ValueListenableBuilder to update the UI based on the
+    //** value of the _valueNotifier
     return ValueListenableBuilder(
       valueListenable: _valueNotifier,
       builder: (context, valueNotifier, child) {
@@ -77,18 +76,12 @@ class _SongCardState extends State<SongCard> {
       child: ListTile(
         contentPadding: EdgeInsets.zero,
 
-        // leading ( image )
-        leading: QueryArtworkWidget(
-          id: widget.song.id,
-          type: ArtworkType.AUDIO,
-          keepOldArtwork: true,
-          nullArtworkWidget: ClipRRect(
-            borderRadius: BorderRadius.circular(40.r),
-            child: Image.asset(AppImages.image1),
-          ),
+        //** leading ( image )
+        leading: SizedBox(
+          child: CustomArtWork(id: widget.song.id),
         ),
 
-        // trailing ( icon )
+        //** trailing ( icon )
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -104,7 +97,7 @@ class _SongCardState extends State<SongCard> {
           ],
         ),
 
-        // title
+        //** title
         title: Text(
           widget.song.title,
           maxLines: 1,
@@ -112,7 +105,7 @@ class _SongCardState extends State<SongCard> {
         ),
         titleTextStyle: AppFonts.medium_14,
 
-        // subtitle
+        //** subtitle
         subtitle: Text(
           widget.song.artist ?? AppStrings.unknown,
           maxLines: 2,
