@@ -11,6 +11,8 @@ abstract class AppFonts {
       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w500);
   static final TextStyle medium_14 =
       TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w500);
+  static final TextStyle medium_16 =
+      TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500);
   static final TextStyle medium_18 =
       TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500);
 

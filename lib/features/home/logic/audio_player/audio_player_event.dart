@@ -17,6 +17,14 @@ class SkipToNextAudioEvent extends AudioPlayerEvent {}
 
 class SkipToPreviousAudioEvent extends AudioPlayerEvent {}
 
+class SkipByIndexAudioEvent extends AudioPlayerEvent {
+  final int index;
+
+  const SkipByIndexAudioEvent({required this.index});
+  @override
+  List<Object> get props => [index];
+}
+
 class SeekToPositionAudioEvent extends AudioPlayerEvent {
   final Duration position;
 

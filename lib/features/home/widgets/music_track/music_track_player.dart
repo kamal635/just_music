@@ -1,10 +1,10 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
+import 'package:just_music/features/home/widgets/details_song/body_details.dart';
 import 'package:just_music/features/home/widgets/music_track/button_music_track.dart';
 import 'package:just_music/features/home/widgets/music_track/seek_bar.dart';
 import 'package:just_music/features/home/widgets/music_track/title_and_image_music_track.dart';
@@ -32,46 +32,44 @@ class MusicTrackPlayer extends StatelessWidget {
         final position = state.audioPlayerData?.currentAudioPosition;
 
         ///*************************************************/
-        ///
+
         // to check if song is playing or not
         if (state.status == AudioPlayerStatus.initial ||
             state.audioPlayerData?.audio == null) {
           return const SizedBox();
         }
 
-        return Container(
-          padding: EdgeInsets.all(10.r),
-          margin: EdgeInsets.all(10.r),
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.2),
-            borderRadius: BorderRadius.circular(12.r),
-          ),
-          child: ClipRect(
-            // Clip the child to avoid unnecessary blurring
-            child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 1.0, sigmaY: 1.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // title and image
-                          TitleAndImageMusicTrack(song: song!),
+        return InkWell(
+          onTap: () async {
+            await detailsSong(context: context);
+          },
+          child: Container(
+            margin: EdgeInsets.all(12.r),
+            padding: EdgeInsets.all(12.r),
+            decoration: BoxDecoration(
+                gradient: AppColor.linearButton,
+                borderRadius: BorderRadius.circular(10.r)),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      // title and image
+                      TitleAndImageMusicTrack(song: song!),
 
-                          // Buttons
-                          ButtonMusicTrack(isPlaying: isPlaying),
-                        ]),
+                      // Buttons
+                      ButtonMusicTrack(isPlaying: isPlaying),
+                    ]),
 
-                    spaceHeight(10),
+                spaceHeight(10),
 
-                    // Slider track
-                    SeekBar(duration: duration, position: position),
+                // Slider track
+                SeekBar(duration: duration, position: position),
 
-                    // time songs
-                  ],
-                )),
+                // time songs
+              ],
+            ),
           ),
         );
       },

@@ -24,8 +24,9 @@ class JustMusicApp extends StatelessWidget {
           ..add(LoadAudioPlayerEvent()),
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark()
-              .copyWith(scaffoldBackgroundColor: AppColor.primary),
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: AppColor.primary,
+          ),
           initialRoute: RouterName.homeView,
           onGenerateRoute: AppRouter.onGenerateRoute,
         ),
