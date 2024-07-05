@@ -25,6 +25,14 @@ class ShuffleModeAudioEvent extends AudioPlayerEvent {
   List<Object> get props => [shuffleMode];
 }
 
+class RepeatModeAudioEvent extends AudioPlayerEvent {
+  final AudioServiceRepeatMode repeateMode;
+
+  const RepeatModeAudioEvent({required this.repeateMode});
+  @override
+  List<Object> get props => [repeateMode];
+}
+
 class SkipByIndexAudioEvent extends AudioPlayerEvent {
   final int index;
 

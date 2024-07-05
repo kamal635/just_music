@@ -6,6 +6,7 @@ enum AudioPlayerStatus {
   playing,
   paused,
   shuffle,
+  repeate,
 }
 
 class AudioPlayerState extends Equatable {

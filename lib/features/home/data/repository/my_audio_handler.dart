@@ -20,13 +20,14 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final _queue = ConcatenatingAudioSource(children: []);
   final _updateController = StreamController<PlaybackEvent>.broadcast();
 
-  ///*********************** Constractor My AudioHandler****************************/
+  ///*********** Constractor My AudioHandler ************/
   ///***************************************************/
   MyAudioHandler() {
     _loadEmptyPlaylist();
     _listenForDurationChanges();
+    _returnPlayPlaylistWhenIsCompleted();
 
-// Redirect events from the update controller to the playback state
+    // Redirect events from the update controller to the playback state
     _updateController.stream.map(_transformEvent).pipe(playbackState);
 
     // Listen to player events and add them to the update controller
@@ -35,42 +36,46 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     });
 
     // Listen to shuffle mode changes
-    _player.shuffleModeEnabledStream.listen((enabled) {
+    _player.shuffleModeEnabledStream.listen((_) {
+      _updateController.add(_player.playbackEvent);
+    });
+
+    _player.loopModeStream.listen((_) {
       _updateController.add(_player.playbackEvent);
     });
   }
 
-  ///*********************** Play ****************************/
+  ///********************** Play ************************/
   ///***************************************************/
   @override
   Future<void> play() => _player.play();
 
-  ///*********************** Pause ****************************/
+  ///********************** Pause ***********************/
   ///***************************************************/
   @override
   Future<void> pause() => _player.pause();
 
-  ///*********************** Stop ****************************/
+  ///******************** Stop **************************/
   ///***************************************************/
   @override
   Future<void> stop() => _player.stop();
 
-  ///*********************** Skip To Next ****************************/
+  ///****************** Skip To Next ********************/
   ///***************************************************/
   @override
   Future<void> skipToNext() => _player.seekToNext();
 
-  ///*********************** Skip To Previous ****************************/
+  ///***************** Skip To Previous *****************/
   ///***************************************************/
   @override
   Future<void> skipToPrevious() => _player.seekToPrevious();
 
-  ///*********************** Seek Duration ****************************/
+  ///***************** Seek Duration ********************/
   ///***************************************************/
   @override
   Future<void> seek(Duration position) => _player.seek(position);
 
-  ///*********************** Set Shuffle Mode ****************************/
+  ///**************** Set Shuffle Mode ******************/
   ///***************************************************/
   @override
   Future<void> setShuffleMode(AudioServiceShuffleMode shuffleMode) async {
@@ -79,14 +84,35 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       _player.shuffle();
     }
     _player.setShuffleModeEnabled(enabled);
+
+    _updateController.add(_player.playbackEvent);
   }
 
-  ///*********************** Skip To Queue Item ****************************/
+  ///**************** Set Repeat Mode ******************/
+  ///***************************************************/
+  @override
+  Future<void> setRepeatMode(AudioServiceRepeatMode repeatMode) async {
+    switch (repeatMode) {
+      case AudioServiceRepeatMode.none:
+        _player.setLoopMode(LoopMode.off);
+      case AudioServiceRepeatMode.one:
+        _player.setLoopMode(LoopMode.one);
+      case AudioServiceRepeatMode.all:
+        _player.setLoopMode(LoopMode.all);
+      case AudioServiceRepeatMode.group:
+        return;
+    }
+    _updateController.add(_player.playbackEvent);
+  }
+
+  ///***************** Skip To Queue Item ***************/
   ///***************************************************/
   @override
   Future<void> skipToQueueItem(int index) =>
       _player.seek(Duration.zero, index: index);
 
+  ///***************** Add Queue Items ******************/
+  ///***************************************************/
   @override
   Future<void> addQueueItems(List<MediaItem> mediaItems) async {
     final audioSources = mediaItems
@@ -102,7 +128,7 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     queue.add(newQueue);
   }
 
-  ///*********************** Load Empty Playlist ****************************/
+  ///************** Load Empty Playlist *****************/
   ///***************************************************/
   Future<void> _loadEmptyPlaylist() async {
     try {
@@ -132,7 +158,22 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     });
   }
 
-  ///*********************** Transform Event ****************************/
+  ///****** */ Listen to Processing State Stream *****/
+  ///*** If was is completed and song is playing ****/
+  ///*** return play music from index 0 ****/
+  Future<void> _returnPlayPlaylistWhenIsCompleted() async {
+    _player.processingStateStream.listen((state) {
+      final isCompleted = state == ProcessingState.completed;
+      final isPlaying = _player.playing == true;
+
+      if (isCompleted && isPlaying) {
+        _player.play();
+        _player.seek(Duration.zero, index: 0);
+      }
+    });
+  }
+
+  ///**************** Transform Event *******************/
   ///***************************************************/
   PlaybackState _transformEvent(PlaybackEvent event) {
     return PlaybackState(
@@ -145,6 +186,11 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
         true: AudioServiceShuffleMode.all,
         false: AudioServiceShuffleMode.none,
       }[_player.shuffleModeEnabled]!,
+      repeatMode: {
+        LoopMode.all: AudioServiceRepeatMode.all,
+        LoopMode.one: AudioServiceRepeatMode.one,
+        LoopMode.off: AudioServiceRepeatMode.none,
+      }[_player.loopMode]!,
       processingState: const {
         ProcessingState.idle: AudioProcessingState.idle,
         ProcessingState.loading: AudioProcessingState.loading,
