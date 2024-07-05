@@ -28,7 +28,7 @@ class ListViewSongCard extends StatelessWidget {
           }
         },
         builder: (context, state) {
-          // when list of songs is Empty
+          //* when list of songs is Empty
           if (state.songModel?.isEmpty ?? false) {
             return SizedBox(
               height: MediaQuery.of(context).size.height / 1.4,

@@ -21,7 +21,6 @@ class TitleAndFavoriteDetailsSong extends StatelessWidget {
               style: AppFonts.medium_16,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
             ),
             subtitle: Text(
               song?.artist ?? AppStrings.unknown,
@@ -29,7 +28,6 @@ class TitleAndFavoriteDetailsSong extends StatelessWidget {
                   .copyWith(color: AppColor.white.withAlpha(140)),
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
             ),
           ),
         ),

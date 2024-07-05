@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 abstract class AppIcon {
-  static const IconData shuffle = Icons.shuffle;
+  static const IconData shuffle = Icons.shuffle_sharp;
   static const IconData musicNote = Icons.music_note;
   static const IconData play = Icons.play_arrow;
   static const IconData pause = Icons.pause;

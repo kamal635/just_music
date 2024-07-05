@@ -34,6 +34,8 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
         _onSkipToPreviousAudioEvent); // to skip to previous song
 
     on<SkipByIndexAudioEvent>(_onSkipByIndexAudioEvent); // to skip by index
+
+    on<ShuffleModeAudioEvent>(_onShuffleModeAudioEvent);
   }
 
   ///**********************Load Audio Player*****************************/
@@ -153,6 +155,16 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   ) async {
     await _audioHandler.skipToQueueItem(event.index);
     emit(state.copyWith(status: AudioPlayerStatus.playing));
+  }
+
+  ///***********************Shuffle Mode****************************/
+  ///***************************************************/
+  void _onShuffleModeAudioEvent(
+    ShuffleModeAudioEvent event,
+    Emitter<AudioPlayerState> emit,
+  ) async {
+    await _audioHandler.setShuffleMode(event.shuffleMode);
+    emit(state.copyWith(status: AudioPlayerStatus.shuffle));
   }
 
   ///***********************Set Audio****************************/

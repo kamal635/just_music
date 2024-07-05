@@ -4,6 +4,7 @@ import 'package:just_music/features/albums/album_view.dart';
 import 'package:just_music/features/favorites/favorite_view.dart';
 import 'package:just_music/features/folders/folders_view.dart';
 import 'package:just_music/features/home/home_view.dart';
+import 'package:just_music/features/home/widgets/music_track/music_track_player.dart';
 import 'package:just_music/features/playlists/playlist_view.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
@@ -49,6 +50,8 @@ class _ChangedViewState extends State<ChangedView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const MusicTrackPlayer(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         backgroundColor: AppColor.primary,
         bottom: TabBar(
