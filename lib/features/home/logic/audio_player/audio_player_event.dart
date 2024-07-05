@@ -17,6 +17,14 @@ class SkipToNextAudioEvent extends AudioPlayerEvent {}
 
 class SkipToPreviousAudioEvent extends AudioPlayerEvent {}
 
+class ShuffleModeAudioEvent extends AudioPlayerEvent {
+  final AudioServiceShuffleMode shuffleMode;
+
+  const ShuffleModeAudioEvent({required this.shuffleMode});
+  @override
+  List<Object> get props => [shuffleMode];
+}
+
 class SkipByIndexAudioEvent extends AudioPlayerEvent {
   final int index;
 

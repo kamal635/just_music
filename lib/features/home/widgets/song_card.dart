@@ -26,12 +26,12 @@ class _SongCardState extends State<SongCard> {
 
   @override
   void initState() {
-    //** Listen to the AudioPlayerBloc stream to update the _valueNotifier
-    //** whenever the audio player state changes
     listenStateAudioPlayer();
     super.initState();
   }
 
+  //** Listen to the AudioPlayerBloc stream to update the _valueNotifier
+  //** whenever the audio player state changes
   void listenStateAudioPlayer() {
     context.read<AudioPlayerBloc>().stream.listen((state) {
       if (state.audioPlayerData?.playbackState.queueIndex == widget.index &&

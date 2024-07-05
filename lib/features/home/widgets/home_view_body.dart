@@ -6,19 +6,23 @@ import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/features/home/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/features/home/widgets/grant_permission.dart';
 import 'package:just_music/features/home/widgets/list_view_song_card.dart';
-import 'package:just_music/features/home/widgets/section_double_button.dart';
 import 'package:just_music/features/home/widgets/section_text_form_field.dart';
 
-class HomeViewBody extends StatelessWidget {
+class HomeViewBody extends StatefulWidget {
   const HomeViewBody({super.key});
 
+  @override
+  State<HomeViewBody> createState() => _HomeViewBodyState();
+}
+
+class _HomeViewBodyState extends State<HomeViewBody> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
           di<CheckPermissionBloc>()..add(StatusPermissionEvent()),
       child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
+        // physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
@@ -36,11 +40,6 @@ class HomeViewBody extends StatelessWidget {
                     return Column(children: [
                       //Form Field
                       const SectionTextFormField(),
-
-                      spaceHeight(10),
-
-                      // Double Button
-                      const SectionDoubleButton(),
 
                       spaceHeight(10),
 

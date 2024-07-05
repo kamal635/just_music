@@ -1,6 +1,8 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
@@ -8,7 +10,10 @@ import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 
 class ButtonsDetailsSong extends StatelessWidget {
-  const ButtonsDetailsSong({super.key, required this.isPlaying});
+  const ButtonsDetailsSong({
+    super.key,
+    required this.isPlaying,
+  });
   final bool isPlaying;
 
   @override
@@ -16,12 +21,36 @@ class ButtonsDetailsSong extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        //* shuffle
-        CustomIconButton(
-          size: 30.h,
-          onPressed: () {},
-          icon: AppIcon.shuffle,
-          color: AppColor.white.withAlpha(180),
+        //*********************** Shuffle Button ************************
+        BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
+          builder: (context, state) {
+            //** Short Variable */
+            final shuffleMode =
+                state.audioPlayerData?.playbackState.shuffleMode;
+            final shuffleModeEnabled =
+                shuffleMode == AudioServiceShuffleMode.all;
+
+            //** Button */
+            return CustomIconButton(
+              size: 30.h,
+              onPressed: () async {
+                final enabled = !shuffleModeEnabled;
+
+                //***Excute Event Shuffle Mode**/
+                context.read<AudioPlayerBloc>().add(ShuffleModeAudioEvent(
+                    shuffleMode: enabled
+                        ? AudioServiceShuffleMode.all
+                        : AudioServiceShuffleMode.none));
+
+                //*** Toast Shuffle Mode */
+                await toastShuffleMode(enabled);
+              },
+              icon: AppIcon.shuffle,
+              color: shuffleModeEnabled
+                  ? AppColor.white
+                  : AppColor.white.withAlpha(120),
+            );
+          },
         ),
 
         //* Skip to Previous
@@ -31,6 +60,7 @@ class ButtonsDetailsSong extends StatelessWidget {
             context.read<AudioPlayerBloc>().add(SkipToPreviousAudioEvent());
           },
           icon: AppIcon.skipPrevious,
+          color: AppColor.white,
         ),
 
         //* Play / Pause

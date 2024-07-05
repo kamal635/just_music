@@ -9,6 +9,7 @@ import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.da
 class ButtonMusicTrack extends StatelessWidget {
   const ButtonMusicTrack({super.key, required this.isPlaying});
   final bool? isPlaying;
+
   @override
   Widget build(BuildContext context) {
     return Row(
