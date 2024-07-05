@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 abstract class AppIcon {
   static const IconData shuffle = Icons.shuffle_sharp;
+  static const IconData repateOne = Icons.repeat_one;
+  static const IconData repateOff = Icons.repeat_outlined;
   static const IconData musicNote = Icons.music_note;
   static const IconData play = Icons.play_arrow;
   static const IconData pause = Icons.pause;
@@ -15,5 +17,4 @@ abstract class AppIcon {
   static const IconData musicQueue = Icons.queue_music;
   static const IconData skipNext = Icons.skip_next;
   static const IconData skipPrevious = Icons.skip_previous;
-  static const IconData repeat = Icons.repeat;
 }

@@ -21,7 +21,8 @@ class ButtonsDetailsSong extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        //*********************** Shuffle Button ************************
+        //************** Shuffle Button ******************/
+        //***********************************************/
         BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
           builder: (context, state) {
             //** Short Variable */
@@ -53,7 +54,8 @@ class ButtonsDetailsSong extends StatelessWidget {
           },
         ),
 
-        //* Skip to Previous
+        //************** Skip to Previous ******************/
+        //*************************************************/
         CustomIconButton(
           size: 30.h,
           onPressed: () {
@@ -63,7 +65,8 @@ class ButtonsDetailsSong extends StatelessWidget {
           color: AppColor.white,
         ),
 
-        //* Play / Pause
+        //**************** Play / Pause ********************/
+        //*************************************************/
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40.r),
@@ -81,7 +84,8 @@ class ButtonsDetailsSong extends StatelessWidget {
           ),
         ),
 
-        //* Skip to Next
+        //**************** Skip to Next ********************/
+        //*************************************************/
         CustomIconButton(
           size: 30.h,
           onPressed: () {
@@ -90,14 +94,53 @@ class ButtonsDetailsSong extends StatelessWidget {
           icon: AppIcon.skipNext,
         ),
 
-        //* Queue Song
-        CustomIconButton(
-          size: 30.h,
-          onPressed: () {},
-          icon: AppIcon.musicQueue,
-          color: AppColor.white.withAlpha(180),
+        //**************** Repeat Mode *********************/
+        //*************************************************/
+        BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
+          builder: (context, state) {
+            //** Short Variable */
+            final repeatMode = state.audioPlayerData?.playbackState.repeatMode;
+            final repeateAll = repeatMode == AudioServiceRepeatMode.all;
+            final repeateOne = repeatMode == AudioServiceRepeatMode.one;
+            return CustomIconButton(
+              size: 30.h,
+              onPressed: () {
+                //***Excute Event Repeate Mode**/
+                excuteEventRepeatMode(context, repeatMode);
+
+                //*** Toast Repeat Mode */
+                toastRepeatMode(repeateAll, repeateOne);
+              },
+              icon: repeateAll
+                  ? AppIcon.repateOff
+                  : repeateOne
+                      ? AppIcon.repateOne
+                      : AppIcon.repateOff,
+              color: repeateAll || repeateOne
+                  ? AppColor.white
+                  : AppColor.white.withAlpha(180),
+            );
+          },
         ),
       ],
     );
+  }
+
+  void excuteEventRepeatMode(
+      BuildContext context, AudioServiceRepeatMode? repeatMode) {
+    //***Excute Event Repeate Mode**/
+    context.read<AudioPlayerBloc>().add(RepeatModeAudioEvent(
+            repeateMode: switch (repeatMode) {
+          //*** initial none : when I press it become (one)*/
+          AudioServiceRepeatMode.none => AudioServiceRepeatMode.one,
+          //*** if was (one) when I press it become (all)*/
+          AudioServiceRepeatMode.one => AudioServiceRepeatMode.all,
+          //*** if was (all) when I press it become (none)*/
+          AudioServiceRepeatMode.all => AudioServiceRepeatMode.none,
+          //*** disable*/
+          AudioServiceRepeatMode.group => throw UnimplementedError(),
+          //*** if was null retrun initial (none)*/
+          null => AudioServiceRepeatMode.none,
+        }));
   }
 }
