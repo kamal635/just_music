@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 
-//******************* Primary Flutter Toast*******************/
+//******************* Primary Flutter Toast ********************/
 Future<void> flutterToast({
   required String message,
   Color? backgroundColor,
