@@ -47,7 +47,7 @@ class MusicTrackPlayer extends StatelessWidget {
             margin: EdgeInsets.all(12.r),
             padding: EdgeInsets.all(12.r),
             decoration: BoxDecoration(
-                gradient: AppColor.linearButton,
+                color: AppColor.secondary,
                 borderRadius: BorderRadius.circular(10.r)),
             child: Column(
               mainAxisSize: MainAxisSize.min,

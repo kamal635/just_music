@@ -34,8 +34,7 @@ class _SongCardState extends State<SongCard> {
   //** whenever the audio player state changes
   void listenStateAudioPlayer() {
     context.read<AudioPlayerBloc>().stream.listen((state) {
-      if (state.audioPlayerData?.playbackState.queueIndex == widget.index &&
-          state.audioPlayerData!.playbackState.playing) {
+      if (state.audioPlayerData?.playbackState.queueIndex == widget.index) {
         _valueNotifier.value = true;
       } else {
         _valueNotifier.value = false;
@@ -67,7 +66,7 @@ class _SongCardState extends State<SongCard> {
         return Container(
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
-            color: valueNotifier ? AppColor.white.withAlpha(60) : null,
+            color: valueNotifier ? AppColor.secondary : null,
             borderRadius: BorderRadius.circular(10.r),
           ),
           child: child,

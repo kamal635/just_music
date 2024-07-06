@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -23,30 +24,47 @@ Future<void> flutterToast({
 }
 
 //**************** Custom Flutter Toast For Shuffle Mode *****************/
-Future<void> toastShuffleMode(bool enabled) async {
+Future<void> toastShuffleMode(
+    bool enabled, AudioServiceShuffleMode? shuffleMode) async {
   await flutterToast(
     message: enabled ? "SHUFFLE ON" : "SHUFFLE OFF",
-    position: ToastGravity.TOP,
-    time: 1,
+    position: ToastGravity.BOTTOM,
+    time: 10,
     toastLength: Toast.LENGTH_SHORT,
-    backgroundColor: enabled ? AppColor.white : AppColor.white.withAlpha(80),
-    textColor: enabled ? AppColor.black : AppColor.white,
+    backgroundColor: AppColor.white,
+    textColor: AppColor.primary,
   );
+
+  if (shuffleMode == AudioServiceShuffleMode.none ||
+      shuffleMode == AudioServiceShuffleMode.all) {
+    Future.delayed(const Duration(milliseconds: 400), () {
+      Fluttertoast.cancel();
+    });
+  }
 }
 
 //**************** Custom Flutter Toast For Repeat Mode *****************/
 //**** I explained how repeat all and one works in method (excuteEventRepeatMode) */
-void toastRepeatMode(bool repeateAll, bool repeateOne) {
+void toastRepeatMode(
+    bool repeateAll, bool repeateOne, AudioServiceRepeatMode? repeatMode) {
   flutterToast(
     message: repeateAll
         ? "REPEAT OFF"
         : repeateOne
             ? "REPEAT ALL"
             : "REPEAT ONE",
-    position: ToastGravity.TOP,
-    time: 1,
+    position: ToastGravity.BOTTOM,
+    time: 0,
     toastLength: Toast.LENGTH_SHORT,
     backgroundColor: AppColor.white,
-    textColor: AppColor.black,
+    textColor: AppColor.primary,
   );
+
+  if (repeatMode == AudioServiceRepeatMode.none ||
+      repeatMode == AudioServiceRepeatMode.all ||
+      repeatMode == AudioServiceRepeatMode.one) {
+    Future.delayed(const Duration(milliseconds: 400), () {
+      Fluttertoast.cancel();
+    });
+  }
 }

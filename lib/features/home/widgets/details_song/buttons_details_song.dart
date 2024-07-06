@@ -44,12 +44,12 @@ class ButtonsDetailsSong extends StatelessWidget {
                         : AudioServiceShuffleMode.none));
 
                 //*** Toast Shuffle Mode */
-                await toastShuffleMode(enabled);
+                await toastShuffleMode(enabled, shuffleMode);
               },
               icon: AppIcon.shuffle,
               color: shuffleModeEnabled
                   ? AppColor.white
-                  : AppColor.white.withAlpha(120),
+                  : AppColor.white.withAlpha(110),
             );
           },
         ),
@@ -80,7 +80,7 @@ class ButtonsDetailsSong extends StatelessWidget {
                   : context.read<AudioPlayerBloc>().add(PlayAudioEvent());
             },
             icon: isPlaying ? AppIcon.pause : AppIcon.play,
-            color: AppColor.black,
+            color: AppColor.primary,
           ),
         ),
 
@@ -109,7 +109,7 @@ class ButtonsDetailsSong extends StatelessWidget {
                 excuteEventRepeatMode(context, repeatMode);
 
                 //*** Toast Repeat Mode */
-                toastRepeatMode(repeateAll, repeateOne);
+                toastRepeatMode(repeateAll, repeateOne, repeatMode);
               },
               icon: repeateAll
                   ? AppIcon.repateOff
@@ -118,7 +118,7 @@ class ButtonsDetailsSong extends StatelessWidget {
                       : AppIcon.repateOff,
               color: repeateAll || repeateOne
                   ? AppColor.white
-                  : AppColor.white.withAlpha(180),
+                  : AppColor.white.withAlpha(110),
             );
           },
         ),
