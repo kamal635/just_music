@@ -35,11 +35,12 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
 
     on<SkipByIndexAudioEvent>(_onSkipByIndexAudioEvent); // to skip by index
 
-    on<ShuffleModeAudioEvent>(_onShuffleModeAudioEvent);
-    on<RepeatModeAudioEvent>(_onRepeatModeAudioEvent);
+    on<ShuffleModeAudioEvent>(_onShuffleModeAudioEvent); // shuffle Mode
+
+    on<RepeatModeAudioEvent>(_onRepeatModeAudioEvent); // Repeat Mode
   }
 
-  ///**********************Load Audio Player*****************************/
+  ///****************Load Audio Player*******************/
   ///***************************************************/
   void _onLoadAudioPlayer(
     LoadAudioPlayerEvent event,
@@ -98,7 +99,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     );
   }
 
-  ///***********************Play Audio****************************/
+  ///*******************Play Audio***********************/
   ///***************************************************/
   void _onPlayAudio(
     PlayAudioEvent event,
@@ -108,7 +109,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
-  ///***********************Pause Audio****************************/
+  ///*******************Pause Audio**********************/
   ///***************************************************/
   void _onPauseAudio(
     PauseAudioEvent event,
@@ -118,7 +119,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.paused));
   }
 
-  ///**********************Seek To Position Audio*****************************/
+  ///*************Seek To Position Audio*****************/
   ///***************************************************/
   void _onSeekToPositionAudioEvent(
     SeekToPositionAudioEvent event,
@@ -128,7 +129,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
-  ///**********************Skip To Next Song*****************************/
+  ///***************Skip To Next Song********************/
   ///***************************************************/
   void _onSkipToNextAudioEvent(
     SkipToNextAudioEvent event,
@@ -138,7 +139,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
-  ///***********************Skip To Previous Song****************************/
+  ///**************Skip To Previous Song*****************/
   ///***************************************************/
   void _onSkipToPreviousAudioEvent(
     SkipToPreviousAudioEvent event,
@@ -148,7 +149,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
-  ///***********************Skip by index****************************/
+  ///*******************Skip by index********************/
   ///***************************************************/
   void _onSkipByIndexAudioEvent(
     SkipByIndexAudioEvent event,
@@ -158,7 +159,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
-  ///***********************Shuffle Mode****************************/
+  ///********************Shuffle Mode********************/
   ///***************************************************/
   void _onShuffleModeAudioEvent(
     ShuffleModeAudioEvent event,
@@ -168,7 +169,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.shuffle));
   }
 
-  ///***********************Repeate Mode****************************/
+  ///********************Repeate Mode********************/
   ///***************************************************/
   void _onRepeatModeAudioEvent(
     RepeatModeAudioEvent event,
@@ -178,7 +179,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     emit(state.copyWith(status: AudioPlayerStatus.repeate));
   }
 
-  ///***********************Set Audio****************************/
+  ///***********************Set Audio********************/
   ///***************************************************/
   void _onSetAudio(
     SetAudioEvent event,

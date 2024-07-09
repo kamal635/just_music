@@ -5,27 +5,27 @@ enum FetchSongsStatus { initial, loading, loaded, failure }
 @immutable
 class FetchSongsFromDeviceState extends Equatable {
   final FetchSongsStatus fetchSongsStatus;
-  final List<Song>? songModel;
+  final List<Song>? songs;
   final String? errorMessage;
 
   const FetchSongsFromDeviceState({
     this.fetchSongsStatus = FetchSongsStatus.initial,
-    this.songModel,
+    this.songs,
     this.errorMessage,
   });
 
   FetchSongsFromDeviceState copyWith({
     FetchSongsStatus? fetchSongsStatus,
-    List<Song>? songModel,
+    List<Song>? songs,
     String? errorMessage,
   }) {
     return FetchSongsFromDeviceState(
       fetchSongsStatus: fetchSongsStatus ?? this.fetchSongsStatus,
-      songModel: songModel ?? this.songModel,
+      songs: songs ?? this.songs,
       errorMessage: errorMessage ?? this.errorMessage,
     );
   }
 
   @override
-  List<Object?> get props => [fetchSongsStatus, songModel, errorMessage];
+  List<Object?> get props => [fetchSongsStatus, songs, errorMessage];
 }

@@ -14,6 +14,7 @@ abstract class AppIcon {
   static const IconData arrowBack = Icons.arrow_back;
   static const IconData arrowDown = Icons.arrow_downward_sharp;
   static const IconData favoriteBorder = Icons.favorite_border;
+  static const IconData favoriteFilled = Icons.favorite;
   static const IconData musicQueue = Icons.queue_music;
   static const IconData skipNext = Icons.skip_next;
   static const IconData skipPrevious = Icons.skip_previous;
