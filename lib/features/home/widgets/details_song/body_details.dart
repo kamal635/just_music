@@ -60,7 +60,9 @@ Future<void> detailsSong({
                     spaceHeight(20),
 
                     // section controller in song
-                    TitleAndFavoriteDetailsSong(song: song),
+                    TitleAndFavoriteDetailsSong(
+                      song: song,
+                    ),
 
                     spaceHeight(40),
 

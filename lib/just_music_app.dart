@@ -5,6 +5,7 @@ import 'package:just_music/core/routes/app_router.dart';
 import 'package:just_music/core/routes/string_route.dart';
 import "package:flutter_screenutil/flutter_screenutil.dart";
 import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 
 class JustMusicApp extends StatelessWidget {
@@ -19,9 +20,17 @@ class JustMusicApp extends StatelessWidget {
       designSize: const Size(360, 690),
       minTextAdapt: true,
       splitScreenMode: true,
-      child: BlocProvider(
-        create: (context) => AudioPlayerBloc(audioHandler: audioHandler)
-          ..add(LoadAudioPlayerEvent()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => AudioPlayerBloc(audioHandler: audioHandler)
+              ..add(LoadAudioPlayerEvent()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                FavoriteSongsBloc()..add(const LoadFavoriteSongs()),
+          ),
+        ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.dark().copyWith(

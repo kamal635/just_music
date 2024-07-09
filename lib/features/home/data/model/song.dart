@@ -1,7 +1,8 @@
 import 'package:audio_service/audio_service.dart';
+import 'package:equatable/equatable.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class Song {
+class Song extends Equatable {
   final int id;
   final int? albumId;
   final int? artistId;
@@ -10,10 +11,9 @@ class Song {
   final String? artist;
   final String? audioUrl;
   final String fileExtension;
-
   final Duration? duration;
 
-  Song({
+  const Song({
     required this.id,
     this.albumId,
     this.artistId,
@@ -66,4 +66,17 @@ class Song {
           "fileExtension": fileExtension,
         },
       );
+
+  @override
+  List<Object?> get props => [
+        id,
+        albumId,
+        artistId,
+        title,
+        album,
+        artist,
+        audioUrl,
+        fileExtension,
+        duration
+      ];
 }
