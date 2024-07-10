@@ -1,6 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/routes/app_router.dart';
 import 'package:just_music/core/routes/string_route.dart';
 import "package:flutter_screenutil/flutter_screenutil.dart";
@@ -28,13 +29,14 @@ class JustMusicApp extends StatelessWidget {
           ),
           BlocProvider(
             create: (context) =>
-                FavoriteSongsBloc()..add(const LoadFavoriteSongs()),
+                di<FavoriteSongsBloc>()..add(const LoadFavoriteSongs()),
           ),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          theme: ThemeData.dark().copyWith(
+          theme: ThemeData(
             scaffoldBackgroundColor: AppColor.primary,
+            brightness: Brightness.dark,
           ),
           initialRoute: RouterName.changedView,
           onGenerateRoute: AppRouter.onGenerateRoute,

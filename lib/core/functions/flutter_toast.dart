@@ -72,9 +72,9 @@ Future<void> toastRepeatMode(
   _currentToast!.init(context);
   _currentToast!.showToast(
     child: Container(
-      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25.0),
+        borderRadius: BorderRadius.circular(25.r),
         color: AppColor.primary,
       ),
       child: Text(
