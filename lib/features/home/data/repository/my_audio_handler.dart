@@ -25,7 +25,7 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   MyAudioHandler() {
     _loadEmptyPlaylist();
     _listenForDurationChanges();
-    _returnPlayPlaylistWhenIsCompleted();
+    // _returnPlayPlaylistWhenIsCompleted();
 
     // Redirect events from the update controller to the playback state
     _updateController.stream.map(_transformEvent).pipe(playbackState);
@@ -62,6 +62,7 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
 
   ///****************** Skip To Next ********************/
   ///***************************************************/
+
   @override
   Future<void> skipToNext() => _player.seekToNext();
 
@@ -115,6 +116,10 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   ///***************************************************/
   @override
   Future<void> addQueueItems(List<MediaItem> mediaItems) async {
+    // Clear the existing _queue
+    await _queue.clear();
+
+    // Map mediaItems to audioSources
     final audioSources = mediaItems
         .map((mediaItem) => AudioSource.uri(
               Uri.parse(mediaItem.extras!['audioUrl'] as String),
@@ -122,6 +127,7 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
             ))
         .toList();
 
+    // Add new audioSources to the queue
     _queue.addAll(audioSources);
 
     final newQueue = queue.value..addAll(mediaItems);
@@ -158,20 +164,20 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     });
   }
 
-  ///****** */ Listen to Processing State Stream *****/
-  ///*** If was is completed and song is playing ****/
-  ///*** return play music from index 0 ****/
-  Future<void> _returnPlayPlaylistWhenIsCompleted() async {
-    _player.processingStateStream.listen((state) {
-      final isCompleted = state == ProcessingState.completed;
-      final isPlaying = _player.playing == true;
+  // ///****** */ Listen to Processing State Stream *****/
+  // ///*** If was is completed and song is playing ****/
+  // ///*** return play music from index 0 ****/
+  // Future<void> _returnPlayPlaylistWhenIsCompleted() async {
+  //   _player.processingStateStream.listen((state) {
+  //     final isCompleted = state == ProcessingState.completed;
+  //     final isPlaying = _player.playing == true;
 
-      if (isCompleted && isPlaying) {
-        _player.play();
-        _player.seek(Duration.zero, index: 0);
-      }
-    });
-  }
+  //     if (isCompleted && isPlaying) {
+  //       _player.play();
+  //       _player.seek(Duration.zero, index: 0);
+  //     }
+  //   });
+  // }
 
   ///**************** Transform Event *******************/
   ///***************************************************/

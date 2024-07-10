@@ -5,6 +5,7 @@ import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/shared_widgets/image_empty_list.dart';
 import 'package:just_music/core/shared_widgets/list_view_songs.dart';
 import 'package:just_music/core/utils/app_images.dart';
+import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
 
 class FavoriteViewBody extends StatelessWidget {
@@ -19,7 +20,8 @@ class FavoriteViewBody extends StatelessWidget {
             //*** state Failure */
             if (state.favoriteSongsStatus == FavoriteSongsStatus.failure) {
               await flutterToast(
-                  message: state.errorMessage ?? "Unknown error..!");
+                  context: context,
+                  message: state.errorMessage ?? AppStrings.unexpectedError);
             }
           },
           builder: (context, state) {

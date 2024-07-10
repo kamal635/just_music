@@ -24,12 +24,10 @@ class CheckPermissionBloc
     StatusPermissionEvent event,
     Emitter<CheckPermissionState> emit,
   ) async {
-    emit(state.copyWith(permissionStatus: PermissionStatuss.initial));
+    emit(state.copyWith(permissionStatus: PermissionStatuss.loading));
 
     // Request permissions for photos and media
-    final hasMediaPermission = await _onAudioQuery.checkAndRequest(
-      retryRequest: true,
-    );
+    final hasMediaPermission = await _onAudioQuery.checkAndRequest();
 
     if (hasMediaPermission) {
       // If hasMediaPermission == true (granted) , emit this
