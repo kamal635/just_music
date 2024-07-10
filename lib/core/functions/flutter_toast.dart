@@ -3,68 +3,114 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
+
+// Handle the current toast reference
+FToast? _currentToast;
 
 //******************* Primary Flutter Toast ********************/
-Future<void> flutterToast({
-  required String message,
-  Color? backgroundColor,
-  Color? textColor,
-  ToastGravity? position,
-  int? time,
-  Toast? toastLength,
-}) async {
-  await Fluttertoast.showToast(
-      msg: message,
-      toastLength: toastLength ?? Toast.LENGTH_LONG,
-      gravity: position ?? ToastGravity.BOTTOM,
-      timeInSecForIosWeb: time ?? 2,
-      backgroundColor: backgroundColor ?? Colors.orange,
-      textColor: textColor ?? Colors.white,
-      fontSize: 14.sp);
+Future<void> flutterToast(
+    {required BuildContext context, required String message}) async {
+  // Cancel the current toast if it exists
+  _currentToast?.removeCustomToast();
+
+  // Show the new toast
+  _currentToast = FToast();
+  _currentToast!.init(context);
+  _currentToast!.showToast(
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.r),
+        color: AppColor.primary,
+      ),
+      child: Text(message,
+          style: AppFonts.normal_12.copyWith(color: AppColor.white)),
+    ),
+    gravity: ToastGravity.BOTTOM,
+    toastDuration: const Duration(seconds: 1),
+  );
 }
 
 //**************** Custom Flutter Toast For Shuffle Mode *****************/
 Future<void> toastShuffleMode(
-    bool enabled, AudioServiceShuffleMode? shuffleMode) async {
-  await flutterToast(
-    message: enabled ? "SHUFFLE ON" : "SHUFFLE OFF",
-    position: ToastGravity.BOTTOM,
-    time: 10,
-    toastLength: Toast.LENGTH_SHORT,
-    backgroundColor: AppColor.white,
-    textColor: AppColor.primary,
-  );
+    {required bool enabled,
+    required AudioServiceShuffleMode? shuffleMode,
+    required BuildContext context}) async {
+  // Cancel the current toast if it exists
+  _currentToast?.removeCustomToast();
 
-  if (shuffleMode == AudioServiceShuffleMode.none ||
-      shuffleMode == AudioServiceShuffleMode.all) {
-    Future.delayed(const Duration(milliseconds: 400), () {
-      Fluttertoast.cancel();
-    });
-  }
+  // Show the new toast
+  _currentToast = FToast();
+  _currentToast!.init(context);
+  _currentToast!.showToast(
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.r),
+        color: AppColor.primary,
+      ),
+      child: Text(enabled ? "SHUFFLE ON" : "SHUFFLE OFF",
+          style: AppFonts.normal_12.copyWith(color: AppColor.white)),
+    ),
+    gravity: ToastGravity.BOTTOM,
+    toastDuration: const Duration(seconds: 1),
+  );
 }
 
 //**************** Custom Flutter Toast For Repeat Mode *****************/
 //**** I explained how repeat all and one works in method (excuteEventRepeatMode) */
-void toastRepeatMode(
-    bool repeateAll, bool repeateOne, AudioServiceRepeatMode? repeatMode) {
-  flutterToast(
-    message: repeateAll
-        ? "REPEAT OFF"
-        : repeateOne
-            ? "REPEAT ALL"
-            : "REPEAT ONE",
-    position: ToastGravity.BOTTOM,
-    time: 0,
-    toastLength: Toast.LENGTH_SHORT,
-    backgroundColor: AppColor.white,
-    textColor: AppColor.primary,
-  );
+Future<void> toastRepeatMode(
+    {required bool repeateAll,
+    required bool repeateOne,
+    required BuildContext context}) async {
+  // Cancel the current toast if it exists
+  _currentToast?.removeCustomToast();
 
-  if (repeatMode == AudioServiceRepeatMode.none ||
-      repeatMode == AudioServiceRepeatMode.all ||
-      repeatMode == AudioServiceRepeatMode.one) {
-    Future.delayed(const Duration(milliseconds: 400), () {
-      Fluttertoast.cancel();
-    });
-  }
+  // Show the new toast
+  _currentToast = FToast();
+  _currentToast!.init(context);
+  _currentToast!.showToast(
+    child: Container(
+      padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.0),
+        color: AppColor.primary,
+      ),
+      child: Text(
+          repeateAll
+              ? "REPEAT OFF"
+              : repeateOne
+                  ? "REPEAT ALL"
+                  : "REPEAT ONE",
+          style: AppFonts.normal_12.copyWith(color: AppColor.white)),
+    ),
+    gravity: ToastGravity.BOTTOM,
+    toastDuration: const Duration(seconds: 1),
+  );
+}
+
+//**************** Custom Flutter Toast For Favorite *****************/
+Future<void> toastFavorite(
+    {required bool isFavorite, required BuildContext context}) async {
+  // Cancel the current toast if it exists
+  _currentToast?.removeCustomToast();
+
+  // Show the new toast
+  _currentToast = FToast();
+  _currentToast!.init(context);
+  _currentToast!.showToast(
+    child: Container(
+      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(25.r),
+        color: AppColor.primary,
+      ),
+      child: Text(
+          isFavorite ? "Removed from favorite song" : "Added to favorite song",
+          style: AppFonts.normal_12.copyWith(color: AppColor.white)),
+    ),
+    gravity: ToastGravity.BOTTOM,
+    toastDuration: const Duration(seconds: 1),
+  );
 }

@@ -8,14 +8,9 @@ import 'package:just_music/features/home/widgets/grant_permission.dart';
 import 'package:just_music/features/home/widgets/list_view_song_card.dart';
 import 'package:just_music/features/home/widgets/section_text_form_field.dart';
 
-class HomeViewBody extends StatefulWidget {
+class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
 
-  @override
-  State<HomeViewBody> createState() => _HomeViewBodyState();
-}
-
-class _HomeViewBodyState extends State<HomeViewBody> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -29,7 +24,7 @@ class _HomeViewBodyState extends State<HomeViewBody> {
               padding: EdgeInsets.all(14.r),
               child: BlocBuilder<CheckPermissionBloc, CheckPermissionState>(
                 builder: (context, state) {
-                  if (state.permissionStatus == PermissionStatuss.initial) {
+                  if (state.permissionStatus == PermissionStatuss.loading) {
                     return const Center(child: CircularProgressIndicator());
                   }
                   if (state.permissionStatus == PermissionStatuss.denied) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
@@ -18,8 +19,10 @@ class FavoriteIconButton extends StatelessWidget {
             false;
 
         return CustomIconButton(
-            onPressed: () {
+            onPressed: () async {
               addAndRemoveSongToFavorite(isFavorite, context);
+
+              await toastFavorite(isFavorite: isFavorite, context: context);
             },
             color: changeColorFavorite(isFavorite),
             icon: changeIconFavorite(isFavorite));

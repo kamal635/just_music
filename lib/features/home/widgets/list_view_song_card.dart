@@ -20,6 +20,7 @@ class ListViewSongCard extends StatelessWidget {
         listener: (context, state) async {
           if (state.fetchSongsStatus == FetchSongsStatus.failure) {
             await flutterToast(
+                context: context,
                 message: state.errorMessage ?? AppStrings.unexpectedError);
           }
         },

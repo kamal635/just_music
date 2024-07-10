@@ -1,6 +1,6 @@
 part of 'check_permission_bloc.dart';
 
-enum PermissionStatuss { initial, granted, denied }
+enum PermissionStatuss { initial, loading, granted, denied }
 
 class CheckPermissionState extends Equatable {
   final PermissionStatuss permissionStatus;

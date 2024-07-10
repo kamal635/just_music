@@ -15,14 +15,6 @@ class MusicTrackPlayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
-      //Every time the position of the song changes you will build,
-      //this is to avoid this from happening
-      buildWhen: (previous, current) {
-        return (previous.audioPlayerData?.audio !=
-                current.audioPlayerData?.audio) ||
-            (previous.audioPlayerData?.playbackState !=
-                current.audioPlayerData?.playbackState);
-      },
       builder: (context, state) {
         ///**********************Short Variables From Bloc***************************/
         ///*************************************************/
