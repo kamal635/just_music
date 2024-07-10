@@ -18,3 +18,7 @@ abstract class AppStrings {
   static const String allowPermission =
       "Allow this app to access files to discover music on your device";
 }
+
+abstract class AppHive {
+  static const String favoriteBox = "favoriteBox";
+}

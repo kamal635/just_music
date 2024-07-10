@@ -18,4 +18,5 @@ abstract class AppIcon {
   static const IconData musicQueue = Icons.queue_music;
   static const IconData skipNext = Icons.skip_next;
   static const IconData skipPrevious = Icons.skip_previous;
+  static const IconData delete = Icons.delete;
 }

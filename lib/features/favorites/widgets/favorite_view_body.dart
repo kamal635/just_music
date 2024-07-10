@@ -34,12 +34,12 @@ class FavoriteViewBody extends StatelessWidget {
 
             //**** state loaded */
             if (state.favoriteSongsStatus == FavoriteSongsStatus.loaded) {
-              //*** List of favorite song (empty || null) */
+              //* List of favorite song (empty || null) */
               if (songs == null || songs.isEmpty) {
                 return const ImageEmptyList(image: AppImages.image2);
               }
 
-              //*** if song is loaded success */
+              //* if song is loaded success */
               return ListViewBuilderSongs(
                 songs: songs,
                 isFavorite: true,
