@@ -54,6 +54,7 @@ class _ChangedViewState extends State<ChangedView>
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         backgroundColor: AppColor.primary,
+        surfaceTintColor: AppColor.primary,
         bottom: TabBar(
             onTap: (i) {
               setState(() {

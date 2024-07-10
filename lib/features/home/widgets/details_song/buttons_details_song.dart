@@ -44,7 +44,10 @@ class ButtonsDetailsSong extends StatelessWidget {
                         : AudioServiceShuffleMode.none));
 
                 //*** Toast Shuffle Mode */
-                await toastShuffleMode(enabled, shuffleMode);
+                await toastShuffleMode(
+                    enabled: enabled,
+                    shuffleMode: shuffleMode,
+                    context: context);
               },
               icon: AppIcon.shuffle,
               color: shuffleModeEnabled
@@ -104,12 +107,15 @@ class ButtonsDetailsSong extends StatelessWidget {
             final repeateOne = repeatMode == AudioServiceRepeatMode.one;
             return CustomIconButton(
               size: 30.h,
-              onPressed: () {
+              onPressed: () async {
                 //***Excute Event Repeate Mode**/
                 excuteEventRepeatMode(context, repeatMode);
 
                 //*** Toast Repeat Mode */
-                toastRepeatMode(repeateAll, repeateOne, repeatMode);
+                await toastRepeatMode(
+                    repeateAll: repeateAll,
+                    repeateOne: repeateOne,
+                    context: context);
               },
               icon: repeateAll
                   ? AppIcon.repateOff

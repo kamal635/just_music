@@ -28,7 +28,7 @@ class FetchSongsFromDeviceBloc
       final listSongs = await getAllSongsRepoImpl.fetchSongsFromDevice();
 
       emit(state.copyWith(
-          fetchSongsStatus: FetchSongsStatus.loaded, songModel: listSongs));
+          fetchSongsStatus: FetchSongsStatus.loaded, songs: listSongs));
     } catch (err) {
       emit(state.copyWith(
           fetchSongsStatus: FetchSongsStatus.failure,

@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/helpers/dependencey_injection.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
+import 'package:just_music/core/shared_widgets/image_empty_list.dart';
+import 'package:just_music/core/shared_widgets/list_view_songs.dart';
 import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/home/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
-import 'package:just_music/features/home/widgets/song_card.dart';
 
 class ListViewSongCard extends StatelessWidget {
   const ListViewSongCard({super.key});
@@ -24,31 +20,12 @@ class ListViewSongCard extends StatelessWidget {
         listener: (context, state) async {
           if (state.fetchSongsStatus == FetchSongsStatus.failure) {
             await flutterToast(
+                context: context,
                 message: state.errorMessage ?? AppStrings.unexpectedError);
           }
         },
         builder: (context, state) {
-          //* when list of songs is Empty
-          if (state.songModel?.isEmpty ?? false) {
-            return SizedBox(
-              height: MediaQuery.of(context).size.height / 1.4,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Image.asset(
-                    AppImages.image2,
-                    height: 60.h,
-                  ),
-                  spaceHeight(10),
-                  Text(
-                    AppStrings.emptySongs,
-                    style: AppFonts.normal_12
-                        .copyWith(color: AppColor.white.withAlpha(160)),
-                  ),
-                ],
-              ),
-            );
-          }
+          final songs = state.songs;
 
           if (state.fetchSongsStatus == FetchSongsStatus.loading ||
               state.fetchSongsStatus == FetchSongsStatus.initial) {
@@ -58,25 +35,11 @@ class ListViewSongCard extends StatelessWidget {
           }
 
           if (state.fetchSongsStatus == FetchSongsStatus.loaded) {
-            return ListView.builder(
-                padding: EdgeInsets.zero,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: state.songModel!.length,
-                itemBuilder: (context, i) {
-                  final song = state.songModel![i];
-                  return InkWell(
-                    borderRadius: BorderRadius.circular(10.r),
-                    onTap: () {
-                      context.read<AudioPlayerBloc>().add(
-                          SetAudioEvent(songs: state.songModel!, index: i));
-                    },
-                    child: SongCard(
-                      song: song,
-                      index: i,
-                    ),
-                  );
-                });
+            //* when list of songs is Empty
+            if (songs == null || songs.isEmpty) {
+              return const ImageEmptyList(image: AppImages.image2);
+            }
+            return ListViewBuilderSongs(songs: songs);
           } else {
             return const SizedBox();
           }

@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/duration.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
+import 'package:just_music/core/shared_widgets/favorite_icon_button.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_strings.dart';
@@ -10,10 +11,15 @@ import 'package:just_music/features/home/data/model/song.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
 
 class SongCard extends StatefulWidget {
-  const SongCard({super.key, required this.song, required this.index});
+  const SongCard({
+    super.key,
+    required this.song,
+    this.isFavorite = false,
+  });
 
   final Song song;
-  final int index;
+
+  final bool isFavorite;
 
   @override
   State<SongCard> createState() => _SongCardState();
@@ -34,19 +40,13 @@ class _SongCardState extends State<SongCard> {
   //** whenever the audio player state changes
   void listenStateAudioPlayer() {
     context.read<AudioPlayerBloc>().stream.listen((state) {
-      if (state.audioPlayerData?.playbackState.queueIndex == widget.index) {
+      final id = state.audioPlayerData?.audio?.id;
+      if (id != null && id == widget.song.id) {
         _valueNotifier.value = true;
       } else {
         _valueNotifier.value = false;
       }
     });
-  }
-
-  @override
-  void dispose() {
-    //** Dispose the ValueNotifier to avoid memory leaks
-    _valueNotifier.dispose();
-    super.dispose();
   }
 
   ///*********/
@@ -80,7 +80,7 @@ class _SongCardState extends State<SongCard> {
           child: CustomArtWork(id: widget.song.id),
         ),
 
-        //** trailing ( icon )
+        //** trailing ( Duration Song )
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -93,6 +93,11 @@ class _SongCardState extends State<SongCard> {
               style: AppFonts.normal_10
                   .copyWith(color: AppColor.white.withAlpha(120)),
             ),
+
+            //** Favorite Icon */
+            widget.isFavorite
+                ? FavoriteIconButton(song: widget.song)
+                : const SizedBox(),
           ],
         ),
 

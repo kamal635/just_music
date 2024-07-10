@@ -25,7 +25,7 @@ class CustomElvatedButton extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10.r),
         // gradient: AppColor.linearButton,
-        color: color,
+        color: color ?? AppColor.secondary,
       ),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(

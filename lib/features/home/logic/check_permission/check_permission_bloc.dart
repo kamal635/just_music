@@ -9,13 +9,10 @@ part 'check_permission_state.dart';
 class CheckPermissionBloc
     extends Bloc<CheckPermissionEvent, CheckPermissionState> {
   final OnAudioQuery _onAudioQuery;
-  // final Permission _permissionHandler;
 
   CheckPermissionBloc({
     required OnAudioQuery onAudioQuery,
-    // required Permission permissionHandler,
   })  : _onAudioQuery = onAudioQuery,
-        // _permissionHandler = permissionHandler,
         super(const CheckPermissionState()) {
     on<StatusPermissionEvent>(_onTappedPermissionEvent);
   }
@@ -24,12 +21,10 @@ class CheckPermissionBloc
     StatusPermissionEvent event,
     Emitter<CheckPermissionState> emit,
   ) async {
-    emit(state.copyWith(permissionStatus: PermissionStatuss.initial));
+    emit(state.copyWith(permissionStatus: PermissionStatuss.loading));
 
     // Request permissions for photos and media
-    final hasMediaPermission = await _onAudioQuery.checkAndRequest(
-      retryRequest: true,
-    );
+    final hasMediaPermission = await _onAudioQuery.checkAndRequest();
 
     if (hasMediaPermission) {
       // If hasMediaPermission == true (granted) , emit this
