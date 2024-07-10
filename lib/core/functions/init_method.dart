@@ -27,4 +27,8 @@ Future<void> initMethod() async {
     statusBarColor: Colors.transparent,
     systemNavigationBarColor: AppColor.primary.withAlpha(230),
   ));
+
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 }
