@@ -26,19 +26,19 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
     // list of Song to add song after filttering
     final listSongsMp3 = <Song>[];
 
-    // for loop in songs from _audioQuery
-    for (final song in listSongs) {
-      // storage file song
+    // Process songs asynchronously
+    await Future.forEach(listSongs, (song) async {
+      // Storage file song
       final file = File(song.data);
 
-      // check if file is exists or not
+      // Check if file exists and other conditions
       if (await file.exists() &&
           song.fileExtension == "mp3" &&
           song.duration != 0) {
-        //add song to list of songs
+        // Add song to list of songs
         listSongsMp3.add(Song.fromDevice(song));
       }
-    }
+    });
 
     return listSongsMp3;
   }
