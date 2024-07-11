@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/shared_widgets/icon_buttons.dart';
+import 'package:just_music/core/utils/app_icon.dart';
+import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/albums/album_view.dart';
 import 'package:just_music/features/favorites/favorite_view.dart';
@@ -55,6 +59,18 @@ class _ChangedViewState extends State<ChangedView>
       appBar: AppBar(
         backgroundColor: AppColor.primary,
         surfaceTintColor: AppColor.primary,
+
+        //* Leading
+        leading: Image.asset(
+          AppImages.logoWhite,
+        ),
+        leadingWidth: 80.w,
+
+        //* Action
+        actions: [
+          CustomIconButton(onPressed: () {}, icon: AppIcon.settings),
+        ],
+
         bottom: TabBar(
             onTap: (i) {
               setState(() {

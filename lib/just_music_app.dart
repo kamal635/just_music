@@ -8,6 +8,7 @@ import "package:flutter_screenutil/flutter_screenutil.dart";
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
 import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
+import 'package:just_music/features/home/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 
 class JustMusicApp extends StatelessWidget {
   const JustMusicApp({super.key, required this.audioHandler});
@@ -30,6 +31,10 @@ class JustMusicApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 di<FavoriteSongsBloc>()..add(const LoadFavoriteSongs()),
+          ),
+          BlocProvider(
+            create: (context) =>
+                di<FetchSongsFromDeviceBloc>()..add(LoadSongsFromDeviceEvent()),
           ),
         ],
         child: MaterialApp(
