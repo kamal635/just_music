@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/home/data/model/song.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 
 abstract class FavoriteRepo {
   Future<Box> openBox();

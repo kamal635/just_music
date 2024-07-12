@@ -6,8 +6,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_music/core/helpers/bloc_observer.dart';
 import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/features/home/data/model/duration.g.dart';
-import 'package:just_music/features/home/data/model/song.dart';
+import 'package:just_music/features/songs/data/model/duration.g.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:hive_flutter/adapters.dart';
 
 Future<void> initMethod() async {

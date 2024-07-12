@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_music/features/home/data/model/song.dart';
-import 'package:just_music/features/home/data/repository/fetch_songs_repo.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
+import 'package:just_music/features/songs/data/repository/fetch_songs_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'fetch_songs_from_device_event.dart';
@@ -11,9 +11,10 @@ part 'fetch_songs_from_device_state.dart';
 // lib\features\home\widgets\list_view_card_song.dart
 class FetchSongsFromDeviceBloc
     extends Bloc<FetchSongsFromDeviceEvent, FetchSongsFromDeviceState> {
-  final FetchSongsFromDeviceRepoImpl getAllSongsRepoImpl;
+  // final StoreSongsLocalRepoImpl storeSongsLocalRepoImpl;
+  final FetchSongsFromDeviceRepoImpl fetchSongsFromDeviceRepoImpl;
 
-  FetchSongsFromDeviceBloc({required this.getAllSongsRepoImpl})
+  FetchSongsFromDeviceBloc({required this.fetchSongsFromDeviceRepoImpl})
       : super(const FetchSongsFromDeviceState()) {
     on<LoadSongsFromDeviceEvent>(_onLoadSongsFromDeviceEvent);
   }
@@ -25,10 +26,16 @@ class FetchSongsFromDeviceBloc
     emit(state.copyWith(fetchSongsStatus: FetchSongsStatus.loading));
 
     try {
-      final listSongs = await getAllSongsRepoImpl.fetchSongsFromDevice();
+      List<Song> songs =
+          await fetchSongsFromDeviceRepoImpl.fetchSongsFromDevice();
+      // // Check if box is empty and fetch songs only if necessary
+      // if (box.isEmpty) {
+      //   await storeSongsLocalRepoImpl.addAll(box);
+      // }
+      // List<Song> songs = storeSongsLocalRepoImpl.getSongs(box);
 
       emit(state.copyWith(
-          fetchSongsStatus: FetchSongsStatus.loaded, songs: listSongs));
+          fetchSongsStatus: FetchSongsStatus.loaded, songs: songs));
     } catch (err) {
       emit(state.copyWith(
           fetchSongsStatus: FetchSongsStatus.failure,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/features/home/data/model/song.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 
 class ImageDetailsSong extends StatelessWidget {
   const ImageDetailsSong({super.key, required this.song});

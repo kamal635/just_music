@@ -4,7 +4,7 @@ import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/features/albums/album_view.dart';
 import 'package:just_music/features/favorites/favorite_view.dart';
 import 'package:just_music/features/folders/folders_view.dart';
-import 'package:just_music/features/home/home_view.dart';
+import 'package:just_music/features/songs/songs_view.dart';
 import 'package:just_music/features/playlists/playlist_view.dart';
 
 abstract class AppRouter {
@@ -13,12 +13,11 @@ abstract class AppRouter {
     final argumant = settings.arguments;
 
     switch (settings.name) {
-      // Home View
-      case RouterName.homeView:
-        return MaterialPageRoute(builder: (context) => const HomeView());
-
       case RouterName.changedView:
         return MaterialPageRoute(builder: (context) => const ChangedView());
+
+      case RouterName.songsView:
+        return MaterialPageRoute(builder: (context) => const SongsView());
 
       case RouterName.albumView:
         return MaterialPageRoute(builder: (context) => const AlbumView());

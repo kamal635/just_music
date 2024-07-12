@@ -5,7 +5,7 @@ import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
-import 'package:just_music/features/home/data/model/song.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 
 class FavoriteIconButton extends StatelessWidget {
   const FavoriteIconButton({super.key, required this.song});
