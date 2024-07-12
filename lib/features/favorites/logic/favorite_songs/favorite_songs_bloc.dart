@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:just_music/features/favorites/data/models/favorite_model.dart';
 import 'package:just_music/features/favorites/data/repository/favorite_repo.dart';
-import 'package:just_music/features/home/data/model/song.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 
 part 'favorite_songs_event.dart';
 part 'favorite_songs_state.dart';

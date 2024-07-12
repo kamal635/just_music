@@ -2,8 +2,8 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:just_music/features/home/data/model/song.dart';
-import 'package:just_music/features/home/data/repository/audio_player_data.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
+import 'package:just_music/features/songs/data/repository/audio_player_data.dart';
 import 'package:rxdart/rxdart.dart';
 
 part 'audio_player_event.dart';

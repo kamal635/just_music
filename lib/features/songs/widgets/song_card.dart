@@ -7,8 +7,8 @@ import 'package:just_music/core/shared_widgets/favorite_icon_button.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/home/data/model/song.dart';
-import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
+import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 
 class SongCard extends StatefulWidget {
   const SongCard({

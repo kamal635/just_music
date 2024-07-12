@@ -21,4 +21,5 @@ abstract class AppStrings {
 
 abstract class AppHive {
   static const String favoriteBox = "favoriteBox";
+  static const String storeSongs = "storeSongs";
 }

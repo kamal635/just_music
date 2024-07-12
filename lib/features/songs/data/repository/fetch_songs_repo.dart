@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:just_music/features/home/data/model/song.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchSongsFromDeviceRepo {
@@ -8,15 +8,14 @@ abstract class FetchSongsFromDeviceRepo {
 }
 
 class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
-  final OnAudioQuery _audioQuery;
+  final OnAudioQuery audioQuery;
 
-  FetchSongsFromDeviceRepoImpl({required OnAudioQuery audioQuery})
-      : _audioQuery = audioQuery;
+  FetchSongsFromDeviceRepoImpl({required this.audioQuery});
 
   @override
   Future<List<Song>> fetchSongsFromDevice() async {
     // fetch songs from device by on_audio_query package
-    final listSongs = await _audioQuery.querySongs(
+    final listSongs = await audioQuery.querySongs(
       sortType: SongSortType.DATE_ADDED,
       orderType: OrderType.ASC_OR_SMALLER,
       uriType: UriType.EXTERNAL,

@@ -4,7 +4,7 @@ import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/home/data/model/song.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 
 class TitleAndImageMusicTrack extends StatelessWidget {
   const TitleAndImageMusicTrack({super.key, required this.song});

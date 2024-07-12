@@ -7,7 +7,7 @@ import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 
-import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
+import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 
 class ButtonsDetailsSong extends StatelessWidget {
   const ButtonsDetailsSong({

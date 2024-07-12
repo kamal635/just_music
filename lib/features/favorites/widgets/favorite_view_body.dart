@@ -40,10 +40,21 @@ class FavoriteViewBody extends StatelessWidget {
               }
 
               //* if song is loaded success */
-              return ListViewBuilderSongs(
-                songs: songs,
-                isFavorite: true,
-              );
+              return CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
+                  slivers: [
+                    SliverListSongs(
+                      songs: songs,
+                      isFavorite: true,
+                    ),
+
+                    //* this to add padding in the bottom CustomScrollView
+                    SliverPadding(
+                      padding: EdgeInsets.only(
+                          bottom: kTextTabBarHeight +
+                              80.h), // Adjust the padding as needed
+                    ),
+                  ]);
             } else {
               return const SizedBox();
             }

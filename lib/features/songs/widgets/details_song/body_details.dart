@@ -6,11 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/home/widgets/details_song/buttons_details_song.dart';
-import 'package:just_music/features/home/widgets/details_song/image_details_song.dart';
-import 'package:just_music/features/home/widgets/details_song/seekbar_details_song.dart';
-import 'package:just_music/features/home/widgets/details_song/title_favorite_details_song.dart';
+import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
+import 'package:just_music/features/songs/widgets/details_song/buttons_details_song.dart';
+import 'package:just_music/features/songs/widgets/details_song/image_details_song.dart';
+import 'package:just_music/features/songs/widgets/details_song/seekbar_details_song.dart';
+import 'package:just_music/features/songs/widgets/details_song/title_favorite_details_song.dart';
 
 Future<void> detailsSong({
   required BuildContext context,

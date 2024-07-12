@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 
-import 'package:just_music/features/home/logic/audio_player/audio_player_bloc.dart';
+import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 
 class SeekBar extends StatelessWidget {
   const SeekBar(
