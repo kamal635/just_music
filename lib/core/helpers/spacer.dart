@@ -12,3 +12,9 @@ SizedBox spaceWidth(double width) {
     width: width.w,
   );
 }
+
+SliverPadding paddingSliver(double heigh) {
+  return SliverPadding(
+    padding: EdgeInsets.only(top: heigh.h), // Adjust the padding as needed
+  );
+}

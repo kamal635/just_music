@@ -6,6 +6,7 @@ import 'package:just_music/features/favorites/favorite_view.dart';
 import 'package:just_music/features/folders/folders_view.dart';
 import 'package:just_music/features/songs/songs_view.dart';
 import 'package:just_music/features/playlists/playlist_view.dart';
+import 'package:just_music/features/songs/widgets/search/search_view_body.dart';
 
 abstract class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -30,6 +31,9 @@ abstract class AppRouter {
 
       case RouterName.favoriteView:
         return MaterialPageRoute(builder: (context) => const FavoriteView());
+
+      case RouterName.listOfSongsView:
+        return MaterialPageRoute(builder: (context) => const SearchViewBody());
     }
     // When route is not exist
     return MaterialPageRoute(

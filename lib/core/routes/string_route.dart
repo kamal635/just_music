@@ -5,4 +5,5 @@ abstract class RouterName {
   static const playListView = "/PlayListView";
   static const foldersView = "/FoldersView";
   static const favoriteView = "/FavoriteView";
+  static const listOfSongsView = "/listOfSongsView";
 }
