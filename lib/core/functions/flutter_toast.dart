@@ -21,6 +21,7 @@ Future<void> flutterToast(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
+        border: Border.all(color: AppColor.secondary, width: 1),
         borderRadius: BorderRadius.circular(25.r),
         color: AppColor.primary,
       ),
@@ -47,6 +48,7 @@ Future<void> toastShuffleMode(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
+        border: Border.all(color: AppColor.secondary, width: 1),
         borderRadius: BorderRadius.circular(25.r),
         color: AppColor.primary,
       ),
@@ -74,6 +76,7 @@ Future<void> toastRepeatMode(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
+        border: Border.all(color: AppColor.secondary, width: 1),
         borderRadius: BorderRadius.circular(25.r),
         color: AppColor.primary,
       ),
@@ -103,6 +106,7 @@ Future<void> toastFavorite(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
+        border: Border.all(color: AppColor.secondary, width: 1),
         borderRadius: BorderRadius.circular(25.r),
         color: AppColor.primary,
       ),

@@ -43,7 +43,7 @@ class FavoriteViewBody extends StatelessWidget {
               return CustomScrollView(
                   physics: const BouncingScrollPhysics(),
                   slivers: [
-                    SliverListSongs(
+                    CustomSliverListSongs(
                       songs: songs,
                       isFavorite: true,
                     ),

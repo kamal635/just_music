@@ -5,8 +5,8 @@ import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/widgets/song_card.dart';
 
-class SliverListSongs extends StatelessWidget {
-  const SliverListSongs({
+class CustomSliverListSongs extends StatelessWidget {
+  const CustomSliverListSongs({
     super.key,
     required this.songs,
     this.isFavorite = false,

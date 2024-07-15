@@ -1,5 +1,6 @@
 abstract class AppStrings {
   static const String unknown = "<unknown>";
+  static const String cancel = "Cancel";
   static const String allow = " Allow ";
   static const String playAll = "Play All";
   static const String shuffle = "Shuffle";
@@ -9,7 +10,7 @@ abstract class AppStrings {
   static const String playlists = "Playlists";
   static const String folders = "Folders";
   static const String favorites = "Favorites";
-  static const String searchByName = "Search by Name";
+  static const String searchByName = "Search for songs on device";
   static const String emptySongs = "No items here yet.";
   static const String unexpectedError =
       "Unexpected error..please try again later!";

@@ -23,4 +23,6 @@ abstract class AppFonts {
       TextStyle(fontSize: 10.sp, fontWeight: FontWeight.w400);
   static final TextStyle normal_12 =
       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.w400);
+  static final TextStyle normal_14 =
+      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400);
 }
