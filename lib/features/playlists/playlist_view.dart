@@ -6,7 +6,7 @@ class PlayListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      body: Center(child: Text("PlayList View")),
+      body: Center(child: Text("create branch playlist_view ")),
     );
   }
 }
