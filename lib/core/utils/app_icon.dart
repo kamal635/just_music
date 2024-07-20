@@ -11,7 +11,9 @@ abstract class AppIcon {
   static const IconData threeDotVertical = Icons.more_vert;
   static const IconData menu = Icons.notes;
   static const IconData settings = Icons.settings;
-  static const IconData arrowBack = Icons.arrow_back;
+  static const IconData arrowBack = Icons.arrow_back_ios_new_outlined;
+  static const IconData add = Icons.add;
+  static const IconData addPlayList = Icons.add_box_outlined;
   static const IconData arrowDown = Icons.arrow_downward_sharp;
   static const IconData favoriteBorder = Icons.favorite_border;
   static const IconData favoriteFilled = Icons.favorite;

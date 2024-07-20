@@ -21,7 +21,7 @@ class ButtonMusicTrack extends StatelessWidget {
             },
             icon: AppIcon.skipPrevious),
 
-        // Stop button
+        // pause/play button
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(40.r),

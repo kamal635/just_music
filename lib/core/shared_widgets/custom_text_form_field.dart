@@ -13,23 +13,34 @@ class CustomTextFormField extends StatelessWidget {
     this.readOnly = false,
     this.autofocus = false,
     this.suffixIcon,
+    this.onSaved,
+    this.initialValue,
+    this.controller,
+    this.focusNode,
   });
   final String? hintText;
+  final String? initialValue;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Function(String)? onChanged;
+  final Function(String?)? onSaved;
   final Function()? onTap;
   final bool readOnly;
   final bool autofocus;
+  final TextEditingController? controller;
+  final FocusNode? focusNode;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 30.h,
       child: TextFormField(
+        controller: controller,
+        focusNode: focusNode,
         onChanged: onChanged,
+        onSaved: onSaved,
+        initialValue: initialValue,
         onTap: onTap,
         readOnly: readOnly,
-
         autofocus: autofocus,
 
         // input decoration

@@ -11,25 +11,23 @@ class CustomElvatedButton extends StatelessWidget {
       this.icon,
       required this.onPressed,
       this.title,
-      this.isIcon = true,
-      this.color});
+      this.isIcon = false,
+      this.color,
+      this.widthButton});
   final String? titleWithIcon;
   final String? title;
   final IconData? icon;
   final VoidCallback onPressed;
   final bool isIcon;
   final Color? color;
+  final double? widthButton;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10.r),
-        // gradient: AppColor.linearButton,
-        color: color ?? AppColor.secondary,
-      ),
+    return SizedBox(
+      width: widthButton ?? 100.w,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.transparent,
+          backgroundColor: color ?? AppColor.secondary,
           shadowColor: Colors.transparent,
         ),
         onPressed: onPressed,
@@ -40,7 +38,7 @@ class CustomElvatedButton extends StatelessWidget {
                   Icon(
                     icon,
                     color: AppColor.white,
-                    size: 24.h,
+                    size: 20.h,
                   ),
                   spaceWidth(10),
                   Text(
