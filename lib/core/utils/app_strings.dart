@@ -1,6 +1,8 @@
 abstract class AppStrings {
   static const String unknown = "<unknown>";
   static const String cancel = "Cancel";
+  static const String ok = "OK";
+  static const String createPlaylist = "create playlist";
   static const String allow = " Allow ";
   static const String playAll = "Play All";
   static const String shuffle = "Shuffle";
@@ -8,6 +10,8 @@ abstract class AppStrings {
   static const String songs = "Songs";
   static const String albums = "Albums";
   static const String playlists = "Playlists";
+  static const String playlistName = "Playlist Name";
+  static const String enterPlaylistName = "Enter Playlist Name";
   static const String folders = "Folders";
   static const String favorites = "Favorites";
   static const String searchByName = "Search for songs on device";
@@ -23,4 +27,5 @@ abstract class AppStrings {
 abstract class AppHive {
   static const String favoriteBox = "favoriteBox";
   static const String storeSongs = "storeSongs";
+  static const String playlist = "playlist";
 }

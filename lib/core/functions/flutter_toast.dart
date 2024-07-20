@@ -21,9 +21,9 @@ Future<void> flutterToast(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.secondary, width: 1),
+        border: Border.all(color: AppColor.white, width: 1),
         borderRadius: BorderRadius.circular(25.r),
-        color: AppColor.primary,
+        color: AppColor.secondary,
       ),
       child: Text(message,
           style: AppFonts.normal_12.copyWith(color: AppColor.white)),
@@ -48,9 +48,9 @@ Future<void> toastShuffleMode(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.secondary, width: 1),
+        border: Border.all(color: AppColor.white, width: 1),
         borderRadius: BorderRadius.circular(25.r),
-        color: AppColor.primary,
+        color: AppColor.secondary,
       ),
       child: Text(enabled ? "SHUFFLE ON" : "SHUFFLE OFF",
           style: AppFonts.normal_12.copyWith(color: AppColor.white)),
@@ -76,9 +76,9 @@ Future<void> toastRepeatMode(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.secondary, width: 1),
+        border: Border.all(color: AppColor.white, width: 1),
         borderRadius: BorderRadius.circular(25.r),
-        color: AppColor.primary,
+        color: AppColor.secondary,
       ),
       child: Text(
           repeateAll
@@ -106,9 +106,9 @@ Future<void> toastFavorite(
     child: Container(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 10.w),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColor.secondary, width: 1),
+        border: Border.all(color: AppColor.white, width: 1),
         borderRadius: BorderRadius.circular(25.r),
-        color: AppColor.primary,
+        color: AppColor.secondary,
       ),
       child: Text(
           isFavorite ? "Removed from favorite song" : "Added to favorite song",

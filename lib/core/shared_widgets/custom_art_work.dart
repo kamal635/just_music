@@ -6,10 +6,15 @@ import 'package:on_audio_query/on_audio_query.dart';
 
 class CustomArtWork extends StatelessWidget {
   const CustomArtWork(
-      {super.key, required this.id, this.radius, this.iconSize});
+      {super.key,
+      required this.id,
+      this.radius,
+      this.iconSize,
+      this.colorIcon});
   final int id;
   final double? radius;
   final double? iconSize;
+  final Color? colorIcon;
   @override
   Widget build(BuildContext context) {
     return QueryArtworkWidget(
@@ -28,7 +33,7 @@ class CustomArtWork extends StatelessWidget {
         ),
         child: Icon(
           AppIcon.musicNote,
-          color: AppColor.primary,
+          color: colorIcon ?? AppColor.primary,
           size: iconSize ?? 22.h,
         ),
       ),

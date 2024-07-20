@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/routes/string_route.dart';
+import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/routes/app_router.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
-import 'package:just_music/features/songs/logic/search_songs/search_songs_bloc.dart';
 
 class JustMusicApp extends StatelessWidget {
   const JustMusicApp({super.key, required this.audioHandler});
@@ -26,25 +26,35 @@ class JustMusicApp extends StatelessWidget {
       splitScreenMode: true,
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(
-            create: (context) => AudioPlayerBloc(audioHandler: audioHandler)
-              ..add(LoadAudioPlayerEvent()),
-          ),
-          BlocProvider(
-            create: (context) =>
-                di<FavoriteSongsBloc>()..add(const LoadFavoriteSongs()),
-          ),
-          BlocProvider(
-            create: (context) =>
-                di<FetchSongsFromDeviceBloc>()..add(LoadSongsFromDeviceEvent()),
-          ),
+          //* Check Permission Bloc
           BlocProvider(
             create: (context) =>
                 di<CheckPermissionBloc>()..add(StatusPermissionEvent()),
           ),
+
+          //* Fetch Songs From Device Bloc
           BlocProvider(
-            create: (context) => di<SearchSongsBloc>(),
+            create: (context) =>
+                di<FetchSongsFromDeviceBloc>()..add(LoadSongsFromDeviceEvent()),
           ),
+
+          //* Audio Player Bloc
+          BlocProvider(
+            create: (context) => AudioPlayerBloc(audioHandler: audioHandler)
+              ..add(LoadAudioPlayerEvent()),
+          ),
+
+          //* Favorite Songs Bloc
+          BlocProvider(
+            create: (context) =>
+                di<FavoriteSongsBloc>()..add(const LoadFavoriteSongs()),
+          ),
+
+          //* Playlist Bloc
+          BlocProvider(
+              create: (context) => di<PlaylistBloc>()
+                ..add(LoadPlaylists())
+                ..add(SortByDateCreatedOrModified())),
         ],
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
