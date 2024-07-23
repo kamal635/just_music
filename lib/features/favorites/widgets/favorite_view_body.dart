@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
+import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/image_empty_list.dart';
 import 'package:just_music/core/shared_widgets/list_view_songs.dart';
 import 'package:just_music/core/utils/app_images.dart';
@@ -49,11 +50,7 @@ class FavoriteViewBody extends StatelessWidget {
                     ),
 
                     //* this to add padding in the bottom CustomScrollView
-                    SliverPadding(
-                      padding: EdgeInsets.only(
-                          bottom: kTextTabBarHeight +
-                              80.h), // Adjust the padding as needed
-                    ),
+                    paddingSliver(kTextTabBarHeight + 80.h)
                   ]);
             } else {
               return const SizedBox();

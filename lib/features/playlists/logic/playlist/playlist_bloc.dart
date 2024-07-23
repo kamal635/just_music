@@ -14,7 +14,9 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
   PlaylistBloc({required this.playlistRepoImpl})
       : super(const PlaylistState()) {
     on<LoadPlaylists>(_onLoadPlaylists); // load playlist
-    on<CreatePlaylist>(_onCreatePlaylist); // create play list
+    on<CreatePlaylist>(_onCreatePlaylist); // create playlist
+    on<RemovePlaylist>(_onRemovePlaylist); // Remove Playlist
+    on<RenamePlaylist>(_onRenamePlaylist); // Rename Playlist
     on<AddSongToPlaylist>(_onAddSongToPlaylist); // add song to playlist
     on<SortByDateCreatedOrModified>(
         _onSortBySortByDateCreatedOrModified); // Sort By Date Created Or Modified
@@ -54,6 +56,54 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
       Box box = await playlistRepoImpl.openBox();
       // create playlist
       playlistRepoImpl.createPlaylist(box, event.name);
+
+      // update sort playlist by date added
+      List<Playlist> updatedPlaylist =
+          playlistRepoImpl.sortByDateCreatedOrModified(box);
+
+      emit(state.copyWith(
+          playlistStatus: PlaylistStatus.loaded, playlist: updatedPlaylist));
+    } catch (e) {
+      emit(state.copyWith(playlistStatus: PlaylistStatus.failure));
+    }
+  }
+
+  ///****************Remove Playlist******************/
+  ///************************************************/
+  void _onRemovePlaylist(
+    RemovePlaylist event,
+    Emitter<PlaylistState> emit,
+  ) async {
+    emit(state.copyWith(playlistStatus: PlaylistStatus.loading));
+
+    try {
+      Box box = await playlistRepoImpl.openBox();
+      // create playlist
+      playlistRepoImpl.removePlaylist(box, event.id);
+
+      // update sort playlist by date added
+      List<Playlist> updatedPlaylist =
+          playlistRepoImpl.sortByDateCreatedOrModified(box);
+
+      emit(state.copyWith(
+          playlistStatus: PlaylistStatus.loaded, playlist: updatedPlaylist));
+    } catch (e) {
+      emit(state.copyWith(playlistStatus: PlaylistStatus.failure));
+    }
+  }
+
+  ///****************Rename Playlist******************/
+  ///************************************************/
+  void _onRenamePlaylist(
+    RenamePlaylist event,
+    Emitter<PlaylistState> emit,
+  ) async {
+    emit(state.copyWith(playlistStatus: PlaylistStatus.loading));
+
+    try {
+      Box box = await playlistRepoImpl.openBox();
+      // create playlist
+      playlistRepoImpl.renamePlaylist(box, event.name, event.id);
 
       // update sort playlist by date added
       List<Playlist> updatedPlaylist =

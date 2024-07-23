@@ -1,8 +1,13 @@
 abstract class AppStrings {
   static const String unknown = "<unknown>";
   static const String cancel = "Cancel";
+  static const String confirm = "Confirm";
   static const String ok = "OK";
   static const String createPlaylist = "create playlist";
+  static const String editNamePlaylist = 'Edit Name Playlist';
+  static const String addSongs = "Add Songs";
+  static const String nameBlank = "Playlist name can't be blank";
+  static const String renamePlaylist = "Rename Playlist";
   static const String allow = " Allow ";
   static const String playAll = "Play All";
   static const String shuffle = "Shuffle";
@@ -14,6 +19,7 @@ abstract class AppStrings {
   static const String enterPlaylistName = "Enter Playlist Name";
   static const String folders = "Folders";
   static const String favorites = "Favorites";
+  static const String delete = "Delete";
   static const String searchByName = "Search for songs on device";
   static const String emptySongs = "No items here yet.";
   static const String unexpectedError =

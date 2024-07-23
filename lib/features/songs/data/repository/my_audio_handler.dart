@@ -25,7 +25,6 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   MyAudioHandler() {
     _loadEmptyPlaylist();
     _listenForDurationChanges();
-    // _returnPlayPlaylistWhenIsCompleted();
 
     // Redirect events from the update controller to the playback state
     _updateController.stream.map(_transformEvent).pipe(playbackState);

@@ -67,7 +67,9 @@ class _AddPlayListButtonMiddleState extends State<AddPlayListButtonMiddle> {
             context: context,
             builder: (context) {
               return AlertDialogBody(
-                  focusNode: _focusNode, controller: _controller);
+                focusNode: _focusNode,
+                controller: _controller,
+              );
             },
           );
         },

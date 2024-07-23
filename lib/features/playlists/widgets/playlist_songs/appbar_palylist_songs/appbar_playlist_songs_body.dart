@@ -3,11 +3,13 @@ import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
+import 'package:just_music/features/playlists/data/model/playlist_model.dart';
+import 'package:just_music/features/playlists/widgets/playlist_songs/appbar_palylist_songs/action_button_playlist_songs.dart';
 
-class PlaylistSongAppBar extends StatelessWidget
+class AppBarPlaylistSongsBody extends StatelessWidget
     implements PreferredSizeWidget {
-  const PlaylistSongAppBar({super.key});
-
+  const AppBarPlaylistSongsBody({super.key, required this.playlist});
+  final Playlist playlist;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -17,10 +19,7 @@ class PlaylistSongAppBar extends StatelessWidget
 
       //* Action Icon
       actions: [
-        CustomIconButton(
-          onPressed: () {},
-          icon: AppIcon.threeDotVertical,
-        ),
+        ActionButtonAppBarPlaylistSongs(playlist: playlist),
       ],
 
       //* Leading Icon

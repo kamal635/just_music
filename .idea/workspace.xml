@@ -5,24 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a055db9c-4671-4608-8cac-b0cef12c07d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/just_music.iml" beforeDir="false" afterPath="$PROJECT_DIR$/just_music.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/helpers/dependencey_injection.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/helpers/dependencey_injection.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/custom_art_work.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/custom_art_work.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/functions/init_method.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/functions/init_method.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/routes/app_router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/routes/app_router.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/routes/string_route.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/routes/string_route.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/custom_elvated_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/custom_elvated_button.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/custom_text_form_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/custom_text_form_field.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/favorite_icon_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/favorite_icon_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/styling/app_colors.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/styling/app_colors.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/utils/app_icon.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/utils/app_icon.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/core/utils/app_strings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/utils/app_strings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/playlists/playlist_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/playlist_view.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/songs/widgets/music_track/button_music_track.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/widgets/music_track/button_music_track.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/songs/widgets/search/search_view_body.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/widgets/search/search_view_body.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/just_music_app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/just_music_app.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/test.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/test.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/favorites/widgets/favorite_view_body.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/favorites/widgets/favorite_view_body.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/data/repository/playlist_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/data/repository/playlist_repo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/logic/playlist/playlist_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/logic/playlist/playlist_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/logic/playlist/playlist_event.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/logic/playlist/playlist_event.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/widgets/alert_dialog/alert_dialog_buttons.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/widgets/alert_dialog/alert_dialog_buttons.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/widgets/playlist_songs/appbar_playlist_songs.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/widgets/playlist_songs/playlist_songs_body.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/widgets/playlist_songs/playlist_songs_body.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/widgets/sliver_grid_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/widgets/sliver_grid_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/playlists/widgets/top_rifght_button.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/playlists/widgets/top_rifght_button.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/songs/data/repository/my_audio_handler.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/data/repository/my_audio_handler.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,20 +64,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Flutter.main.dart.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/kamal/Desktop/just_music-development",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kamal/Desktop/just_music-development&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

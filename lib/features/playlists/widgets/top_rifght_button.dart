@@ -49,8 +49,8 @@ class _AddPlayListButtonTopRightState extends State<AddPlayListButtonTopRight> {
       child: CustomIconButton(
         onPressed: () async {
           // get number of list playlist
-          final numberPlayList =
-              context.read<PlaylistBloc>().state.playlist!.length;
+          final listOfPlayList = context.read<PlaylistBloc>().state.playlist;
+          final numberPlayList = listOfPlayList!.length;
 
           // Reset the controller's text to the initial value and increse the value
           _controller.text = "New playlist ${numberPlayList + 1}";
@@ -66,7 +66,7 @@ class _AddPlayListButtonTopRightState extends State<AddPlayListButtonTopRight> {
             },
           );
         },
-        icon: AppIcon.addPlayList,
+        icon: AppIcon.addMusicOrPlaylist,
       ),
     );
   }

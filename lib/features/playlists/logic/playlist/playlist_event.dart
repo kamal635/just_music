@@ -19,6 +19,25 @@ class CreatePlaylist extends PlaylistEvent {
   List<Object> get props => [name];
 }
 
+//* Create Playlist
+class RemovePlaylist extends PlaylistEvent {
+  final String id;
+
+  const RemovePlaylist({required this.id});
+  @override
+  List<Object> get props => [id];
+}
+
+//* Rename Playlist
+class RenamePlaylist extends PlaylistEvent {
+  final String name;
+  final String id;
+
+  const RenamePlaylist({required this.name, required this.id});
+  @override
+  List<Object> get props => [name, id];
+}
+
 //* Add Song To Playlist
 class AddSongToPlaylist extends PlaylistEvent {
   final String playlistId;

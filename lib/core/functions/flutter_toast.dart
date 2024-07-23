@@ -10,7 +10,9 @@ FToast? _currentToast;
 
 //******************* Primary Flutter Toast ********************/
 Future<void> flutterToast(
-    {required BuildContext context, required String message}) async {
+    {required BuildContext context,
+    required String message,
+    ToastGravity? gravity}) async {
   // Cancel the current toast if it exists
   _currentToast?.removeCustomToast();
 
@@ -28,7 +30,7 @@ Future<void> flutterToast(
       child: Text(message,
           style: AppFonts.normal_12.copyWith(color: AppColor.white)),
     ),
-    gravity: ToastGravity.BOTTOM,
+    gravity: gravity ?? ToastGravity.BOTTOM,
     toastDuration: const Duration(seconds: 1),
   );
 }

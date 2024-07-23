@@ -10,6 +10,12 @@ abstract class PlaylistRepo {
   //* Create Playlist
   Future<void> createPlaylist(Box box, String name);
 
+  //* Remove Playlist
+  Future<void> removePlaylist(Box box, String id);
+
+//* Remove Playlist
+  Future<void> renamePlaylist(Box box, String name, String id);
+
   //* Fetch PlayLists
   List<Playlist> fetchPlaylists(Box box);
 
@@ -34,6 +40,36 @@ class PlaylistRepoImpl implements PlaylistRepo {
   @override
   Future<void> createPlaylist(Box box, String name) async {
     await box.add(Playlist(name: name, songs: const <Song>[]));
+  }
+
+  ///*************Remove Playlist***************/
+  ///******************************************/
+  @override
+  Future<void> removePlaylist(Box box, String id) async {
+    final key = box.keys.cast<int>().firstWhere((key) {
+      final playlist = box.get(key) as Playlist;
+      return playlist.id == id;
+    });
+
+    await box.delete(key);
+  }
+
+  ///*************Rename Playlist***************/
+  ///******************************************/
+  @override
+  Future<void> renamePlaylist(Box box, String name, String id) async {
+    final key = box.keys.cast<int>().firstWhere((key) {
+      final playlist = box.get(key) as Playlist;
+      return playlist.id == id;
+    });
+
+    Playlist playlist = box.get(key) as Playlist;
+    final updatePlaylist = playlist.copyWith(
+      name: name,
+      dateCreatedOrModified: DateTime.now(),
+    );
+
+    await box.put(key, updatePlaylist);
   }
 
   ///*************Fetch Playlists***************/
