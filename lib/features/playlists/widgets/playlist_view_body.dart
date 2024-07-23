@@ -48,17 +48,3 @@ class PlayListViewBody extends StatelessWidget {
     );
   }
 }
-// Column(
-//       children: [
-//         //* Top right button
-//         AddPlayListButtonTopRight(),
-
-//         Spacer(), // Space between the top and middle button
-
-//         //* Middle button
-//         AddPlayListButtonMiddle(),
-
-//         Spacer(flex: 1), // Space below the middle button
-//       ],
-//     )
-

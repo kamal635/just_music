@@ -4,7 +4,8 @@ import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/features/albums/album_view.dart';
 import 'package:just_music/features/favorites/favorite_view.dart';
 import 'package:just_music/features/folders/folders_view.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
+import 'package:just_music/features/playlists/widgets/playlist_songs/add_songs_to_playlist/add_songs_to_playlist_body.dart';
+import 'package:just_music/features/playlists/widgets/playlist_songs/add_songs_to_playlist/extends_classes_from_list_of_songs.dart';
 import 'package:just_music/features/playlists/widgets/playlist_songs/playlist_songs_body.dart';
 import 'package:just_music/features/songs/songs_view.dart';
 import 'package:just_music/features/playlists/playlist_view.dart';
@@ -13,7 +14,7 @@ import 'package:just_music/features/songs/widgets/search/search_view_body.dart';
 abstract class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     // ignore: unused_local_variable
-    final argumant = settings.arguments;
+    final argument = settings.arguments as Map?;
 
     switch (settings.name) {
       case RouterName.changedView:
@@ -38,9 +39,43 @@ abstract class AppRouter {
         return MaterialPageRoute(builder: (context) => const SearchViewBody());
 
       case RouterName.playlistSongs:
+        return MaterialPageRoute(builder: (context) {
+          return PlaylistSongsBody(
+            index: argument?["index"],
+            playlist: argument?["playlist"],
+          );
+        });
+
+      case RouterName.addSongsToPlayListsBody:
         return MaterialPageRoute(
-            builder: (context) => PlaylistSongsBody(
-                  playlist: argumant as Playlist,
+            builder: (context) => AddSongsToPlayListsBody(
+                  playlistComeFromPreviousPage: argument?["playlist"],
+                ));
+
+      case RouterName.listOfSongsFavoriteToAddToAddToPlaylist:
+        return MaterialPageRoute(
+            builder: (context) => SongsFavoriteToAddToPlaylist(
+                  playlistComeFromPreviousPage:
+                      argument?["playlistComeFromPreviousPage"],
+                  favoriteSong: argument?["favoriteSong"],
+                  playlist: argument?["playlistComeFromPreviousPage"],
+                ));
+
+      case RouterName.listOfSongsLocalSongsToAddToAddToPlaylist:
+        return MaterialPageRoute(
+            builder: (context) => SongsLocalToAddToPlaylist(
+                  playlistComeFromPreviousPage:
+                      argument?["playlistComeFromPreviousPage"],
+                  songs: argument?["songs"],
+                  playlist: argument?["playlistComeFromPreviousPage"],
+                ));
+
+      case RouterName.listOfSongsPlaylistSongsToAddToAddToPlaylist:
+        return MaterialPageRoute(
+            builder: (context) => SongsPlaylistToAddToPlaylist(
+                  playlistComeFromPreviousPage:
+                      argument?["playlistComeFromPreviousPage"],
+                  playlist: argument?["playlist"],
                 ));
     }
     // When route is not exist

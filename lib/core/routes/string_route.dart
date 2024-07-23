@@ -7,4 +7,11 @@ abstract class RouterName {
   static const favoriteView = "/FavoriteView";
   static const listOfSongsView = "/listOfSongsView";
   static const playlistSongs = "/playlistSongs";
+  static const addSongsToPlayListsBody = "/AddSongsToPlayListsBody";
+  static const listOfSongsLocalSongsToAddToAddToPlaylist =
+      "/listOfSongsLocalSongsToAddToAddToPlaylist";
+  static const listOfSongsPlaylistSongsToAddToAddToPlaylist =
+      "/ListOfSongsPlaylistSongsToAddToAddToPlaylist";
+  static const listOfSongsFavoriteToAddToAddToPlaylist =
+      "/ListOfSongsToAddToAddToPlaylist";
 }

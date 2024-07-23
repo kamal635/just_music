@@ -30,8 +30,14 @@ class CustomSliverGridView extends StatelessWidget {
                   Expanded(
                     child: InkWell(
                       onTap: () {
-                        context.pushNamed(RouterName.playlistSongs,
-                            arguments: playlist);
+                        context.pushNamed(
+                          RouterName.playlistSongs,
+                          arguments: {
+                            "index": i,
+                            "playlist": playlist,
+                          },
+                        );
+                        print("${playlist.id}");
                       },
                       child: Container(
                         decoration: BoxDecoration(
@@ -46,8 +52,8 @@ class CustomSliverGridView extends StatelessWidget {
                             CustomArtWork(
                               id: playlist.songs == null ||
                                       playlist.songs!.isEmpty
-                                  ? 0
-                                  : playlist.songs?.first.id ?? 0,
+                                  ? -1
+                                  : playlist.songs?.first.id ?? -1,
                               iconSize: 66.h,
                             ),
 
@@ -80,10 +86,12 @@ class CustomSliverGridView extends StatelessWidget {
                   ListTile(
                     title: Text(
                       playlist.name,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
                       style: AppFonts.medium_14,
                     ),
                     subtitle: Text(
-                      "Total ${playlist.numOfSongs} song",
+                      "Total ${playlist.numOfSongs} songs",
                       style: AppFonts.normal_10
                           .copyWith(color: AppColor.white.withAlpha(110)),
                     ),
