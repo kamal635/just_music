@@ -1,6 +1,6 @@
 import 'package:just_music/features/favorites/data/models/favorite_model.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/widgets/playlist_songs/add_songs_to_playlist/list_of_songs_to_add_to_playlist.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/add_songs_to_playlist/list_of_songs_to_add_to_playlist.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 
 //* Specific class for favorite songs

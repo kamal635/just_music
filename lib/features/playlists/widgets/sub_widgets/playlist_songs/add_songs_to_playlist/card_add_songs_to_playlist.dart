@@ -13,7 +13,8 @@ class CustomCardAddSongToPlaylist extends StatelessWidget {
       this.colorIcon,
       required this.title,
       required this.subtitle,
-      this.artwork = false,
+      this.isArtwork = false,
+      this.isTrailing = false,
       this.artworkId,
       this.icon,
       this.index});
@@ -21,7 +22,8 @@ class CustomCardAddSongToPlaylist extends StatelessWidget {
   final Color? colorIcon;
   final String title;
   final int subtitle;
-  final bool artwork;
+  final bool isArtwork;
+  final bool isTrailing;
   final int? artworkId;
   final IconData? icon;
 
@@ -34,7 +36,7 @@ class CustomCardAddSongToPlaylist extends StatelessWidget {
         contentPadding: EdgeInsets.zero,
 
         //** leading ( image )
-        leading: artwork
+        leading: isArtwork
             ? Container(
                 height: 50,
                 width: 50,
@@ -62,15 +64,17 @@ class CustomCardAddSongToPlaylist extends StatelessWidget {
               ),
 
         //** trailing
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              AppIcon.arrowForward,
-              size: 14.h,
-            ),
-          ],
-        ),
+        trailing: isTrailing
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    AppIcon.arrowForward,
+                    size: 14.h,
+                  ),
+                ],
+              )
+            : const SizedBox(),
 
         //** title
         title: Text(

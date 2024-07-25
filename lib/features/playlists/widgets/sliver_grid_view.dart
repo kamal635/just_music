@@ -37,7 +37,6 @@ class CustomSliverGridView extends StatelessWidget {
                             "playlist": playlist,
                           },
                         );
-                        print("${playlist.id}");
                       },
                       child: Container(
                         decoration: BoxDecoration(

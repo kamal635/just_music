@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/duration.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/core/shared_widgets/favorite_icon_button.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_strings.dart';
@@ -14,12 +13,13 @@ class SongCard extends StatefulWidget {
   const SongCard({
     super.key,
     required this.song,
-    this.isFavorite = false,
+    this.isIcon = false,
+    this.widgetIcon,
   });
 
   final Song song;
-
-  final bool isFavorite;
+  final Widget? widgetIcon;
+  final bool isIcon;
 
   @override
   State<SongCard> createState() => _SongCardState();
@@ -95,9 +95,7 @@ class _SongCardState extends State<SongCard> {
             ),
 
             //** Favorite Icon */
-            widget.isFavorite
-                ? FavoriteIconButton(song: widget.song)
-                : const SizedBox(),
+            widget.isIcon ? widget.widgetIcon! : const SizedBox(),
           ],
         ),
 

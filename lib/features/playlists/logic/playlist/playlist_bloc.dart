@@ -18,6 +18,8 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
     on<RemovePlaylist>(_onRemovePlaylist); // Remove Playlist
     on<RenamePlaylist>(_onRenamePlaylist); // Rename Playlist
     on<AddSongToPlaylist>(_onAddSongToPlaylist); // add song to playlist
+    on<RemoveSongFromPlaylist>(
+        _onRemoveSongFromPlaylist); // Remove song From playlist
     on<SortByDateCreatedOrModified>(
         _onSortBySortByDateCreatedOrModified); // Sort By Date Created Or Modified
   }
@@ -129,6 +131,32 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
 
       // add sont to playlist by playlist id
       playlistRepoImpl.addSongToPlaylist(box, event.playlistId, event.song);
+
+      // update sort playlist by date modified
+      List<Playlist> updatedPlaylist =
+          playlistRepoImpl.sortByDateCreatedOrModified(box);
+
+      emit(state.copyWith(
+          playlistStatus: PlaylistStatus.loaded, playlist: updatedPlaylist));
+    } catch (e) {
+      emit(state.copyWith(playlistStatus: PlaylistStatus.failure));
+    }
+  }
+
+  ///**************Remove Song From Playlist****************/
+  ///************************************************/
+  void _onRemoveSongFromPlaylist(
+    RemoveSongFromPlaylist event,
+    Emitter<PlaylistState> emit,
+  ) async {
+    emit(state.copyWith(playlistStatus: PlaylistStatus.loading));
+
+    try {
+      Box box = await playlistRepoImpl.openBox();
+
+      // remove song from playlist by playlist id
+      playlistRepoImpl.removeSongFromPlaylist(
+          box, event.playlistId, event.song);
 
       // update sort playlist by date modified
       List<Playlist> updatedPlaylist =

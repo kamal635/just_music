@@ -20,7 +20,7 @@ class FavoriteViewBody extends StatelessWidget {
           listener: (context, state) async {
             //*** state Failure */
             if (state.favoriteSongsStatus == FavoriteSongsStatus.failure) {
-              await flutterToast(
+              await flutterToastSuccessfully(
                   context: context,
                   message: state.errorMessage ?? AppStrings.unexpectedError);
             }
@@ -46,11 +46,11 @@ class FavoriteViewBody extends StatelessWidget {
                   slivers: [
                     CustomSliverListSongs(
                       songs: songs,
-                      isFavorite: true,
+                      isIcon: true,
                     ),
 
                     //* this to add padding in the bottom CustomScrollView
-                    paddingSliver(kTextTabBarHeight + 80.h)
+                    sliverPadding(kTextTabBarHeight + 80.h)
                   ]);
             } else {
               return const SizedBox();

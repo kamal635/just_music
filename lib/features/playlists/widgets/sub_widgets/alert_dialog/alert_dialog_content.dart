@@ -8,10 +8,14 @@ import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 
 class ContentAlertDialog extends StatelessWidget {
-  const ContentAlertDialog(
-      {super.key, required this.focusNode, required this.controller});
+  const ContentAlertDialog({
+    super.key,
+    required this.focusNode,
+    required this.controller,
+  });
   final FocusNode focusNode;
   final TextEditingController controller;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -33,15 +37,14 @@ class ContentAlertDialog extends StatelessWidget {
             focusNode: focusNode,
             controller: controller,
             onChanged: (value) {
+              // Assign the controller to the value
+              controller.text = value;
               // get number of list playlist
               final numberPlayList =
                   context.read<PlaylistBloc>().state.playlist!.length;
 
               // Reset the controller's text to the initial value
-              controller.text = "New playlist ${numberPlayList + 1}";
-
-              // Assign the controller to the value
-              controller.text = value;
+              value = "New playlist ${numberPlayList + 1}";
             },
           ),
         )
