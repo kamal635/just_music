@@ -4,7 +4,7 @@ import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/widgets/playlist_songs/appbar_palylist_songs/action_button_playlist_songs.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/appbar_palylist_songs/action_button_playlist_songs.dart';
 
 class AppBarPlaylistSongsBody extends StatelessWidget
     implements PreferredSizeWidget {

@@ -9,8 +9,8 @@ import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/playlists/widgets/playlist_songs/add_songs_to_playlist/appbar_add_song_to_playlist.dart';
-import 'package:just_music/features/playlists/widgets/playlist_songs/add_songs_to_playlist/card_add_songs_to_playlist.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/add_songs_to_playlist/appbar_add_song_to_playlist.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/add_songs_to_playlist/card_add_songs_to_playlist.dart';
 import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 
 class AddSongsToPlayListsBody extends StatelessWidget {
@@ -25,7 +25,7 @@ class AddSongsToPlayListsBody extends StatelessWidget {
         builder: (context, state) {
           return CustomScrollView(
             slivers: [
-              paddingSliver(10),
+              sliverPadding(10),
 
               // * (Favorite and local songs)
               SliverToBoxAdapter(
@@ -97,13 +97,10 @@ class AddSongsToPlayListsBody extends StatelessWidget {
                   // check if playlist return true show sizedbox
                   // Because I am coming from the playlist to which I want to add songs
                   // It should not be displayed here
-                  if (playlistComeFromPreviousPage.id != playlist.id) {
+                  if (playlistComeFromPreviousPage.id != playlist.id &&
+                      playlist.songs!.isNotEmpty) {
                     return InkWell(
                       onTap: () {
-                        print(
-                            "playlistComeFromPreviousPage :${playlistComeFromPreviousPage.id}");
-                        print(
-                            '*************************Navigating to playlist: ${playlist.name}, ID: ${playlist.id}');
                         context.pushNamed(
                             RouterName
                                 .listOfSongsPlaylistSongsToAddToAddToPlaylist,
@@ -118,7 +115,8 @@ class AddSongsToPlayListsBody extends StatelessWidget {
                         index: index,
                         title: playlist.name,
                         subtitle: playlist.songs!.length,
-                        artwork: true,
+                        isArtwork: true,
+                        isTrailing: true,
                         artworkId:
                             playlist.songs == null || playlist.songs!.isEmpty
                                 ? -1
@@ -130,7 +128,7 @@ class AddSongsToPlayListsBody extends StatelessWidget {
                   }
                 },
               ),
-              paddingSliver(kTextTabBarHeight + 80.h),
+              sliverPadding(kTextTabBarHeight + 80.h),
             ],
           );
         },

@@ -6,9 +6,14 @@ abstract class AppStrings {
   static const String createPlaylist = "create playlist";
   static const String editNamePlaylist = 'Edit Name Playlist';
   static const String addSongs = "Add Songs";
+  static const String addToPlaylist = "Add To Playlist";
+  static const String removeFromPlaylist = "Remove From Playlist";
+  static const String addToFavorite = "Add To Favorite";
   static const String nameBlank = "Playlist name can't be blank";
+  static const String nameAlreadyExist = "Playlist Name already exists";
   static const String renamePlaylist = "Rename Playlist";
   static const String allow = " Allow ";
+  static const String detail = " detail";
   static const String playAll = "Play All";
   static const String shuffle = "Shuffle";
   static const String library = "Library";

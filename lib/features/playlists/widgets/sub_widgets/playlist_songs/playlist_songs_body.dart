@@ -4,17 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/shared_widgets/list_view_songs.dart';
+
+import 'package:just_music/core/shared_widgets/song_menu_button.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/playlists/widgets/playlist_songs/appbar_palylist_songs/appbar_playlist_songs_body.dart';
-import 'package:just_music/features/playlists/widgets/playlist_songs/button_middle_add_song.dart';
-import 'package:just_music/features/playlists/widgets/playlist_songs/section_image_title_buttons.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/appbar_palylist_songs/appbar_playlist_songs_body.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/button_middle_add_song.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/section_image_title_buttons.dart';
+import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
+import 'package:just_music/features/songs/widgets/song_card.dart';
 
 class PlaylistSongsBody extends StatelessWidget {
   const PlaylistSongsBody(
@@ -37,7 +40,7 @@ class PlaylistSongsBody extends StatelessWidget {
             SectionImageTitleButtons(index: index, playlist: playlist),
 
             // padding height
-            paddingSliver(20),
+            sliverPadding(20),
 
             // if playlist null or empty show buttons add song Middle or show Button add songs with list of songs
             BlocBuilder<PlaylistBloc, PlaylistState>(
@@ -87,7 +90,7 @@ class PlaylistSongsBody extends StatelessWidget {
               },
             ),
 
-            paddingSliver(10),
+            sliverPadding(10),
 
             // if playlist null or empty show buttons add song or show list of songs
             BlocBuilder<PlaylistBloc, PlaylistState>(
@@ -104,11 +107,29 @@ class PlaylistSongsBody extends StatelessWidget {
                           playlist: updatedPlaylist,
                         ),
                       )
-                    : CustomSliverListSongs(songs: updatedPlaylist.songs!);
+                    : SliverList.builder(
+                        itemCount: updatedPlaylist.songs!.length,
+                        itemBuilder: (context, i) {
+                          final song = updatedPlaylist.songs![i];
+                          return InkWell(
+                            borderRadius: BorderRadius.circular(10.r),
+                            onTap: () {
+                              context.read<AudioPlayerBloc>().add(SetAudioEvent(
+                                  songs: updatedPlaylist.songs!, index: i));
+                            },
+                            child: SongCard(
+                              song: song,
+                              isIcon: true,
+                              widgetIcon: SongMenuButton(
+                                  playlist: updatedPlaylist, song: song),
+                            ),
+                          );
+                        },
+                      );
               },
             ),
 
-            paddingSliver(kTextTabBarHeight + 80.h),
+            sliverPadding(kTextTabBarHeight + 80.h),
           ],
         ),
       ),

@@ -13,7 +13,7 @@ SizedBox spaceWidth(double width) {
   );
 }
 
-SliverPadding paddingSliver(double heigh) {
+SliverPadding sliverPadding(double heigh) {
   return SliverPadding(
     padding: EdgeInsets.only(top: heigh.h), // Adjust the padding as needed
   );

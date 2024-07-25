@@ -69,7 +69,7 @@ class ActionButtonAppBarPlaylistSongs extends StatelessWidget {
                               CustomElvatedButton(
                                 onPressed: () {
                                   if (namePlaylist == "") {
-                                    flutterToast(
+                                    flutterToastSuccessfully(
                                       context: context,
                                       message: AppStrings.nameBlank,
                                     );

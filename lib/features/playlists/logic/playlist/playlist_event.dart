@@ -48,5 +48,15 @@ class AddSongToPlaylist extends PlaylistEvent {
   List<Object> get props => [playlistId, song];
 }
 
+//* Remove Song From Playlist
+class RemoveSongFromPlaylist extends PlaylistEvent {
+  final String playlistId;
+  final Song song;
+
+  const RemoveSongFromPlaylist({required this.playlistId, required this.song});
+  @override
+  List<Object> get props => [playlistId, song];
+}
+
 //* Sort By Date Created Or Modified
 class SortByDateCreatedOrModified extends PlaylistEvent {}

@@ -22,7 +22,7 @@ class SongsViewBody extends StatelessWidget {
 
         //* Failure
         if (failure) {
-          await flutterToast(
+          await flutterToastSuccessfully(
               context: context,
               message: state.errorMessage ?? AppStrings.unexpectedError);
         }
@@ -53,7 +53,7 @@ class SongsViewBody extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               slivers: [
                 // padding
-                paddingSliver(15),
+                sliverPadding(15),
 
                 // Search box
                 const SliverToBoxAdapter(
@@ -61,13 +61,13 @@ class SongsViewBody extends StatelessWidget {
                 ),
 
                 // padding
-                paddingSliver(15),
+                sliverPadding(15),
 
                 // List Songs
                 CustomSliverListSongs(songs: songs),
 
                 // padding
-                paddingSliver(kTextTabBarHeight + 80.h),
+                sliverPadding(kTextTabBarHeight + 80.h),
               ],
             ),
           );

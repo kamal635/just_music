@@ -22,6 +22,9 @@ abstract class PlaylistRepo {
   //* Add Song To Playlist
   Future<void> addSongToPlaylist(Box box, String playlistId, Song song);
 
+  //* Remove Song From Playlist
+  Future<void> removeSongFromPlaylist(Box box, String playlistId, Song song);
+
   //* Sort Playlists by date added or modified
   List<Playlist> sortByDateCreatedOrModified(Box box);
 }
@@ -111,8 +114,36 @@ class PlaylistRepoImpl implements PlaylistRepo {
     await box.put(key, updatedPlaylist);
   }
 
+  ///***********Remove Song From Playlist************/
+  ///******************************************/
+  @override
+  Future<void> removeSongFromPlaylist(
+      Box box, String playlistId, Song song) async {
+    // Find the key of the playlist
+    final key = box.keys.cast<int>().firstWhere((key) {
+      final playlist = box.get(key) as Playlist;
+      return playlist.id == playlistId;
+    });
+
+    // Retrieve the playlist
+    final playlist = box.get(key) as Playlist;
+
+    // updated song by add song to the songs in playlist
+    final updatedSongs = List<Song>.from(playlist.songs!.toList())
+      ..remove(song);
+    // updated playlist for added to the box again
+    final updatedPlaylist = playlist.copyWith(
+      songs: updatedSongs,
+      dateCreatedOrModified: DateTime.now(),
+      numOfSongs: updatedSongs.length,
+    );
+
+    // Put the updated playlist back in the box
+    await box.put(key, updatedPlaylist);
+  }
+
   ///***********Sort By Date Added Or Modified************/
-  ///****************************************/
+  ///****************************************************/
   @override
   List<Playlist> sortByDateCreatedOrModified(Box box) {
     List<Playlist> playlists = box.values.toList().cast<Playlist>()
