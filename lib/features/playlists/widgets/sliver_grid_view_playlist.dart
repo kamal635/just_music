@@ -10,8 +10,8 @@ import 'package:just_music/core/styling/app_linear.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 
-class CustomSliverGridView extends StatelessWidget {
-  const CustomSliverGridView({super.key});
+class SliverGridViewPlaylist extends StatelessWidget {
+  const SliverGridViewPlaylist({super.key});
 
   @override
   Widget build(BuildContext context) {

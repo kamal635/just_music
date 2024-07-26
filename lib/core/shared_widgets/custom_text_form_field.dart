@@ -59,7 +59,8 @@ class CustomTextFormField extends StatelessWidget {
           // Property TextFormField
           filled: true,
           fillColor: AppColor.white.withAlpha(40),
-          contentPadding: EdgeInsets.all(10.r),
+          contentPadding:
+              EdgeInsets.symmetric(vertical: 5.0.h, horizontal: 10.0.w),
           hintText: hintText,
           hintStyle:
               AppFonts.medium_12.copyWith(color: AppColor.white.withAlpha(140)),

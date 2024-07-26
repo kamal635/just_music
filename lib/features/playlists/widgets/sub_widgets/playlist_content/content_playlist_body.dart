@@ -4,23 +4,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/routes/string_route.dart';
-
-import 'package:just_music/core/shared_widgets/song_menu_button.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/appbar_palylist_songs/appbar_playlist_songs_body.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/button_middle_add_song.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_songs/section_image_title_buttons.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/appbar_palylist_songs/appbar_playlist_songs_body.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/list_of_songs_content.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/button_middle_content.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/image_title_buttons_content.dart';
 import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
-import 'package:just_music/features/songs/widgets/song_card.dart';
 
-class PlaylistSongsBody extends StatelessWidget {
-  const PlaylistSongsBody(
+class ContentPlaylistBody extends StatelessWidget {
+  const ContentPlaylistBody(
       {super.key, required this.index, required this.playlist});
   final Playlist playlist;
   final int index;
@@ -37,7 +34,8 @@ class PlaylistSongsBody extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             // Sectin (Image + Title playlist + buttons play and add song)
-            SectionImageTitleButtons(index: index, playlist: playlist),
+            ImageAndTitleAndButtonsContentPlaylist(
+                index: index, playlist: playlist),
 
             // padding height
             sliverPadding(20),
@@ -103,29 +101,13 @@ class PlaylistSongsBody extends StatelessWidget {
                 return updatedPlaylist.songs == null ||
                         updatedPlaylist.songs!.isEmpty
                     ? SliverFillRemaining(
-                        child: ButtonMiddleAddSong(
+                        child: ButtonMiddleContentPlaylist(
                           playlist: updatedPlaylist,
                         ),
                       )
-                    : SliverList.builder(
-                        itemCount: updatedPlaylist.songs!.length,
-                        itemBuilder: (context, i) {
-                          final song = updatedPlaylist.songs![i];
-                          return InkWell(
-                            borderRadius: BorderRadius.circular(10.r),
-                            onTap: () {
-                              context.read<AudioPlayerBloc>().add(SetAudioEvent(
-                                  songs: updatedPlaylist.songs!, index: i));
-                            },
-                            child: SongCard(
-                              song: song,
-                              isIcon: true,
-                              widgetIcon: SongMenuButton(
-                                  playlist: updatedPlaylist, song: song),
-                            ),
-                          );
-                        },
-                      );
+                    : ListOfSongsContentPlaylist(
+                        songs: updatedPlaylist.songs!,
+                        playlist: updatedPlaylist);
               },
             ),
 

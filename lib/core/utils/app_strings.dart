@@ -6,7 +6,15 @@ abstract class AppStrings {
   static const String createPlaylist = "create playlist";
   static const String editNamePlaylist = 'Edit Name Playlist';
   static const String addSongs = "Add Songs";
+  static const String deleteSong = "Delete this song from the playlist?";
+  static const String songAlreadyExist =
+      "This song already exists in this playlist";
+  static const String newPlaylist = "New playlist";
+  static const String successfullyAddedSong =
+      "Successfully added to the playlist";
+  static const String localSongs = "Local songs";
   static const String addToPlaylist = "Add To Playlist";
+  static const String addSongsToPlaylist = "Add songs to playlist";
   static const String removeFromPlaylist = "Remove From Playlist";
   static const String addToFavorite = "Add To Favorite";
   static const String nameBlank = "Playlist name can't be blank";
@@ -24,7 +32,9 @@ abstract class AppStrings {
   static const String enterPlaylistName = "Enter Playlist Name";
   static const String folders = "Folders";
   static const String favorites = "Favorites";
+  static const String favoriteSongs = "Favorite songs";
   static const String delete = "Delete";
+  static const String done = "Done";
   static const String searchByName = "Search for songs on device";
   static const String emptySongs = "No items here yet.";
   static const String unexpectedError =
@@ -39,4 +49,12 @@ abstract class AppHive {
   static const String favoriteBox = "favoriteBox";
   static const String storeSongs = "storeSongs";
   static const String playlist = "playlist";
+}
+
+abstract class AppArguments {
+  static const String favoriteSong = "favoriteSong";
+  static const String playlist = "playlist";
+  static const String songs = "songs";
+  static const String playlistComeFromPreviousPage =
+      "playlistComeFromPreviousPage";
 }

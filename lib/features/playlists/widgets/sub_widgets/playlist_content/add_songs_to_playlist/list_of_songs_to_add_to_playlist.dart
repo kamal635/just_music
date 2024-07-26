@@ -7,6 +7,7 @@ import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
+import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
@@ -50,7 +51,7 @@ class ListOfSongs extends StatelessWidget {
               onPressed: () {
                 context.pop();
               },
-              title: "Done",
+              title: AppStrings.done,
             ),
           )
         ],
@@ -98,7 +99,7 @@ class ListOfSongs extends StatelessWidget {
                         style: AppFonts.medium_14,
                       ),
                       subtitle: Text(
-                        song.artist ?? "<Unknown>",
+                        song.artist ?? AppStrings.unknown,
                         textAlign: TextAlign.start,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

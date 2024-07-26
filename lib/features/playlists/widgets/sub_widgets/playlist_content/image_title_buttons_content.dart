@@ -14,8 +14,8 @@ import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 
-class SectionImageTitleButtons extends StatelessWidget {
-  const SectionImageTitleButtons(
+class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
+  const ImageAndTitleAndButtonsContentPlaylist(
       {super.key, required this.index, required this.playlist});
   final int index;
   final Playlist playlist;
