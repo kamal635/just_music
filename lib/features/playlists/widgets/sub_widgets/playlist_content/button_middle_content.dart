@@ -7,8 +7,8 @@ import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 
-class ButtonMiddleAddSong extends StatelessWidget {
-  const ButtonMiddleAddSong({super.key, required this.playlist});
+class ButtonMiddleContentPlaylist extends StatelessWidget {
+  const ButtonMiddleContentPlaylist({super.key, required this.playlist});
   final Playlist playlist;
   @override
   Widget build(BuildContext context) {

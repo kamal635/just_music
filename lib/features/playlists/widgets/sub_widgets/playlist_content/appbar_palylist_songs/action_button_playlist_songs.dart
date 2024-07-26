@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
@@ -25,6 +26,7 @@ class ActionButtonAppBarPlaylistSongs extends StatelessWidget {
 
         // store name playlist to rename it
         String namePlaylist = updatedPlaylist.name;
+
         return PopupMenuButton<int>(
           color: AppColor.secondary,
           iconColor: AppColor.white,
@@ -68,11 +70,24 @@ class ActionButtonAppBarPlaylistSongs extends StatelessWidget {
                               // Confirm Button
                               CustomElvatedButton(
                                 onPressed: () {
-                                  if (namePlaylist == "") {
-                                    flutterToastSuccessfully(
-                                      context: context,
-                                      message: AppStrings.nameBlank,
-                                    );
+                                  // check if playlist name is existing
+                                  final isNameExisting = state.playlist?.any(
+                                        (pl) => pl.name == namePlaylist,
+                                      ) ??
+                                      false;
+
+                                  // if text is empty
+                                  if (namePlaylist.isEmpty) {
+                                    flutterToastError(
+                                        context: context,
+                                        message: AppStrings.nameBlank,
+                                        gravity: ToastGravity.TOP);
+                                  } // if playlist name is already exist
+                                  else if (isNameExisting) {
+                                    flutterToastError(
+                                        context: context,
+                                        message: AppStrings.nameAlreadyExist,
+                                        gravity: ToastGravity.TOP);
                                   } else {
                                     context.read<PlaylistBloc>().add(
                                         RenamePlaylist(

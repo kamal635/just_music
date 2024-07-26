@@ -10,6 +10,7 @@ import 'package:just_music/features/songs/data/model/song.dart';
 class FavoriteIconButton extends StatelessWidget {
   const FavoriteIconButton({super.key, required this.song});
   final Song song;
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoriteSongsBloc, FavoriteSongsState>(
@@ -17,6 +18,9 @@ class FavoriteIconButton extends StatelessWidget {
         final isFavorite = state.favoriteSong?.favoriteSongs
                 .any((songFavorite) => songFavorite.id == song.id) ??
             false;
+
+        print(
+            'Building FavoriteIconButton for song ${song.id} - isFavorite: $isFavorite');
 
         return CustomIconButton(
             onPressed: () async {
@@ -30,27 +34,18 @@ class FavoriteIconButton extends StatelessWidget {
     );
   }
 
-  // ********** Change Color Favorite
-  //******************************/
   Color changeColorFavorite(bool isFavorite) =>
       isFavorite ? AppColor.red : AppColor.white;
 
-  // ********** Change Icon Favorite
-  //******************************/
   IconData changeIconFavorite(bool isFavorite) {
     return isFavorite ? AppIcon.favoriteFilled : AppIcon.favoriteBorder;
   }
 
-  // ********** Add And Remove Song
-  //******************************/
   void addAndRemoveSongToFavorite(bool isFavorite, BuildContext context) {
     isFavorite
-        //* if ture remove
         ? context
             .read<FavoriteSongsBloc>()
             .add(RemoveSongFromFavorite(song: song))
-
-        //* else add
         : context.read<FavoriteSongsBloc>().add(AddSongToFavorite(song: song));
   }
 }

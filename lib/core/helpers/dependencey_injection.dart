@@ -12,31 +12,24 @@ import 'package:on_audio_query/on_audio_query.dart';
 final di = GetIt.instance;
 
 Future<void> setUpDependincy() async {
+  //======================= Repository ======================
+  di.registerLazySingleton<FetchSongsFromDeviceRepoImpl>(
+      () => FetchSongsFromDeviceRepoImpl(audioQuery: di()));
+  di.registerLazySingleton<FavoriteRepoImpl>(() => FavoriteRepoImpl());
+  di.registerLazySingleton<PlaylistRepoImpl>(() => PlaylistRepoImpl());
+
   //======================= Bloc ======================
   di.registerFactory<CheckPermissionBloc>(
       () => CheckPermissionBloc(onAudioQuery: di()));
-
   di.registerFactory<FetchSongsFromDeviceBloc>(
       () => FetchSongsFromDeviceBloc(fetchSongsFromDeviceRepoImpl: di()));
-
   di.registerFactory<FavoriteSongsBloc>(
-      () => FavoriteSongsBloc(favoriteRepoImpl: di()));
-
+    () => FavoriteSongsBloc(favoriteRepoImpl: di()),
+  );
   di.registerFactory<SearchSongsBloc>(
       () => SearchSongsBloc(fetchSongsFromDeviceRepoImpl: di()));
-
   di.registerFactory<PlaylistBloc>(() => PlaylistBloc(playlistRepoImpl: di()));
 
-  //======================= Repository ======================
-
-  di.registerLazySingleton<FetchSongsFromDeviceRepoImpl>(
-      () => FetchSongsFromDeviceRepoImpl(audioQuery: di()));
-
-  di.registerLazySingleton<FavoriteRepoImpl>(() => FavoriteRepoImpl());
-
-  di.registerLazySingleton<PlaylistRepoImpl>(() => PlaylistRepoImpl());
-
   //======================= External Package ======================
-
   di.registerFactory<OnAudioQuery>(() => OnAudioQuery());
 }

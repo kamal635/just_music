@@ -93,9 +93,9 @@ class FavoriteSongsBloc extends Bloc<FavoriteSongsEvent, FavoriteSongsState> {
       // existing Favorite Song
       List<Song> existingFavorites = state.favoriteSong!.favoriteSongs;
 
-      // Combine existing favorites with the new song
+      // Remove song by id
       List<Song> updatedFavorites = List.from(existingFavorites)
-        ..remove(event.song);
+        ..removeWhere((song) => song.id == event.song.id);
 
       emit(state.copyWith(
           favoriteSongsStatus: FavoriteSongsStatus.loaded,

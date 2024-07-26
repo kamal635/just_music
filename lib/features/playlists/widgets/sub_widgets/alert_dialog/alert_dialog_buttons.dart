@@ -62,18 +62,22 @@ class _ButtonsAlertDialogState extends State<ButtonsAlertDialog> {
         CustomElvatedButton(
           widthButton: 100.w,
           onPressed: () {
+            // if text is empty
             if (widget.controller.text.isEmpty) {
-              flutterToastSuccessfully(
+              flutterToastError(
                   context: context,
                   message: AppStrings.nameBlank,
                   gravity: ToastGravity.TOP);
-            } else if (isNameExisting) {
-              flutterToastSuccessfully(
+            }
+            // if playlist name is already exist
+            else if (isNameExisting) {
+              flutterToastError(
                   context: context,
                   message: AppStrings.nameAlreadyExist,
                   gravity: ToastGravity.TOP);
-            } else {
-              // Add the text and value to create playlist
+            }
+            // Add the text and value to create playlist
+            else {
               context
                   .read<PlaylistBloc>()
                   .add(CreatePlaylist(name: widget.controller.text));

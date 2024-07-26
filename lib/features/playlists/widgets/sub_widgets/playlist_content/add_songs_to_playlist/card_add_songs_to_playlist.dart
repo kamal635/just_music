@@ -11,7 +11,7 @@ class CustomCardAddSongToPlaylist extends StatelessWidget {
       {super.key,
       this.colorCard,
       this.colorIcon,
-      required this.title,
+      this.title,
       required this.subtitle,
       this.isArtwork = false,
       this.isTrailing = false,
@@ -20,7 +20,7 @@ class CustomCardAddSongToPlaylist extends StatelessWidget {
       this.index});
   final Color? colorCard;
   final Color? colorIcon;
-  final String title;
+  final String? title;
   final int subtitle;
   final bool isArtwork;
   final bool isTrailing;
@@ -78,7 +78,7 @@ class CustomCardAddSongToPlaylist extends StatelessWidget {
 
         //** title
         title: Text(
-          title,
+          title ?? "",
           textAlign: TextAlign.start,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,

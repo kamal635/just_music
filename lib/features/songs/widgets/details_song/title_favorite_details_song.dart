@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/shared_widgets/favorite_icon_button.dart';
+import 'package:just_music/core/shared_widgets/icon_buttons.dart';
+import 'package:just_music/core/shared_widgets/song_menu_button/actions_classes/add_to_playlist_action.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
+import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';
+import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 
 class TitleAndFavoriteDetailsSong extends StatelessWidget {
@@ -30,6 +35,21 @@ class TitleAndFavoriteDetailsSong extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
             ),
           ),
+        ),
+
+        CustomIconButton(
+          onPressed: () {
+            showModalBottomSheet(
+              backgroundColor: AppColor.primary,
+              context: context,
+              builder: (context) {
+                return AddToPlaylistDialog(
+                    playlist: Playlist(name: ""), song: song);
+              },
+            );
+          },
+          icon: AppIcon.addToPlaylist,
+          size: 24.h,
         ),
 
         //** Favorite Icon */

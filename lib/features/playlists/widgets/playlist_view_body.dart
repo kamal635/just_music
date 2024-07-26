@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/playlists/widgets/create_playlist_button.dart';
-import 'package:just_music/features/playlists/widgets/sliver_grid_view.dart';
+import 'package:just_music/features/playlists/widgets/sliver_grid_view_playlist.dart';
 
 class PlayListViewBody extends StatelessWidget {
   const PlayListViewBody({super.key});
@@ -28,7 +28,10 @@ class PlayListViewBody extends StatelessWidget {
             if (playlist == null || playlist.isEmpty) {
               //* Middle  button
               return const Center(
-                child: CreatePlaylistButton(isMiddleButton: true),
+                child: CreatePlaylistButton(
+                  isMiddleButton: true,
+                  isTopRightButton: false,
+                ),
               ); // Add Playlist
             }
 
@@ -38,13 +41,14 @@ class PlayListViewBody extends StatelessWidget {
                 //* Top right button
                 const SliverToBoxAdapter(
                   child: CreatePlaylistButton(
+                      isTopRightButton: true,
                       isMiddleButton: false), // Add Playlist
                 ),
 
                 sliverPadding(10),
 
                 //* sliver gridview playlist
-                const CustomSliverGridView(), // Display list of playlist
+                const SliverGridViewPlaylist(), // Display list of playlist
 
                 sliverPadding(kTextTabBarHeight + 80.h),
               ],
