@@ -7,28 +7,54 @@ import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/widgets/song_card.dart';
 
-class ListOfSongsContentPlaylist extends StatelessWidget {
+class ListOfSongsContentPlaylist extends StatefulWidget {
   const ListOfSongsContentPlaylist(
       {super.key, required this.songs, required this.playlist});
   final List<Song> songs;
   final Playlist playlist;
+
+  @override
+  State<ListOfSongsContentPlaylist> createState() =>
+      _ListOfSongsContentPlaylistState();
+}
+
+class _ListOfSongsContentPlaylistState
+    extends State<ListOfSongsContentPlaylist> {
+  bool _isListVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(milliseconds: 300), () {
+      setState(() {
+        _isListVisible = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverList.builder(
-      itemCount: songs.length,
+      itemCount: widget.songs.length,
       itemBuilder: (context, i) {
-        final song = songs[i];
+        final song = widget.songs[i];
         return InkWell(
           borderRadius: BorderRadius.circular(10.r),
           onTap: () {
             context
                 .read<AudioPlayerBloc>()
-                .add(SetAudioEvent(songs: songs, index: i));
+                .add(SetAudioEvent(songs: widget.songs, index: i));
           },
-          child: SongCard(
-            song: song,
-            isIcon: true,
-            widgetIcon: SongMenuButton(playlist: playlist, song: song),
+          child: AnimatedOpacity(
+            opacity: _isListVisible ? 1.0 : 0.0,
+            duration: const Duration(seconds: 1),
+            curve: Curves.easeIn,
+            child: SongCard(
+              song: song,
+              isIcon: true,
+              widgetIcon: SongMenuButton(playlist: widget.playlist, song: song),
+            ),
           ),
         );
       },

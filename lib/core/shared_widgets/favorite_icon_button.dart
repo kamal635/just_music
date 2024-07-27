@@ -19,17 +19,27 @@ class FavoriteIconButton extends StatelessWidget {
                 .any((songFavorite) => songFavorite.id == song.id) ??
             false;
 
-        print(
-            'Building FavoriteIconButton for song ${song.id} - isFavorite: $isFavorite');
-
-        return CustomIconButton(
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 600),
+          transitionBuilder: (Widget child, Animation<double> animation) {
+            return ScaleTransition(
+              scale: animation,
+              child: FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+            );
+          },
+          child: CustomIconButton(
+            key: ValueKey<bool>(isFavorite),
             onPressed: () async {
               addAndRemoveSongToFavorite(isFavorite, context);
-
               await toastFavorite(isFavorite: isFavorite, context: context);
             },
             color: changeColorFavorite(isFavorite),
-            icon: changeIconFavorite(isFavorite));
+            icon: changeIconFavorite(isFavorite),
+          ),
+        );
       },
     );
   }

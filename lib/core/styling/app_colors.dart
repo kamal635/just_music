@@ -4,6 +4,8 @@ abstract class AppColor {
   ///************************* Colors ******************/
   static const Color primary = Color(0xFF0C2530);
   static const Color secondary = Color(0xFF1C607C);
+  static const Color blue = Color(0xFF0091F7);
+  static const Color navBottomBar = Color(0xFF223A44);
   static const Color red = Color(0xFFff0000);
   static const Color folder = Color(0xFFC1E344);
   static const Color yellow = Color(0xFFFFE553);

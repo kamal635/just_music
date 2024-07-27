@@ -8,6 +8,7 @@ part 'search_songs_state.dart';
 
 class SearchSongsBloc extends Bloc<SearchSongsEvent, SearchSongsState> {
   final FetchSongsFromDeviceRepoImpl fetchSongsFromDeviceRepoImpl;
+
   SearchSongsBloc({required this.fetchSongsFromDeviceRepoImpl})
       : super(const SearchSongsState()) {
     on<SearchEvent>(_onSearchEvent);

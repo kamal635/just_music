@@ -16,7 +16,7 @@ class MusicTrackPlayer extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
       builder: (context, state) {
-        ///**********************Short Variables From Bloc***************************/
+        ///**************Short Variables From Bloc************/
         ///*************************************************/
         final song = state.audioPlayerData?.audio;
         final isPlaying = state.audioPlayerData?.playbackState.playing;
@@ -36,7 +36,7 @@ class MusicTrackPlayer extends StatelessWidget {
             await detailsSong(context: context);
           },
           child: Container(
-            margin: EdgeInsets.all(12.r),
+            margin: EdgeInsets.symmetric(horizontal: 12.r),
             padding: EdgeInsets.all(12.r),
             decoration: BoxDecoration(
                 color: AppColor.secondary,
