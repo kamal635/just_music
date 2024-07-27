@@ -10,8 +10,25 @@ import 'package:just_music/core/styling/app_linear.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 
-class SliverGridViewPlaylist extends StatelessWidget {
+class SliverGridViewPlaylist extends StatefulWidget {
   const SliverGridViewPlaylist({super.key});
+
+  @override
+  State<SliverGridViewPlaylist> createState() => _SliverGridViewPlaylistState();
+}
+
+class _SliverGridViewPlaylistState extends State<SliverGridViewPlaylist> {
+  bool _isFieldVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 200), () {
+      setState(() {
+        _isFieldVisible = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,44 +55,51 @@ class SliverGridViewPlaylist extends StatelessWidget {
                           },
                         );
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          gradient: AppLinear.listLinearPlayList[
-                              i % AppLinear.listLinearPlayList.length],
-                        ),
-                        child: Stack(
-                          fit: StackFit.expand,
-                          children: [
-                            //* image playlist
-                            CustomArtWork(
-                              id: playlist.songs == null ||
-                                      playlist.songs!.isEmpty
-                                  ? -1
-                                  : playlist.songs?.first.id ?? -1,
-                              iconSize: 66.h,
-                            ),
+                      child: AnimatedContainer(
+                        duration: const Duration(seconds: 1),
+                        curve: Curves.easeIn,
+                        transform: _isFieldVisible
+                            ? Matrix4.translationValues(0, 0, 0)
+                            : Matrix4.translationValues(0, -20, 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            gradient: AppLinear.listLinearPlayList[
+                                i % AppLinear.listLinearPlayList.length],
+                          ),
+                          child: Stack(
+                            fit: StackFit.expand,
+                            children: [
+                              //* image playlist
+                              CustomArtWork(
+                                id: playlist.songs == null ||
+                                        playlist.songs!.isEmpty
+                                    ? -1
+                                    : playlist.songs?.first.id ?? -1,
+                                iconSize: 66.h,
+                              ),
 
-                            //*icon as image
-                            Positioned(
-                              bottom: 5,
-                              right: 5,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(40.r),
-                                  color: AppColor.primary,
-                                ),
-                                child: IconButton(
-                                  icon: Icon(
-                                    AppIcon.play,
-                                    color: AppColor.white,
-                                    size: 22.h,
+                              //*icon as image
+                              Positioned(
+                                bottom: 5,
+                                right: 5,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(40.r),
+                                    color: AppColor.primary,
                                   ),
-                                  onPressed: null,
+                                  child: IconButton(
+                                    icon: Icon(
+                                      AppIcon.play,
+                                      color: AppColor.white,
+                                      size: 22.h,
+                                    ),
+                                    onPressed: null,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),

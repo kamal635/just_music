@@ -6,7 +6,7 @@ import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/widgets/song_card.dart';
 
-class CustomSliverListSongs extends StatelessWidget {
+class CustomSliverListSongs extends StatefulWidget {
   const CustomSliverListSongs({
     super.key,
     required this.songs,
@@ -16,27 +16,51 @@ class CustomSliverListSongs extends StatelessWidget {
   final List<Song> songs;
   final bool isIcon;
   final Widget? widgetIcon;
+
+  @override
+  State<CustomSliverListSongs> createState() => _CustomSliverListSongsState();
+}
+
+class _CustomSliverListSongsState extends State<CustomSliverListSongs> {
+  bool _isListVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(milliseconds: 400), () {
+      setState(() {
+        _isListVisible = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SliverList(
         delegate: SliverChildBuilderDelegate(
       (context, i) {
-        final song = songs[i];
+        final song = widget.songs[i];
         return InkWell(
           borderRadius: BorderRadius.circular(10.r),
           onTap: () {
             context
                 .read<AudioPlayerBloc>()
-                .add(SetAudioEvent(songs: songs, index: i));
+                .add(SetAudioEvent(songs: widget.songs, index: i));
           },
-          child: SongCard(
-            song: song,
-            isIcon: isIcon,
-            widgetIcon: widgetIcon ?? FavoriteIconButton(song: song),
+          child: AnimatedOpacity(
+            opacity: _isListVisible ? 1.0 : 0.0,
+            duration: const Duration(seconds: 1),
+            curve: Curves.easeIn,
+            child: SongCard(
+              song: song,
+              isIcon: widget.isIcon,
+              widgetIcon: widget.widgetIcon ?? FavoriteIconButton(song: song),
+            ),
           ),
         );
       },
-      childCount: songs.length,
+      childCount: widget.songs.length,
     ));
   }
 }

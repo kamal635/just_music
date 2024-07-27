@@ -50,7 +50,7 @@ class PlayListViewBody extends StatelessWidget {
                 //* sliver gridview playlist
                 const SliverGridViewPlaylist(), // Display list of playlist
 
-                sliverPadding(kTextTabBarHeight + 80.h),
+                sliverPadding(kTextTabBarHeight + 60.h),
               ],
             );
           } else {

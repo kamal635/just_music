@@ -1,6 +1,7 @@
 abstract class AppStrings {
   static const String unknown = "<unknown>";
   static const String cancel = "Cancel";
+  static const String home = "Home";
   static const String confirm = "Confirm";
   static const String ok = "OK";
   static const String createPlaylist = "create playlist";
@@ -28,15 +29,18 @@ abstract class AppStrings {
   static const String songs = "Songs";
   static const String albums = "Albums";
   static const String playlists = "Playlists";
+  static const String playlist = "Playlist";
   static const String playlistName = "Playlist Name";
   static const String enterPlaylistName = "Enter Playlist Name";
   static const String folders = "Folders";
   static const String favorites = "Favorites";
+  static const String favorite = "Favorite";
   static const String favoriteSongs = "Favorite songs";
   static const String delete = "Delete";
   static const String done = "Done";
   static const String searchByName = "Search for songs on device";
   static const String emptySongs = "No items here yet.";
+  static const String search = "Search";
   static const String unexpectedError =
       "Unexpected error..please try again later!";
   static const String followingSteps =

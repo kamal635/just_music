@@ -28,14 +28,11 @@ class FetchSongsFromDeviceBloc
     try {
       List<Song> songs =
           await fetchSongsFromDeviceRepoImpl.fetchSongsFromDevice();
-      // // Check if box is empty and fetch songs only if necessary
-      // if (box.isEmpty) {
-      //   await storeSongsLocalRepoImpl.addAll(box);
-      // }
-      // List<Song> songs = storeSongsLocalRepoImpl.getSongs(box);
 
       emit(state.copyWith(
-          fetchSongsStatus: FetchSongsStatus.loaded, songs: songs));
+        fetchSongsStatus: FetchSongsStatus.loaded,
+        songs: songs,
+      ));
     } catch (err) {
       emit(state.copyWith(
           fetchSongsStatus: FetchSongsStatus.failure,

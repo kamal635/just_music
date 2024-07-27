@@ -73,6 +73,7 @@ class _CreatePlaylistButtonState extends State<CreatePlaylistButton> {
                     child: CustomIconButton(
                       onPressed: () async {
                         // Show alert dialog to create playlist
+                        await showDialogCreatePlaylist(context);
                       },
                       icon: AppIcon.addMusicOrPlaylist,
                     ),

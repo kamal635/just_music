@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:just_music/changed_view.dart';
 import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/features/albums/album_view.dart';
 import 'package:just_music/features/favorites/favorite_view.dart';
-import 'package:just_music/features/folders/folders_view.dart';
 import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/add_songs_to_playlist_body.dart';
 import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/extends_classes_from_list_of_songs.dart';
 import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/content_playlist_body.dart';
@@ -23,14 +21,8 @@ abstract class AppRouter {
       case RouterName.songsView:
         return MaterialPageRoute(builder: (context) => const SongsView());
 
-      case RouterName.albumView:
-        return MaterialPageRoute(builder: (context) => const AlbumView());
-
       case RouterName.playListView:
         return MaterialPageRoute(builder: (context) => const PlayListView());
-
-      case RouterName.foldersView:
-        return MaterialPageRoute(builder: (context) => const FoldersView());
 
       case RouterName.favoriteView:
         return MaterialPageRoute(builder: (context) => const FavoriteView());

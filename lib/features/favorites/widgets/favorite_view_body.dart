@@ -50,7 +50,7 @@ class FavoriteViewBody extends StatelessWidget {
                     ),
 
                     //* this to add padding in the bottom CustomScrollView
-                    sliverPadding(kTextTabBarHeight + 80.h)
+                    sliverPadding(kTextTabBarHeight + 60.h)
                   ]);
             } else {
               return const SizedBox();

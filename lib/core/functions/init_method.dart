@@ -25,9 +25,9 @@ Future<void> initMethod() async {
 
   Bloc.observer = MyBlocObserver();
 
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
-    systemNavigationBarColor: AppColor.primary.withAlpha(230),
+    systemNavigationBarColor: AppColor.navBottomBar,
   ));
 
   // SystemChrome.setPreferredOrientations([

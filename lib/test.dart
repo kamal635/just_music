@@ -1,47 +1,75 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:just_music/core/helpers/dependencey_injection.dart';
-// import 'package:just_music/core/styling/app_colors.dart';
-// import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-// import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-// import 'package:just_music/features/songs/widgets/song_card.dart';
-// import 'package:on_audio_query/on_audio_query.dart';
+import 'package:flutter/material.dart';
 
-// class TestWidget extends StatefulWidget {
-//   const TestWidget({super.key, required this.playlist});
-//   final Playlist playlist;
-//   @override
-//   State<TestWidget> createState() => _TestWidgetState();
-// }
+class AnimatedPage extends StatefulWidget {
+  const AnimatedPage({super.key});
 
-// class _TestWidgetState extends State<TestWidget> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocProvider(
-//       create: (context) => di<PlaylistBloc>()
-//         ..add(LoadPlaylistSongs(playlistId: widget.playlist.id)),
-//       child: Scaffold(
-//         body: BlocBuilder<PlaylistBloc, PlaylistState>(
-//           builder: (context, state) {
-//             if (state.playlistStatus == PlaylistStatus.loading) {
-//               return const Center(
-//                 child: CircularProgressIndicator(),
-//               );
-//             }
-//             return ListView.builder(
-//               itemCount: state.songs?.length,
-//               itemBuilder: (context, i) {
-//                 return InkWell(
-//                   onTap: () {
-//                     print(state.songs?[i].id);
-//                   },
-//                   child: Text("${state.songs?[i].id}"),
-//                 );
-//               },
-//             );
-//           },
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  _AnimatedPageState createState() => _AnimatedPageState();
+}
+
+class _AnimatedPageState extends State<AnimatedPage> {
+  bool _isFieldVisible = false;
+  bool _isListVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(milliseconds: 300), () {
+      setState(() {
+        _isFieldVisible = true;
+      });
+    });
+
+    Future.delayed(const Duration(milliseconds: 600), () {
+      setState(() {
+        _isListVisible = true;
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Animated TextField and SliverList'),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: AnimatedContainer(
+              duration: const Duration(seconds: 1),
+              curve: Curves.easeIn,
+              transform: _isFieldVisible
+                  ? Matrix4.translationValues(0, 0, 0)
+                  : Matrix4.translationValues(0, -50, 0),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'Enter text',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return AnimatedOpacity(
+                  opacity: _isListVisible ? 1.0 : 0.0,
+                  duration: const Duration(seconds: 1),
+                  curve: Curves.easeIn,
+                  child: ListTile(
+                    title: Text('Item #$index'),
+                  ),
+                );
+              },
+              childCount: 20,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

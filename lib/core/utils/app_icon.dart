@@ -7,6 +7,7 @@ abstract class AppIcon {
   static const IconData musicNote = Icons.music_note;
   static const IconData play = Icons.play_arrow;
   static const IconData pause = Icons.pause;
+  static const IconData home = Icons.home;
   static const IconData search = Icons.search;
   static const IconData threeDotVertical = Icons.more_vert;
   static const IconData menu = Icons.notes;
@@ -21,6 +22,7 @@ abstract class AppIcon {
   static const IconData arrowDown = Icons.arrow_downward_sharp;
   static const IconData favoriteBorder = Icons.favorite_border;
   static const IconData favoriteFilled = Icons.favorite;
+  static const IconData playlist = Icons.library_music_sharp;
   static const IconData folder = Icons.folder;
   static const IconData addMusicOrPlaylist = Icons.queue_outlined;
   static const IconData addToPlaylist = Icons.playlist_add;

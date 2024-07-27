@@ -111,7 +111,7 @@ class ContentPlaylistBody extends StatelessWidget {
               },
             ),
 
-            sliverPadding(kTextTabBarHeight + 80.h),
+            sliverPadding(kTextTabBarHeight + 60.h),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
@@ -64,10 +65,12 @@ class SongsViewBody extends StatelessWidget {
                 sliverPadding(15),
 
                 // List Songs
-                CustomSliverListSongs(songs: songs),
+                CustomSliverListSongs(
+                  songs: songs,
+                ),
 
                 // padding
-                sliverPadding(kTextTabBarHeight + 80.h),
+                sliverPadding(kTextTabBarHeight + 60.h),
               ],
             ),
           );
