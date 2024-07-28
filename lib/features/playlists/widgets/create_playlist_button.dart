@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/shared_widgets/icon_buttons.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
@@ -11,12 +11,14 @@ import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart'
 import 'package:just_music/features/playlists/widgets/sub_widgets/alert_dialog/alert_dialog_body.dart';
 
 class CreatePlaylistButton extends StatefulWidget {
-  const CreatePlaylistButton(
-      {super.key,
-      required this.isMiddleButton,
-      required this.isTopRightButton});
+  const CreatePlaylistButton({
+    super.key,
+    required this.isMiddleButton,
+    required this.isTopRightButton,
+  });
   final bool isMiddleButton;
   final bool isTopRightButton;
+
   @override
   State<CreatePlaylistButton> createState() => _CreatePlaylistButtonState();
 }

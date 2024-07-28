@@ -18,14 +18,14 @@ import 'package:just_music/features/songs/widgets/music_track/music_track_player
 
 class ContentPlaylistBody extends StatelessWidget {
   const ContentPlaylistBody(
-      {super.key, required this.index, required this.playlist});
+      {super.key, required this.playlist, required this.index});
   final Playlist playlist;
   final int index;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: const MusicTrackPlayer(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       appBar: AppBarPlaylistSongsBody(
         playlist: playlist,
       ),
@@ -35,7 +35,9 @@ class ContentPlaylistBody extends StatelessWidget {
           slivers: [
             // Sectin (Image + Title playlist + buttons play and add song)
             ImageAndTitleAndButtonsContentPlaylist(
-                index: index, playlist: playlist),
+              playlist: playlist,
+              index: index,
+            ),
 
             // padding height
             sliverPadding(20),

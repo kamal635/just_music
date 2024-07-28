@@ -74,3 +74,8 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 
 
 >>>>>>> d3a14c83b6020111ed7d25f282dceedfc27a42c0
+android/app/src/main/res/
+ios/Runner/Assets.xcassets/
+ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+ios/Runner/Info.plist
+web/splash/img/

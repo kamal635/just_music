@@ -1,7 +1,6 @@
 abstract class AppStrings {
   static const String unknown = "<unknown>";
   static const String cancel = "Cancel";
-  static const String home = "Home";
   static const String confirm = "Confirm";
   static const String ok = "OK";
   static const String createPlaylist = "create playlist";

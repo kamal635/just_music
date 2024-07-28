@@ -16,7 +16,7 @@ import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.d
 
 class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
   const ImageAndTitleAndButtonsContentPlaylist(
-      {super.key, required this.index, required this.playlist});
+      {super.key, required this.playlist, required this.index});
   final int index;
   final Playlist playlist;
   @override

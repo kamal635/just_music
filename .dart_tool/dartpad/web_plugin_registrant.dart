@@ -8,6 +8,7 @@
 
 import 'package:audio_service_web/audio_service_web.dart';
 import 'package:audio_session/audio_session_web.dart';
+import 'package:flutter_native_splash/flutter_native_splash_web.dart';
 import 'package:fluttertoast/fluttertoast_web.dart';
 import 'package:just_audio_web/just_audio_web.dart';
 import 'package:on_audio_query_web/on_audio_query_web.dart';
@@ -17,6 +18,7 @@ void registerPlugins([final Registrar? pluginRegistrar]) {
   final Registrar registrar = pluginRegistrar ?? webPluginRegistrar;
   AudioServiceWeb.registerWith(registrar);
   AudioSessionWeb.registerWith(registrar);
+  FlutterNativeSplashWeb.registerWith(registrar);
   FluttertoastWebPlugin.registerWith(registrar);
   JustAudioPlugin.registerWith(registrar);
   OnAudioQueryPlugin.registerWith(registrar);

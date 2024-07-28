@@ -28,13 +28,13 @@ class TitleAndImageMusicTrack extends StatelessWidget {
               children: [
                 Text(
                   song.title,
-                  style: AppFonts.medium_12,
+                  style: AppFonts.medium_14,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
                   song.artist ?? AppStrings.unknown,
-                  style: AppFonts.normal_8
+                  style: AppFonts.normal_10
                       .copyWith(color: AppColor.white.withAlpha(140)),
                 ),
               ],

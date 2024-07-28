@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/duration.dart';
+import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
@@ -41,6 +43,7 @@ class _SongCardState extends State<SongCard> {
   void listenStateAudioPlayer() {
     context.read<AudioPlayerBloc>().stream.listen((state) {
       final id = state.audioPlayerData?.audio?.id;
+
       if (id != null && id == widget.song.id) {
         _valueNotifier.value = true;
       } else {
@@ -66,56 +69,65 @@ class _SongCardState extends State<SongCard> {
         return Container(
           padding: EdgeInsets.only(left: 10.w),
           decoration: BoxDecoration(
-            color: valueNotifier ? AppColor.secondary : null,
+            // color: valueNotifier ? AppColor.secondary : null,
             borderRadius: BorderRadius.circular(10.r),
           ),
-          child: child,
-        );
-      },
-      child: ListTile(
-        contentPadding: EdgeInsets.zero,
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
 
-        //** leading ( image )
-        leading: SizedBox(
-          child: CustomArtWork(id: widget.song.id),
-        ),
-
-        //** trailing ( Duration Song )
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              widget.song.duration! > const Duration(milliseconds: 3600000)
-                  ? widget.song.duration!
-                      .toFormattedStringWithHoursWithCharacter()
-                  : widget.song.duration!
-                      .toFormattedStringWithoutHoursWithCharacter(),
-              style: AppFonts.normal_10
-                  .copyWith(color: AppColor.white.withAlpha(120)),
+            //** leading ( image )
+            leading: SizedBox(
+              child: CustomArtWork(id: widget.song.id),
             ),
 
-            //** Favorite Icon */
-            widget.isIcon ? widget.widgetIcon! : const SizedBox(),
-          ],
-        ),
+            //** trailing ( Duration Song )
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                valueNotifier
+                    ? Image.asset(
+                        AppImages.waveSoundStatic,
+                        height: 20.h,
+                      )
+                    : const SizedBox(),
+                spaceWidth(10),
+                Text(
+                  widget.song.duration! > const Duration(milliseconds: 3600000)
+                      ? widget.song.duration!
+                          .toFormattedStringWithHoursWithCharacter()
+                      : widget.song.duration!
+                          .toFormattedStringWithoutHoursWithCharacter(),
+                  style: AppFonts.normal_10.copyWith(
+                      color: valueNotifier
+                          ? AppColor.lightBlue
+                          : AppColor.white.withAlpha(120)),
+                ),
 
-        //** title
-        title: Text(
-          widget.song.title,
-          maxLines: 1,
-          overflow: TextOverflow.ellipsis,
-        ),
-        titleTextStyle: AppFonts.medium_14,
+                //** Favorite Icon */
+                widget.isIcon ? widget.widgetIcon! : const SizedBox(),
+              ],
+            ),
 
-        //** subtitle
-        subtitle: Text(
-          widget.song.artist ?? AppStrings.unknown,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-        ),
-        subtitleTextStyle:
-            AppFonts.normal_10.copyWith(color: AppColor.white.withAlpha(120)),
-      ),
+            //** title
+            title: Text(
+              widget.song.title,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+            ),
+            titleTextStyle: AppFonts.medium_14.copyWith(
+                color: valueNotifier ? AppColor.lightBlue : AppColor.white),
+
+            //** subtitle
+            subtitle: Text(
+              widget.song.artist ?? AppStrings.unknown,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+            subtitleTextStyle: AppFonts.normal_10
+                .copyWith(color: AppColor.white.withAlpha(120)),
+          ),
+        );
+      },
     );
   }
 }

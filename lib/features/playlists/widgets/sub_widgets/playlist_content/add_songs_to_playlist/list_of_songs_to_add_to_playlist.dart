@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/shared_widgets/icon_buttons.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
@@ -80,15 +80,22 @@ class ListOfSongs extends StatelessWidget {
                       contentPadding: EdgeInsets.zero,
                       trailing: CustomIconButton(
                         onPressed: () {
-                          context.read<PlaylistBloc>().add(
-                                AddSongToPlaylist(
-                                  playlistId: updatedPlaylist.id!,
-                                  song: song,
-                                ),
-                              );
+                          isAdded
+                              ? context.read<PlaylistBloc>().add(
+                                    RemoveSongFromPlaylist(
+                                      playlistId: updatedPlaylist.id!,
+                                      song: song,
+                                    ),
+                                  )
+                              : context.read<PlaylistBloc>().add(
+                                    AddSongToPlaylist(
+                                      playlistId: updatedPlaylist.id!,
+                                      song: song,
+                                    ),
+                                  );
                         },
                         icon: isAdded ? AppIcon.checkMark : AppIcon.add,
-                        color: isAdded ? AppColor.folder : AppColor.white,
+                        color: isAdded ? AppColor.lightBlue : AppColor.white,
                         size: 22.h,
                       ),
                       title: Text(

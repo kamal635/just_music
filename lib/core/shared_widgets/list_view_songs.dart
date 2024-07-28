@@ -28,7 +28,7 @@ class _CustomSliverListSongsState extends State<CustomSliverListSongs> {
   void initState() {
     super.initState();
 
-    Future.delayed(const Duration(milliseconds: 400), () {
+    Future.delayed(const Duration(milliseconds: 200), () {
       setState(() {
         _isListVisible = true;
       });
@@ -50,7 +50,7 @@ class _CustomSliverListSongsState extends State<CustomSliverListSongs> {
           },
           child: AnimatedOpacity(
             opacity: _isListVisible ? 1.0 : 0.0,
-            duration: const Duration(seconds: 1),
+            duration: const Duration(milliseconds: 500),
             curve: Curves.easeIn,
             child: SongCard(
               song: song,

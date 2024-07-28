@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/widgets/details_song/body_details.dart';
@@ -35,16 +34,16 @@ class MusicTrackPlayer extends StatelessWidget {
           onTap: () async {
             await detailsSong(context: context);
           },
-          child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 12.r),
-            padding: EdgeInsets.all(12.r),
-            decoration: BoxDecoration(
-                color: AppColor.secondary,
-                borderRadius: BorderRadius.circular(10.r)),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 12.r),
+                padding: EdgeInsets.all(6.r),
+                decoration: BoxDecoration(
+                    color: AppColor.navBottomBar,
+                    borderRadius: BorderRadius.circular(10.r)),
+                child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       // title and image
@@ -53,15 +52,10 @@ class MusicTrackPlayer extends StatelessWidget {
                       // Buttons
                       ButtonMusicTrack(isPlaying: isPlaying),
                     ]),
-
-                spaceHeight(10),
-
-                // Slider track
-                SeekBar(duration: duration, position: position),
-
-                // time songs
-              ],
-            ),
+              ),
+              // Slider track
+              SeekBar(duration: duration, position: position),
+            ],
           ),
         );
       },

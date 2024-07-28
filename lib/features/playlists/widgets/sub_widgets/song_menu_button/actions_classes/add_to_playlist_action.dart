@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_strings.dart';

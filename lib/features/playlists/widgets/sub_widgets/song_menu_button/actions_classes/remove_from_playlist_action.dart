@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/navigation.dart';
+import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/shared_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_strings.dart';
@@ -47,6 +48,8 @@ class RemoveFromPlaylistAction implements SongMenuAction {
                   title: AppStrings.cancel,
                   colorButton: AppColor.white.withAlpha(80),
                 ),
+
+                spaceWidth(10),
                 // OK
                 CustomElvatedButton(
                   widthButton: 120.w,

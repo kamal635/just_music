@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 abstract class AppIcon {
+  //*******************Font Awesome Icons***********************/
+  static const IconData favoriteBorder = FontAwesomeIcons.heart;
+  static const IconData favoriteFilled = FontAwesomeIcons.solidHeart;
+  static const IconData disc = FontAwesomeIcons.compactDisc;
+
+  //*******************Icons Material***********************/
+  static const IconData playlist = Icons.library_music_outlined;
+  static const IconData playlistFilled = Icons.library_music_sharp;
   static const IconData shuffle = Icons.shuffle_sharp;
   static const IconData repateOne = Icons.repeat_one;
   static const IconData repateOff = Icons.repeat_outlined;
   static const IconData musicNote = Icons.music_note;
   static const IconData play = Icons.play_arrow;
   static const IconData pause = Icons.pause;
-  static const IconData home = Icons.home;
   static const IconData search = Icons.search;
   static const IconData threeDotVertical = Icons.more_vert;
   static const IconData menu = Icons.notes;
@@ -20,9 +28,7 @@ abstract class AppIcon {
   static const IconData rename = Icons.edit;
   static const IconData detail = Icons.edit_document;
   static const IconData arrowDown = Icons.arrow_downward_sharp;
-  static const IconData favoriteBorder = Icons.favorite_border;
-  static const IconData favoriteFilled = Icons.favorite;
-  static const IconData playlist = Icons.library_music_sharp;
+
   static const IconData folder = Icons.folder;
   static const IconData addMusicOrPlaylist = Icons.queue_outlined;
   static const IconData addToPlaylist = Icons.playlist_add;

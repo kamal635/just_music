@@ -30,7 +30,7 @@ abstract class AppRouter {
       case RouterName.listOfSongsView:
         return MaterialPageRoute(builder: (context) => const SearchViewBody());
 
-      case RouterName.playlistSongs:
+      case RouterName.contentPlaylistBody:
         return MaterialPageRoute(builder: (context) {
           return ContentPlaylistBody(
             index: argument?["index"],

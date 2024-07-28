@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/core/shared_widgets/image_empty_list.dart';
 import 'package:just_music/core/shared_widgets/list_view_songs.dart';
 import 'package:just_music/core/utils/app_images.dart';
@@ -30,14 +31,14 @@ class FavoriteViewBody extends StatelessWidget {
 
             //*** state Loading */
             if (state.favoriteSongsStatus == FavoriteSongsStatus.loading) {
-              return const Center(child: CircularProgressIndicator());
+              return const CustomLoading();
             }
 
             //**** state loaded */
             if (state.favoriteSongsStatus == FavoriteSongsStatus.loaded) {
               //* List of favorite song (empty || null) */
               if (songs == null || songs.isEmpty) {
-                return const ImageEmptyList(image: AppImages.image2);
+                return const ImageEmptyList(image: AppImages.emptyFavorites);
               }
 
               //* if song is loaded success */

@@ -19,7 +19,7 @@ class SeekBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 12.r),
+      padding: EdgeInsets.symmetric(horizontal: 20.r),
       child: ProgressBar(
         // Set the progress to the current position or zero if null
         progress: position ?? Duration.zero,
@@ -32,16 +32,15 @@ class SeekBar extends StatelessWidget {
               .add(SeekToPositionAudioEvent(position: position));
         },
         // Customize the appearance of the progress bar
-        barHeight: 4,
-        thumbRadius: 5.r,
-        thumbGlowRadius: 15.r,
-        timeLabelLocation: timeLabelLocation ?? TimeLabelLocation.below,
+        barHeight: 3,
+        thumbRadius: 0,
+        timeLabelLocation: timeLabelLocation ?? TimeLabelLocation.none,
         timeLabelTextStyle: AppFonts.normal_12,
         timeLabelPadding: 12,
         baseBarColor: AppColor.white.withAlpha(55),
         thumbGlowColor: AppColor.white.withAlpha(55),
-        thumbColor: AppColor.white,
-        progressBarColor: AppColor.white,
+        thumbColor: AppColor.lightBlue,
+        progressBarColor: AppColor.lightBlue,
       ),
     );
   }

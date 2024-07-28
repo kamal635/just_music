@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/core/shared_widgets/list_view_songs.dart';
 import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 import 'package:just_music/features/songs/widgets/search/section_search.dart';
@@ -38,13 +38,13 @@ class SongsViewBody extends StatelessWidget {
 
         //* Loading
         if (loading || initial) {
-          return const Center(child: CircularProgressIndicator());
+          return const CustomLoading();
         }
         //* Loaded
         if (loaded) {
           // when list of songs is Empty
           if (songs == null || songs.isEmpty) {
-            return const ImageEmptyList(image: AppImages.image2);
+            return const ImageEmptyList(image: AppImages.emptySongs);
           }
 
           // when fetch song success

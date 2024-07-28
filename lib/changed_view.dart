@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/icon_buttons.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
+import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_images.dart';
@@ -33,27 +34,6 @@ class _ChangedViewState extends State<ChangedView>
   ];
 
   int _currentIndex = 0;
-  late AnimationController _animationController;
-  late Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      duration: const Duration(milliseconds: 300),
-      vsync: this,
-    );
-    _animation = CurvedAnimation(
-      parent: _animationController,
-      curve: Curves.easeInOut,
-    );
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,27 +54,32 @@ class _ChangedViewState extends State<ChangedView>
     );
   }
 
+  //***** Loading */
   Widget _buildLoadingScreen() {
     return Container(
       color: AppColor.primary,
-      child: const Center(
-        child: CircularProgressIndicator(),
-      ),
+      child: const CustomLoading(),
     );
   }
 
+  //***** Body changed view */
   Widget _buildMainScreen() {
     return Scaffold(
       floatingActionButton: const MusicTrackPlayer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: _buildCustomBottomNavigationBar(),
       appBar: AppBar(
+        centerTitle: true,
+        title: Text(
+          _getTitleAppbarForIndex(_currentIndex),
+          style: AppFonts.bold_18,
+        ),
         toolbarHeight: 60.h,
         backgroundColor: AppColor.primary,
         surfaceTintColor: AppColor.primary,
         leadingWidth: 100,
         leading: Image.asset(
-          AppImages.logoWhite,
+          AppImages.mainLogo,
         ),
         actions: [
           CustomIconButton(
@@ -105,96 +90,101 @@ class _ChangedViewState extends State<ChangedView>
     );
   }
 
+  //***** Bottom Nav Bar */
   Widget _buildCustomBottomNavigationBar() {
     return Container(
       decoration: BoxDecoration(
         color: AppColor.navBottomBar,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: AppColor.black.withOpacity(0.1),
             blurRadius: 10,
             spreadRadius: 2,
           ),
         ],
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(18.r),
-          topRight: Radius.circular(18.r),
-        ),
+        border: const Border(bottom: BorderSide(width: 0.3)),
       ),
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
+        padding: EdgeInsets.symmetric(vertical: 6.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: List.generate(_views.length, (index) {
             bool isSelected = _currentIndex == index;
+            Color color =
+                isSelected ? AppColor.lightBlue : AppColor.white.withAlpha(110);
             return InkWell(
-              onTap: () => _onTabTapped(index),
-              child: AnimatedBuilder(
-                animation: _animation,
-                builder: (context, child) {
-                  double size =
-                      isSelected ? 18.h + (5.h * _animation.value) : 18.h;
-                  Color color = isSelected
-                      ? AppColor.blue
-                      : AppColor.white.withAlpha(110);
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Icon(
-                        _getIconForIndex(index),
-                        color: color,
-                        size: size,
-                      ),
-                      spaceHeight(5),
-                      Text(
-                        _getLabelForIndex(index),
-                        style: AppFonts.medium_12.copyWith(color: color),
-                      ),
-                    ],
-                  );
-                },
-              ),
-            );
+                onTap: () => _onTabTapped(index),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      _getIconForIndex(index, isSelected),
+                      color: color,
+                      size: 18.h,
+                    ),
+                    spaceHeight(2),
+                    Text(
+                      _getLabelForIndex(index),
+                      style: AppFonts.normal_10.copyWith(color: color),
+                    ),
+                  ],
+                ));
           }),
         ),
       ),
     );
   }
 
-  IconData _getIconForIndex(int index) {
+  //***** Icons */
+  IconData _getIconForIndex(int index, bool isSelected) {
     switch (index) {
       case 0:
-        return AppIcon.home;
+        return AppIcon.disc;
       case 1:
-        return AppIcon.playlist;
+        return isSelected ? AppIcon.playlistFilled : AppIcon.playlist;
       case 2:
-        return AppIcon.favoriteFilled;
+        return isSelected ? AppIcon.favoriteFilled : AppIcon.favoriteBorder;
       default:
-        return AppIcon.home;
+        return AppIcon.disc;
     }
   }
 
+  //**** Label Icon Nav bar */
   String _getLabelForIndex(int index) {
     switch (index) {
       case 0:
-        return AppStrings.home;
+        return AppStrings.songs;
       case 1:
         return AppStrings.playlist;
       case 2:
         return AppStrings.favorite;
       default:
-        return AppStrings.home;
+        return AppStrings.songs;
     }
   }
 
+  //**** Title Appbar */
+  String _getTitleAppbarForIndex(int index) {
+    switch (index) {
+      case 0:
+        return AppStrings.songs;
+      case 1:
+        return AppStrings.playlist;
+      case 2:
+        return AppStrings.favorite;
+      default:
+        return AppStrings.songs;
+    }
+  }
+
+  //**** on tapped nav bar */
   void _onTabTapped(int index) {
     setState(() {
       _currentIndex = index;
-      _animationController.reset();
-      _animationController.forward();
     });
   }
 
+  //*** Icon Settings in appbar */
   void _onSettingsPressed() {
     // Handle settings button pressed
   }
