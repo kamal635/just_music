@@ -42,7 +42,7 @@ Future<void> flutterToastSuccessfully({
         ],
       ),
     ),
-    gravity: gravity ?? ToastGravity.BOTTOM,
+    gravity: gravity ?? ToastGravity.TOP,
     toastDuration: const Duration(seconds: 2),
   );
 }
@@ -80,7 +80,7 @@ Future<void> flutterToastError({
         ],
       ),
     ),
-    gravity: gravity ?? ToastGravity.BOTTOM,
+    gravity: gravity ?? ToastGravity.TOP,
     toastDuration: const Duration(seconds: 2),
   );
 }
@@ -107,7 +107,7 @@ Future<void> toastShuffleMode(
       child: Text(enabled ? "SHUFFLE ON" : "SHUFFLE OFF",
           style: AppFonts.normal_12.copyWith(color: AppColor.white)),
     ),
-    gravity: ToastGravity.BOTTOM,
+    gravity: ToastGravity.TOP,
     toastDuration: const Duration(seconds: 2),
   );
 }
@@ -140,7 +140,7 @@ Future<void> toastRepeatMode(
                   : "REPEAT ONE",
           style: AppFonts.normal_12.copyWith(color: AppColor.white)),
     ),
-    gravity: ToastGravity.BOTTOM,
+    gravity: ToastGravity.TOP,
     toastDuration: const Duration(seconds: 2),
   );
 }

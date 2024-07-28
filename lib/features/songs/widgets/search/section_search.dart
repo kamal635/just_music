@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/routes/string_route.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
 import 'package:just_music/core/shared_widgets/custom_text_form_field.dart';
-import 'package:just_music/core/shared_widgets/icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';
@@ -20,7 +21,7 @@ class _SectionSearchState extends State<SectionSearch> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         _isFieldVisible = true;
       });
@@ -31,11 +32,11 @@ class _SectionSearchState extends State<SectionSearch> {
   Widget build(BuildContext context) {
     // TextField
     return AnimatedContainer(
-      duration: const Duration(seconds: 1),
+      duration: const Duration(milliseconds: 500),
       curve: Curves.easeIn,
       transform: _isFieldVisible
           ? Matrix4.translationValues(0, 0, 0)
-          : Matrix4.translationValues(0, -60, 0),
+          : Matrix4.translationValues(0, -70.h, 0),
       child: CustomTextFormField(
         readOnly: true,
         onTap: () {

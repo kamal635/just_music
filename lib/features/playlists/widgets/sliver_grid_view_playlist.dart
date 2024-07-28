@@ -23,7 +23,7 @@ class _SliverGridViewPlaylistState extends State<SliverGridViewPlaylist> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(milliseconds: 200), () {
+    Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         _isFieldVisible = true;
       });
@@ -48,7 +48,7 @@ class _SliverGridViewPlaylistState extends State<SliverGridViewPlaylist> {
                     child: InkWell(
                       onTap: () {
                         context.pushNamed(
-                          RouterName.playlistSongs,
+                          RouterName.contentPlaylistBody,
                           arguments: {
                             "index": i,
                             "playlist": playlist,
@@ -56,11 +56,11 @@ class _SliverGridViewPlaylistState extends State<SliverGridViewPlaylist> {
                         );
                       },
                       child: AnimatedContainer(
-                        duration: const Duration(seconds: 1),
-                        curve: Curves.easeIn,
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut,
                         transform: _isFieldVisible
                             ? Matrix4.translationValues(0, 0, 0)
-                            : Matrix4.translationValues(0, -20, 0),
+                            : Matrix4.translationValues(-50.w, 0, 0),
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r),
@@ -126,7 +126,7 @@ class _SliverGridViewPlaylistState extends State<SliverGridViewPlaylist> {
               crossAxisCount: 2,
               crossAxisSpacing: 10.w,
               mainAxisSpacing: 10.h,
-              childAspectRatio: 0.55.h,
+              childAspectRatio: 12.8.w / 12.5.h,
             ));
       },
     );

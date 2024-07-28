@@ -28,24 +28,59 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  audio_service: ^0.18.13
-  audio_video_progress_bar: ^2.0.3
-  carousel_slider: ^4.2.1
-  cupertino_icons: ^1.0.2
-  equatable: ^2.0.5
+
+ 
+
+ 
+ 
+ 
+
   flutter:
     sdk: flutter
+  cupertino_icons: ^1.0.2
+  meta: ^1.12.0
+
+
+  # State Management
   flutter_bloc: ^8.1.5
+
+  # To responsive UI
   flutter_screenutil: ^5.9.1
+
+  # To show flashing widget on screen
   fluttertoast: ^8.2.5
+
+  # To implement value based equality without needing to explicitly override == and hashCode.
+  equatable: ^2.0.5
+  
+  # To Dependency injection
   get_it: ^7.7.0
+
+  # To query audios/songs infos [title, artist, album, etc..] from device storage.
+  on_audio_query: ^2.9.0
+
+  # A feature-rich audio player for Flutter. Loop, clip and concatenate any sound from any source (asset/file/URL/stream) in a variety of audio formats with gapless playback
+  just_audio: ^0.9.38
+
+  # Flutter plugin to play audio in the background while the screen is off.
+  audio_service: ^0.18.13
+
+  # To combine multiple streams to output a single stream
+  rxdart: ^0.27.7
+ 
+  # A progress bar widget to show or change the position of an audio or video stream.
+  audio_video_progress_bar: ^2.0.3
+
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  just_audio: ^0.9.38
-  meta: ^1.12.0
-  on_audio_query: ^2.9.0
-  rxdart: ^0.27.7
+  
   uuid: ^4.4.2
+  
+  flutter_native_splash: ^2.4.1
+
+  font_awesome_flutter: ^10.7.0
+
+
 
 dev_dependencies:
   build_runner: ^2.4.6

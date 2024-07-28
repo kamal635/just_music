@@ -21,8 +21,12 @@ class JustMusicApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    // Determine the design size based on the device's screen width
+    final designSize = MediaQuery.of(context).size.width > 600
+        ? const Size(834, 1194) // iPad design size
+        : const Size(375, 690); // Mobile phone design size
     return ScreenUtilInit(
-      designSize: const Size(360, 690),
+      designSize: designSize,
       minTextAdapt: true,
       splitScreenMode: true,
       child: MultiBlocProvider(

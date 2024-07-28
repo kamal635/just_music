@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/playlists/widgets/create_playlist_button.dart';
 import 'package:just_music/features/playlists/widgets/sliver_grid_view_playlist.dart';
@@ -17,15 +18,15 @@ class PlayListViewBody extends StatelessWidget {
         builder: (context, state) {
           // State Loading
           if (state.playlistStatus == PlaylistStatus.loading) {
-            return const Center(child: CircularProgressIndicator());
+            return const CustomLoading();
           }
 
           // State Loaded
           if (state.playlistStatus == PlaylistStatus.loaded) {
-            final playlist = state.playlist;
+            final playlists = state.playlist;
 
             // check if playlist is empty or null
-            if (playlist == null || playlist.isEmpty) {
+            if (playlists == null || playlists.isEmpty) {
               //* Middle  button
               return const Center(
                 child: CreatePlaylistButton(

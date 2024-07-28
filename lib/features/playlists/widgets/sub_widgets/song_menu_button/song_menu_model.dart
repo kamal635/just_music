@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/core/shared_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
-import 'package:just_music/core/shared_widgets/song_menu_button/actions_classes/add_to_favorite_action.dart';
-import 'package:just_music/core/shared_widgets/song_menu_button/actions_classes/add_to_playlist_action.dart';
-import 'package:just_music/core/shared_widgets/song_menu_button/actions_classes/details_song_action.dart';
-import 'package:just_music/core/shared_widgets/song_menu_button/actions_classes/remove_from_playlist_action.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/add_to_favorite_action.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/add_to_playlist_action.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/details_song_action.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/remove_from_playlist_action.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';

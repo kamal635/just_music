@@ -29,9 +29,10 @@ class SectionLocalSongsAddSongsToPlaylist extends StatelessWidget {
           },
           child: CustomCardAddSongToPlaylist(
             icon: AppIcon.folder,
-            colorCard: AppColor.folder.withAlpha(110),
-            colorIcon: AppColor.folder,
+            colorCard: AppColor.lightBlue.withAlpha(110),
+            colorIcon: AppColor.lightBlue,
             title: AppStrings.localSongs,
+            isTrailing: true,
             subtitle: state.songs?.length ?? 0,
           ),
         );
