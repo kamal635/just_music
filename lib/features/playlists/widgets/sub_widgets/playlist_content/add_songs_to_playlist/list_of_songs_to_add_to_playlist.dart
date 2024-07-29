@@ -46,7 +46,7 @@ class ListOfSongs extends StatelessWidget {
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 12.w),
-            child: CustomElvatedButton(
+            child: CustomElevatedButton(
               widthButton: 80.w,
               onPressed: () {
                 context.pop();

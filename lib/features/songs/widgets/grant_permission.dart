@@ -30,7 +30,7 @@ class GrantPermission extends StatelessWidget {
               style: AppFonts.normal_10,
             ),
             spaceHeight(20),
-            CustomElvatedButton(
+            CustomElevatedButton(
                 title: AppStrings.allow,
                 isIcon: false,
                 onPressed: () {

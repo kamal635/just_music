@@ -4,8 +4,8 @@ import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 
-class CustomElvatedButton extends StatelessWidget {
-  const CustomElvatedButton(
+class CustomElevatedButton extends StatelessWidget {
+  const CustomElevatedButton(
       {super.key,
       this.titleWithIcon,
       this.icon,

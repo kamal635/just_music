@@ -15,7 +15,7 @@ class ButtonMiddleContentPlaylist extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        CustomElvatedButton(
+        CustomElevatedButton(
           widthButton: 140.w,
           onPressed: () async {
             context.pushNamed(RouterName.addSongsToPlayListsBody,

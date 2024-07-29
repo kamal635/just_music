@@ -66,7 +66,7 @@ class ActionButtonAppBarPlaylistSongs extends StatelessWidget {
                           spaceHeight(20),
 
                           // Confirm Button
-                          CustomElvatedButton(
+                          CustomElevatedButton(
                             onPressed: () {
                               // check if playlist name is existing
                               final isNameExisting = state.playlist?.any(

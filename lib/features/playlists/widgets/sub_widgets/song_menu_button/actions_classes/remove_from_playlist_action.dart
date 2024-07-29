@@ -18,9 +18,9 @@ class RemoveFromPlaylistAction implements SongMenuAction {
   RemoveFromPlaylistAction(this.song, this.playlist);
 
   @override
-  void execute(BuildContext context) {
+  void execute(BuildContext context) async {
     context.pop();
-    showDialog(
+    await showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -40,7 +40,7 @@ class RemoveFromPlaylistAction implements SongMenuAction {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 // Cancel
-                CustomElvatedButton(
+                CustomElevatedButton(
                   widthButton: 120.w,
                   onPressed: () {
                     context.pop();
@@ -51,7 +51,7 @@ class RemoveFromPlaylistAction implements SongMenuAction {
 
                 spaceWidth(10),
                 // OK
-                CustomElvatedButton(
+                CustomElevatedButton(
                   widthButton: 120.w,
                   onPressed: () {
                     context.read<PlaylistBloc>().add(RemoveSongFromPlaylist(

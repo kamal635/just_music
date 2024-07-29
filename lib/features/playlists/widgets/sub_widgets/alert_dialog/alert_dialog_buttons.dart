@@ -23,7 +23,6 @@ class _ButtonsAlertDialogState extends State<ButtonsAlertDialog> {
   @override
   void initState() {
     super.initState();
-
     // Add a listener to update the state whenever the text changes
     widget.controller.addListener(_checkNameExistence);
   }
@@ -31,16 +30,19 @@ class _ButtonsAlertDialogState extends State<ButtonsAlertDialog> {
   void _checkNameExistence() {
     if (mounted) {
       setState(() {
-        isNameExisting = context.read<PlaylistBloc>().state.playlist!.any((pl) {
-          return widget.controller.text == pl.name;
-        });
+        isNameExisting = context.read<PlaylistBloc>().state.playlist?.any((pl) {
+              return widget.controller.text == pl.name;
+            }) ??
+            false;
       });
     }
   }
 
   @override
   void dispose() {
+    // Remove listener before disposing of the controller
     widget.controller.removeListener(_checkNameExistence);
+    print("TextEditingController listener removed");
     super.dispose();
   }
 
@@ -49,8 +51,7 @@ class _ButtonsAlertDialogState extends State<ButtonsAlertDialog> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Cancel
-        CustomElvatedButton(
+        CustomElevatedButton(
           widthButton: 100.w,
           onPressed: () {
             context.pop();
@@ -58,26 +59,20 @@ class _ButtonsAlertDialogState extends State<ButtonsAlertDialog> {
           title: AppStrings.cancel,
           colorButton: AppColor.white.withAlpha(80),
         ),
-        // OK
-        CustomElvatedButton(
+        CustomElevatedButton(
           widthButton: 100.w,
           onPressed: () {
-            // if text is empty
             if (widget.controller.text.isEmpty) {
               flutterToastError(
                   context: context,
                   message: AppStrings.nameBlank,
                   gravity: ToastGravity.TOP);
-            }
-            // if playlist name is already exist
-            else if (isNameExisting) {
+            } else if (isNameExisting) {
               flutterToastError(
                   context: context,
                   message: AppStrings.nameAlreadyExist,
                   gravity: ToastGravity.TOP);
-            }
-            // Add the text and value to create playlist
-            else {
+            } else {
               context
                   .read<PlaylistBloc>()
                   .add(CreatePlaylist(name: widget.controller.text));

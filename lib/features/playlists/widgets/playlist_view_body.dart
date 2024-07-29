@@ -17,9 +17,6 @@ class PlayListViewBody extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
       child: BlocConsumer<PlaylistBloc, PlaylistState>(
-        // Here because I arrange the list according to the time the playlist was created
-        //When I create a new playlist, it always becomes the first in the list
-        //At index 0, this way I can open the playlist when it is created
         listener: (context, state) {
           final playlists = state.playlist;
           final checkPlaylist = playlists != null &&
@@ -29,54 +26,42 @@ class PlayListViewBody extends StatelessWidget {
           if (checkPlaylist) {
             final playlistFirst = playlists.first;
             const index = 0;
-            Future.delayed(const Duration(milliseconds: 100), () {
+            if (context.mounted) {
               context.pushNamed(RouterName.contentPlaylistBody, arguments: {
                 "index": index,
                 "playlist": playlistFirst,
               });
-            });
+            }
           }
         },
         builder: (context, state) {
-          // State Loading
           if (state.playlistStatus == PlaylistStatus.loading) {
             return const CustomLoading();
           }
 
-          // State Loaded
           if (state.playlistStatus == PlaylistStatus.loaded ||
               state.playlistStatus == PlaylistStatus.created ||
               state.playlistStatus == PlaylistStatus.remove) {
             final playlists = state.playlist;
 
-            // check if playlist is empty or null
             if (playlists == null || playlists.isEmpty) {
-              //* Middle  button
               return const Center(
                 child: CreatePlaylistButton(
                   isMiddleButton: true,
                   isTopRightButton: false,
                 ),
-              ); // Add Playlist
+              );
             }
 
-            // if playlist is not empty
             return CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                //* Top right button
                 const SliverToBoxAdapter(
                   child: CreatePlaylistButton(
-                      isTopRightButton: true,
-                      isMiddleButton: false), // Add Playlist
+                      isTopRightButton: true, isMiddleButton: false),
                 ),
-
                 sliverPadding(10),
-
-                //* sliver gridview playlist
-                SliverGridViewPlaylist(
-                    playlists: playlists), // Display list of playlist
-
+                SliverGridViewPlaylist(playlists: playlists),
                 sliverPadding(60),
               ],
             );
