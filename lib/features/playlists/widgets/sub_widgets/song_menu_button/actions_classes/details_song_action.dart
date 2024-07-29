@@ -15,9 +15,9 @@ class DetailSongAction extends SongMenuAction {
   DetailSongAction(this.song);
 
   @override
-  void execute(BuildContext context) {
+  void execute(BuildContext context) async {
     context.pop();
-    showModalBottomSheet(
+    await showModalBottomSheet(
       backgroundColor: AppColor.primary,
       context: context,
       isScrollControlled: true, // Allows the bottom sheet to adjust its height

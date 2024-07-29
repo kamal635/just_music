@@ -29,6 +29,7 @@ class CustomTextFormField extends StatelessWidget {
   final bool autofocus;
   final TextEditingController? controller;
   final FocusNode? focusNode;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -43,7 +44,7 @@ class CustomTextFormField extends StatelessWidget {
         readOnly: readOnly,
         autofocus: autofocus,
 
-        // input decoration
+        // Input decoration
         decoration: InputDecoration(
           // Border
           border: OutlineInputBorder(
@@ -53,17 +54,21 @@ class CustomTextFormField extends StatelessWidget {
 
           // Enabled border
           enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14.r),
-              borderSide: BorderSide.none),
+            borderRadius: BorderRadius.circular(14.r),
+            borderSide: BorderSide.none,
+          ),
 
           // Property TextFormField
           filled: true,
           fillColor: AppColor.white.withAlpha(40),
-          contentPadding:
-              EdgeInsets.symmetric(vertical: 5.0.h, horizontal: 10.0.w),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 5.0.h,
+            horizontal: 10.0.w,
+          ),
           hintText: hintText,
-          hintStyle:
-              AppFonts.medium_12.copyWith(color: AppColor.white.withAlpha(140)),
+          hintStyle: AppFonts.medium_12.copyWith(
+            color: AppColor.white.withAlpha(140),
+          ),
           hintFadeDuration: Durations.extralong2,
           prefixIcon: prefixIcon,
           suffixIcon: suffixIcon,

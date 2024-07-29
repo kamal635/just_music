@@ -68,7 +68,7 @@ class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   // Suffle Button
-                  CustomElvatedButton(
+                  CustomElevatedButton(
                     widthButton: 150.w,
                     onPressed: () {
                       updatedPlaylist.songs == null ||
@@ -89,7 +89,7 @@ class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
                   spaceWidth(20),
 
                   // Play Button
-                  CustomElvatedButton(
+                  CustomElevatedButton(
                     widthButton: 150.w,
                     onPressed: () {
                       updatedPlaylist.songs == null ||

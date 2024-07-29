@@ -30,103 +30,90 @@ class _CreatePlaylistButtonState extends State<CreatePlaylistButton> {
   @override
   void initState() {
     super.initState();
-
-    // init TextEditingController
     _controller = TextEditingController();
-
-    // this to select text
     _focusNode.addListener(_selectText);
   }
 
   void _selectText() {
-    if (mounted) {
+    if (mounted && _focusNode.hasFocus) {
       setState(() {
-        if (_focusNode.hasFocus) {
-          _controller.selection = TextSelection(
-            baseOffset: 0,
-            extentOffset: _controller.text.length,
-          );
-        }
+        _controller.selection = TextSelection(
+          baseOffset: 0,
+          extentOffset: _controller.text.length,
+        );
       });
     }
   }
 
   @override
   void dispose() {
+    _focusNode.removeListener(_selectText);
     _controller.dispose();
     _focusNode.dispose();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-        // is middle button == true => elvated button
-        widget.isMiddleButton
-            ? CustomElvatedButton(
-                widthButton: 160.w,
-                onPressed: () async {
-                  // show alert dialog to create playlist
+    return widget.isMiddleButton
+        ? CustomElevatedButton(
+            widthButton: 160.w,
+            onPressed: () async {
+              await showDialogCreatePlaylist(context);
+            },
+            titleWithIcon: AppStrings.createPlaylist,
+            icon: AppIcon.add,
+            isIcon: true,
+          )
+        : widget.isTopRightButton
+            ? Align(
+                alignment: Alignment.topRight,
+                child: CustomIconButton(
+                  onPressed: () async {
+                    await showDialogCreatePlaylist(context);
+                  },
+                  icon: AppIcon.addMusicOrPlaylist,
+                ),
+              )
+            : InkWell(
+                onTap: () async {
                   await showDialogCreatePlaylist(context);
                 },
-                titleWithIcon: AppStrings.createPlaylist,
-                icon: AppIcon.add,
-                isIcon: true,
-              )
-            : widget.isTopRightButton
-                ?
-                // is Top Right button == true => icon button
-                Align(
-                    alignment: Alignment.topRight,
-                    child: CustomIconButton(
-                      onPressed: () async {
-                        // Show alert dialog to create playlist
-                        await showDialogCreatePlaylist(context);
-                      },
-                      icon: AppIcon.addMusicOrPlaylist,
+                child: Row(
+                  children: [
+                    Container(
+                      height: 50,
+                      width: 50,
+                      margin: EdgeInsets.symmetric(horizontal: 12.w),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8.r),
+                        color: AppColor.white.withAlpha(140),
+                      ),
+                      child: Icon(
+                        AppIcon.add,
+                        color: AppColor.primary,
+                        size: 22.h,
+                      ),
                     ),
-                  )
-
-                // is middle button == false && top right button == false => container add new playlist
-                : InkWell(
-                    onTap: () async {
-                      await showDialogCreatePlaylist(context);
-                    },
-                    child: Row(
-                      children: [
-                        Container(
-                          height: 50,
-                          width: 50,
-                          margin: EdgeInsets.symmetric(horizontal: 12.w),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            color: AppColor.white.withAlpha(140),
-                          ),
-                          child: Icon(
-                            AppIcon.add,
-                            color: AppColor.primary,
-                            size: 22.h,
-                          ),
-                        ),
-                        Text(
-                          AppStrings.newPlaylist,
-                          style: AppFonts.medium_12,
-                        )
-                      ],
-                    ),
-                  );
+                    Text(
+                      AppStrings.newPlaylist,
+                      style: AppFonts.medium_12,
+                    )
+                  ],
+                ),
+              );
   }
 
   Future<void> showDialogCreatePlaylist(BuildContext context) async {
-    // get number of list playlist
     final listOfPlayList = context.read<PlaylistBloc>().state.playlist;
-    final numberPlayList = listOfPlayList!.length;
+    final numberPlayList = listOfPlayList?.length ?? 0;
 
-    // Reset the controller's text to the initial value and increse the value
     _controller.text = "New playlist ${numberPlayList + 1}";
 
-    // Ensure the text selection works
     _focusNode.requestFocus();
+
+    if (!mounted) return;
 
     await showDialog(
       context: context,
