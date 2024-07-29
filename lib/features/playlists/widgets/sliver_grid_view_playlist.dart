@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/routes/string_route.dart';
@@ -8,11 +7,11 @@ import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/styling/app_linear.dart';
 import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
+import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 
 class SliverGridViewPlaylist extends StatefulWidget {
-  const SliverGridViewPlaylist({super.key});
-
+  const SliverGridViewPlaylist({super.key, required this.playlists});
+  final List<Playlist> playlists;
   @override
   State<SliverGridViewPlaylist> createState() => _SliverGridViewPlaylistState();
 }
@@ -32,103 +31,98 @@ class _SliverGridViewPlaylistState extends State<SliverGridViewPlaylist> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PlaylistBloc, PlaylistState>(
-      builder: (context, state) {
-        final playlists = state.playlist;
+    return SliverGrid.builder(
+        itemCount: widget.playlists.length,
+        itemBuilder: (context, i) {
+          final playlist = widget.playlists[i];
 
-        return SliverGrid.builder(
-            itemCount: playlists!.length,
-            itemBuilder: (context, i) {
-              final playlist = playlists[i];
-              //* container playlist
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: InkWell(
-                      onTap: () {
-                        context.pushNamed(
-                          RouterName.contentPlaylistBody,
-                          arguments: {
-                            "index": i,
-                            "playlist": playlist,
-                          },
-                        );
+          //* container playlist
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: InkWell(
+                  onTap: () {
+                    context.pushNamed(
+                      RouterName.contentPlaylistBody,
+                      arguments: {
+                        "index": i,
+                        "playlist": playlist,
                       },
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                        transform: _isFieldVisible
-                            ? Matrix4.translationValues(0, 0, 0)
-                            : Matrix4.translationValues(-50.w, 0, 0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            gradient: AppLinear.listLinearPlayList[
-                                i % AppLinear.listLinearPlayList.length],
+                    );
+                  },
+                  child: AnimatedContainer(
+                    duration: const Duration(milliseconds: 800),
+                    curve: Curves.easeInOut,
+                    transform: _isFieldVisible
+                        ? Matrix4.translationValues(0, 0, 0)
+                        : Matrix4.translationValues(-50.w, 0, 0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r),
+                        gradient: AppLinear.listLinearPlayList[
+                            i % AppLinear.listLinearPlayList.length],
+                      ),
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          //* image playlist
+                          CustomArtWork(
+                            id: playlist.songs == null ||
+                                    playlist.songs!.isEmpty
+                                ? -1
+                                : playlist.songs?.first.id ?? -1,
+                            iconSize: 66.h,
                           ),
-                          child: Stack(
-                            fit: StackFit.expand,
-                            children: [
-                              //* image playlist
-                              CustomArtWork(
-                                id: playlist.songs == null ||
-                                        playlist.songs!.isEmpty
-                                    ? -1
-                                    : playlist.songs?.first.id ?? -1,
-                                iconSize: 66.h,
-                              ),
 
-                              //*icon as image
-                              Positioned(
-                                bottom: 5,
-                                right: 5,
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(40.r),
-                                    color: AppColor.primary,
-                                  ),
-                                  child: IconButton(
-                                    icon: Icon(
-                                      AppIcon.play,
-                                      color: AppColor.white,
-                                      size: 22.h,
-                                    ),
-                                    onPressed: null,
-                                  ),
-                                ),
+                          //*icon as image
+                          Positioned(
+                            bottom: 5,
+                            right: 5,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(40.r),
+                                color: AppColor.primary,
                               ),
-                            ],
+                              child: IconButton(
+                                icon: Icon(
+                                  AppIcon.play,
+                                  color: AppColor.white,
+                                  size: 22.h,
+                                ),
+                                onPressed: null,
+                              ),
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                   ),
+                ),
+              ),
 
-                  // *info playlist
-                  ListTile(
-                    title: Text(
-                      playlist.name,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: AppFonts.medium_14,
-                    ),
-                    subtitle: Text(
-                      "Total ${playlist.numOfSongs} songs",
-                      style: AppFonts.normal_10
-                          .copyWith(color: AppColor.white.withAlpha(110)),
-                    ),
-                  )
-                ],
-              );
-            },
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 10.w,
-              mainAxisSpacing: 10.h,
-              childAspectRatio: 12.8.w / 12.5.h,
-            ));
-      },
-    );
+              // *info playlist
+              ListTile(
+                title: Text(
+                  playlist.name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                  style: AppFonts.medium_14,
+                ),
+                subtitle: Text(
+                  "Total ${playlist.numOfSongs} songs",
+                  style: AppFonts.normal_10
+                      .copyWith(color: AppColor.white.withAlpha(110)),
+                ),
+              )
+            ],
+          );
+        },
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10.w,
+          mainAxisSpacing: 10.h,
+          childAspectRatio: 12.8.w / 12.5.h,
+        ));
   }
 }

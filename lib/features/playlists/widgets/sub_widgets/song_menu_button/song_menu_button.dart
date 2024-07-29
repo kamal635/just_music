@@ -13,15 +13,17 @@ import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 
 class SongMenuButton extends StatelessWidget {
-  const SongMenuButton({super.key, required this.playlist, required this.song});
-  final Playlist playlist;
+  const SongMenuButton(
+      {super.key, this.playlist, required this.song, this.hideIndex});
+  final Playlist? playlist;
   final Song song;
-
+  final int? hideIndex;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FavoriteSongsBloc, FavoriteSongsState>(
       builder: (context, state) {
         return CustomIconButton(
+          size: 22.h,
           onPressed: () {
             showModalBottomSheet(
               // to take showModalBottomSheet full height
@@ -68,32 +70,36 @@ class SongMenuButton extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final songMenuModel = SongMenuModel.listSongMenu(
                             song, state.favoriteSong, playlist)[index];
-                        return InkWell(
-                          onTap: () {
-                            songMenuModel.action.execute(context);
-                          },
-                          child: Padding(
-                            padding: EdgeInsets.all(4.h),
-                            child: ListTile(
-                              leading: Container(
-                                height: 28.h,
-                                width: 28.h,
-                                decoration: BoxDecoration(
-                                    color: AppColor.secondary,
-                                    borderRadius: BorderRadius.circular(6.r)),
-                                child: Icon(
-                                  songMenuModel.icon,
-                                  color: songMenuModel.colorIcon,
-                                  size: 18.h,
+                        if (index != hideIndex) {
+                          return InkWell(
+                            onTap: () {
+                              songMenuModel.action.execute(context);
+                            },
+                            child: Padding(
+                              padding: EdgeInsets.all(4.h),
+                              child: ListTile(
+                                leading: Container(
+                                  height: 28.h,
+                                  width: 28.h,
+                                  decoration: BoxDecoration(
+                                      color: AppColor.secondary,
+                                      borderRadius: BorderRadius.circular(6.r)),
+                                  child: Icon(
+                                    songMenuModel.icon,
+                                    color: songMenuModel.colorIcon,
+                                    size: 18.h,
+                                  ),
+                                ),
+                                title: Text(
+                                  songMenuModel.name,
+                                  style: AppFonts.medium_12,
                                 ),
                               ),
-                              title: Text(
-                                songMenuModel.name,
-                                style: AppFonts.medium_12,
-                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
                       },
                     ),
                     sliverPadding(25),

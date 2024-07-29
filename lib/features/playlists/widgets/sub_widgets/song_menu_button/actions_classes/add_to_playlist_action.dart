@@ -16,7 +16,7 @@ import 'package:just_music/features/songs/data/model/song.dart';
 
 //************** Add To Playlist Action  */
 class AddToPlaylistAction implements SongMenuAction {
-  final Playlist playlist;
+  final Playlist? playlist;
   final Song song;
 
   AddToPlaylistAction(this.playlist, this.song);
@@ -36,7 +36,7 @@ class AddToPlaylistAction implements SongMenuAction {
 
 //***********************Add ToPlay list Dialog */
 class AddToPlaylistDialog extends StatefulWidget {
-  final Playlist playlist;
+  final Playlist? playlist;
   final Song song;
 
   const AddToPlaylistDialog(
@@ -105,7 +105,7 @@ class _AddToPlaylistDialogState extends State<AddToPlaylistDialog> {
 
             // List of playlists
             SliverList.builder(
-              itemCount: state.playlist!.length,
+              itemCount: state.playlist?.length,
               itemBuilder: (context, index) {
                 // check if song exist
                 final isSongExist = state.playlist![index].songs
@@ -113,7 +113,7 @@ class _AddToPlaylistDialogState extends State<AddToPlaylistDialog> {
                     false;
 
                 // hide playlist I come from it
-                if (widget.playlist.id != state.playlist![index].id) {
+                if (widget.playlist?.id != state.playlist![index].id) {
                   return InkWell(
                     onTap: () {
                       if (isSongExist) {

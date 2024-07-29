@@ -70,7 +70,7 @@ class SongsViewBody extends StatelessWidget {
                 ),
 
                 // padding
-                sliverPadding(kTextTabBarHeight + 60.h),
+                sliverPadding(60),
               ],
             ),
           );

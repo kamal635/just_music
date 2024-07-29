@@ -14,7 +14,7 @@ import 'package:just_music/features/songs/data/model/song.dart';
 
 class RemoveFromPlaylistAction implements SongMenuAction {
   final Song song;
-  final Playlist playlist;
+  final Playlist? playlist;
   RemoveFromPlaylistAction(this.song, this.playlist);
 
   @override
@@ -55,7 +55,7 @@ class RemoveFromPlaylistAction implements SongMenuAction {
                   widthButton: 120.w,
                   onPressed: () {
                     context.read<PlaylistBloc>().add(RemoveSongFromPlaylist(
-                        playlistId: playlist.id!, song: song));
+                        playlistId: playlist!.id!, song: song));
                     context.pop();
                   },
                   title: AppStrings.confirm,
