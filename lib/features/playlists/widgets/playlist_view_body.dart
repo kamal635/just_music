@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/playlists/widgets/create_playlist_button.dart';
@@ -14,7 +16,27 @@ class PlayListViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 10.w),
-      child: BlocBuilder<PlaylistBloc, PlaylistState>(
+      child: BlocConsumer<PlaylistBloc, PlaylistState>(
+        // Here because I arrange the list according to the time the playlist was created
+        //When I create a new playlist, it always becomes the first in the list
+        //At index 0, this way I can open the playlist when it is created
+        listener: (context, state) {
+          final playlists = state.playlist;
+          final checkPlaylist = playlists != null &&
+              playlists.isNotEmpty &&
+              state.playlistStatus == PlaylistStatus.created;
+
+          if (checkPlaylist) {
+            final playlistFirst = playlists.first;
+            const index = 0;
+            Future.delayed(const Duration(milliseconds: 100), () {
+              context.pushNamed(RouterName.contentPlaylistBody, arguments: {
+                "index": index,
+                "playlist": playlistFirst,
+              });
+            });
+          }
+        },
         builder: (context, state) {
           // State Loading
           if (state.playlistStatus == PlaylistStatus.loading) {
@@ -22,7 +44,9 @@ class PlayListViewBody extends StatelessWidget {
           }
 
           // State Loaded
-          if (state.playlistStatus == PlaylistStatus.loaded) {
+          if (state.playlistStatus == PlaylistStatus.loaded ||
+              state.playlistStatus == PlaylistStatus.created ||
+              state.playlistStatus == PlaylistStatus.remove) {
             final playlists = state.playlist;
 
             // check if playlist is empty or null
@@ -38,6 +62,7 @@ class PlayListViewBody extends StatelessWidget {
 
             // if playlist is not empty
             return CustomScrollView(
+              physics: const BouncingScrollPhysics(),
               slivers: [
                 //* Top right button
                 const SliverToBoxAdapter(
@@ -49,9 +74,10 @@ class PlayListViewBody extends StatelessWidget {
                 sliverPadding(10),
 
                 //* sliver gridview playlist
-                const SliverGridViewPlaylist(), // Display list of playlist
+                SliverGridViewPlaylist(
+                    playlists: playlists), // Display list of playlist
 
-                sliverPadding(kTextTabBarHeight + 60.h),
+                sliverPadding(60),
               ],
             );
           } else {

@@ -12,10 +12,12 @@ class SeekBar extends StatelessWidget {
       {super.key,
       required this.position,
       required this.duration,
-      this.timeLabelLocation});
+      this.timeLabelLocation,
+      this.thumbRadius});
   final Duration? position;
   final Duration? duration;
   final TimeLabelLocation? timeLabelLocation;
+  final double? thumbRadius;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,7 +35,7 @@ class SeekBar extends StatelessWidget {
         },
         // Customize the appearance of the progress bar
         barHeight: 3,
-        thumbRadius: 0,
+        thumbRadius: thumbRadius ?? 0,
         timeLabelLocation: timeLabelLocation ?? TimeLabelLocation.none,
         timeLabelTextStyle: AppFonts.normal_12,
         timeLabelPadding: 12,

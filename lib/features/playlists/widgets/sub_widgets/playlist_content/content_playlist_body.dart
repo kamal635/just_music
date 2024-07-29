@@ -32,6 +32,7 @@ class ContentPlaylistBody extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
           slivers: [
             // Sectin (Image + Title playlist + buttons play and add song)
             ImageAndTitleAndButtonsContentPlaylist(
@@ -113,7 +114,7 @@ class ContentPlaylistBody extends StatelessWidget {
               },
             ),
 
-            sliverPadding(kTextTabBarHeight + 60.h),
+            sliverPadding(60),
           ],
         ),
       ),

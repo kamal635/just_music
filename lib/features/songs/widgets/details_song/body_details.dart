@@ -6,10 +6,10 @@ import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/widgets/details_song/buttons_details_song.dart';
-import 'package:just_music/features/songs/widgets/details_song/image_details_song.dart';
+import 'package:just_music/features/songs/widgets/details_song/control_song_details_song_buttons.dart';
+import 'package:just_music/features/songs/widgets/details_song/image_title_details_song.dart';
 import 'package:just_music/features/songs/widgets/details_song/seekbar_details_song.dart';
-import 'package:just_music/features/songs/widgets/details_song/title_favorite_details_song.dart';
+import 'package:just_music/features/songs/widgets/details_song/menu_favorite_add_to_playlist_details_song_buttons.dart';
 
 Future<void> detailsSong({
   required BuildContext context,
@@ -54,28 +54,28 @@ Future<void> detailsSong({
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // image
-                    ImageDetailsSong(song: song),
+                    ImageAndTitleDetailsSong(song: song),
 
                     spaceHeight(20),
-
-                    // section controller in song
-                    TitleAndFavoriteDetailsSong(
-                      song: song,
-                    ),
-
-                    spaceHeight(40),
 
                     // seekbar
                     SeekBarDetilsSong(duration: duration, position: position),
 
                     spaceHeight(40),
 
-                    // buttons
-                    ButtonsDetailsSong(
+                    // Buttons ( Shuffle + next and previous + play and pause + repeat)
+                    ControlSongDetailsSongButtons(
                       isPlaying: isPlaying,
                     ),
 
-                    spaceHeight(80),
+                    spaceHeight(40),
+
+                    // Buttons ( Menu + Favorite + Add to playlist)
+                    MenuAndFavoriteAndAddToPlaylistDetailsSongButtons(
+                      song: song,
+                    ),
+
+                    spaceHeight(40),
                   ],
                 ),
               )

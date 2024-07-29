@@ -35,14 +35,20 @@ class _CreatePlaylistButtonState extends State<CreatePlaylistButton> {
     _controller = TextEditingController();
 
     // this to select text
-    _focusNode.addListener(() {
-      if (_focusNode.hasFocus) {
-        _controller.selection = TextSelection(
-          baseOffset: 0,
-          extentOffset: _controller.text.length,
-        );
-      }
-    });
+    _focusNode.addListener(_selectText);
+  }
+
+  void _selectText() {
+    if (mounted) {
+      setState(() {
+        if (_focusNode.hasFocus) {
+          _controller.selection = TextSelection(
+            baseOffset: 0,
+            extentOffset: _controller.text.length,
+          );
+        }
+      });
+    }
   }
 
   @override

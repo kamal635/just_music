@@ -1,6 +1,6 @@
 part of 'playlist_bloc.dart';
 
-enum PlaylistStatus { initial, loading, loaded, failure }
+enum PlaylistStatus { initial, loading, loaded, failure, created, remove }
 
 class PlaylistState extends Equatable {
   final List<Playlist>? playlist;

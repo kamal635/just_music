@@ -25,7 +25,7 @@ class SongMenuModel {
   });
 
   static List<SongMenuModel> listSongMenu(
-      Song song, FavoriteSong? favoriteSong, Playlist playlist) {
+      Song song, FavoriteSong? favoriteSong, Playlist? playlist) {
     final isFavorite =
         favoriteSong?.favoriteSongs.any((fs) => fs.id == song.id) ?? false;
 

@@ -35,7 +35,8 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
     try {
       Box box = await playlistRepoImpl.openBox();
       // fetch all playlists
-      List<Playlist> playlist = playlistRepoImpl.fetchPlaylists(box);
+      List<Playlist> playlist =
+          playlistRepoImpl.sortByDateCreatedOrModified(box);
 
       emit(state.copyWith(
         playlistStatus: PlaylistStatus.loaded,
@@ -64,7 +65,7 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
           playlistRepoImpl.sortByDateCreatedOrModified(box);
 
       emit(state.copyWith(
-          playlistStatus: PlaylistStatus.loaded, playlist: updatedPlaylist));
+          playlistStatus: PlaylistStatus.created, playlist: updatedPlaylist));
     } catch (e) {
       emit(state.copyWith(playlistStatus: PlaylistStatus.failure));
     }
@@ -88,7 +89,7 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
           playlistRepoImpl.sortByDateCreatedOrModified(box);
 
       emit(state.copyWith(
-          playlistStatus: PlaylistStatus.loaded, playlist: updatedPlaylist));
+          playlistStatus: PlaylistStatus.remove, playlist: updatedPlaylist));
     } catch (e) {
       emit(state.copyWith(playlistStatus: PlaylistStatus.failure));
     }

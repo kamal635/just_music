@@ -1,6 +1,7 @@
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/widgets/music_track/seek_bar.dart';
 
@@ -16,6 +17,7 @@ class SeekBarDetilsSong extends StatelessWidget {
           position: position,
           duration: duration,
           timeLabelLocation: TimeLabelLocation.below,
+          thumbRadius: 5.r,
         );
       },
     );
