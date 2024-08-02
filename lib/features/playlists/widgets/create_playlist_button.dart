@@ -10,53 +10,50 @@ import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/playlists/widgets/sub_widgets/alert_dialog/alert_dialog_body.dart';
 
-class CreatePlaylistButton extends StatefulWidget {
+class CreatePlaylistButton extends StatelessWidget {
   const CreatePlaylistButton({
-    super.key,
+    Key? key,
     required this.isMiddleButton,
     required this.isTopRightButton,
-  });
+  }) : super(key: key);
+
   final bool isMiddleButton;
   final bool isTopRightButton;
 
-  @override
-  State<CreatePlaylistButton> createState() => _CreatePlaylistButtonState();
-}
+  Future<void> showDialogCreatePlaylist(BuildContext context) async {
+    final playlistBloc = context.read<PlaylistBloc>();
+    final listOfPlayList = playlistBloc.state.playlist ?? [];
 
-class _CreatePlaylistButtonState extends State<CreatePlaylistButton> {
-  late TextEditingController _controller;
-  final FocusNode _focusNode = FocusNode();
+    final playlistNumbers = listOfPlayList
+        .where((playlist) => playlist.name.startsWith("New playlist "))
+        .map((playlist) {
+      final name = playlist.name;
+      final numberStr = name.replaceFirst("New playlist ", "");
+      return int.tryParse(numberStr) ?? 0;
+    }).toList();
 
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-    _focusNode.addListener(_selectText);
-  }
-
-  void _selectText() {
-    if (mounted && _focusNode.hasFocus) {
-      setState(() {
-        _controller.selection = TextSelection(
-          baseOffset: 0,
-          extentOffset: _controller.text.length,
-        );
-      });
+    int newPlaylistNumber = 1;
+    while (playlistNumbers.contains(newPlaylistNumber)) {
+      newPlaylistNumber++;
     }
-  }
 
-  @override
-  void dispose() {
-    _focusNode.removeListener(_selectText);
-    _controller.dispose();
-    _focusNode.dispose();
+    playlistBloc.controller.text = "New playlist $newPlaylistNumber";
+    playlistBloc.focusNode.requestFocus();
 
-    super.dispose();
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialogBody(
+          focusNode: playlistBloc.focusNode,
+          controller: playlistBloc.controller,
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    return widget.isMiddleButton
+    return isMiddleButton
         ? CustomElevatedButton(
             widthButton: 160.w,
             onPressed: () async {
@@ -66,7 +63,7 @@ class _CreatePlaylistButtonState extends State<CreatePlaylistButton> {
             icon: AppIcon.add,
             isIcon: true,
           )
-        : widget.isTopRightButton
+        : isTopRightButton
             ? Align(
                 alignment: Alignment.topRight,
                 child: CustomIconButton(
@@ -103,26 +100,5 @@ class _CreatePlaylistButtonState extends State<CreatePlaylistButton> {
                   ],
                 ),
               );
-  }
-
-  Future<void> showDialogCreatePlaylist(BuildContext context) async {
-    final listOfPlayList = context.read<PlaylistBloc>().state.playlist;
-    final numberPlayList = listOfPlayList?.length ?? 0;
-
-    _controller.text = "New playlist ${numberPlayList + 1}";
-
-    _focusNode.requestFocus();
-
-    if (!mounted) return;
-
-    await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialogBody(
-          focusNode: _focusNode,
-          controller: _controller,
-        );
-      },
-    );
   }
 }

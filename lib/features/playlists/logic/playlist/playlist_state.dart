@@ -17,6 +17,7 @@ class PlaylistState extends Equatable {
     List<Playlist>? playlist,
     PlaylistStatus? playlistStatus,
     String? errorMessage,
+    bool? nameExisting,
   }) {
     return PlaylistState(
       playlist: playlist ?? this.playlist,
@@ -26,5 +27,5 @@ class PlaylistState extends Equatable {
   }
 
   @override
-  List<Object?> get props => [playlist, playlistStatus];
+  List<Object?> get props => [playlist, playlistStatus, errorMessage];
 }

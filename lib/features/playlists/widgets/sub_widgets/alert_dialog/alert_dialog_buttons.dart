@@ -18,71 +18,79 @@ class ButtonsAlertDialog extends StatefulWidget {
 }
 
 class _ButtonsAlertDialogState extends State<ButtonsAlertDialog> {
-  bool isNameExisting = false;
+  late bool isNameExisting;
 
   @override
   void initState() {
     super.initState();
-    // Add a listener to update the state whenever the text changes
+    isNameExisting = false;
+
+    // Add listener to the TextEditingController
     widget.controller.addListener(_checkNameExistence);
   }
 
+  @override
+  void dispose() {
+    // Remove listener when the widget is disposed
+    widget.controller.removeListener(_checkNameExistence);
+    super.dispose();
+  }
+
   void _checkNameExistence() {
-    if (mounted) {
+    final state = context.read<PlaylistBloc>().state;
+    final newName = widget.controller.text;
+    final nameExists = state.playlist?.any((pl) => pl.name == newName) ?? false;
+
+    if (isNameExisting != nameExists) {
       setState(() {
-        isNameExisting = context.read<PlaylistBloc>().state.playlist?.any((pl) {
-              return widget.controller.text == pl.name;
-            }) ??
-            false;
+        isNameExisting = nameExists;
       });
     }
   }
 
   @override
-  void dispose() {
-    // Remove listener before disposing of the controller
-    widget.controller.removeListener(_checkNameExistence);
-    print("TextEditingController listener removed");
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        CustomElevatedButton(
-          widthButton: 100.w,
-          onPressed: () {
-            context.pop();
-          },
-          title: AppStrings.cancel,
-          colorButton: AppColor.white.withAlpha(80),
-        ),
-        CustomElevatedButton(
-          widthButton: 100.w,
-          onPressed: () {
-            if (widget.controller.text.isEmpty) {
-              flutterToastError(
-                  context: context,
-                  message: AppStrings.nameBlank,
-                  gravity: ToastGravity.TOP);
-            } else if (isNameExisting) {
-              flutterToastError(
-                  context: context,
-                  message: AppStrings.nameAlreadyExist,
-                  gravity: ToastGravity.TOP);
-            } else {
-              context
-                  .read<PlaylistBloc>()
-                  .add(CreatePlaylist(name: widget.controller.text));
-              context.pop();
-            }
-          },
-          title: AppStrings.ok,
-          colorButton: AppColor.primary,
-        ),
-      ],
+    return BlocBuilder<PlaylistBloc, PlaylistState>(
+      builder: (context, state) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            CustomElevatedButton(
+              widthButton: 100.w,
+              onPressed: () {
+                context.pop();
+              },
+              title: AppStrings.cancel,
+              colorButton: AppColor.white.withAlpha(80),
+            ),
+            CustomElevatedButton(
+              widthButton: 100.w,
+              onPressed: () {
+                // if text is empty
+                if (widget.controller.text.isEmpty) {
+                  flutterToastError(
+                      context: context,
+                      message: AppStrings.nameBlank,
+                      gravity: ToastGravity.TOP);
+                } // if playlist name is already exist
+                else if (isNameExisting) {
+                  flutterToastError(
+                      context: context,
+                      message: AppStrings.nameAlreadyExist,
+                      gravity: ToastGravity.TOP);
+                } else {
+                  context
+                      .read<PlaylistBloc>()
+                      .add(CreatePlaylist(name: widget.controller.text));
+                  context.pop();
+                }
+              },
+              title: AppStrings.ok,
+              colorButton: AppColor.primary,
+            ),
+          ],
+        );
+      },
     );
   }
 }

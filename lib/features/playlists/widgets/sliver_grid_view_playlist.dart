@@ -122,7 +122,7 @@ class _SliverGridViewPlaylistState extends State<SliverGridViewPlaylist> {
           crossAxisCount: 2,
           crossAxisSpacing: 10.w,
           mainAxisSpacing: 10.h,
-          childAspectRatio: 12.8.w / 12.5.h,
+          childAspectRatio: 12.5.w / 14.h,
         ));
   }
 }

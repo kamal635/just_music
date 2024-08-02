@@ -156,6 +156,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     Emitter<AudioPlayerState> emit,
   ) async {
     await _audioHandler.skipToQueueItem(event.index);
+
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 

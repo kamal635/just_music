@@ -16,64 +16,91 @@ abstract class AppRouter {
 
     switch (settings.name) {
       case RouterName.changedView:
-        return MaterialPageRoute(builder: (context) => const ChangedView());
+        return _buildRoute(const ChangedView());
 
       case RouterName.songsView:
-        return MaterialPageRoute(builder: (context) => const SongsView());
+        return _buildRoute(const SongsView());
 
       case RouterName.playListView:
-        return MaterialPageRoute(builder: (context) => const PlayListView());
+        return _buildRoute(const PlayListView());
 
       case RouterName.favoriteView:
-        return MaterialPageRoute(builder: (context) => const FavoriteView());
+        return _buildRoute(const FavoriteView());
 
       case RouterName.listOfSongsView:
-        return MaterialPageRoute(builder: (context) => const SearchViewBody());
+        return _buildRoute(const SearchViewBody());
 
       case RouterName.contentPlaylistBody:
-        return MaterialPageRoute(builder: (context) {
-          return ContentPlaylistBody(
-            index: argument?["index"],
-            playlist: argument?["playlist"],
-          );
-        });
+        return _buildRoute(ContentPlaylistBody(
+          index: argument?["index"],
+          playlist: argument?["playlist"],
+        ));
 
       case RouterName.addSongsToPlayListsBody:
-        return MaterialPageRoute(
-            builder: (context) => AddSongsToPlayListsBody(
-                  playlistComeFromPreviousPage: argument?["playlist"],
-                ));
+        return _buildRoute(AddSongsToPlayListsBody(
+          playlistComeFromPreviousPage: argument?["playlist"],
+        ));
 
       case RouterName.listOfSongsFavoriteToAddToAddToPlaylist:
-        return MaterialPageRoute(
-            builder: (context) => SongsFavoriteToAddToPlaylist(
-                  playlistComeFromPreviousPage:
-                      argument?["playlistComeFromPreviousPage"],
-                  favoriteSong: argument?["favoriteSong"],
-                  playlist: argument?["playlistComeFromPreviousPage"],
-                ));
+        return _buildRoute(SongsFavoriteToAddToPlaylist(
+          playlistComeFromPreviousPage:
+              argument?["playlistComeFromPreviousPage"],
+          favoriteSong: argument?["favoriteSong"],
+          playlist: argument?["playlistComeFromPreviousPage"],
+        ));
 
       case RouterName.listOfSongsLocalSongsToAddToAddToPlaylist:
-        return MaterialPageRoute(
-            builder: (context) => SongsLocalToAddToPlaylist(
-                  playlistComeFromPreviousPage:
-                      argument?["playlistComeFromPreviousPage"],
-                  songs: argument?["songs"],
-                  playlist: argument?["playlistComeFromPreviousPage"],
-                ));
+        return _buildRoute(SongsLocalToAddToPlaylist(
+          playlistComeFromPreviousPage:
+              argument?["playlistComeFromPreviousPage"],
+          songs: argument?["songs"],
+          playlist: argument?["playlistComeFromPreviousPage"],
+        ));
 
       case RouterName.listOfSongsPlaylistSongsToAddToAddToPlaylist:
-        return MaterialPageRoute(
-            builder: (context) => SongsPlaylistToAddToPlaylist(
-                  playlistComeFromPreviousPage:
-                      argument?["playlistComeFromPreviousPage"],
-                  playlist: argument?["playlist"],
-                ));
+        return _buildRoute(SongsPlaylistToAddToPlaylist(
+          playlistComeFromPreviousPage:
+              argument?["playlistComeFromPreviousPage"],
+          playlist: argument?["playlist"],
+        ));
     }
-    // When route is not exist
-    return MaterialPageRoute(
-        builder: (context) => const Scaffold(
-              body: Center(child: Text("Oops..This route is not exist..!")),
-            ));
+    // When route does not exist
+    return _buildRoute(const Scaffold(
+      body: Center(child: Text("Oops..This route does not exist..!")),
+    ));
+  }
+
+  //*** Add Animation when Navigation */
+  static PageRouteBuilder _buildRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const beginOffset = Offset(1.0, 0.0);
+        const endOffset = Offset.zero;
+        const curve = Curves.ease;
+
+        var slideTween = Tween(begin: beginOffset, end: endOffset)
+            .chain(CurveTween(curve: curve));
+        var fadeTween =
+            Tween(begin: 0.0, end: 1.0).chain(CurveTween(curve: curve));
+        var reverseFadeTween =
+            Tween(begin: 1.0, end: 0.0).chain(CurveTween(curve: curve));
+
+        var slideAnimation = animation.drive(slideTween);
+        var fadeAnimation = animation.drive(fadeTween);
+        var reverseFadeAnimation = secondaryAnimation.drive(reverseFadeTween);
+
+        return SlideTransition(
+          position: slideAnimation,
+          child: FadeTransition(
+            opacity: reverseFadeAnimation,
+            child: FadeTransition(
+              opacity: fadeAnimation,
+              child: child,
+            ),
+          ),
+        );
+      },
+    );
   }
 }

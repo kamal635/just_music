@@ -58,8 +58,8 @@ class ActionButtonAppBarPlaylistSongs extends StatelessWidget {
                           CustomTextFormField(
                             autofocus: true,
                             initialValue: namePlaylist,
-                            onChanged: (value) {
-                              namePlaylist = value;
+                            onChanged: (p0) {
+                              namePlaylist = p0;
                             },
                           ),
 
@@ -73,7 +73,6 @@ class ActionButtonAppBarPlaylistSongs extends StatelessWidget {
                                     (pl) => pl.name == namePlaylist,
                                   ) ??
                                   false;
-
                               // if text is empty
                               if (namePlaylist.isEmpty) {
                                 flutterToastError(

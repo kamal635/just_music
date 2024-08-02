@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
@@ -10,9 +11,12 @@ part 'playlist_state.dart';
 
 class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
   final PlaylistRepoImpl playlistRepoImpl;
+  final TextEditingController _controller = TextEditingController();
+  final FocusNode _focusNode = FocusNode();
 
   PlaylistBloc({required this.playlistRepoImpl})
       : super(const PlaylistState()) {
+    _focusNode.addListener(_selectText);
     on<LoadPlaylists>(_onLoadPlaylists); // load playlist
     on<CreatePlaylist>(_onCreatePlaylist); // create playlist
     on<RemovePlaylist>(_onRemovePlaylist); // Remove Playlist
@@ -22,6 +26,26 @@ class PlaylistBloc extends Bloc<PlaylistEvent, PlaylistState> {
         _onRemoveSongFromPlaylist); // Remove song From playlist
     on<SortByDateCreatedOrModified>(
         _onSortBySortByDateCreatedOrModified); // Sort By Date Created Or Modified
+  }
+
+  void _selectText() {
+    if (_focusNode.hasFocus) {
+      _controller.selection = TextSelection(
+        baseOffset: 0,
+        extentOffset: _controller.text.length,
+      );
+    }
+  }
+
+  TextEditingController get controller => _controller;
+  FocusNode get focusNode => _focusNode;
+
+  @override
+  Future<void> close() {
+    _focusNode.removeListener(_selectText);
+    _controller.dispose();
+    _focusNode.dispose();
+    return super.close();
   }
 
   ///****************Load Playlists*******************/

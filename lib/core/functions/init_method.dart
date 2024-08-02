@@ -10,6 +10,7 @@ import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/songs/data/model/duration.g.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:just_music/features/songs/data/model/uri.g.dart';
 
 Future<void> initMethod() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,7 @@ Future<void> initMethod() async {
   Hive.registerAdapter<Duration>(DurationAdapter());
   Hive.registerAdapter<Song>(SongAdapter());
   Hive.registerAdapter<Playlist>(PlaylistAdapter());
+  Hive.registerAdapter<Uri>(UriAdapter());
 
   Bloc.observer = MyBlocObserver();
 
