@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/features/songs/widgets/search/list_of_songs_search.dart';
-import 'package:just_music/features/songs/widgets/search/text_field_and_text_button.dart';
+import 'package:just_music/features/changed_view/widgets/search/list_of_songs_search.dart';
+import 'package:just_music/features/changed_view/widgets/search/text_field_and_text_button.dart';
 
 class SearchViewBody extends StatelessWidget {
   const SearchViewBody({super.key});

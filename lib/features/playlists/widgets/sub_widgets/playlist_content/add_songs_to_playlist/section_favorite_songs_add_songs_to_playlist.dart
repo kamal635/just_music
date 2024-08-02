@@ -29,8 +29,8 @@ class SectionFavoriteSongsAddSongsToPlaylist extends StatelessWidget {
           },
           child: CustomCardAddSongToPlaylist(
             icon: AppIcon.favoriteFilled,
-            colorCard: AppColor.red.withAlpha(110),
-            colorIcon: AppColor.red,
+            colorCard: AppColor.favorite.withAlpha(110),
+            colorIcon: AppColor.favorite,
             title: AppStrings.favoriteSongs,
             isTrailing: true,
             subtitle: state.favoriteSong?.favoriteSongs.length ?? 0,

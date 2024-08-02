@@ -6,7 +6,6 @@ import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/core/shared_widgets/list_view_songs.dart';
 import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
-import 'package:just_music/features/songs/widgets/search/section_search.dart';
 import 'package:just_music/core/shared_widgets/image_empty_list.dart';
 import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
@@ -53,14 +52,6 @@ class SongsViewBody extends StatelessWidget {
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [
-                // padding
-                sliverPadding(15),
-
-                // Search box
-                const SliverToBoxAdapter(
-                  child: SectionSearch(),
-                ),
-
                 // padding
                 sliverPadding(15),
 

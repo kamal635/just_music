@@ -45,7 +45,7 @@ class FavoriteIconButton extends StatelessWidget {
   }
 
   Color changeColorFavorite(bool isFavorite) =>
-      isFavorite ? AppColor.red : AppColor.white;
+      isFavorite ? AppColor.favorite : AppColor.white;
 
   IconData changeIconFavorite(bool isFavorite) {
     return isFavorite ? AppIcon.favoriteFilled : AppIcon.favoriteBorder;

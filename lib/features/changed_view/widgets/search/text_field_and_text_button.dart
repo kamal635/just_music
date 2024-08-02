@@ -5,7 +5,7 @@ import 'package:just_music/core/shared_widgets/custom_text_form_field.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/songs/logic/search_songs/search_songs_bloc.dart';
+import 'package:just_music/features/changed_view/logic/search_songs/search_songs_bloc.dart';
 
 class TextFormFieldAndTextButton extends StatelessWidget {
   const TextFormFieldAndTextButton({super.key});

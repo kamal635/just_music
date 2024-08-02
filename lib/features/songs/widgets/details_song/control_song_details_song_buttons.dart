@@ -32,7 +32,7 @@ class ControlSongDetailsSongButtons extends StatelessWidget {
 
             //** Button */
             return CustomIconButton(
-              size: 30.h,
+              size: 24.h,
               onPressed: () async {
                 final enabled = !shuffleModeEnabled;
 

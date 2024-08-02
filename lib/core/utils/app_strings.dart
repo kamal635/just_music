@@ -26,6 +26,7 @@ abstract class AppStrings {
   static const String shuffle = "Shuffle";
   static const String library = "Library";
   static const String songs = "Songs";
+  static const String home = "Home";
   static const String albums = "Albums";
   static const String playlists = "Playlists";
   static const String playlist = "Playlist";
