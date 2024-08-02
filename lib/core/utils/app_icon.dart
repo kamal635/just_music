@@ -6,11 +6,12 @@ abstract class AppIcon {
   static const IconData favoriteBorder = FontAwesomeIcons.heart;
   static const IconData favoriteFilled = FontAwesomeIcons.solidHeart;
   static const IconData disc = FontAwesomeIcons.compactDisc;
+  static const IconData home = FontAwesomeIcons.house;
+  static const IconData shuffle = FontAwesomeIcons.shuffle;
 
   //*******************Icons Material***********************/
   static const IconData playlist = Icons.library_music_outlined;
   static const IconData playlistFilled = Icons.library_music_sharp;
-  static const IconData shuffle = Icons.shuffle_sharp;
   static const IconData repateOne = Icons.repeat_one;
   static const IconData repateOff = Icons.repeat_outlined;
   static const IconData musicNote = Icons.music_note;

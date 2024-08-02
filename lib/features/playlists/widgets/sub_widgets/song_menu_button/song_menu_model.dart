@@ -33,7 +33,7 @@ class SongMenuModel {
       // Favorite
       SongMenuModel(
         icon: isFavorite ? AppIcon.favoriteFilled : AppIcon.favoriteBorder,
-        colorIcon: isFavorite ? AppColor.red : AppColor.white,
+        colorIcon: isFavorite ? AppColor.favorite : AppColor.white,
         name: AppStrings.addToFavorite,
         action: AddToFavoriteAction(song, isFavorite),
       ),

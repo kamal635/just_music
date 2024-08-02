@@ -11,7 +11,7 @@ import 'package:just_music/core/routes/app_router.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
-import 'package:just_music/features/songs/logic/search_songs/search_songs_bloc.dart';
+import 'package:just_music/features/changed_view/logic/search_songs/search_songs_bloc.dart';
 
 class JustMusicApp extends StatelessWidget {
   const JustMusicApp({super.key, required this.audioHandler});

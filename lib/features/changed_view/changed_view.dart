@@ -4,17 +4,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
 import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/favorites/favorite_view.dart';
+import 'package:just_music/features/home/home_view.dart';
 import 'package:just_music/features/songs/songs_view.dart';
 import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/features/songs/widgets/grant_permission.dart';
 import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
 import 'package:just_music/features/playlists/playlist_view.dart';
 import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/features/changed_view/widgets/search/section_search.dart';
 
 ///** This page was created to navigate between pages in the bottomNavigationBar
 ///* while only changing the body */
@@ -28,9 +27,9 @@ class ChangedView extends StatefulWidget {
 class _ChangedViewState extends State<ChangedView>
     with SingleTickerProviderStateMixin {
   final List<Widget> _views = [
+    const HomeView(),
     const SongsView(),
     const PlayListView(),
-    const FavoriteView(),
   ];
 
   int _currentIndex = 0;
@@ -69,18 +68,12 @@ class _ChangedViewState extends State<ChangedView>
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: _buildCustomBottomNavigationBar(),
       appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          _getTitleAppbarForIndex(_currentIndex),
-          style: AppFonts.bold_18,
-        ),
+        title: const SectionSearch(), // Search box
+
         toolbarHeight: 60.h,
         backgroundColor: AppColor.primary,
         surfaceTintColor: AppColor.primary,
-        leadingWidth: 100,
-        leading: Image.asset(
-          AppImages.mainLogo,
-        ),
+
         actions: [
           CustomIconButton(
               onPressed: _onSettingsPressed, icon: AppIcon.settings),
@@ -93,6 +86,7 @@ class _ChangedViewState extends State<ChangedView>
   //***** Bottom Nav Bar */
   Widget _buildCustomBottomNavigationBar() {
     return Container(
+      height: 50.h,
       decoration: BoxDecoration(
         color: AppColor.navBottomBar,
         boxShadow: [
@@ -104,32 +98,44 @@ class _ChangedViewState extends State<ChangedView>
         ],
         border: const Border(bottom: BorderSide(width: 0.3)),
       ),
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 6.h),
+      child: Material(
+        color: Colors.transparent,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(_views.length, (index) {
-            bool isSelected = _currentIndex == index;
-            Color color =
-                isSelected ? AppColor.lightBlue : AppColor.white.withAlpha(110);
-            return InkWell(
+          children: List.generate(
+            _views.length,
+            (index) {
+              bool isSelected = _currentIndex == index;
+              Color color = isSelected
+                  ? AppColor.lightBlue
+                  : AppColor.white.withAlpha(110);
+              return InkResponse(
                 onTap: () => _onTabTapped(index),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      _getIconForIndex(index, isSelected),
-                      color: color,
-                      size: 18.h,
-                    ),
-                    spaceHeight(2),
-                    Text(
-                      _getLabelForIndex(index),
-                      style: AppFonts.normal_10.copyWith(color: color),
-                    ),
-                  ],
-                ));
-          }),
+                splashFactory: InkRipple.splashFactory,
+                radius: 60,
+                splashColor: AppColor.white.withAlpha(40),
+                highlightColor: Colors.transparent,
+                child: Container(
+                    height: double.infinity,
+                    alignment: Alignment.center,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          _getIconForIndex(index, isSelected),
+                          color: color,
+                          size: 18,
+                        ),
+                        spaceHeight(2),
+                        Text(
+                          _getLabelForIndex(index),
+                          style: TextStyle(color: color),
+                        ),
+                      ],
+                    )),
+              );
+            },
+          ),
         ),
       ),
     );
@@ -139,13 +145,13 @@ class _ChangedViewState extends State<ChangedView>
   IconData _getIconForIndex(int index, bool isSelected) {
     switch (index) {
       case 0:
-        return AppIcon.disc;
+        return AppIcon.home;
       case 1:
-        return isSelected ? AppIcon.playlistFilled : AppIcon.playlist;
-      case 2:
-        return isSelected ? AppIcon.favoriteFilled : AppIcon.favoriteBorder;
-      default:
         return AppIcon.disc;
+      case 2:
+        return isSelected ? AppIcon.playlistFilled : AppIcon.playlist;
+      default:
+        return AppIcon.home;
     }
   }
 
@@ -153,27 +159,13 @@ class _ChangedViewState extends State<ChangedView>
   String _getLabelForIndex(int index) {
     switch (index) {
       case 0:
-        return AppStrings.songs;
+        return AppStrings.home;
       case 1:
-        return AppStrings.playlist;
+        return AppStrings.songs;
       case 2:
-        return AppStrings.favorite;
-      default:
-        return AppStrings.songs;
-    }
-  }
-
-  //**** Title Appbar */
-  String _getTitleAppbarForIndex(int index) {
-    switch (index) {
-      case 0:
-        return AppStrings.songs;
-      case 1:
         return AppStrings.playlist;
-      case 2:
-        return AppStrings.favorite;
       default:
-        return AppStrings.songs;
+        return AppStrings.home;
     }
   }
 
