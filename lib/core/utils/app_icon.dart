@@ -28,7 +28,6 @@ abstract class AppIcon {
   static const IconData rename = Icons.edit;
   static const IconData detail = Icons.edit_document;
   static const IconData arrowDown = Icons.arrow_downward_sharp;
-
   static const IconData folder = Icons.folder;
   static const IconData addMusicOrPlaylist = Icons.queue_outlined;
   static const IconData addToPlaylist = Icons.playlist_add;

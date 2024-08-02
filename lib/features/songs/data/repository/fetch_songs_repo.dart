@@ -34,8 +34,11 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
       if (await file.exists() &&
           song.fileExtension == "mp3" &&
           song.duration != 0) {
+        // Fetch artwork for the song
+        final artwork =
+            await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
         // Add song to list of songs
-        listSongsMp3.add(Song.fromDevice(song));
+        listSongsMp3.add(Song.fromDevice(song, artwork));
       }
     });
 

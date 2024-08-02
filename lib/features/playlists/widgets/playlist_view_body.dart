@@ -26,12 +26,17 @@ class PlayListViewBody extends StatelessWidget {
           if (checkPlaylist) {
             final playlistFirst = playlists.first;
             const index = 0;
-            if (context.mounted) {
-              context.pushNamed(RouterName.contentPlaylistBody, arguments: {
-                "index": index,
-                "playlist": playlistFirst,
-              });
-            }
+            Future.delayed(
+              const Duration(milliseconds: 500),
+              () {
+                if (context.mounted) {
+                  context.pushNamed(RouterName.contentPlaylistBody, arguments: {
+                    "index": index,
+                    "playlist": playlistFirst,
+                  });
+                }
+              },
+            );
           }
         },
         builder: (context, state) {

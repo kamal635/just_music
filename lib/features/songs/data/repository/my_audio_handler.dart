@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
 Future<AudioHandler> initMyAudioHandler() async {
@@ -9,8 +10,9 @@ Future<AudioHandler> initMyAudioHandler() async {
     config: const AudioServiceConfig(
       androidNotificationChannelId: 'com.mycompany.myapp.channel.audio',
       androidNotificationChannelName: 'Music playback',
-      androidNotificationOngoing: true,
-      androidStopForegroundOnPause: true,
+      androidNotificationOngoing:
+          false, // Allow the notification to be dismissed
+      androidStopForegroundOnPause: true, // Stop foreground service on pause
     ),
   );
 }
@@ -57,18 +59,37 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   ///******************** Stop **************************/
   ///***************************************************/
   @override
-  Future<void> stop() => _player.stop();
+  Future<void> stop() async {
+    await _player.stop();
+    await super.stop();
+  }
 
   ///****************** Skip To Next ********************/
   ///***************************************************/
 
   @override
-  Future<void> skipToNext() => _player.seekToNext();
+  Future<void> skipToNext() async {
+    if (_player.loopMode == LoopMode.one) {
+      _player.setLoopMode(LoopMode.off);
+      await _player.seekToNext();
+      _player.setLoopMode(LoopMode.one);
+    } else {
+      await _player.seekToNext();
+    }
+  }
 
   ///***************** Skip To Previous *****************/
   ///***************************************************/
   @override
-  Future<void> skipToPrevious() => _player.seekToPrevious();
+  Future<void> skipToPrevious() async {
+    if (_player.loopMode == LoopMode.one) {
+      _player.setLoopMode(LoopMode.off);
+      await _player.seekToPrevious();
+      _player.setLoopMode(LoopMode.one);
+    } else {
+      await _player.seekToPrevious();
+    }
+  }
 
   ///***************** Seek Duration ********************/
   ///***************************************************/
@@ -139,7 +160,7 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     try {
       await _player.setAudioSource(_queue);
     } catch (err) {
-      print('Error loading empty playlist: $err');
+      debugPrint('Error loading empty playlist: $err');
     }
   }
 
@@ -162,21 +183,6 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       }
     });
   }
-
-  // ///****** */ Listen to Processing State Stream *****/
-  // ///*** If was is completed and song is playing ****/
-  // ///*** return play music from index 0 ****/
-  // Future<void> _returnPlayPlaylistWhenIsCompleted() async {
-  //   _player.processingStateStream.listen((state) {
-  //     final isCompleted = state == ProcessingState.completed;
-  //     final isPlaying = _player.playing == true;
-
-  //     if (isCompleted && isPlaying) {
-  //       _player.play();
-  //       _player.seek(Duration.zero, index: 0);
-  //     }
-  //   });
-  // }
 
   ///**************** Transform Event *******************/
   ///***************************************************/
@@ -206,8 +212,8 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       controls: [
         MediaControl.skipToPrevious,
         if (_player.playing) MediaControl.pause else MediaControl.play,
-        MediaControl.stop,
         MediaControl.skipToNext,
+        closeControl
       ],
       systemActions: {
         MediaAction.seek,
@@ -216,6 +222,12 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       },
     );
   }
+
+  final MediaControl closeControl = const MediaControl(
+    androidIcon: 'drawable/ic_stat_close',
+    label: 'close',
+    action: MediaAction.stop,
+  );
 
   void closeListeners() {
     _updateController.close();
