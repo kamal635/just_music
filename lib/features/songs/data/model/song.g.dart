@@ -24,7 +24,7 @@ class SongAdapter extends TypeAdapter<Song> {
       album: fields[4] as String?,
       artist: fields[5] as String?,
       audioUrl: fields[6] as String?,
-      fileExtension: fields[7] as String,
+      fileExtension: fields[7] as String?,
       duration: fields[8] as Duration?,
       artworkUri: fields[9] as Uri?,
     );

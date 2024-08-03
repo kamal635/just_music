@@ -28,7 +28,7 @@ class CustomArtWork extends StatelessWidget {
         height: 50,
         width: 50,
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.r),
+          borderRadius: BorderRadius.circular(radius ?? 8.r),
           color: AppColor.white.withAlpha(140),
         ),
         child: Icon(

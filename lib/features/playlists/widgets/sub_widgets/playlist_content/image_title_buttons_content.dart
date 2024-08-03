@@ -1,18 +1,13 @@
-import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/styling/app_colors.dart';
+import 'package:just_music/core/shared_widgets/custom_shuffle_and_play_all_buttons.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/styling/app_linear.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/playlists/data/model/playlist_model.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 
 class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
   const ImageAndTitleAndButtonsContentPlaylist(
@@ -63,53 +58,7 @@ class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
 
               spaceHeight(20),
 
-              //* Buttons
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  // Suffle Button
-                  CustomElevatedButton(
-                    widthButton: 150.w,
-                    onPressed: () {
-                      updatedPlaylist.songs == null ||
-                              updatedPlaylist.songs!.isEmpty
-                          ? null
-                          : context.read<AudioPlayerBloc>().add(SetAudioEvent(
-                              songs: updatedPlaylist.songs ?? [], index: 0));
-
-                      context.read<AudioPlayerBloc>().add(
-                          const ShuffleModeAudioEvent(
-                              shuffleMode: AudioServiceShuffleMode.all));
-                    },
-                    titleWithIcon: AppStrings.shuffle,
-                    isIcon: true,
-                    icon: AppIcon.shuffle,
-                  ),
-
-                  spaceWidth(20),
-
-                  // Play Button
-                  CustomElevatedButton(
-                    widthButton: 150.w,
-                    onPressed: () {
-                      updatedPlaylist.songs == null ||
-                              updatedPlaylist.songs!.isEmpty
-                          ? null
-                          : context.read<AudioPlayerBloc>().add(SetAudioEvent(
-                              songs: updatedPlaylist.songs ?? [], index: 0));
-
-                      context.read<AudioPlayerBloc>().add(
-                          const ShuffleModeAudioEvent(
-                              shuffleMode: AudioServiceShuffleMode.none));
-                    },
-                    titleWithIcon: AppStrings.playAll,
-                    isIcon: true,
-                    icon: AppIcon.play,
-                    colorButton: Colors.transparent,
-                    colorBorderSide: AppColor.white,
-                  )
-                ],
-              )
+              CustomShuffleAndPlayAllButtons(songs: updatedPlaylist.songs)
             ],
           ),
         );
