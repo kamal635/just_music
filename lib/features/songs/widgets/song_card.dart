@@ -67,7 +67,6 @@ class _SongCardState extends State<SongCard> {
       valueListenable: _valueNotifier,
       builder: (context, valueNotifier, child) {
         return Container(
-          padding: EdgeInsets.only(left: 10.w),
           decoration: BoxDecoration(
             // color: valueNotifier ? AppColor.secondary : null,
             borderRadius: BorderRadius.circular(10.r),
@@ -86,7 +85,7 @@ class _SongCardState extends State<SongCard> {
               children: [
                 valueNotifier
                     ? Image.asset(
-                        AppImages.waveSoundStatic,
+                        AppImages.waveSoundAnimated,
                         height: 20.h,
                       )
                     : const SizedBox(),

@@ -7,6 +7,10 @@ sealed class AudioPlayerEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class LoadRecentlyPlayedEvent extends AudioPlayerEvent {}
+
+class MostPlayedEvent extends AudioPlayerEvent {}
+
 class LoadAudioPlayerEvent extends AudioPlayerEvent {}
 
 class PlayAudioEvent extends AudioPlayerEvent {}

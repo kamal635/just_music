@@ -1,7 +1,11 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:just_music/features/home/data/most_played_repo.dart';
+import 'package:just_music/features/home/data/recently_played_repo.dart';
+import 'package:just_music/features/home/models/most_played_model.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/data/repository/audio_player_data.dart';
 import 'package:rxdart/rxdart.dart';
@@ -11,8 +15,13 @@ part 'audio_player_state.dart';
 
 class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   final AudioHandler _audioHandler;
+  final RecentlyPlayedRepoImpl recentlyPlayedRepoImpl;
+  final MostPlayedRepoImpl mostPlayedRepoImpl;
+
   AudioPlayerBloc({
     required AudioHandler audioHandler,
+    required this.recentlyPlayedRepoImpl,
+    required this.mostPlayedRepoImpl,
   })  : _audioHandler = audioHandler,
         super(const AudioPlayerState()) {
     on<LoadAudioPlayerEvent>(
@@ -38,6 +47,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     on<ShuffleModeAudioEvent>(_onShuffleModeAudioEvent); // shuffle Mode
 
     on<RepeatModeAudioEvent>(_onRepeatModeAudioEvent); // Repeat Mode
+
+    on<LoadRecentlyPlayedEvent>(_onLoadRecentlyPlayedEvent); // Recently Played
+
+    on<MostPlayedEvent>(_onMostPlayedEvent); // Most Played
   }
 
   ///****************Load Audio Player*******************/
@@ -93,6 +106,19 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
           );
         }
 
+        // This listens for changes in the playback state of the audio handler
+        _audioHandler.playbackState
+            .debounceTime(const Duration(milliseconds: 500))
+            .distinct((prev, next) =>
+                prev.processingState == next.processingState &&
+                prev.playing == next.playing)
+            .listen((playbackState) {
+          if (playbackState.processingState == AudioProcessingState.completed) {
+            _addCurrentSongToRecentlyPlayed(emit);
+            _addCurrentSongToMostPlayed(emit);
+          }
+        });
+
         debugPrint('data: ${data.playbackState.toString()}');
         return state.copyWith(audioPlayerData: data);
       },
@@ -136,6 +162,8 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     Emitter<AudioPlayerState> emit,
   ) async {
     await _audioHandler.skipToNext();
+    await _addCurrentSongToRecentlyPlayed(emit);
+    await _addCurrentSongToMostPlayed(emit);
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
@@ -146,6 +174,8 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     Emitter<AudioPlayerState> emit,
   ) async {
     await _audioHandler.skipToPrevious();
+    await _addCurrentSongToRecentlyPlayed(emit);
+    await _addCurrentSongToMostPlayed(emit);
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
@@ -156,7 +186,8 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     Emitter<AudioPlayerState> emit,
   ) async {
     await _audioHandler.skipToQueueItem(event.index);
-
+    await _addCurrentSongToRecentlyPlayed(emit);
+    await _addCurrentSongToMostPlayed(emit);
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
@@ -199,9 +230,77 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     // this to play song by index when user press on song in listview.builder
     await _audioHandler.skipToQueueItem(event.index);
 
+    await _addCurrentSongToRecentlyPlayed(emit);
+    await _addCurrentSongToMostPlayed(emit);
     //  play song
     await _audioHandler.play();
 
     emit(state.copyWith(status: AudioPlayerStatus.playing));
+  }
+
+  ///**************Load Recently Played Event*************/
+  ///***************************************************/
+  void _onLoadRecentlyPlayedEvent(
+    LoadRecentlyPlayedEvent event,
+    Emitter<AudioPlayerState> emit,
+  ) async {
+    // Open the box for recently played songs
+    final box = await recentlyPlayedRepoImpl.openBox();
+
+    // Get the updated list of recently played songs
+    final updatedList = recentlyPlayedRepoImpl.getSongs(box);
+    emit(state.copyWith(
+        status: AudioPlayerStatus.loaded, recentlyPlayed: updatedList));
+  }
+
+  ///**************Load Most Played Event*************/
+  ///***************************************************/
+  void _onMostPlayedEvent(
+    MostPlayedEvent event,
+    Emitter<AudioPlayerState> emit,
+  ) async {
+    // Open the box for recently played songs
+    final box = await mostPlayedRepoImpl.openBox();
+
+    // Get the updated list of recently played songs
+    final updatedList = mostPlayedRepoImpl.getSongs(box);
+    emit(state.copyWith(
+        status: AudioPlayerStatus.loaded, mostPlayed: updatedList));
+  }
+
+  ///** This method adds the currently playing song to the recently played list and updates the state.
+  Future<void> _addCurrentSongToRecentlyPlayed(
+      Emitter<AudioPlayerState> emit) async {
+    if (state.audioPlayerData?.audio != null) {
+      final currentSong = state.audioPlayerData!.audio!;
+      final box = await recentlyPlayedRepoImpl.openBox();
+
+      await recentlyPlayedRepoImpl.addSong(box, currentSong);
+
+      final updatedList = recentlyPlayedRepoImpl.getSongs(box);
+
+      emit(state.copyWith(
+        recentlyPlayed: updatedList,
+        status: AudioPlayerStatus.loaded,
+      ));
+    }
+  }
+
+  ///** This method adds the currently playing song to the Most played list and updates the state.
+  Future<void> _addCurrentSongToMostPlayed(
+      Emitter<AudioPlayerState> emit) async {
+    if (state.audioPlayerData?.audio != null) {
+      final currentSong = state.audioPlayerData!.audio!;
+      final box = await mostPlayedRepoImpl.openBox();
+
+      await mostPlayedRepoImpl.addSong(box, MostPlayedModel(song: currentSong));
+
+      final updatedList = mostPlayedRepoImpl.getSongs(box);
+
+      emit(state.copyWith(
+        mostPlayed: updatedList,
+        status: AudioPlayerStatus.loaded,
+      ));
+    }
   }
 }

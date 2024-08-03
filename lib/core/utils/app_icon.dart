@@ -8,6 +8,7 @@ abstract class AppIcon {
   static const IconData disc = FontAwesomeIcons.compactDisc;
   static const IconData home = FontAwesomeIcons.house;
   static const IconData shuffle = FontAwesomeIcons.shuffle;
+  static const IconData headPhone = FontAwesomeIcons.headphones;
 
   //*******************Icons Material***********************/
   static const IconData playlist = Icons.library_music_outlined;

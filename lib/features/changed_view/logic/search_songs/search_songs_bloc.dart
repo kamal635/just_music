@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
@@ -10,67 +8,45 @@ part 'search_songs_state.dart';
 
 class SearchSongsBloc extends Bloc<SearchSongsEvent, SearchSongsState> {
   final FetchSongsFromDeviceRepoImpl fetchSongsFromDeviceRepoImpl;
-  List<Song> _allSongs = [];
-  Timer? _debounce;
+  final List<Song> _allSongs = [];
 
   SearchSongsBloc({required this.fetchSongsFromDeviceRepoImpl})
       : super(const SearchSongsState()) {
     on<SearchEvent>(_onSearchEvent);
     on<ResetSearchEvent>(_onResetSearchEvent);
-    _fetchSongs();
-  }
-
-  Future<void> _fetchSongs() async {
-    try {
-      _allSongs = await fetchSongsFromDeviceRepoImpl.fetchSongsFromDevice();
-    } catch (e) {
-      // Handle error, possibly update the state with an error status
-    }
   }
 
   void _onSearchEvent(
     SearchEvent event,
     Emitter<SearchSongsState> emit,
   ) async {
-    // Cancel the previous debounce timer if it is still active
-    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    // Emit a loading state while the search is being performed
+    emit(state.copyWith(
+      searchStatus: SearchStatus.loading,
+    ));
 
-    // Set up a new debounce timer to delay the search action
-    _debounce = Timer(const Duration(milliseconds: 300), () async {
-      // Emit a loading state while the search is being performed
+    final songs = await fetchSongsFromDeviceRepoImpl.fetchSongsFromDevice();
+    _allSongs.addAll(songs);
+    // Check if the search query is not empty
+    if (event.query.isNotEmpty) {
+      final queryLower = event.query
+          .toLowerCase(); // Convert the query to lowercase for case-insensitive search
+      final filterSongs = _allSongs.where((song) {
+        return song.title
+            .toLowerCase()
+            .contains(queryLower); // Filter songs based on the query
+      }).toList();
+
       emit(state.copyWith(
-        searchStatus: SearchStatus.loading,
+        songs: filterSongs,
+        searchStatus: SearchStatus.loaded,
       ));
-
-      // Check if the search query is not empty
-      if (event.query.isNotEmpty) {
-        final queryLower = event.query
-            .toLowerCase(); // Convert the query to lowercase for case-insensitive search
-        final filterSongs = _allSongs.where((song) {
-          return song.title
-              .toLowerCase()
-              .contains(queryLower); // Filter songs based on the query
-        }).toList();
-        // Emit the filtered list of songs and update the search status to loaded
-        if (!emit.isDone) {
-          emit(state.copyWith(
-            songs: filterSongs,
-            searchStatus: SearchStatus.loaded,
-          ));
-        }
-      } else {
-        // If the query is empty, emit an empty list of songs and set the search status to loaded
-        if (!emit.isDone) {
-          emit(state.copyWith(
-            songs: [],
-            searchStatus: SearchStatus.loaded,
-          ));
-        }
-      }
-    });
-
-    // Await the debounce timer to ensure it completes before the handler finishes
-    _debounce?.cancel();
+    } else {
+      emit(state.copyWith(
+        songs: [],
+        searchStatus: SearchStatus.loaded,
+      ));
+    }
   }
 
   void _onResetSearchEvent(

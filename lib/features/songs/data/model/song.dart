@@ -26,7 +26,7 @@ class Song extends Equatable {
   @HiveField(6)
   final String? audioUrl;
   @HiveField(7)
-  final String fileExtension;
+  final String? fileExtension;
   @HiveField(8)
   final Duration? duration;
   @HiveField(9)
@@ -40,7 +40,7 @@ class Song extends Equatable {
     this.album,
     this.artist,
     this.audioUrl,
-    required this.fileExtension,
+    this.fileExtension,
     this.duration,
     this.artworkUri,
   });

@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/routes/string_route.dart';
+import 'package:just_music/features/home/data/most_played_repo.dart';
+import 'package:just_music/features/home/data/recently_played_repo.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/core/styling/app_colors.dart';
@@ -49,8 +51,13 @@ class JustMusicApp extends StatelessWidget {
 
           //* Audio Player Bloc
           BlocProvider(
-            create: (context) => AudioPlayerBloc(audioHandler: audioHandler)
-              ..add(LoadAudioPlayerEvent()),
+            create: (context) => AudioPlayerBloc(
+                audioHandler: audioHandler,
+                recentlyPlayedRepoImpl: RecentlyPlayedRepoImpl(),
+                mostPlayedRepoImpl: MostPlayedRepoImpl())
+              ..add(LoadAudioPlayerEvent())
+              ..add(LoadRecentlyPlayedEvent())
+              ..add(MostPlayedEvent()),
           ),
 
           //* Favorite Songs Bloc

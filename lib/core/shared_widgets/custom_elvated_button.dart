@@ -14,7 +14,8 @@ class CustomElevatedButton extends StatelessWidget {
       this.isIcon = false,
       this.colorButton,
       this.widthButton,
-      this.colorBorderSide});
+      this.colorBorderSide,
+      this.sizeIcon});
   final String? titleWithIcon;
   final String? title;
   final IconData? icon;
@@ -23,6 +24,7 @@ class CustomElevatedButton extends StatelessWidget {
   final Color? colorButton;
   final Color? colorBorderSide;
   final double? widthButton;
+  final double? sizeIcon;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -42,9 +44,9 @@ class CustomElevatedButton extends StatelessWidget {
                   Icon(
                     icon,
                     color: AppColor.white,
-                    size: 20.h,
+                    size: sizeIcon ?? 20.h,
                   ),
-                  spaceWidth(10),
+                  spaceWidth(15),
                   Text(
                     titleWithIcon ?? "",
                     style: AppFonts.medium_12.copyWith(color: AppColor.white),
