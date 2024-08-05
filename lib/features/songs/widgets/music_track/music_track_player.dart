@@ -18,6 +18,8 @@ class MusicTrackPlayer extends StatelessWidget {
         ///**************Short Variables From Bloc************/
         ///*************************************************/
         final song = state.audioPlayerData?.audio;
+        final songs = state.audioPlayerData?.queue;
+        final currentIndex = state.audioPlayerData?.playbackState.queueIndex;
         final isPlaying = state.audioPlayerData?.playbackState.playing;
         final duration = state.audioPlayerData?.audio?.duration;
         final position = state.audioPlayerData?.currentAudioPosition;
@@ -50,7 +52,11 @@ class MusicTrackPlayer extends StatelessWidget {
                       TitleAndImageMusicTrack(song: song!),
 
                       // Buttons
-                      ButtonMusicTrack(isPlaying: isPlaying),
+                      ButtonMusicTrack(
+                        isPlaying: isPlaying,
+                        songs: songs!,
+                        currentIndex: currentIndex!,
+                      ),
                     ]),
               ),
               // Slider track

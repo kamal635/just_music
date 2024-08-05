@@ -29,6 +29,8 @@ Future<void> detailsSong({
       return BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
         builder: (context, state) {
           final song = state.audioPlayerData!.audio;
+          final songs = state.audioPlayerData?.queue;
+          final currentIndex = state.audioPlayerData?.playbackState.queueIndex;
           final duration = state.audioPlayerData?.audio?.duration;
           final position = state.audioPlayerData?.currentAudioPosition;
           final isPlaying = state.audioPlayerData!.playbackState.playing;
@@ -66,6 +68,8 @@ Future<void> detailsSong({
                     // Buttons ( Shuffle + next and previous + play and pause + repeat)
                     ControlSongDetailsSongButtons(
                       isPlaying: isPlaying,
+                      currentIndex: currentIndex!,
+                      songs: songs!,
                     ),
 
                     spaceHeight(40),

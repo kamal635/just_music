@@ -4,10 +4,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/duration.dart';
 import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
+import 'package:just_music/core/shared_widgets/favorite_icon_button.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
+import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/song_menu_button.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 
@@ -15,13 +17,14 @@ class SongCard extends StatefulWidget {
   const SongCard({
     super.key,
     required this.song,
-    this.isIcon = false,
-    this.widgetIcon,
+    this.isFavorite = false,
+    this.hideIndex,
   });
 
   final Song song;
-  final Widget? widgetIcon;
-  final bool isIcon;
+
+  final bool isFavorite;
+  final int? hideIndex;
 
   @override
   State<SongCard> createState() => _SongCardState();
@@ -102,8 +105,13 @@ class _SongCardState extends State<SongCard> {
                           : AppColor.white.withAlpha(120)),
                 ),
 
-                //** Favorite Icon */
-                widget.isIcon ? widget.widgetIcon! : const SizedBox(),
+                //**  Icon */
+                widget.isFavorite
+                    ? FavoriteIconButton(song: widget.song)
+                    : SongMenuButton(
+                        song: widget.song,
+                        hideIndex: widget.hideIndex,
+                      ),
               ],
             ),
 

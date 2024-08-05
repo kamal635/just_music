@@ -9,6 +9,8 @@ sealed class AudioPlayerEvent extends Equatable {
 
 class LoadRecentlyPlayedEvent extends AudioPlayerEvent {}
 
+class AddToRecentlyAndMostPlayedEvent extends AudioPlayerEvent {}
+
 class MostPlayedEvent extends AudioPlayerEvent {}
 
 class LoadAudioPlayerEvent extends AudioPlayerEvent {}

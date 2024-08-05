@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/home/widgets/custom_title_feature_home_view.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/song_menu_button.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/widgets/song_card.dart';
 
-class RecentlyPlayed extends StatelessWidget {
-  const RecentlyPlayed({super.key});
+class HomeRecentlyPlayed extends StatelessWidget {
+  const HomeRecentlyPlayed({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: BlocBuilder<AudioPlayerBloc, AudioPlayerState>(
+        buildWhen: (previous, current) {
+          return previous.recentlyPlayed != current.recentlyPlayed;
+        },
         builder: (context, state) {
           final recentPlayed = state.recentlyPlayed;
+          final endIndex = recentPlayed.length < 3 ? recentPlayed.length : 3;
+          final subList = recentPlayed.sublist(0, endIndex);
 
           if (state.recentlyPlayed.isEmpty) {
             return const SizedBox();
@@ -27,7 +33,11 @@ class RecentlyPlayed extends StatelessWidget {
               // title And icon more
               CustomTitleFeatureHomeView(
                 title: AppStrings.recentlyPlayed,
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed(RouterName.recentlyPlayedView, arguments: {
+                    "songs": recentPlayed,
+                  });
+                },
               ),
 
               spaceHeight(5),
@@ -36,7 +46,7 @@ class RecentlyPlayed extends StatelessWidget {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: recentPlayed.length,
+                itemCount: subList.length,
                 itemBuilder: (context, index) {
                   final songRecentlyPlayed = state.recentlyPlayed[index];
                   return InkWell(
@@ -48,8 +58,7 @@ class RecentlyPlayed extends StatelessWidget {
                     },
                     child: SongCard(
                       song: songRecentlyPlayed,
-                      isIcon: true,
-                      widgetIcon: SongMenuButton(song: songRecentlyPlayed),
+                      hideIndex: 2,
                     ),
                   );
                 },

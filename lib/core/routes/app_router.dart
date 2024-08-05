@@ -3,6 +3,8 @@ import 'package:just_music/features/changed_view/changed_view.dart';
 import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/features/favorites/favorite_view.dart';
 import 'package:just_music/features/home/home_view.dart';
+import 'package:just_music/features/home/widgets/most_played/most_played_view.dart';
+import 'package:just_music/features/home/widgets/recently_played/recently_palyed_view.dart';
 import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/add_songs_to_playlist_body.dart';
 import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/extends_classes_from_list_of_songs.dart';
 import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/content_playlist_body.dart';
@@ -19,6 +21,15 @@ abstract class AppRouter {
       case RouterName.changedView:
         return _buildRoute(const ChangedView());
 
+      case RouterName.recentlyPlayedView:
+        return _buildRoute(RecentlyPlayedView(
+          recentlyPlayed: argument?["songs"],
+        ));
+
+      case RouterName.mostPlayedView:
+        return _buildRoute(MostPlayedView(
+          songs: argument?["songs"],
+        ));
       case RouterName.homeView:
         return _buildRoute(const HomeView());
 
