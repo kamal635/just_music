@@ -30,8 +30,8 @@ class RecentlyPlayedRepoImpl implements RecentlyPlayedRepo {
     // Insert the new song at the beginning of the list
     updatedList.insert(0, song);
 
-    // Ensure the list contains no more than 3 items
-    while (updatedList.length > 3) {
+    // Ensure the list contains no more than 10 items
+    while (updatedList.length > 10) {
       updatedList.removeLast();
     }
     // Clear the box and add the updated list back
@@ -45,7 +45,7 @@ class RecentlyPlayedRepoImpl implements RecentlyPlayedRepo {
   List<Song> getSongs(Box box) {
     final listRecentlyPlayed = box.values.toList().cast<Song>();
 
-    // Return only the top 5 items
-    return listRecentlyPlayed.take(3).toList();
+    // Return only the top 10 items
+    return listRecentlyPlayed.take(10).toList();
   }
 }

@@ -79,7 +79,7 @@ class SongDetail {
     return [
       SongDetail(title: "Name", subTitle: song.title),
       SongDetail(title: "Artist", subTitle: song.artist ?? AppStrings.unknown),
-      SongDetail(title: "Size", subTitle: song.album ?? AppStrings.unknown),
+      SongDetail(title: "Album", subTitle: song.album ?? AppStrings.unknown),
       SongDetail(title: "Format", subTitle: ".${song.fileExtension}"),
     ];
   }

@@ -16,7 +16,7 @@ class CardMostPlayed extends StatelessWidget {
       margin: EdgeInsets.only(right: 12.w),
       padding: EdgeInsets.all(12.w),
       decoration: BoxDecoration(
-        color: AppColor.lightBlue.withAlpha(40),
+        color: AppColor.navBottomBar,
         borderRadius: BorderRadius.circular(12.r),
       ),
       height: 120.h,
@@ -34,6 +34,7 @@ class CardMostPlayed extends StatelessWidget {
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
+              style: AppFonts.normal_12,
             ),
           ),
           Row(
@@ -43,11 +44,13 @@ class CardMostPlayed extends StatelessWidget {
               Icon(
                 AppIcon.headPhone,
                 size: 12.h,
+                color: AppColor.white.withAlpha(110),
               ),
               spaceWidth(6),
               Text(
                 "${mostPlayedModel.playCount}",
-                style: AppFonts.normal_14,
+                style: AppFonts.normal_12
+                    .copyWith(color: AppColor.white.withAlpha(110)),
               )
             ],
           )

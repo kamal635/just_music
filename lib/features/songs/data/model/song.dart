@@ -31,7 +31,8 @@ class Song extends Equatable {
   final Duration? duration;
   @HiveField(9)
   final Uri? artworkUri;
-
+  @HiveField(10)
+  final int? size;
   const Song({
     required this.id,
     this.albumId,
@@ -43,6 +44,7 @@ class Song extends Equatable {
     this.fileExtension,
     this.duration,
     this.artworkUri,
+    this.size,
   });
 
   factory Song.fromDevice(SongModel songModel, Uint8List? artworkData) {
@@ -73,7 +75,8 @@ class Song extends Equatable {
       audioUrl: songModel.data,
       fileExtension: songModel.fileExtension,
       duration: Duration(milliseconds: songModel.duration ?? 0),
-      artworkUri: artworkUri, // Set artworkUri
+      artworkUri: artworkUri,
+      size: songModel.size,
     );
   }
 
@@ -87,7 +90,8 @@ class Song extends Equatable {
         artist: mediaItem.artist ?? "<Not Artist MediaItem>",
         audioUrl: mediaItem.extras!['audioUrl'],
         fileExtension: mediaItem.extras!['fileExtension'],
-        artworkUri: mediaItem.artUri, // Set artworkUri
+        size: mediaItem.extras!['size'],
+        artworkUri: mediaItem.artUri,
       );
     } catch (err) {
       throw Exception('Failed to convert MediaItem to Song: $err');
@@ -103,6 +107,7 @@ class Song extends Equatable {
         extras: <String, dynamic>{
           'audioUrl': audioUrl,
           "fileExtension": fileExtension,
+          "size": size,
         },
       );
 
@@ -118,5 +123,6 @@ class Song extends Equatable {
         fileExtension,
         duration,
         artworkUri,
+        size,
       ];
 }

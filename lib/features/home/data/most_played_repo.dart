@@ -39,9 +39,9 @@ class MostPlayedRepoImpl implements MostPlayedRepo {
       // Replace the existing entry with the updated one
       updatedList[existingSongIndex] = updatedMostPlayed;
     } else {
-      // Increment play count for the new song
+      // Set play count for the new song
       final newMostPlayed = mostPlayed.copyWith(
-        playCount: mostPlayed.playCount + 1,
+        playCount: 1,
       );
 
       // Add the new song to the list
@@ -51,8 +51,8 @@ class MostPlayedRepoImpl implements MostPlayedRepo {
     // Sort the list by play count in descending order
     updatedList.sort((a, b) => b.playCount.compareTo(a.playCount));
 
-    // Ensure the list contains no more than 5 items
-    while (updatedList.length > 5) {
+    // Ensure the list contains no more than 10 items
+    while (updatedList.length > 10) {
       updatedList.removeLast();
     }
 
@@ -72,7 +72,7 @@ class MostPlayedRepoImpl implements MostPlayedRepo {
       (a, b) => b.playCount.compareTo(a.playCount),
     );
 
-    // Return only the top 5 items
-    return listMostPlayed.take(5).toList();
+    // Return only the top 10 items
+    return listMostPlayed.take(10).toList();
   }
 }

@@ -1,13 +1,17 @@
+import 'dart:async';
+
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+
 import 'package:just_music/features/home/data/most_played_repo.dart';
 import 'package:just_music/features/home/data/recently_played_repo.dart';
 import 'package:just_music/features/home/models/most_played_model.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/data/repository/audio_player_data.dart';
+
 import 'package:rxdart/rxdart.dart';
 
 part 'audio_player_event.dart';
@@ -17,6 +21,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   final AudioHandler _audioHandler;
   final RecentlyPlayedRepoImpl recentlyPlayedRepoImpl;
   final MostPlayedRepoImpl mostPlayedRepoImpl;
+  StreamSubscription<MediaItem?>? _streamSubscription;
 
   AudioPlayerBloc({
     required AudioHandler audioHandler,
@@ -51,6 +56,25 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     on<LoadRecentlyPlayedEvent>(_onLoadRecentlyPlayedEvent); // Recently Played
 
     on<MostPlayedEvent>(_onMostPlayedEvent); // Most Played
+
+    on<AddToRecentlyAndMostPlayedEvent>(
+        _onAddToRecentlyAndMostPlayedEvent); // Listen Change Index
+
+    trackTheSong();
+  }
+
+  void trackTheSong() {
+    _streamSubscription = _audioHandler.mediaItem.listen((mediaItem) {
+      if (mediaItem != null) {
+        add(AddToRecentlyAndMostPlayedEvent());
+      }
+    });
+  }
+
+  @override
+  Future<void> close() {
+    _streamSubscription?.cancel();
+    return super.close();
   }
 
   ///****************Load Audio Player*******************/
@@ -106,19 +130,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
           );
         }
 
-        // This listens for changes in the playback state of the audio handler
-        _audioHandler.playbackState
-            .debounceTime(const Duration(milliseconds: 500))
-            .distinct((prev, next) =>
-                prev.processingState == next.processingState &&
-                prev.playing == next.playing)
-            .listen((playbackState) {
-          if (playbackState.processingState == AudioProcessingState.completed) {
-            _addCurrentSongToRecentlyPlayed(emit);
-            _addCurrentSongToMostPlayed(emit);
-          }
-        });
-
         debugPrint('data: ${data.playbackState.toString()}');
         return state.copyWith(audioPlayerData: data);
       },
@@ -162,8 +173,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     Emitter<AudioPlayerState> emit,
   ) async {
     await _audioHandler.skipToNext();
-    await _addCurrentSongToRecentlyPlayed(emit);
-    await _addCurrentSongToMostPlayed(emit);
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
@@ -174,8 +183,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     Emitter<AudioPlayerState> emit,
   ) async {
     await _audioHandler.skipToPrevious();
-    await _addCurrentSongToRecentlyPlayed(emit);
-    await _addCurrentSongToMostPlayed(emit);
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
@@ -186,8 +193,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     Emitter<AudioPlayerState> emit,
   ) async {
     await _audioHandler.skipToQueueItem(event.index);
-    await _addCurrentSongToRecentlyPlayed(emit);
-    await _addCurrentSongToMostPlayed(emit);
     emit(state.copyWith(status: AudioPlayerStatus.playing));
   }
 
@@ -230,8 +235,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     // this to play song by index when user press on song in listview.builder
     await _audioHandler.skipToQueueItem(event.index);
 
-    await _addCurrentSongToRecentlyPlayed(emit);
-    await _addCurrentSongToMostPlayed(emit);
     //  play song
     await _audioHandler.play();
 
@@ -266,6 +269,16 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     final updatedList = mostPlayedRepoImpl.getSongs(box);
     emit(state.copyWith(
         status: AudioPlayerStatus.loaded, mostPlayed: updatedList));
+  }
+
+  ///**************Listen Change Index Event*************/
+  ///***************************************************/
+  void _onAddToRecentlyAndMostPlayedEvent(
+    AddToRecentlyAndMostPlayedEvent event,
+    Emitter<AudioPlayerState> emit,
+  ) async {
+    await _addCurrentSongToMostPlayed(emit);
+    await _addCurrentSongToRecentlyPlayed(emit);
   }
 
   ///** This method adds the currently playing song to the recently played list and updates the state.

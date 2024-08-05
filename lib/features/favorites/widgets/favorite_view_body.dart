@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/functions/flutter_toast.dart';
-import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/shared_widgets/image_empty_list.dart';
-import 'package:just_music/core/shared_widgets/list_view_songs.dart';
-import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
+import 'package:just_music/features/favorites/widgets/song_favorite_view.dart';
 
 class FavoriteViewBody extends StatelessWidget {
   const FavoriteViewBody({super.key});
@@ -36,23 +33,7 @@ class FavoriteViewBody extends StatelessWidget {
 
             //**** state loaded */
             if (state.favoriteSongsStatus == FavoriteSongsStatus.loaded) {
-              //* List of favorite song (empty || null) */
-              if (songs == null || songs.isEmpty) {
-                return const ImageEmptyList(image: AppImages.emptyFavorites);
-              }
-
-              //* if song is loaded success */
-              return CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    CustomSliverListSongs(
-                      songs: songs,
-                      isIcon: true,
-                    ),
-
-                    //* this to add padding in the bottom CustomScrollView
-                    sliverPadding(kTextTabBarHeight + 60.h)
-                  ]);
+              return SongsFavoriteViewBody(songs: songs!);
             } else {
               return const SizedBox();
             }

@@ -6,15 +6,19 @@ import 'package:just_music/core/functions/flutter_toast.dart';
 import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/utils/app_icon.dart';
+import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 
 class ControlSongDetailsSongButtons extends StatelessWidget {
   const ControlSongDetailsSongButtons({
     super.key,
     required this.isPlaying,
+    required this.songs,
+    required this.currentIndex,
   });
   final bool isPlaying;
-
+  final List<Song> songs;
+  final int currentIndex;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -59,14 +63,18 @@ class ControlSongDetailsSongButtons extends StatelessWidget {
         //************** Skip to Previous ******************/
         //*************************************************/
         CustomIconButton(
-          size: 30.h,
-          onPressed: () {
-            context.read<AudioPlayerBloc>().add(SkipToPreviousAudioEvent());
-          },
+          onPressed: currentIndex > 0
+              ? () {
+                  context
+                      .read<AudioPlayerBloc>()
+                      .add(SkipToPreviousAudioEvent());
+                }
+              : null,
           icon: AppIcon.skipPrevious,
-          color: AppColor.white,
+          color:
+              currentIndex > 0 ? AppColor.white : AppColor.white.withAlpha(110),
+          size: 30.h,
         ),
-
         //**************** Play / Pause ********************/
         //*************************************************/
         Container(
@@ -89,11 +97,16 @@ class ControlSongDetailsSongButtons extends StatelessWidget {
         //**************** Skip to Next ********************/
         //*************************************************/
         CustomIconButton(
-          size: 30.h,
-          onPressed: () {
-            context.read<AudioPlayerBloc>().add(SkipToNextAudioEvent());
-          },
+          onPressed: currentIndex < songs.length - 1
+              ? () {
+                  context.read<AudioPlayerBloc>().add(SkipToNextAudioEvent());
+                }
+              : null,
           icon: AppIcon.skipNext,
+          color: currentIndex < songs.length - 1
+              ? AppColor.white
+              : AppColor.white.withAlpha(110),
+          size: 30.h,
         ),
 
         //**************** Repeat Mode *********************/

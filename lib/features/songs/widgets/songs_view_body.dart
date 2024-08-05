@@ -58,6 +58,7 @@ class SongsViewBody extends StatelessWidget {
                 // List Songs
                 CustomSliverListSongs(
                   songs: songs,
+                  hideIndex: 2,
                 ),
 
                 // padding

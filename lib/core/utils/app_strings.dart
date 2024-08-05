@@ -7,6 +7,7 @@ abstract class AppStrings {
   static const String editNamePlaylist = 'Edit Name Playlist';
   static const String addSongs = "Add Songs";
   static const String recentlyPlayed = "Recently Played";
+  static const String recentlyPlayedSongs = "Recently played songs";
   static const String deleteSong = "Delete this song from the playlist?";
   static const String songAlreadyExist =
       "This song already exists in this playlist";
@@ -43,6 +44,7 @@ abstract class AppStrings {
   static const String emptySongs = "No items here yet.";
   static const String search = "Search";
   static const String mostPlayed = "Most Played";
+  static const String mostPlayedSongs = "Most played songs";
   static const String more = "More";
   static const String unexpectedError =
       "Unexpected error..please try again later!";
