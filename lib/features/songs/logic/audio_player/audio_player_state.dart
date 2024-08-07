@@ -9,34 +9,34 @@ enum AudioPlayerStatus {
   repeate,
 }
 
-class AudioPlayerState extends Equatable {
-  final AudioPlayerStatus status;
+class AudioPlayerState {
   final AudioPlayerData<Song>? audioPlayerData;
+  final AudioPlayerStatus status;
   final List<Song> recentlyPlayed;
   final List<MostPlayedModel> mostPlayed;
+  final Duration? lastKnownPosition;
 
   const AudioPlayerState({
-    this.status = AudioPlayerStatus.initial,
     this.audioPlayerData,
+    this.status = AudioPlayerStatus.initial,
     this.recentlyPlayed = const [],
     this.mostPlayed = const [],
+    this.lastKnownPosition,
   });
 
   AudioPlayerState copyWith({
-    AudioPlayerStatus? status,
     AudioPlayerData<Song>? audioPlayerData,
+    AudioPlayerStatus? status,
     List<Song>? recentlyPlayed,
     List<MostPlayedModel>? mostPlayed,
+    Duration? lastKnownPosition,
   }) {
     return AudioPlayerState(
-      status: status ?? this.status,
       audioPlayerData: audioPlayerData ?? this.audioPlayerData,
+      status: status ?? this.status,
       recentlyPlayed: recentlyPlayed ?? this.recentlyPlayed,
       mostPlayed: mostPlayed ?? this.mostPlayed,
+      lastKnownPosition: lastKnownPosition ?? this.lastKnownPosition,
     );
   }
-
-  @override
-  List<Object?> get props =>
-      [status, audioPlayerData, recentlyPlayed, mostPlayed];
 }

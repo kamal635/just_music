@@ -1,74 +1,76 @@
+// // import 'package:flutter/material.dart';
+// // import 'package:just_music/core/utils/app_images.dart';
+
 // import 'package:flutter/material.dart';
 
-// class AnimatedPage extends StatefulWidget {
-//   const AnimatedPage({super.key});
+// import 'package:flutter/material.dart';
+
+// import 'package:flutter/material.dart';
+
+// import 'package:flutter/material.dart';
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
 //   @override
-//   _AnimatedPageState createState() => _AnimatedPageState();
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: MyHomePage(),
+//     );
+//   }
 // }
 
-// class _AnimatedPageState extends State<AnimatedPage> {
-//   bool _isFieldVisible = false;
-//   bool _isListVisible = false;
+// class MyHomePage extends StatefulWidget {
+//   const MyHomePage({super.key});
 
 //   @override
-//   void initState() {
-//     super.initState();
-//     Future.delayed(const Duration(milliseconds: 300), () {
-//       setState(() {
-//         _isFieldVisible = true;
-//       });
-//     });
+//   _MyHomePageState createState() => _MyHomePageState();
+// }
 
-//     Future.delayed(const Duration(milliseconds: 600), () {
-//       setState(() {
-//         _isListVisible = true;
-//       });
-//     });
-//   }
+// class _MyHomePageState extends State<MyHomePage> {
+//   final List<String> items = List.generate(1, (index) => 'Item ${index + 1}');
 
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Animated TextField and SliverList'),
-//       ),
-//       body: CustomScrollView(
-//         slivers: [
-//           SliverToBoxAdapter(
-//             child: AnimatedContainer(
-//               duration: const Duration(seconds: 1),
-//               curve: Curves.easeIn,
-//               transform: _isFieldVisible
-//                   ? Matrix4.translationValues(0, 0, 0)
-//                   : Matrix4.translationValues(0, -50, 0),
-//               child: Padding(
-//                 padding: const EdgeInsets.all(16.0),
-//                 child: TextFormField(
-//                   decoration: const InputDecoration(
-//                     labelText: 'Enter text',
-//                     border: OutlineInputBorder(),
-//                   ),
+//       body: LayoutBuilder(
+//         builder: (BuildContext context, BoxConstraints constraints) {
+//           final double screenHeight = constraints.maxHeight;
+//           const double appBarHeight = 200.0; // Height of the SliverAppBar
+//           final double listHeight =
+//               items.length * 35; // Approximate height of list items
+
+//           return CustomScrollView(
+//             slivers: <Widget>[
+//               SliverAppBar(
+//                 title: const Text('SliverAppBar'),
+//                 floating: true,
+//                 pinned: true,
+//                 expandedHeight: appBarHeight,
+//                 flexibleSpace: FlexibleSpaceBar(
+//                   background: Container(color: Colors.blue),
 //                 ),
 //               ),
-//             ),
-//           ),
-//           SliverList(
-//             delegate: SliverChildBuilderDelegate(
-//               (BuildContext context, int index) {
-//                 return AnimatedOpacity(
-//                   opacity: _isListVisible ? 1.0 : 0.0,
-//                   duration: const Duration(seconds: 1),
-//                   curve: Curves.easeIn,
-//                   child: ListTile(
-//                     title: Text('Item #$index'),
+//               SliverList(
+//                 delegate: SliverChildBuilderDelegate(
+//                   (BuildContext context, int index) {
+//                     return ListTile(
+//                       title: Text(items[index]),
+//                     );
+//                   },
+//                   childCount: items.length,
+//                 ),
+//               ),
+//               if (listHeight < screenHeight - appBarHeight)
+//                 SliverToBoxAdapter(
+//                   child: Container(
+//                     height: screenHeight - appBarHeight - listHeight,
+//                     color: Colors.transparent,
 //                   ),
-//                 );
-//               },
-//               childCount: 20,
-//             ),
-//           ),
-//         ],
+//                 ),
+//             ],
+//           );
+//         },
 //       ),
 //     );
 //   }

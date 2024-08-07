@@ -33,7 +33,7 @@ class FavoriteViewBody extends StatelessWidget {
 
             //**** state loaded */
             if (state.favoriteSongsStatus == FavoriteSongsStatus.loaded) {
-              return SongsFavoriteViewBody(songs: songs!);
+              return SongsFavoriteViewBody(songs: songs ?? []);
             } else {
               return const SizedBox();
             }

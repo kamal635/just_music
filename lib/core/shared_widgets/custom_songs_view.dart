@@ -22,13 +22,30 @@ class CustomSongsView extends StatelessWidget {
       this.image,
       required this.title,
       required this.subTitle});
-  final List<Song> songs;
+  final List<Song>? songs;
   final String? image;
   final String title;
   final String subTitle;
 
   @override
   Widget build(BuildContext context) {
+    Map<int, double> paddingMap = {
+      0: 600,
+      1: 550,
+      2: 510,
+      3: 470,
+      4: 430,
+      5: 390,
+      6: 350,
+      8: 310,
+      9: 270,
+      10: 230,
+    };
+
+    double calculatePadding(int lenght) {
+      return paddingMap[lenght] ?? 200;
+    }
+
     return Scaffold(
       floatingActionButton: const MusicTrackPlayer(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
@@ -39,7 +56,7 @@ class CustomSongsView extends StatelessWidget {
           slivers: [
             SliverAppBar(
               expandedHeight: 120.h,
-              floating: false,
+              floating: true,
               pinned: true,
               backgroundColor: AppColor.primary,
               foregroundColor: AppColor.primary,
@@ -56,7 +73,7 @@ class CustomSongsView extends StatelessWidget {
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   // Calculate if the SliverAppBar is collapsed
-                  final double collapseHeight = 120.h - kToolbarHeight;
+                  final double collapseHeight = 130.h - kToolbarHeight;
                   final bool isCollapsed =
                       constraints.biggest.height <= collapseHeight;
 
@@ -72,7 +89,7 @@ class CustomSongsView extends StatelessWidget {
                         Visibility(
                           visible: !isCollapsed,
                           child: Text(
-                            "$subTitle : ${songs.length} songs",
+                            "$subTitle : ${songs?.length ?? 0} songs",
                             style: AppFonts.normal_8.copyWith(
                               color: AppColor.white.withAlpha(120),
                             ),
@@ -95,28 +112,28 @@ class CustomSongsView extends StatelessWidget {
               ),
             ),
             sliverPadding(20),
-            songs.isEmpty
-                ? SliverToBoxAdapter(
-                    child: ImageEmptyList(
-                        image: image ?? AppImages.emptyFavorites),
-                  )
-                : SliverList.builder(
-                    itemCount: songs.length,
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        onTap: () {
-                          context
-                              .read<AudioPlayerBloc>()
-                              .add(SetAudioEvent(songs: songs, index: index));
-                        },
-                        child: SongCard(
-                          song: songs[index],
-                          hideIndex: 2,
-                        ),
-                      );
+            if (songs == null || songs!.isEmpty)
+              SliverToBoxAdapter(
+                child: ImageEmptyList(image: image ?? AppImages.emptyFavorites),
+              )
+            else
+              SliverList.builder(
+                itemCount: songs?.length,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      context
+                          .read<AudioPlayerBloc>()
+                          .add(SetAudioEvent(songs: songs!, index: index));
                     },
-                  ),
-            sliverPadding(150),
+                    child: SongCard(
+                      song: songs![index],
+                      hideIndex: 2,
+                    ),
+                  );
+                },
+              ),
+            sliverPadding(calculatePadding(songs?.length ?? 0)),
           ],
         ),
       ),
