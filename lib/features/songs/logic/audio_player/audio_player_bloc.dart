@@ -1,17 +1,12 @@
 import 'dart:async';
-
 import 'package:audio_service/audio_service.dart';
-import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:just_music/features/home/data/most_played_repo.dart';
 import 'package:just_music/features/home/data/recently_played_repo.dart';
 import 'package:just_music/features/home/models/most_played_model.dart';
 import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:just_music/features/songs/data/repository/audio_player_data.dart';
-
 import 'package:rxdart/rxdart.dart';
 
 part 'audio_player_event.dart';
@@ -21,7 +16,9 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   final AudioHandler _audioHandler;
   final RecentlyPlayedRepoImpl recentlyPlayedRepoImpl;
   final MostPlayedRepoImpl mostPlayedRepoImpl;
-  StreamSubscription<MediaItem?>? _streamSubscription;
+  StreamSubscription<MediaItem?>? _streamMediaItem;
+  MediaItem? _previousMediaItem;
+  AudioServiceRepeatMode _currentRepeatMode = AudioServiceRepeatMode.none;
 
   AudioPlayerBloc({
     required AudioHandler audioHandler,
@@ -63,27 +60,45 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     trackTheSong();
   }
 
+  /// This method sets up a listener on the mediaItem stream from the audio handler.
+  /// It checks if the media item has changed or if the repeat mode is set to `repeat.one`.
+  /// If either condition is true, it updates the `_previousMediaItem` and triggers
+  /// the `AddToRecentlyAndMostPlayedEvent`.
   void trackTheSong() {
-    _streamSubscription = _audioHandler.mediaItem.listen((mediaItem) {
+    _streamMediaItem = _audioHandler.mediaItem.distinct().listen((mediaItem) {
       if (mediaItem != null) {
-        add(AddToRecentlyAndMostPlayedEvent());
+        // Check if the media item has changed or if repeat mode is set to repeat.one
+        if (mediaItem != _previousMediaItem ||
+            _currentRepeatMode == AudioServiceRepeatMode.one) {
+          // Update the previous media item to the current one
+          _previousMediaItem = mediaItem;
+
+          // Add event to update the recently and most played songs lists
+          add(AddToRecentlyAndMostPlayedEvent());
+        }
       }
     });
   }
 
   @override
   Future<void> close() {
-    _streamSubscription?.cancel();
+    _streamMediaItem?.cancel();
     return super.close();
   }
 
   ///****************Load Audio Player*******************/
   ///***************************************************/
+  /// Handles the loading of the audio player state and updates the state based on
+  /// the combined streams of playback state, queue, current media item, and position.
+  ///
+  /// This method listens to changes in the audio player's data and updates the state
+  /// accordingly. It also checks if a song is replayed in `repeat.one` mode and adds
+  /// an event to update the recently and most played songs lists if necessary.
   void _onLoadAudioPlayer(
     LoadAudioPlayerEvent event,
     Emitter<AudioPlayerState> emit,
   ) async {
-    // combine 4 streams to output   AudioPlayerData<Song>
+    // Combine the streams of playback state, queue, current media item, and position
     Stream<AudioPlayerData<Song>> audioPlayerDataStream = Rx.combineLatest4<
         PlaybackState,
         List<MediaItem>,
@@ -95,12 +110,10 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       _audioHandler.mediaItem,
       AudioService.position,
       (playbackState, mediaItems, mediaItem, position) {
-        // can be "null" if there not any song playing in the player
+        // Map the current media item and queue to Song objects
         final audio =
             (mediaItem == null) ? null : Song.fromMediaItem(mediaItem);
-
         final queue = mediaItems.map((e) => Song.fromMediaItem(e)).toList();
-
         return AudioPlayerData<Song>(
           audio: audio,
           queue: queue,
@@ -111,27 +124,42 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
       },
     );
 
+    // Listen to the combined stream and update the state based on the data
     await emit.forEach(
       audioPlayerDataStream,
       onData: (data) {
-        // in this case we don't  display "music track player card"
-        if (state.status == AudioPlayerStatus.initial && data.audio == null) {
-          return state.copyWith(
-            audioPlayerData: data,
-            status: AudioPlayerStatus.initial,
-          );
+        // Check if the current audio being played is the same as the previously stored audio
+        final isSameAudio = state.audioPlayerData?.audio == data.audio;
+
+        // Check if the last known position of the audio was greater than 2 seconds
+        final isBeyondInitialPosition = state.lastKnownPosition != null &&
+            state.lastKnownPosition! > const Duration(seconds: 2);
+
+        // Check if the current position of the audio is less than 2 seconds,
+        // indicating that the song has restarted
+        final isRestarted = data.currentAudioPosition != null &&
+            data.currentAudioPosition! < const Duration(seconds: 2);
+
+        // Combine the checks to determine if the same song has restarted
+        final isSongReplayed =
+            isSameAudio && isBeyondInitialPosition && isRestarted;
+
+        // If the song has restarted and the repeat mode is 'repeat.one',
+        // add the song to recently and most played lists
+        if (isSongReplayed &&
+            _currentRepeatMode == AudioServiceRepeatMode.one) {
+          add(AddToRecentlyAndMostPlayedEvent());
         }
 
-        // in this case we  display "music track player card"
-        if (state.status == AudioPlayerStatus.initial && data.audio != null) {
-          return state.copyWith(
-            audioPlayerData: data,
-            status: AudioPlayerStatus.loaded,
-          );
-        }
-
-        debugPrint('data: ${data.playbackState.toString()}');
-        return state.copyWith(audioPlayerData: data);
+        // Update the state with the new audio player data and current position
+        return state.copyWith(
+          audioPlayerData: data,
+          lastKnownPosition: data.currentAudioPosition,
+          status:
+              (state.status == AudioPlayerStatus.initial && data.audio == null)
+                  ? AudioPlayerStatus.initial
+                  : AudioPlayerStatus.loaded,
+        );
       },
     );
   }
@@ -212,6 +240,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     RepeatModeAudioEvent event,
     Emitter<AudioPlayerState> emit,
   ) async {
+    _currentRepeatMode = event.repeateMode;
     await _audioHandler.setRepeatMode(event.repeateMode);
     emit(state.copyWith(status: AudioPlayerStatus.repeate));
   }
@@ -235,10 +264,16 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     // this to play song by index when user press on song in listview.builder
     await _audioHandler.skipToQueueItem(event.index);
 
-    //  play song
-    await _audioHandler.play();
+    _previousMediaItem = mediaItems[event.index];
+    emit(state.copyWith(
+      status: AudioPlayerStatus.playing,
+      lastKnownPosition: Duration.zero,
+    ));
 
-    emit(state.copyWith(status: AudioPlayerStatus.playing));
+    //  play song
+    add(PlayAudioEvent());
+
+    add(AddToRecentlyAndMostPlayedEvent());
   }
 
   ///**************Load Recently Played Event*************/
