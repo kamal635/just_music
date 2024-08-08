@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/features/home/widgets/featured_songs/home_featured_songs.dart';
 import 'package:just_music/features/home/widgets/most_played/home_most_played.dart';
 import 'package:just_music/features/home/widgets/recently_played/home_recently_played.dart';
 import 'package:just_music/features/home/widgets/shuffle_and_favorite/body_shuffle_and_favorite.dart';
@@ -24,10 +25,11 @@ class HomeViewBody extends StatelessWidget {
           // Recently Played
           const HomeRecentlyPlayed(),
 
-          sliverPadding(30),
-
           // Most Played
           const HomeMostPlayed(),
+
+          // Featured Songs
+          const HomeFeaturedSongs(),
 
           sliverPadding(120),
         ],

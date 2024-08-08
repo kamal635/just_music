@@ -65,6 +65,7 @@ class HomeMostPlayed extends StatelessWidget {
                   }),
                 ),
               ),
+              spaceHeight(30),
             ],
           );
         },

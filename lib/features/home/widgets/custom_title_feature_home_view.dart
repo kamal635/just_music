@@ -20,7 +20,7 @@ class CustomTitleFeatureHomeView extends StatelessWidget {
           // title  Recently Played
           Text(
             title,
-            style: AppFonts.medium_18,
+            style: AppFonts.bold_20,
           ),
           const Spacer(),
           InkWell(
@@ -32,7 +32,7 @@ class CustomTitleFeatureHomeView extends StatelessWidget {
                 // Text "More"
                 Text(
                   AppStrings.more,
-                  style: AppFonts.medium_14
+                  style: AppFonts.medium_12
                       .copyWith(color: AppColor.white.withAlpha(180)),
                 ),
 
@@ -41,7 +41,7 @@ class CustomTitleFeatureHomeView extends StatelessWidget {
                 // Icon Arrow
                 Icon(
                   AppIcon.arrowForward,
-                  size: 12.h,
+                  size: 10.h,
                   color: AppColor.white.withAlpha(180),
                 )
               ],

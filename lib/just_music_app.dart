@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/routes/string_route.dart';
+import 'package:just_music/features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
 import 'package:just_music/core/styling/app_colors.dart';
@@ -59,6 +60,11 @@ class JustMusicApp extends StatelessWidget {
           BlocProvider(
             create: (context) =>
                 di<FavoriteSongsBloc>()..add(const LoadFavoriteSongs()),
+          ),
+
+          //* Favorite Songs Bloc
+          BlocProvider(
+            create: (context) => NavBottomBarBloc(),
           ),
 
           //* Playlist Bloc

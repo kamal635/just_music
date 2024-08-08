@@ -63,6 +63,8 @@ class HomeRecentlyPlayed extends StatelessWidget {
                   );
                 },
               ),
+
+              spaceHeight(30),
             ],
           );
         },
