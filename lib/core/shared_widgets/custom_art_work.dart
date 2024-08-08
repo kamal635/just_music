@@ -10,17 +10,19 @@ class CustomArtWork extends StatelessWidget {
       required this.id,
       this.radius,
       this.iconSize,
-      this.colorIcon});
+      this.colorIcon,
+      this.artworkType});
   final int id;
   final double? radius;
   final double? iconSize;
   final Color? colorIcon;
+  final ArtworkType? artworkType;
   @override
   Widget build(BuildContext context) {
     return QueryArtworkWidget(
       artworkBorder: BorderRadius.all(Radius.circular(radius ?? 8.r)),
       id: id,
-      type: ArtworkType.AUDIO,
+      type: artworkType ?? ArtworkType.AUDIO,
       keepOldArtwork: true,
       size: 300,
       quality: 100,
