@@ -6,6 +6,7 @@ abstract class AppStrings {
   static const String createPlaylist = "create playlist";
   static const String editNamePlaylist = 'Edit Name Playlist';
   static const String addSongs = "Add Songs";
+  static const String artists = "Artists";
   static const String featuredSongs = "Featured Songs";
   static const String recentlyPlayed = "Recently Played";
   static const String recentlyPlayedSongs = "Recently played songs";
@@ -65,6 +66,7 @@ abstract class AppHive {
 
 abstract class AppArguments {
   static const String favoriteSong = "favoriteSong";
+  static const String artist = "artist";
   static const String playlist = "playlist";
   static const String songs = "songs";
   static const String playlistComeFromPreviousPage =

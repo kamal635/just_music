@@ -1,5 +1,9 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:just_music/features/artists/data/repo/fetch_artists.dart';
+import 'package:just_music/features/artists/data/repo/fetch_songs_artist.dart';
+import 'package:just_music/features/artists/logic/artists/artists_bloc.dart';
+import 'package:just_music/features/artists/logic/songs_artist/songs_artist_bloc.dart';
 import 'package:just_music/features/favorites/data/repository/favorite_repo.dart';
 import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
 import 'package:just_music/features/home/data/most_played_repo.dart';
@@ -24,7 +28,10 @@ Future<void> setUpDependincy() async {
   di.registerLazySingleton<RecentlyPlayedRepoImpl>(
       () => RecentlyPlayedRepoImpl());
   di.registerLazySingleton<MostPlayedRepoImpl>(() => MostPlayedRepoImpl());
-
+  di.registerLazySingleton<FetchArtistsRepoImpl>(
+      () => FetchArtistsRepoImpl(onAudioQuery: di()));
+  di.registerLazySingleton<FetchSongsArtistImpl>(
+      () => FetchSongsArtistImpl(onAudioQuery: di()));
   //======================= Bloc ======================
   di.registerFactory<CheckPermissionBloc>(
       () => CheckPermissionBloc(onAudioQuery: di()));
@@ -36,7 +43,10 @@ Future<void> setUpDependincy() async {
   di.registerFactory<SearchSongsBloc>(
       () => SearchSongsBloc(fetchSongsFromDeviceRepoImpl: di()));
   di.registerFactory<PlaylistBloc>(() => PlaylistBloc(playlistRepoImpl: di()));
-
+  di.registerFactory<ArtistsBloc>(
+      () => ArtistsBloc(fetchArtistsRepoImpl: di()));
+  di.registerFactory<SongsArtistBloc>(
+      () => SongsArtistBloc(fetchSongsArtistImpl: di()));
   //======================= External Package ======================
   di.registerFactory<OnAudioQuery>(() => OnAudioQuery());
 

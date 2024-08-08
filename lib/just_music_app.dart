@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/helpers/dependencey_injection.dart';
 import 'package:just_music/core/routes/string_route.dart';
+import 'package:just_music/features/artists/logic/artists/artists_bloc.dart';
+import 'package:just_music/features/artists/logic/songs_artist/songs_artist_bloc.dart';
 import 'package:just_music/features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
 import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
 import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
@@ -62,9 +64,14 @@ class JustMusicApp extends StatelessWidget {
                 di<FavoriteSongsBloc>()..add(const LoadFavoriteSongs()),
           ),
 
-          //* Favorite Songs Bloc
+          //* Nav Bottom Bar Bloc
           BlocProvider(
             create: (context) => NavBottomBarBloc(),
+          ),
+
+          //* Artists Bloc
+          BlocProvider(
+            create: (context) => di<ArtistsBloc>()..add(LoadArtistEvent()),
           ),
 
           //* Playlist Bloc

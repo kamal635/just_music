@@ -1,6 +1,7 @@
 abstract class RouterName {
   static const changedView = "/";
   static const homeView = "/homeView";
+  static const songsArtist = "/songsArtist";
   static const recentlyPlayedView = "/recentlyPlayedView";
   static const mostPlayedView = "/mostPlayedView";
   static const songsView = "/songsView";
