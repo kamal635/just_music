@@ -292,7 +292,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   }
 
   ///**************Load Most Played Event*************/
-  ///***************************************************/
+  ///************************************************/
   void _onMostPlayedEvent(
     MostPlayedEvent event,
     Emitter<AudioPlayerState> emit,
@@ -306,8 +306,8 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
         status: AudioPlayerStatus.loaded, mostPlayed: updatedList));
   }
 
-  ///**************Listen Change Index Event*************/
-  ///***************************************************/
+  ///*******Add To Recently And Most Played Event******/
+  ///************************************************/
   void _onAddToRecentlyAndMostPlayedEvent(
     AddToRecentlyAndMostPlayedEvent event,
     Emitter<AudioPlayerState> emit,

@@ -5,6 +5,8 @@ abstract class AppFonts {
   //==================== bold ============================
   static final TextStyle bold_18 =
       TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold);
+  static final TextStyle bold_20 =
+      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold);
   static final TextStyle bold_22 =
       TextStyle(fontSize: 22.sp, fontWeight: FontWeight.bold);
 

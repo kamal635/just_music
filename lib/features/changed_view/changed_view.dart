@@ -6,6 +6,7 @@ import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
 import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';
+import 'package:just_music/features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
 import 'package:just_music/features/home/home_view.dart';
 import 'package:just_music/features/songs/songs_view.dart';
 import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
@@ -31,8 +32,6 @@ class _ChangedViewState extends State<ChangedView>
     const SongsView(),
     const PlayListView(),
   ];
-
-  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -63,81 +62,94 @@ class _ChangedViewState extends State<ChangedView>
 
   //***** Body changed view */
   Widget _buildMainScreen() {
-    return Scaffold(
-      floatingActionButton: const MusicTrackPlayer(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      bottomNavigationBar: _buildCustomBottomNavigationBar(),
-      appBar: AppBar(
-        title: const SectionSearch(), // Search box
+    return BlocBuilder<NavBottomBarBloc, NavBottomBarState>(
+      builder: (context, state) {
+        return Scaffold(
+          floatingActionButton: const MusicTrackPlayer(),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          bottomNavigationBar: _buildCustomBottomNavigationBar(),
+          appBar: AppBar(
+            title: const SectionSearch(), // Search box
 
-        toolbarHeight: 60.h,
-        backgroundColor: AppColor.primary,
-        surfaceTintColor: AppColor.primary,
+            toolbarHeight: 60.h,
+            backgroundColor: AppColor.primary,
+            surfaceTintColor: AppColor.primary,
 
-        actions: [
-          CustomIconButton(
-              onPressed: _onSettingsPressed, icon: AppIcon.settings),
-        ],
-      ),
-      body: _views[_currentIndex],
+            actions: [
+              CustomIconButton(
+                  onPressed: _onSettingsPressed, icon: AppIcon.settings),
+            ],
+          ),
+          body: _views[state.currentPage],
+        );
+      },
     );
   }
 
   //***** Bottom Nav Bar */
   Widget _buildCustomBottomNavigationBar() {
-    return Container(
-      height: 50.h,
-      decoration: BoxDecoration(
-        color: AppColor.navBottomBar,
-        boxShadow: [
-          BoxShadow(
-            color: AppColor.black.withOpacity(0.1),
-            blurRadius: 10,
-            spreadRadius: 2,
+    return BlocBuilder<NavBottomBarBloc, NavBottomBarState>(
+      builder: (context, state) {
+        return Container(
+          height: 50.h,
+          decoration: BoxDecoration(
+            color: AppColor.navBottomBar,
+            boxShadow: [
+              BoxShadow(
+                color: AppColor.black.withOpacity(0.1),
+                blurRadius: 10,
+                spreadRadius: 2,
+              ),
+            ],
+            border: const Border(bottom: BorderSide(width: 0.3)),
           ),
-        ],
-        border: const Border(bottom: BorderSide(width: 0.3)),
-      ),
-      child: Material(
-        color: Colors.transparent,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: List.generate(
-            _views.length,
-            (index) {
-              bool isSelected = _currentIndex == index;
-              Color color = isSelected
-                  ? AppColor.lightBlue
-                  : AppColor.white.withAlpha(110);
-              return InkResponse(
-                onTap: () => _onTabTapped(index),
-                splashFactory: InkRipple.splashFactory,
-                radius: 60,
-                splashColor: AppColor.white.withAlpha(40),
-                highlightColor: Colors.transparent,
-                child: Container(
-                    height: double.infinity,
-                    alignment: Alignment.center,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Icon(
-                          _getIconForIndex(index, isSelected),
-                          color: color,
-                          size: 18,
-                        ),
-                        spaceHeight(2),
-                        Text(
-                          _getLabelForIndex(index),
-                          style: TextStyle(color: color),
-                        ),
-                      ],
-                    )),
-              );
-            },
+          child: Material(
+            color: Colors.transparent,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: List.generate(
+                _views.length,
+                (index) {
+                  bool isSelected = state.currentPage == index;
+                  Color color = isSelected
+                      ? AppColor.lightBlue
+                      : AppColor.white.withAlpha(110);
+                  return InkResponse(
+                    onTap: () {
+                      context
+                          .read<NavBottomBarBloc>()
+                          .add(ChangedCurrentPageEvent(index: index));
+                    },
+                    splashFactory: InkRipple.splashFactory,
+                    radius: 60,
+                    splashColor: AppColor.white.withAlpha(40),
+                    highlightColor: Colors.transparent,
+                    child: Container(
+                        height: double.infinity,
+                        alignment: Alignment.center,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Icon(
+                              _getIconForIndex(index, isSelected),
+                              color: color,
+                              size: 18,
+                            ),
+                            spaceHeight(2),
+                            Text(
+                              _getLabelForIndex(index),
+                              style: TextStyle(color: color),
+                            ),
+                          ],
+                        )),
+                  );
+                },
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -167,13 +179,6 @@ class _ChangedViewState extends State<ChangedView>
       default:
         return AppStrings.home;
     }
-  }
-
-  //**** on tapped nav bar */
-  void _onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
   }
 
   //*** Icon Settings in appbar */

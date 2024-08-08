@@ -29,21 +29,22 @@ class CustomSongsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     Map<int, double> paddingMap = {
-      0: 600,
-      1: 550,
-      2: 510,
-      3: 470,
-      4: 430,
-      5: 390,
-      6: 350,
-      8: 310,
-      9: 270,
-      10: 230,
+      0: screenHeight,
+      1: screenHeight / 2,
+      2: screenHeight / 2,
+      3: screenHeight / 2,
+      4: screenHeight / 2.8,
+      5: screenHeight / 2.8,
+      6: screenHeight / 2.8,
+      7: screenHeight / 2.8,
+      8: screenHeight / 7.2,
+      9: screenHeight / 7.2,
     };
 
     double calculatePadding(int lenght) {
-      return paddingMap[lenght] ?? 200;
+      return paddingMap[lenght] ?? screenHeight / 8;
     }
 
     return Scaffold(
@@ -55,7 +56,7 @@ class CustomSongsView extends StatelessWidget {
           physics: const AlwaysScrollableScrollPhysics(),
           slivers: [
             SliverAppBar(
-              expandedHeight: 120.h,
+              expandedHeight: screenHeight / 6,
               floating: true,
               pinned: true,
               backgroundColor: AppColor.primary,
@@ -73,7 +74,8 @@ class CustomSongsView extends StatelessWidget {
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {
                   // Calculate if the SliverAppBar is collapsed
-                  final double collapseHeight = 130.h - kToolbarHeight;
+                  final double collapseHeight =
+                      screenHeight / 5 - kToolbarHeight;
                   final bool isCollapsed =
                       constraints.biggest.height <= collapseHeight;
 
