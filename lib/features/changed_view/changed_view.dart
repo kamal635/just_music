@@ -8,8 +8,8 @@ import 'package:just_music/core/utils/app_icon.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
 import 'package:just_music/features/home/home_view.dart';
-import 'package:just_music/features/songs/songs_view.dart';
 import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
+import 'package:just_music/features/songs/widgets/tab_bar/tab_bar_songs.dart';
 import 'package:just_music/features/songs/widgets/grant_permission.dart';
 import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
 import 'package:just_music/features/playlists/playlist_view.dart';
@@ -29,7 +29,7 @@ class _ChangedViewState extends State<ChangedView>
     with SingleTickerProviderStateMixin {
   final List<Widget> _views = [
     const HomeView(),
-    const SongsView(),
+    const TabBarSongsView(),
     const PlayListView(),
   ];
 

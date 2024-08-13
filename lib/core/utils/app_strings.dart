@@ -67,6 +67,7 @@ abstract class AppHive {
 abstract class AppArguments {
   static const String favoriteSong = "favoriteSong";
   static const String artist = "artist";
+  static const String album = "album";
   static const String playlist = "playlist";
   static const String songs = "songs";
   static const String playlistComeFromPreviousPage =

@@ -7,23 +7,23 @@ import 'package:just_music/core/shared_widgets/image_empty_list.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/artists/logic/artists/artists_bloc.dart';
-import 'package:just_music/features/artists/widgets/grid_view_artists.dart';
+import 'package:just_music/features/albums/logic/albums/albums_bloc.dart';
+import 'package:just_music/features/albums/widgets/grid_view_albums.dart';
 
-class ArtistsViewBody extends StatelessWidget {
-  const ArtistsViewBody({super.key});
+class AlbumsViewBody extends StatelessWidget {
+  const AlbumsViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ArtistsBloc, ArtistsState>(
+    return BlocBuilder<AlbumsBloc, AlbumsState>(
       builder: (context, state) {
-        if (state.artistsStatus == ArtistsStatus.loading) {
+        if (state.albumsStatus == AlbumsStatus.loading) {
           return const CustomLoading();
         }
-        if (state.artistsStatus == ArtistsStatus.loaded) {
-          final artists = state.artists;
-          if (artists == null && artists!.isEmpty) {
-            return const ImageEmptyList(image: AppImages.emptyFavorites);
+        if (state.albumsStatus == AlbumsStatus.loaded) {
+          final albums = state.albums;
+          if (albums == null && albums!.isEmpty) {
+            return const ImageEmptyList(image: AppImages.emptySongs);
           }
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -31,19 +31,19 @@ class ArtistsViewBody extends StatelessWidget {
               slivers: [
                 sliverPadding(20),
 
-                // Number artists
+                // Number albums
                 SliverToBoxAdapter(
                   child: Text(
-                    "${artists.length} ${AppStrings.artists}",
+                    "${albums.length} ${AppStrings.albums}",
                     style: AppFonts.bold_18,
                   ),
                 ),
 
                 sliverPadding(20),
 
-                // List of artist
-                GridViewArtists(
-                  artists: state.artists!,
+                // List of albums
+                GridViewAlbums(
+                  albums: state.albums!,
                 ),
               ],
             ),
