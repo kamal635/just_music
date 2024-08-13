@@ -58,7 +58,11 @@ class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
 
               spaceHeight(20),
 
-              CustomShuffleAndPlayAllButtons(songs: updatedPlaylist.songs)
+              Padding(
+                padding: EdgeInsets.only(right: 12.w),
+                child: CustomShuffleAndPlayAllButtons(
+                    songs: updatedPlaylist.songs),
+              )
             ],
           ),
         );

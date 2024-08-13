@@ -6,6 +6,7 @@ import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
+import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/albums/logic/albums/albums_bloc.dart';
 import 'package:just_music/features/artists/data/model/artists.dart';
@@ -60,6 +61,8 @@ class SectionAlbumsInSongsArtist extends StatelessWidget {
                                 id: album.id,
                                 iconSize: 66.h,
                                 artworkType: ArtworkType.ALBUM,
+                                nullArtworkWidget: AppImages.album,
+                                isNullImage: true,
                               ),
 
                               // //*icon as image

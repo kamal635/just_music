@@ -7,6 +7,7 @@ import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
+import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/core/utils/app_strings.dart';
 import 'package:just_music/features/artists/data/model/artists.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -66,6 +67,8 @@ class _GridViewArtistsState extends State<GridViewArtists> {
                             id: artist.id,
                             iconSize: 66.h,
                             artworkType: ArtworkType.ARTIST,
+                            isNullImage: true,
+                            nullArtworkWidget: AppImages.artist,
                           ),
 
                           //*icon as image
