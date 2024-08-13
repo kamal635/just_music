@@ -30,7 +30,7 @@ class ContentPlaylistBody extends StatelessWidget {
         playlist: playlist,
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
+        padding: EdgeInsets.only(left: 12.w),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),
           slivers: [
@@ -69,7 +69,6 @@ class ContentPlaylistBody extends StatelessWidget {
                               Container(
                                 height: 50,
                                 width: 50,
-                                margin: EdgeInsets.symmetric(horizontal: 10.w),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8.r),
                                   color: AppColor.white.withAlpha(140),
@@ -80,6 +79,7 @@ class ContentPlaylistBody extends StatelessWidget {
                                   size: 22.h,
                                 ),
                               ),
+                              spaceWidth(12),
                               Text(
                                 AppStrings.addSongs,
                                 style: AppFonts.medium_12,

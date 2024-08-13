@@ -9,8 +9,26 @@ import 'package:just_music/features/home/widgets/featured_songs/card_featured_so
 import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
 import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 
-class HomeFeaturedSongs extends StatelessWidget {
+class HomeFeaturedSongs extends StatefulWidget {
   const HomeFeaturedSongs({super.key});
+
+  @override
+  _HomeFeaturedSongsState createState() => _HomeFeaturedSongsState();
+}
+
+class _HomeFeaturedSongsState extends State<HomeFeaturedSongs>
+    with SingleTickerProviderStateMixin {
+  double _opacity = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _opacity = 1.0;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,52 +42,55 @@ class HomeFeaturedSongs extends StatelessWidget {
           const endIndex = 12;
           final subList = songs?.sublist(
               0, endIndex > songs.length ? songs.length : endIndex);
-          return Column(
-            children: [
-              // title list of featured songs
-              CustomTitleFeatureHomeView(
-                onTap: () {
-                  context
-                      .read<NavBottomBarBloc>()
-                      .add(const ChangedCurrentPageEvent(index: 1));
-                },
-                title: AppStrings.featuredSongs,
-              ),
+          return AnimatedOpacity(
+            opacity: _opacity,
+            duration: const Duration(milliseconds: 500),
+            child: Column(
+              children: [
+                // title list of featured songs
+                CustomTitleFeatureHomeView(
+                  onTap: () {
+                    context
+                        .read<NavBottomBarBloc>()
+                        .add(const ChangedCurrentPageEvent(index: 1));
+                  },
+                  title: AppStrings.featuredSongs,
+                ),
 
-              spaceHeight(10),
+                spaceHeight(10),
 
-              // GridView Featured Songs
-              Padding(
-                padding: EdgeInsets.only(right: 12.w),
-                child: SizedBox(
-                  height: 160.h,
-                  child: GridView.builder(
-                    clipBehavior: Clip.none,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: subList?.length,
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      crossAxisSpacing: 10.h,
-                      mainAxisSpacing: 20.w,
-                      childAspectRatio: 1 / 5,
+                // GridView Featured Songs
+                Padding(
+                  padding: EdgeInsets.only(right: 12.w),
+                  child: SizedBox(
+                    height: 160.h,
+                    child: GridView.builder(
+                      clipBehavior: Clip.none,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: subList?.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 10.h,
+                        mainAxisSpacing: 20.w,
+                        childAspectRatio: 1 / 5,
+                      ),
+                      itemBuilder: (context, index) {
+                        return InkWell(
+                          borderRadius: BorderRadius.circular(12.r),
+                          onTap: () {
+                            context.read<AudioPlayerBloc>().add(
+                                SetAudioEvent(songs: songs!, index: index));
+                          },
+                          child: CardFeaturedHomeView(
+                            song: subList![index],
+                          ),
+                        );
+                      },
                     ),
-                    itemBuilder: (context, index) {
-                      return InkWell(
-                        borderRadius: BorderRadius.circular(12.r),
-                        onTap: () {
-                          context
-                              .read<AudioPlayerBloc>()
-                              .add(SetAudioEvent(songs: songs!, index: index));
-                        },
-                        child: CardFeaturedHomeView(
-                          song: subList![index],
-                        ),
-                      );
-                    },
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           );
         },
       ),

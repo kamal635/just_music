@@ -6,6 +6,7 @@ import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
 import 'package:just_music/core/styling/app_colors.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_icon.dart';
+import 'package:just_music/core/utils/app_images.dart';
 import 'package:just_music/features/albums/data/model/album.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -67,6 +68,8 @@ class SliverAppBarSongsAlbum extends StatelessWidget {
                   id: album.id,
                   iconSize: 66.h,
                   artworkType: ArtworkType.ALBUM,
+                  isNullImage: true,
+                  nullArtworkWidget: AppImages.album,
                 ),
                 Container(
                   color: AppColor.primary.withAlpha(80),
