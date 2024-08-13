@@ -21,7 +21,9 @@ class HomeFeaturedSongs extends StatelessWidget {
             return const SizedBox();
           }
           final songs = state.songs;
-          final subList = songs!.sublist(0, 12);
+          const endIndex = 12;
+          final subList = songs?.sublist(
+              0, endIndex > songs.length ? songs.length : endIndex);
           return Column(
             children: [
               // title list of featured songs
@@ -44,7 +46,7 @@ class HomeFeaturedSongs extends StatelessWidget {
                   child: GridView.builder(
                     clipBehavior: Clip.none,
                     scrollDirection: Axis.horizontal,
-                    itemCount: subList.length,
+                    itemCount: subList?.length,
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                       crossAxisSpacing: 10.h,
@@ -57,10 +59,10 @@ class HomeFeaturedSongs extends StatelessWidget {
                         onTap: () {
                           context
                               .read<AudioPlayerBloc>()
-                              .add(SetAudioEvent(songs: songs, index: index));
+                              .add(SetAudioEvent(songs: songs!, index: index));
                         },
                         child: CardFeaturedHomeView(
-                          song: subList[index],
+                          song: subList![index],
                         ),
                       );
                     },
