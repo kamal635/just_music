@@ -48,7 +48,7 @@ class SongsViewBody extends StatelessWidget {
 
           // when fetch song success
           return Padding(
-            padding: EdgeInsets.symmetric(horizontal: 14.r),
+            padding: EdgeInsets.only(left: 12.r),
             child: CustomScrollView(
               physics: const BouncingScrollPhysics(),
               slivers: [

@@ -23,9 +23,9 @@ class SectionAlbumsInSongsArtist extends StatelessWidget {
           final orginalAlbums = state.albums;
 
           final albumsById = orginalAlbums
-              ?.where((album) => artist.id == album.artistId)
+              .where((album) => artist.id == album.artistId)
               .toList();
-          if (albumsById == null && albumsById!.isEmpty) {
+          if (albumsById.isEmpty) {
             return const SizedBox();
           }
           return Padding(

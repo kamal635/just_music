@@ -4,11 +4,11 @@ enum ArtistsStatus { initial, loading, loaded, failure }
 
 class ArtistsState extends Equatable {
   final ArtistsStatus artistsStatus;
-  final List<Artist>? artists;
+  final List<Artist> artists;
 
   const ArtistsState({
     this.artistsStatus = ArtistsStatus.initial,
-    this.artists,
+    this.artists = const <Artist>[],
   });
 
   ArtistsState copyWith({
