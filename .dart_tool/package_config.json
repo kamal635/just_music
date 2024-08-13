@@ -15,7 +15,7 @@
     },
     {
       "name": "ansicolor",
-      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/ansicolor-2.0.2",
+      "rootUri": "file:///C:/Users/Lenovo/AppData/Local/Pub/Cache/hosted/pub.dev/ansicolor-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -770,7 +770,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-08-12T22:07:25.898837Z",
+  "generated": "2024-08-13T09:06:25.533668Z",
   "generator": "pub",
   "generatorVersion": "3.5.0",
   "flutterRoot": "file:///C:/flutter",

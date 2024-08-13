@@ -5,17 +5,16 @@ import 'package:just_music/core/helpers/spacer.dart';
 import 'package:just_music/core/shared_widgets/custom_loading.dart';
 import 'package:just_music/core/shared_widgets/image_empty_list.dart';
 import 'package:just_music/core/utils/app_images.dart';
-import 'package:just_music/features/artists/data/model/artists.dart';
-import 'package:just_music/features/artists/logic/songs_artist/songs_artist_bloc.dart';
-import 'package:just_music/features/artists/widgets/songs_artist/section_albums_songs_artist.dart';
-import 'package:just_music/features/artists/widgets/songs_artist/section_buttons_songs_artist.dart';
-import 'package:just_music/features/artists/widgets/songs_artist/section_songs_artist.dart';
-import 'package:just_music/features/artists/widgets/songs_artist/sliver_appbar_songs_artist.dart';
+import 'package:just_music/features/albums/data/model/album.dart';
+import 'package:just_music/features/albums/logic/songs_album/songs_albums_bloc.dart';
+import 'package:just_music/features/albums/widgets/songs_album/section_buttons_songs_album.dart';
+import 'package:just_music/features/albums/widgets/songs_album/section_songs_album.dart';
+import 'package:just_music/features/albums/widgets/songs_album/sliver_appbar_songs_album.dart';
 import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
 
-class SongsArtist extends StatelessWidget {
-  const SongsArtist({super.key, required this.artist});
-  final Artist artist;
+class SongsAlbum extends StatelessWidget {
+  const SongsAlbum({super.key, required this.album});
+  final Album album;
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -37,18 +36,18 @@ class SongsArtist extends StatelessWidget {
     }
 
     return BlocProvider(
-      create: (context) => di<SongsArtistBloc>()
-        ..add(LoadSongsArtistByIdEvent(artistId: artist.id)),
+      create: (context) => di<SongsAlbumsBloc>()
+        ..add(LoadSongsAlbumByIdEvent(albumId: album.id)),
       child: Scaffold(
         floatingActionButton: const MusicTrackPlayer(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        body: BlocBuilder<SongsArtistBloc, SongsArtistState>(
+        body: BlocBuilder<SongsAlbumsBloc, SongsAlbumsState>(
           builder: (context, state) {
             final songs = state.songs;
-            if (state.songsArtistStatus == SongsArtistStatus.loading) {
+            if (state.songsAlbumStatus == SongsAlbumStatus.loading) {
               return const CustomLoading();
             }
-            if (state.songsArtistStatus == SongsArtistStatus.loaded) {
+            if (state.songsAlbumStatus == SongsAlbumStatus.loaded) {
               if (songs == null && songs!.isEmpty) {
                 return const ImageEmptyList(image: AppImages.emptySongs);
               }
@@ -56,23 +55,18 @@ class SongsArtist extends StatelessWidget {
                 physics: const AlwaysScrollableScrollPhysics(),
                 slivers: [
                   //* Sliver Appbar
-                  SliverAppBarSongsArtist(
-                      screenHeight: screenHeight, artist: artist),
-
-                  sliverPadding(20),
-
-                  //* Albums
-                  SectionAlbumsInSongsArtist(artist: artist),
+                  SliverAppBarSongsAlbum(
+                      screenHeight: screenHeight, album: album),
 
                   sliverPadding(20),
 
                   //* Butons
-                  SectionButtonsSongsArtist(songs: songs),
+                  SectionButtonsSongsAlbum(songs: songs),
 
                   sliverPadding(20),
 
                   //* Songs
-                  SectionSongsInSongsArtist(songs: songs),
+                  SectionSongsInSongsAlbum(songs: songs),
 
                   sliverPadding(calculatePadding(songs.length)),
                 ],

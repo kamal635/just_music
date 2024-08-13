@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_music/features/albums/widgets/songs_album/body_songs_album.dart';
 import 'package:just_music/features/artists/widgets/songs_artist/body_songs_artist.dart';
 import 'package:just_music/features/changed_view/changed_view.dart';
 import 'package:just_music/core/routes/string_route.dart';
@@ -33,9 +34,15 @@ abstract class AppRouter {
         ));
       case RouterName.homeView:
         return _buildRoute(const HomeView());
+
       case RouterName.songsArtist:
         return _buildRoute(SongsArtist(
           artist: argument?["artist"],
+        ));
+
+      case RouterName.songsAlbums:
+        return _buildRoute(SongsAlbum(
+          album: argument?["album"],
         ));
 
       case RouterName.songsView:
