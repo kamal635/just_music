@@ -27,5 +27,11 @@ class Album extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, artistId, album, artist, numOfSongs];
+  List<Object?> get props => [
+        id,
+        artistId,
+        album,
+        artist,
+        numOfSongs,
+      ];
 }
