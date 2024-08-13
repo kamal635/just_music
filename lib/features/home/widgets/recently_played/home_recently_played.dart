@@ -12,7 +12,7 @@ class HomeRecentlyPlayed extends StatefulWidget {
   const HomeRecentlyPlayed({super.key});
 
   @override
-  _HomeRecentlyPlayedState createState() => _HomeRecentlyPlayedState();
+  State<HomeRecentlyPlayed> createState() => _HomeRecentlyPlayedState();
 }
 
 class _HomeRecentlyPlayedState extends State<HomeRecentlyPlayed>

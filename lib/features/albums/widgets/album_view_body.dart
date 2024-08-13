@@ -22,7 +22,7 @@ class AlbumsViewBody extends StatelessWidget {
         }
         if (state.albumsStatus == AlbumsStatus.loaded) {
           final albums = state.albums;
-          if (albums == null && albums!.isEmpty) {
+          if (albums.isEmpty) {
             return const ImageEmptyList(image: AppImages.emptySongs);
           }
           return Padding(
@@ -43,7 +43,7 @@ class AlbumsViewBody extends StatelessWidget {
 
                 // List of albums
                 GridViewAlbums(
-                  albums: state.albums!,
+                  albums: state.albums,
                 ),
               ],
             ),

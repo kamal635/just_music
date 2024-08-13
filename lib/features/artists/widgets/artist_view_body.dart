@@ -22,7 +22,7 @@ class ArtistsViewBody extends StatelessWidget {
         }
         if (state.artistsStatus == ArtistsStatus.loaded) {
           final artists = state.artists;
-          if (artists == null && artists!.isEmpty) {
+          if (artists.isEmpty) {
             return const ImageEmptyList(image: AppImages.emptyFavorites);
           }
           return Padding(
@@ -43,7 +43,7 @@ class ArtistsViewBody extends StatelessWidget {
 
                 // List of artist
                 GridViewArtists(
-                  artists: state.artists!,
+                  artists: state.artists,
                 ),
               ],
             ),

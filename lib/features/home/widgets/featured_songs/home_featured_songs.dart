@@ -13,7 +13,7 @@ class HomeFeaturedSongs extends StatefulWidget {
   const HomeFeaturedSongs({super.key});
 
   @override
-  _HomeFeaturedSongsState createState() => _HomeFeaturedSongsState();
+  State<HomeFeaturedSongs> createState() => _HomeFeaturedSongsState();
 }
 
 class _HomeFeaturedSongsState extends State<HomeFeaturedSongs>
@@ -89,6 +89,7 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs>
                     ),
                   ),
                 ),
+                spaceHeight(30),
               ],
             ),
           );

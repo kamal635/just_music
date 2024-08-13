@@ -8,6 +8,8 @@ abstract class AppStrings {
   static const String addSongs = "Add Songs";
   static const String artists = "Artists";
   static const String featuredSongs = "Featured Songs";
+  static const String featuredArtists = "Featured Artists";
+  static const String featuredAlbums = "Featured Albums";
   static const String recentlyPlayed = "Recently Played";
   static const String recentlyPlayedSongs = "Recently played songs";
   static const String deleteSong = "Delete this song from the playlist?";
