@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/helpers/navigation.dart';
 import 'package:just_music/core/helpers/spacer.dart';
+import 'package:just_music/core/routes/string_route.dart';
 import 'package:just_music/core/shared_widgets/custom_art_work.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
 import 'package:just_music/core/utils/app_images.dart';
@@ -51,7 +53,11 @@ class HomeFeaturedAlbums extends StatelessWidget {
                       return InkWell(
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
-                        onTap: () {},
+                        onTap: () {
+                          context.pushNamed(RouterName.songsAlbums, arguments: {
+                            AppArguments.album: album,
+                          });
+                        },
                         child: Padding(
                           padding: EdgeInsets.only(right: 12.w),
                           child: Column(

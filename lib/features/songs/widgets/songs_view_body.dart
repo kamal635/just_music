@@ -42,7 +42,7 @@ class SongsViewBody extends StatelessWidget {
         //* Loaded
         if (loaded) {
           // when list of songs is Empty
-          if (songs == null || songs.isEmpty) {
+          if (songs.isEmpty) {
             return const ImageEmptyList(image: AppImages.emptySongs);
           }
 

@@ -20,10 +20,14 @@ class SongsAlbumsBloc extends Bloc<SongsAlbumsEvent, SongsAlbumsState> {
   ) async {
     emit(state.copyWith(songsAlbumStatus: SongsAlbumStatus.loading));
     try {
-      final listSongsAlbum =
-          await fetchSongsAlbumImpl.fetchSongsAbum(event.albumId);
+      final listSongsAlbum = await fetchSongsAlbumImpl.fetchSongsAlbum(
+        event.albumId,
+      );
+
       emit(state.copyWith(
-          songsAlbumStatus: SongsAlbumStatus.loaded, songs: listSongsAlbum));
+        songsAlbumStatus: SongsAlbumStatus.loaded,
+        songs: List.from(state.songs.toList())..addAll(listSongsAlbum),
+      ));
     } catch (e) {
       emit(state.copyWith(songsAlbumStatus: SongsAlbumStatus.failure));
     }

@@ -22,9 +22,11 @@ class CardFeaturedHomeView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           // Art Work
-          CustomArtWork(
-            id: song.id,
-            radius: 40,
+          SizedBox(
+            child: CustomArtWork(
+              id: song.id,
+              radius: 12.r,
+            ),
           ),
 
           spaceWidth(6),

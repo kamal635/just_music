@@ -4,11 +4,11 @@ enum SongsAlbumStatus { initial, loading, loaded, failure }
 
 class SongsAlbumsState extends Equatable {
   final SongsAlbumStatus songsAlbumStatus;
-  final List<Song>? songs;
+  final List<Song> songs;
 
   const SongsAlbumsState({
     this.songsAlbumStatus = SongsAlbumStatus.initial,
-    this.songs,
+    this.songs = const <Song>[],
   });
 
   SongsAlbumsState copyWith({

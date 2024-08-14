@@ -5,6 +5,7 @@ import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchSongsFromDeviceRepo {
   Future<List<Song>> fetchSongsFromDevice();
+  Future<List<Song>> fetchFixedSongsFromDevice();
 }
 
 class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
@@ -14,7 +15,6 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
 
   @override
   Future<List<Song>> fetchSongsFromDevice() async {
-    // fetch songs from device by on_audio_query package
     final listSongs = await audioQuery.querySongs(
       sortType: SongSortType.DATE_ADDED,
       orderType: OrderType.ASC_OR_SMALLER,
@@ -22,25 +22,52 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
       ignoreCase: true,
     );
 
-    // list of Song to add song after filttering
+    // Handle songs in chunks
     final listSongsMp3 = <Song>[];
 
-    // Process songs asynchronously
-    await Future.forEach(listSongs, (song) async {
-      // Storage file song
+    for (var song in listSongs) {
       final file = File(song.data);
 
-      // Check if file exists and other conditions
       if (await file.exists() &&
           song.fileExtension == "mp3" &&
           song.duration != 0) {
-        // Fetch artwork for the song
         final artwork =
             await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
-        // Add song to list of songs
         listSongsMp3.add(Song.fromDevice(song, artwork));
       }
-    });
+    }
+
+    return listSongsMp3;
+  }
+
+  @override
+  Future<List<Song>> fetchFixedSongsFromDevice() async {
+    final listSongs = await audioQuery.querySongs(
+      sortType: SongSortType.DATE_ADDED,
+      orderType: OrderType.ASC_OR_SMALLER,
+      uriType: UriType.EXTERNAL,
+      ignoreCase: true,
+    );
+
+    final listSongsMp3 = <Song>[];
+
+    const fixedLenghtSongs = 8;
+    final ckcekLenghtSongs = fixedLenghtSongs > listSongs.length
+        ? listSongs.length
+        : fixedLenghtSongs;
+
+    for (var i = 0; i < ckcekLenghtSongs; i++) {
+      final song = listSongs[i];
+      final file = File(song.data);
+
+      if (await file.exists() &&
+          song.fileExtension == "mp3" &&
+          song.duration != 0) {
+        final artwork =
+            await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
+        listSongsMp3.add(Song.fromDevice(song, artwork));
+      }
+    }
 
     return listSongsMp3;
   }

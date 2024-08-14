@@ -6,32 +6,39 @@ import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.d
 import 'package:just_music/features/songs/widgets/song_card.dart';
 
 class SectionSongsInSongsAlbum extends StatelessWidget {
-  const SectionSongsInSongsAlbum({super.key, required this.songs});
+  const SectionSongsInSongsAlbum({
+    super.key,
+    required this.songs,
+  });
+
   final List<Song> songs;
+
   @override
   Widget build(BuildContext context) {
-    return SliverList.builder(
-      itemCount: songs.length,
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(left: 12.w),
-              child: InkWell(
-                onTap: () {
-                  context
-                      .read<AudioPlayerBloc>()
-                      .add(SetAudioEvent(songs: songs, index: index));
-                },
-                child: SongCard(
-                  song: songs[index],
-                  hideIndex: 2,
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Column(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(left: 12.w),
+                child: InkWell(
+                  onTap: () {
+                    context
+                        .read<AudioPlayerBloc>()
+                        .add(SetAudioEvent(songs: songs, index: index));
+                  },
+                  child: SongCard(
+                    song: songs[index],
+                    hideIndex: 2,
+                  ),
                 ),
               ),
-            ),
-          ],
-        );
-      },
+            ],
+          );
+        },
+        childCount: songs.length,
+      ),
     );
   }
 }

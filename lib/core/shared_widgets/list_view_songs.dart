@@ -11,6 +11,7 @@ class CustomSliverListSongs extends StatefulWidget {
     required this.songs,
     this.hideIndex,
   });
+
   final List<Song> songs;
   final int? hideIndex;
 
@@ -35,28 +36,29 @@ class _CustomSliverListSongsState extends State<CustomSliverListSongs> {
   @override
   Widget build(BuildContext context) {
     return SliverList(
-        delegate: SliverChildBuilderDelegate(
-      (context, i) {
-        final song = widget.songs[i];
-        return InkWell(
-          borderRadius: BorderRadius.circular(10.r),
-          onTap: () {
-            context
-                .read<AudioPlayerBloc>()
-                .add(SetAudioEvent(songs: widget.songs, index: i));
-          },
-          child: AnimatedOpacity(
-            opacity: _isListVisible ? 1.0 : 0.0,
-            duration: const Duration(milliseconds: 800),
-            curve: Curves.easeIn,
-            child: SongCard(
-              song: song,
-              hideIndex: widget.hideIndex,
+      delegate: SliverChildBuilderDelegate(
+        (context, i) {
+          final song = widget.songs[i];
+          return InkWell(
+            borderRadius: BorderRadius.circular(10.r),
+            onTap: () {
+              context
+                  .read<AudioPlayerBloc>()
+                  .add(SetAudioEvent(songs: widget.songs, index: i));
+            },
+            child: AnimatedOpacity(
+              opacity: _isListVisible ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 800),
+              curve: Curves.easeIn,
+              child: SongCard(
+                song: song,
+                hideIndex: widget.hideIndex,
+              ),
             ),
-          ),
-        );
-      },
-      childCount: widget.songs.length,
-    ));
+          );
+        },
+        childCount: widget.songs.length,
+      ),
+    );
   }
 }
