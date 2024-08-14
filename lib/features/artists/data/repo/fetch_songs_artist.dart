@@ -10,6 +10,7 @@ class FetchSongsArtistImpl implements FetchSongsArtist {
 
   FetchSongsArtistImpl({required OnAudioQuery onAudioQuery})
       : _onAudioQuery = onAudioQuery;
+
   @override
   Future<List<Song>> fetchSongsArtist(int artistId) async {
     final listSongsArtist = await _onAudioQuery.queryAudiosFrom(

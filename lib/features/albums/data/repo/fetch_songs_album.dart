@@ -2,7 +2,7 @@ import 'package:just_music/features/songs/data/model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchSongsAlbum {
-  Future<List<Song>> fetchSongsAbum(int albumId);
+  Future<List<Song>> fetchSongsAlbum(int albumId);
 }
 
 class FetchSongsAlbumImpl implements FetchSongsAlbum {
@@ -10,8 +10,9 @@ class FetchSongsAlbumImpl implements FetchSongsAlbum {
 
   FetchSongsAlbumImpl({required OnAudioQuery onAudioQuery})
       : _onAudioQuery = onAudioQuery;
+
   @override
-  Future<List<Song>> fetchSongsAbum(int albumId) async {
+  Future<List<Song>> fetchSongsAlbum(int albumId) async {
     final listSongsAlbum = await _onAudioQuery.queryAudiosFrom(
       AudiosFromType.ALBUM_ID,
       albumId,

@@ -17,7 +17,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   final RecentlyPlayedRepoImpl recentlyPlayedRepoImpl;
   final MostPlayedRepoImpl mostPlayedRepoImpl;
   StreamSubscription<MediaItem?>? _streamMediaItem;
-  MediaItem? _previousMediaItem;
   AudioServiceRepeatMode _currentRepeatMode = AudioServiceRepeatMode.none;
 
   AudioPlayerBloc({
@@ -28,56 +27,22 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
         super(const AudioPlayerState()) {
     on<LoadAudioPlayerEvent>(
         _onLoadAudioPlayer); //combine streams and load audio player to check if song is null or not
-
     on<PlayAudioEvent>(_onPlayAudio); // play song
-
     on<PauseAudioEvent>(_onPauseAudio); // pause song
-
     on<SetAudioEvent>(
         _onSetAudio); // set list of songs and mapping to media item
-
     on<SeekToPositionAudioEvent>(
         _onSeekToPositionAudioEvent); // Change the position of the song when the user slides his finger on the slider
-
     on<SkipToNextAudioEvent>(_onSkipToNextAudioEvent); // to skip to next song
-
     on<SkipToPreviousAudioEvent>(
         _onSkipToPreviousAudioEvent); // to skip to previous song
-
     on<SkipByIndexAudioEvent>(_onSkipByIndexAudioEvent); // to skip by index
-
     on<ShuffleModeAudioEvent>(_onShuffleModeAudioEvent); // shuffle Mode
-
     on<RepeatModeAudioEvent>(_onRepeatModeAudioEvent); // Repeat Mode
-
     on<LoadRecentlyPlayedEvent>(_onLoadRecentlyPlayedEvent); // Recently Played
-
     on<MostPlayedEvent>(_onMostPlayedEvent); // Most Played
-
     on<AddToRecentlyAndMostPlayedEvent>(
         _onAddToRecentlyAndMostPlayedEvent); // Listen Change Index
-
-    trackTheSong();
-  }
-
-  /// This method sets up a listener on the mediaItem stream from the audio handler.
-  /// It checks if the media item has changed or if the repeat mode is set to `repeat.one`.
-  /// If either condition is true, it updates the `_previousMediaItem` and triggers
-  /// the `AddToRecentlyAndMostPlayedEvent`.
-  void trackTheSong() {
-    _streamMediaItem = _audioHandler.mediaItem.distinct().listen((mediaItem) {
-      if (mediaItem != null) {
-        // Check if the media item has changed or if repeat mode is set to repeat.one
-        if (mediaItem != _previousMediaItem ||
-            _currentRepeatMode == AudioServiceRepeatMode.one) {
-          // Update the previous media item to the current one
-          _previousMediaItem = mediaItem;
-
-          // Add event to update the recently and most played songs lists
-          add(AddToRecentlyAndMostPlayedEvent());
-        }
-      }
-    });
   }
 
   @override
@@ -264,7 +229,6 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
     // this to play song by index when user press on song in listview.builder
     await _audioHandler.skipToQueueItem(event.index);
 
-    _previousMediaItem = mediaItems[event.index];
     emit(state.copyWith(
       status: AudioPlayerStatus.playing,
       lastKnownPosition: Duration.zero,

@@ -8,7 +8,7 @@ class NavBottomBarState extends Equatable {
 
   const NavBottomBarState({
     this.navBottomBarStatus = NavBottomBarStatus.initial,
-    this.currentPage = 0,
+    this.currentPage = 1,
   });
 
   NavBottomBarState copyWith({

@@ -37,7 +37,7 @@ class BodyShuffleAndFavoriteHomeView extends StatelessWidget {
                   onTap: () {
                     context
                         .read<AudioPlayerBloc>()
-                        .add(SetAudioEvent(songs: state.songs!, index: 0));
+                        .add(SetAudioEvent(songs: state.songs, index: 0));
 
                     context.read<AudioPlayerBloc>().add(
                         const ShuffleModeAudioEvent(

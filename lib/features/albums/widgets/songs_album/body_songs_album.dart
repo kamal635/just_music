@@ -48,7 +48,7 @@ class SongsAlbum extends StatelessWidget {
               return const CustomLoading();
             }
             if (state.songsAlbumStatus == SongsAlbumStatus.loaded) {
-              if (songs == null && songs!.isEmpty) {
+              if (songs.isEmpty) {
                 return const ImageEmptyList(image: AppImages.emptySongs);
               }
               return CustomScrollView(

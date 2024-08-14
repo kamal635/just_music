@@ -7,11 +7,8 @@ import 'package:meta/meta.dart';
 part 'fetch_songs_from_device_event.dart';
 part 'fetch_songs_from_device_state.dart';
 
-// BlocProvider instance in :
-// lib\features\home\widgets\list_view_card_song.dart
 class FetchSongsFromDeviceBloc
     extends Bloc<FetchSongsFromDeviceEvent, FetchSongsFromDeviceState> {
-  // final StoreSongsLocalRepoImpl storeSongsLocalRepoImpl;
   final FetchSongsFromDeviceRepoImpl fetchSongsFromDeviceRepoImpl;
 
   FetchSongsFromDeviceBloc({required this.fetchSongsFromDeviceRepoImpl})

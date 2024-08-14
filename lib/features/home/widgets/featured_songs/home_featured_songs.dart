@@ -35,13 +35,8 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs>
     return SliverToBoxAdapter(
       child: BlocBuilder<FetchSongsFromDeviceBloc, FetchSongsFromDeviceState>(
         builder: (context, state) {
-          if (state.songs == null || state.songs!.isEmpty) {
-            return const SizedBox();
-          }
           final songs = state.songs;
-          const endIndex = 12;
-          final subList = songs?.sublist(
-              0, endIndex > songs.length ? songs.length : endIndex);
+          final subSongs = songs.take(12).toList();
           return AnimatedOpacity(
             opacity: _opacity,
             duration: const Duration(milliseconds: 500),
@@ -67,22 +62,23 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs>
                     child: GridView.builder(
                       clipBehavior: Clip.none,
                       scrollDirection: Axis.horizontal,
-                      itemCount: subList?.length,
+                      itemCount: subSongs.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 3,
-                        crossAxisSpacing: 10.h,
-                        mainAxisSpacing: 20.w,
+                        crossAxisSpacing: 16.h,
+                        mainAxisSpacing: 25.w,
                         childAspectRatio: 1 / 5,
                       ),
                       itemBuilder: (context, index) {
                         return InkWell(
                           borderRadius: BorderRadius.circular(12.r),
                           onTap: () {
-                            context.read<AudioPlayerBloc>().add(
-                                SetAudioEvent(songs: songs!, index: index));
+                            context
+                                .read<AudioPlayerBloc>()
+                                .add(SetAudioEvent(songs: songs, index: index));
                           },
                           child: CardFeaturedHomeView(
-                            song: subList![index],
+                            song: subSongs[index],
                           ),
                         );
                       },

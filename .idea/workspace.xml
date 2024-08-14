@@ -5,8 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a055db9c-4671-4608-8cac-b0cef12c07d5" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/lib/features/home/widgets/shuffle_and_favorite/body_shuffle_and_favorite.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/home/widgets/shuffle_and_favorite/body_shuffle_and_favorite.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/just_music_app.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/just_music_app.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/core/shared_widgets/list_view_songs.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/core/shared_widgets/list_view_songs.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/albums/data/repo/fetch_songs_album.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/albums/data/repo/fetch_songs_album.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/albums/logic/songs_album/songs_albums_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/albums/logic/songs_album/songs_albums_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/albums/logic/songs_album/songs_albums_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/albums/logic/songs_album/songs_albums_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/albums/widgets/songs_album/body_songs_album.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/albums/widgets/songs_album/body_songs_album.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/albums/widgets/songs_album/section_songs_album.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/albums/widgets/songs_album/section_songs_album.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/artists/data/repo/fetch_songs_artist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/artists/data/repo/fetch_songs_artist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/artists/logic/songs_artist/songs_artist_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/artists/logic/songs_artist/songs_artist_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/artists/logic/songs_artist/songs_artist_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/artists/logic/songs_artist/songs_artist_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/artists/widgets/songs_artist/body_songs_artist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/artists/widgets/songs_artist/body_songs_artist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/artists/widgets/songs_artist/section_albums_songs_artist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/artists/widgets/songs_artist/section_albums_songs_artist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/artists/widgets/songs_artist/section_songs_artist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/artists/widgets/songs_artist/section_songs_artist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/home/widgets/albums/home_albums.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/home/widgets/albums/home_albums.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/home/widgets/artists/home_featured_artist.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/home/widgets/artists/home_featured_artist.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/home/widgets/home_view_body.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/home/widgets/home_view_body.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/songs/data/repository/fetch_songs_repo.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/data/repository/fetch_songs_repo.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/songs/logic/audio_player/audio_player_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/logic/audio_player/audio_player_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/songs/widgets/songs_view_body.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/songs/widgets/songs_view_body.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,23 +73,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;home__view&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kamal/Desktop/just_music-development/android&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;Errors&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Flutter.main.dart.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "albums__view",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/Lenovo/Desktop/just_music-development/android",
+    "settings.editor.selected.configurable": "Errors",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

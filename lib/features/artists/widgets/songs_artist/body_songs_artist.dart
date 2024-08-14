@@ -49,7 +49,7 @@ class SongsArtist extends StatelessWidget {
               return const CustomLoading();
             }
             if (state.songsArtistStatus == SongsArtistStatus.loaded) {
-              if (songs == null && songs!.isEmpty) {
+              if (songs.isEmpty) {
                 return const ImageEmptyList(image: AppImages.emptySongs);
               }
               return CustomScrollView(

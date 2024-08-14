@@ -33,7 +33,7 @@ class SectionLocalSongsAddSongsToPlaylist extends StatelessWidget {
             colorIcon: AppColor.lightBlue,
             title: AppStrings.localSongs,
             isTrailing: true,
-            subtitle: state.songs?.length ?? 0,
+            subtitle: state.songs.length,
           ),
         );
       },

@@ -5,18 +5,19 @@ enum FetchSongsStatus { initial, loading, loaded, failure }
 @immutable
 class FetchSongsFromDeviceState extends Equatable {
   final FetchSongsStatus fetchSongsStatus;
-  final List<Song>? songs;
+  final List<Song> songs;
   final String? errorMessage;
 
   const FetchSongsFromDeviceState({
     this.fetchSongsStatus = FetchSongsStatus.initial,
-    this.songs,
+    this.songs = const <Song>[],
     this.errorMessage,
   });
 
   FetchSongsFromDeviceState copyWith({
     FetchSongsStatus? fetchSongsStatus,
     List<Song>? songs,
+    List<Song>? subSongs,
     String? errorMessage,
   }) {
     return FetchSongsFromDeviceState(
