@@ -1,6 +1,6 @@
-# just_music
+Just Music - Flutter Music App
 
-A new Flutter project.
+Just Music is a sleek and user-friendly music player app built with Flutter, designed to offer a smooth and enjoyable music experience. Whether you're a casual listener or a dedicated music lover, Just Music provides a rich set of features to help you effortlessly manage and enjoy your favorite songs.
 
 ## Getting Started
 
