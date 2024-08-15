@@ -23,7 +23,7 @@ class ArtistsViewBody extends StatelessWidget {
         if (state.artistsStatus == ArtistsStatus.loaded) {
           final artists = state.artists;
           if (artists.isEmpty) {
-            return const ImageEmptyList(image: AppImages.emptyFavorites);
+            return const ImageEmptyList(image: AppImages.emptySongs);
           }
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),

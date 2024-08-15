@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import '../model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -22,19 +21,11 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
       ignoreCase: true,
     );
 
-    // Handle songs in chunks
     final listSongsMp3 = <Song>[];
 
     for (var song in listSongs) {
-      final file = File(song.data);
-
-      if (await file.exists() &&
-          song.fileExtension == "mp3" &&
-          song.duration != 0) {
-        final artwork =
-            await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
-        listSongsMp3.add(Song.fromDevice(song, artwork));
-      }
+      final artwork = await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
+      listSongsMp3.add(Song.fromDevice(song, artwork));
     }
 
     return listSongsMp3;
