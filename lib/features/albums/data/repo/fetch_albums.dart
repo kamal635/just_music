@@ -1,4 +1,4 @@
-import 'package:just_music/features/albums/data/model/album.dart';
+import '../model/album.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchAlbumsRepo {

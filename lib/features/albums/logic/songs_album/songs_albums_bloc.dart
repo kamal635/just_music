@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:just_music/features/albums/data/repo/fetch_songs_album.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../data/repo/fetch_songs_album.dart';
+import '../../../songs/data/model/song.dart';
 
 part 'songs_albums_event.dart';
 part 'songs_albums_state.dart';

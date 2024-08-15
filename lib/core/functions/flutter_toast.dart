@@ -2,10 +2,10 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
+import '../helpers/spacer.dart';
+import '../styling/app_colors.dart';
+import '../styling/app_fonts.dart';
+import '../constant/app_icon.dart';
 
 // Handle the current toast reference
 FToast? _currentToast;

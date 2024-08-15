@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/playlists/widgets/create_playlist_button.dart';
-import 'package:just_music/features/playlists/widgets/sliver_grid_view_playlist.dart';
+import '../../../core/helpers/navigation.dart';
+import '../../../core/helpers/spacer.dart';
+import '../../../core/routes/string_route.dart';
+import '../../../core/shared_widgets/custom_loading.dart';
+import '../logic/playlist/playlist_bloc.dart';
+import 'create_playlist_button.dart';
+import 'sliver_grid_view_playlist.dart';
 
 class PlayListViewBody extends StatelessWidget {
   const PlayListViewBody({super.key});

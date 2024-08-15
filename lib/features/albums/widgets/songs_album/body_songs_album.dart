@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_music/core/helpers/dependencey_injection.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/shared_widgets/image_empty_list.dart';
-import 'package:just_music/core/utils/app_images.dart';
-import 'package:just_music/features/albums/data/model/album.dart';
-import 'package:just_music/features/albums/logic/songs_album/songs_albums_bloc.dart';
-import 'package:just_music/features/albums/widgets/songs_album/section_buttons_songs_album.dart';
-import 'package:just_music/features/albums/widgets/songs_album/section_songs_album.dart';
-import 'package:just_music/features/albums/widgets/songs_album/sliver_appbar_songs_album.dart';
-import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
+import '../../../../core/helpers/dependencey_injection.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/shared_widgets/custom_loading.dart';
+import '../../../../core/shared_widgets/image_empty_list.dart';
+import '../../../../core/constant/app_images.dart';
+import '../../data/model/album.dart';
+import '../../logic/songs_album/songs_albums_bloc.dart';
+import 'section_buttons_songs_album.dart';
+import 'section_songs_album.dart';
+import 'sliver_appbar_songs_album.dart';
+import '../../../songs/widgets/music_track/music_track_player.dart';
 
 class SongsAlbum extends StatelessWidget {
   const SongsAlbum({super.key, required this.album});

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/duration.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/core/shared_widgets/favorite_icon_button.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/utils/app_images.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/song_menu_button.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
+import '../../../core/helpers/duration.dart';
+import '../../../core/helpers/spacer.dart';
+import '../../../core/shared_widgets/custom_art_work.dart';
+import '../../../core/shared_widgets/favorite_icon_button.dart';
+import '../../../core/styling/app_fonts.dart';
+import '../../../core/styling/app_colors.dart';
+import '../../../core/constant/app_images.dart';
+import '../../../core/constant/app_strings.dart';
+import '../../playlists/widgets/sub_widgets/song_menu_button/song_menu_button.dart';
+import '../data/model/song.dart';
+import '../logic/audio_player/audio_player_bloc.dart';
 
 class SongCard extends StatefulWidget {
   const SongCard({

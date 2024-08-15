@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/home/models/most_played_model.dart';
+import '../../../core/constant/app_strings.dart';
+import '../models/most_played_model.dart';
 
 abstract class MostPlayedRepo {
   Future<Box> openBox();

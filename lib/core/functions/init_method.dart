@@ -3,15 +3,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:just_music/core/helpers/bloc_observer.dart';
-import 'package:just_music/core/helpers/dependencey_injection.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/features/home/models/most_played_model.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/songs/data/model/duration.g.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../helpers/bloc_observer.dart';
+import '../helpers/dependencey_injection.dart';
+import '../styling/app_colors.dart';
+import '../../features/home/models/most_played_model.dart';
+import '../../features/playlists/data/model/playlist_model.dart';
+import '../../features/songs/data/model/duration.g.dart';
+import '../../features/songs/data/model/song.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:just_music/features/songs/data/model/uri.g.dart';
+import '../../features/songs/data/model/uri.g.dart';
 
 Future<void> initMethod() async {
   WidgetsFlutterBinding.ensureInitialized();

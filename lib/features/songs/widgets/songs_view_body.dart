@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/functions/flutter_toast.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/shared_widgets/list_view_songs.dart';
-import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
-import 'package:just_music/core/shared_widgets/image_empty_list.dart';
-import 'package:just_music/core/utils/app_images.dart';
-import 'package:just_music/core/utils/app_strings.dart';
+import '../../../core/functions/flutter_toast.dart';
+import '../../../core/helpers/spacer.dart';
+import '../../../core/shared_widgets/custom_loading.dart';
+import '../../../core/shared_widgets/list_view_songs.dart';
+import '../logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
+import '../../../core/shared_widgets/image_empty_list.dart';
+import '../../../core/constant/app_images.dart';
+import '../../../core/constant/app_strings.dart';
 
 class SongsViewBody extends StatelessWidget {
   const SongsViewBody({super.key});

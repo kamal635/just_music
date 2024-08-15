@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/features/albums/widgets/songs_album/body_songs_album.dart';
-import 'package:just_music/features/artists/widgets/songs_artist/body_songs_artist.dart';
-import 'package:just_music/features/changed_view/changed_view.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/features/favorites/favorite_view.dart';
-import 'package:just_music/features/home/home_view.dart';
-import 'package:just_music/features/home/widgets/most_played/most_played_view.dart';
-import 'package:just_music/features/home/widgets/recently_played/recently_palyed_view.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/add_songs_to_playlist_body.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/extends_classes_from_list_of_songs.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/content_playlist_body.dart';
-import 'package:just_music/features/songs/songs_view.dart';
-import 'package:just_music/features/playlists/playlist_view.dart';
-import 'package:just_music/features/changed_view/widgets/search/search_view_body.dart';
+import '../../features/albums/widgets/songs_album/body_songs_album.dart';
+import '../../features/artists/widgets/songs_artist/body_songs_artist.dart';
+import '../../features/changed_view/changed_view.dart';
+import 'string_route.dart';
+import '../../features/favorites/favorite_view.dart';
+import '../../features/home/home_view.dart';
+import '../../features/home/widgets/most_played/most_played_view.dart';
+import '../../features/home/widgets/recently_played/recently_palyed_view.dart';
+import '../../features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/add_songs_to_playlist_body.dart';
+import '../../features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/extends_classes_from_list_of_songs.dart';
+import '../../features/playlists/widgets/sub_widgets/playlist_content/content_playlist_body.dart';
+import '../../features/songs/songs_view.dart';
+import '../../features/playlists/playlist_view.dart';
+import '../../features/changed_view/widgets/search/search_view_body.dart';
 
 abstract class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {

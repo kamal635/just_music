@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/appbar_palylist_songs/appbar_playlist_songs_body.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/list_of_songs_content.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/button_middle_content.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/image_title_buttons_content.dart';
-import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
+import '../../../../../core/helpers/navigation.dart';
+import '../../../../../core/helpers/spacer.dart';
+import '../../../../../core/routes/string_route.dart';
+import '../../../../../core/styling/app_colors.dart';
+import '../../../../../core/styling/app_fonts.dart';
+import '../../../../../core/constant/app_icon.dart';
+import '../../../../../core/constant/app_strings.dart';
+import '../../../data/model/playlist_model.dart';
+import '../../../logic/playlist/playlist_bloc.dart';
+import 'appbar_palylist_songs/appbar_playlist_songs_body.dart';
+import 'list_of_songs_content.dart';
+import 'button_middle_content.dart';
+import 'image_title_buttons_content.dart';
+import '../../../../songs/widgets/music_track/music_track_player.dart';
 
 class ContentPlaylistBody extends StatelessWidget {
   const ContentPlaylistBody(

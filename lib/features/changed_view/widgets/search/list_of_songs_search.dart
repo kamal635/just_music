@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/changed_view/logic/search_songs/search_songs_bloc.dart';
+import '../../../../core/helpers/navigation.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/shared_widgets/custom_loading.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../../../core/styling/app_fonts.dart';
+import '../../../songs/logic/audio_player/audio_player_bloc.dart';
+import '../../logic/search_songs/search_songs_bloc.dart';
 
 class ListOfSongsSearch extends StatelessWidget {
   const ListOfSongsSearch({super.key});

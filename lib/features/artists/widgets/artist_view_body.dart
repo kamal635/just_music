@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/shared_widgets/image_empty_list.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_images.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/artists/logic/artists/artists_bloc.dart';
-import 'package:just_music/features/artists/widgets/grid_view_artists.dart';
+import '../../../core/helpers/spacer.dart';
+import '../../../core/shared_widgets/custom_loading.dart';
+import '../../../core/shared_widgets/image_empty_list.dart';
+import '../../../core/styling/app_fonts.dart';
+import '../../../core/constant/app_images.dart';
+import '../../../core/constant/app_strings.dart';
+import '../logic/artists/artists_bloc.dart';
+import 'grid_view_artists.dart';
 
 class ArtistsViewBody extends StatelessWidget {
   const ArtistsViewBody({super.key});

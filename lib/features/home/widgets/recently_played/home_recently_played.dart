@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/home/widgets/custom_title_feature_home_view.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/widgets/song_card.dart';
+import '../../../../core/helpers/navigation.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/routes/string_route.dart';
+import '../../../../core/constant/app_strings.dart';
+import '../custom_title_feature_home_view.dart';
+import '../../../songs/logic/audio_player/audio_player_bloc.dart';
+import '../../../songs/widgets/song_card.dart';
 
 class HomeRecentlyPlayed extends StatefulWidget {
   const HomeRecentlyPlayed({super.key});

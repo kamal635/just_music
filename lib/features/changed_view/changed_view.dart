@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
-import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
-import 'package:just_music/features/home/home_view.dart';
-import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
-import 'package:just_music/features/songs/widgets/tab_bar/tab_bar_songs.dart';
-import 'package:just_music/features/songs/widgets/grant_permission.dart';
-import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
-import 'package:just_music/features/playlists/playlist_view.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/features/changed_view/widgets/search/section_search.dart';
+import '../../core/helpers/spacer.dart';
+import '../../core/shared_widgets/custom_icon_buttons.dart';
+import '../../core/shared_widgets/custom_loading.dart';
+import '../../core/constant/app_icon.dart';
+import '../../core/constant/app_strings.dart';
+import 'logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
+import '../home/home_view.dart';
+import '../songs/logic/check_permission/check_permission_bloc.dart';
+import '../songs/widgets/tab_bar/tab_bar_songs.dart';
+import '../songs/widgets/grant_permission.dart';
+import '../songs/widgets/music_track/music_track_player.dart';
+import '../playlists/playlist_view.dart';
+import '../../core/styling/app_colors.dart';
+import 'widgets/search/section_search.dart';
 
 ///** This page was created to navigate between pages in the bottomNavigationBar
 ///* while only changing the body */

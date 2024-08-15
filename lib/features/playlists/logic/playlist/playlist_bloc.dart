@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/data/repository/playlist_repo.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../data/model/playlist_model.dart';
+import '../../data/repository/playlist_repo.dart';
+import '../../../songs/data/model/song.dart';
 
 part 'playlist_event.dart';
 part 'playlist_state.dart';
