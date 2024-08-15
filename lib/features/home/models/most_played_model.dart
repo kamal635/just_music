@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../songs/data/model/song.dart';
 
 part 'most_played_model.g.dart';
 

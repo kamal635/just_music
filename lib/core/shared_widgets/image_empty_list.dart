@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_strings.dart';
+import '../helpers/spacer.dart';
+import '../styling/app_colors.dart';
+import '../styling/app_fonts.dart';
+import '../constant/app_strings.dart';
 
 class ImageEmptyList extends StatelessWidget {
   const ImageEmptyList({super.key, required this.image});

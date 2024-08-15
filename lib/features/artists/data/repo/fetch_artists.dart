@@ -1,4 +1,4 @@
-import 'package:just_music/features/artists/data/model/artists.dart';
+import '../model/artists.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchArtistsRepo {

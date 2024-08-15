@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
-import 'package:just_music/features/home/widgets/custom_title_feature_home_view.dart';
-import 'package:just_music/features/home/widgets/featured_songs/card_featured_songs.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/constant/app_strings.dart';
+import '../../../changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
+import '../custom_title_feature_home_view.dart';
+import 'card_featured_songs.dart';
+import '../../../songs/logic/audio_player/audio_player_bloc.dart';
+import '../../../songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 
 class HomeFeaturedSongs extends StatefulWidget {
   const HomeFeaturedSongs({super.key});

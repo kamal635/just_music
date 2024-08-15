@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
+import '../../../../../../core/helpers/navigation.dart';
+import '../../../../../../core/helpers/spacer.dart';
+import '../abstract_class_actions_song_menu.dart';
 
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../../../../../core/styling/app_colors.dart';
+import '../../../../../../core/styling/app_fonts.dart';
+import '../../../../../../core/constant/app_strings.dart';
+import '../../../../../songs/data/model/song.dart';
 
 class DetailSongAction extends SongMenuAction {
   final Song song;

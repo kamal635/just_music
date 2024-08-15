@@ -1,4 +1,4 @@
-import 'package:just_music/core/utils/app_strings.dart';
+import '../../../../core/constant/app_strings.dart';
 
 class TabBarSongsModel {
   final String name;

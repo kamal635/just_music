@@ -1,6 +1,6 @@
-import 'package:just_music/core/shared_widgets/custom_songs_view.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../../../core/shared_widgets/custom_songs_view.dart';
+import '../../../../core/constant/app_strings.dart';
+import '../../../songs/data/model/song.dart';
 
 class MostPlayedViewBody extends CustomSongsView {
   const MostPlayedViewBody({

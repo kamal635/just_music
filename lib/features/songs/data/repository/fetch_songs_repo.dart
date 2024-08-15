@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchSongsFromDeviceRepo {

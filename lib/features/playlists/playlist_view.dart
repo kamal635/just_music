@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/features/playlists/widgets/playlist_view_body.dart';
+import 'widgets/playlist_view_body.dart';
 
 class PlayListView extends StatelessWidget {
   const PlayListView({super.key});

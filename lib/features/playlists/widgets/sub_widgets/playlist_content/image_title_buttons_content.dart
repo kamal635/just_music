@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/core/shared_widgets/custom_shuffle_and_play_all_buttons.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/styling/app_linear.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
+import '../../../../../core/helpers/spacer.dart';
+import '../../../../../core/shared_widgets/custom_art_work.dart';
+import '../../../../../core/shared_widgets/custom_shuffle_and_play_all_buttons.dart';
+import '../../../../../core/styling/app_fonts.dart';
+import '../../../../../core/styling/app_linear.dart';
+import '../../../data/model/playlist_model.dart';
+import '../../../logic/playlist/playlist_bloc.dart';
 
 class ImageAndTitleAndButtonsContentPlaylist extends StatelessWidget {
   const ImageAndTitleAndButtonsContentPlaylist(

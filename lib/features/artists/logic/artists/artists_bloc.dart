@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:just_music/features/artists/data/model/artists.dart';
-import 'package:just_music/features/artists/data/repo/fetch_artists.dart';
+import '../../data/model/artists.dart';
+import '../../data/repo/fetch_artists.dart';
 
 part 'artists_event.dart';
 part 'artists_state.dart';

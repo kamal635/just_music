@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
-import 'package:just_music/core/shared_widgets/custom_shuffle_and_play_all_buttons.dart';
-import 'package:just_music/core/shared_widgets/image_empty_list.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_images.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/widgets/music_track/music_track_player.dart';
-import 'package:just_music/features/songs/widgets/song_card.dart';
+import '../helpers/navigation.dart';
+import '../helpers/spacer.dart';
+import 'custom_icon_buttons.dart';
+import 'custom_shuffle_and_play_all_buttons.dart';
+import 'image_empty_list.dart';
+import '../styling/app_colors.dart';
+import '../styling/app_fonts.dart';
+import '../constant/app_icon.dart';
+import '../constant/app_images.dart';
+import '../../features/songs/data/model/song.dart';
+import '../../features/songs/logic/audio_player/audio_player_bloc.dart';
+import '../../features/songs/widgets/music_track/music_track_player.dart';
+import '../../features/songs/widgets/song_card.dart';
 
 class CustomSongsView extends StatelessWidget {
   const CustomSongsView(

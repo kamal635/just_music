@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/core/utils/app_strings.dart';
+import '../../../../../core/constant/app_strings.dart';
 
 class TitleAlertDialog extends StatelessWidget {
   const TitleAlertDialog({super.key});

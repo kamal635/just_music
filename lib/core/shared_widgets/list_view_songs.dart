@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/widgets/song_card.dart';
+import '../../features/songs/data/model/song.dart';
+import '../../features/songs/logic/audio_player/audio_player_bloc.dart';
+import '../../features/songs/widgets/song_card.dart';
 
 class CustomSliverListSongs extends StatefulWidget {
   const CustomSliverListSongs({

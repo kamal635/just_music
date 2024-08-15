@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/features/albums/albums_view.dart';
-import 'package:just_music/features/artists/artists_view.dart';
-import 'package:just_music/features/songs/songs_view.dart';
-import 'package:just_music/features/songs/widgets/tab_bar/tab_bar_model.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../../../core/styling/app_fonts.dart';
+import '../../../albums/albums_view.dart';
+import '../../../artists/artists_view.dart';
+import '../../songs_view.dart';
+import 'tab_bar_model.dart';
 
 class TabBarSongsView extends StatefulWidget {
   const TabBarSongsView({super.key});

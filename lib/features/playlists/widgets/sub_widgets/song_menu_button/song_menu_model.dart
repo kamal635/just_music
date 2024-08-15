@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/add_to_favorite_action.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/add_to_playlist_action.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/details_song_action.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/actions_classes/remove_from_playlist_action.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/favorites/data/models/favorite_model.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import 'abstract_class_actions_song_menu.dart';
+import 'actions_classes/add_to_favorite_action.dart';
+import 'actions_classes/add_to_playlist_action.dart';
+import 'actions_classes/details_song_action.dart';
+import 'actions_classes/remove_from_playlist_action.dart';
+import '../../../../../core/styling/app_colors.dart';
+import '../../../../../core/constant/app_icon.dart';
+import '../../../../../core/constant/app_strings.dart';
+import '../../../../favorites/data/models/favorite_model.dart';
+import '../../../data/model/playlist_model.dart';
+import '../../../../songs/data/model/song.dart';
 
 class SongMenuModel {
   final IconData icon;

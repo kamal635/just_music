@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/card_add_songs_to_playlist.dart';
+import '../../../../../../core/helpers/navigation.dart';
+import '../../../../../../core/routes/string_route.dart';
+import '../../../../../../core/styling/app_colors.dart';
+import '../../../../../../core/constant/app_icon.dart';
+import '../../../../../../core/constant/app_strings.dart';
+import '../../../../../favorites/logic/favorite_songs/favorite_songs_bloc.dart';
+import '../../../../data/model/playlist_model.dart';
+import 'card_add_songs_to_playlist.dart';
 
 class SectionFavoriteSongsAddSongsToPlaylist extends StatelessWidget {
   const SectionFavoriteSongsAddSongsToPlaylist(
