@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:just_music/features/settings/settings_view.dart';
 import '../../features/albums/widgets/songs_album/body_songs_album.dart';
 import '../../features/artists/widgets/songs_artist/body_songs_artist.dart';
 import '../../features/changed_view/changed_view.dart';
@@ -27,6 +28,9 @@ abstract class AppRouter {
         return _buildRoute(RecentlyPlayedView(
           recentlyPlayed: argument?["songs"],
         ));
+
+      case RouterName.settingsView:
+        return _buildRoute(const SettingsView());
 
       case RouterName.mostPlayedView:
         return _buildRoute(MostPlayedView(
