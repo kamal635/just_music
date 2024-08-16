@@ -28,7 +28,7 @@ class SectionPlaylistsAddSongsToPlaylist extends StatelessWidget {
               return InkWell(
                 onTap: () {
                   context.pushNamed(
-                      RouterName.listOfSongsPlaylistSongsToAddToAddToPlaylist,
+                      RouterName.listOfSongsPlaylistSongsToAddToPlaylist,
                       arguments: {
                         AppArguments.songs: playlist.songs,
                         AppArguments.playlist: playlist,

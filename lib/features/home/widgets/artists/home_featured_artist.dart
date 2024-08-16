@@ -54,7 +54,7 @@ class HomeFeaturedArtists extends StatelessWidget {
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () {
-                          context.pushNamed(RouterName.songsArtist, arguments: {
+                          context.pushNamed(RouterName.artistSongs, arguments: {
                             AppArguments.artist: artist,
                           });
                         },

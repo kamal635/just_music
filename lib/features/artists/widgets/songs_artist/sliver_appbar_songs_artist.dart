@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../core/helpers/navigation.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_back.dart';
 import '../../../../core/shared_widgets/custom_art_work.dart';
-import '../../../../core/shared_widgets/custom_icon_buttons.dart';
 import '../../../../core/styling/app_colors.dart';
 import '../../../../core/styling/app_fonts.dart';
-import '../../../../core/constant/app_icon.dart';
 import '../../../../core/constant/app_images.dart';
 import '../../data/model/artists.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -26,12 +24,7 @@ class SliverAppBarSongsArtist extends StatelessWidget {
       surfaceTintColor: AppColor.primary,
 
       // Leading
-      leading: CustomIconButton(
-        onPressed: () {
-          context.pop();
-        },
-        icon: AppIcon.arrowBack,
-      ),
+      leading: const CustomIconBack(),
 
       flexibleSpace: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {

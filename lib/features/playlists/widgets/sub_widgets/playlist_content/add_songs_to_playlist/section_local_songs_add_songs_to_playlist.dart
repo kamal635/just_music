@@ -19,8 +19,7 @@ class SectionLocalSongsAddSongsToPlaylist extends StatelessWidget {
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            context.pushNamed(
-                RouterName.listOfSongsLocalSongsToAddToAddToPlaylist,
+            context.pushNamed(RouterName.listOfSongsLocalSongsToAddToPlaylist,
                 arguments: {
                   AppArguments.songs: state.songs,
                   AppArguments.playlistComeFromPreviousPage:

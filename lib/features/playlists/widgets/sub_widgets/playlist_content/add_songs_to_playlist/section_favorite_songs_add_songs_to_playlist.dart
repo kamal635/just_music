@@ -19,8 +19,7 @@ class SectionFavoriteSongsAddSongsToPlaylist extends StatelessWidget {
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            context.pushNamed(
-                RouterName.listOfSongsFavoriteToAddToAddToPlaylist,
+            context.pushNamed(RouterName.listOfSongsFavoriteToAddToPlaylist,
                 arguments: {
                   AppArguments.favoriteSong: state.favoriteSong,
                   AppArguments.playlistComeFromPreviousPage:

@@ -21,66 +21,71 @@ abstract class AppRouter {
     final argument = settings.arguments as Map?;
 
     switch (settings.name) {
+      //**********Initial View**********/
       case RouterName.changedView:
         return _buildRoute(const ChangedView());
 
-      case RouterName.recentlyPlayedView:
-        return _buildRoute(RecentlyPlayedView(
-          recentlyPlayed: argument?["songs"],
-        ));
-
-      case RouterName.settingsView:
-        return _buildRoute(const SettingsView());
-
-      case RouterName.mostPlayedView:
-        return _buildRoute(MostPlayedView(
-          songs: argument?["songs"],
-        ));
+      //**********Home View**********/
       case RouterName.homeView:
         return _buildRoute(const HomeView());
 
-      case RouterName.songsArtist:
-        return _buildRoute(SongsArtist(
-          artist: argument?["artist"],
-        ));
-
-      case RouterName.songsAlbums:
-        return _buildRoute(SongsAlbum(
-          album: argument?["album"],
-        ));
-
+      //**********Songs View**********/
       case RouterName.songsView:
         return _buildRoute(const SongsView());
 
-      case RouterName.playListView:
-        return _buildRoute(const PlayListView());
+      //**********Settings View**********/
+      case RouterName.settingsView:
+        return _buildRoute(const SettingsView());
 
+      //**********Favorite View**********/
       case RouterName.favoriteView:
         return _buildRoute(const FavoriteView());
 
-      case RouterName.listOfSongsView:
-        return _buildRoute(const SearchViewBody());
+      //**********Playlist View**********/
+      case RouterName.playListView:
+        return _buildRoute(const PlayListView());
 
+      //**********Artist Songs View**********/
+      case RouterName.artistSongs:
+        return _buildRoute(ArtistSong(
+          artist: argument?["artist"],
+        ));
+
+      //**********Album View**********/
+      case RouterName.AlbumSongs:
+        return _buildRoute(AlbumSongs(
+          album: argument?["album"],
+        ));
+
+      //**********Content Playlist Body**********/
       case RouterName.contentPlaylistBody:
         return _buildRoute(ContentPlaylistBody(
           index: argument?["index"],
           playlist: argument?["playlist"],
         ));
 
+      //**********Recently Played View**********/
+      case RouterName.recentlyPlayedView:
+        return _buildRoute(RecentlyPlayedView(
+          recentlyPlayed: argument?["songs"],
+        ));
+
+      //**********Most Played View**********/
+      case RouterName.mostPlayedView:
+        return _buildRoute(MostPlayedView(
+          songs: argument?["songs"],
+        ));
+
+      //**********List Of Songs View**********/
+      case RouterName.listOfSongsView:
+        return _buildRoute(const SearchViewBody());
       case RouterName.addSongsToPlayListsBody:
         return _buildRoute(AddSongsToPlayListsBody(
           playlistComeFromPreviousPage: argument?["playlist"],
         ));
 
-      case RouterName.listOfSongsFavoriteToAddToAddToPlaylist:
-        return _buildRoute(SongsFavoriteToAddToPlaylist(
-          playlistComeFromPreviousPage:
-              argument?["playlistComeFromPreviousPage"],
-          favoriteSong: argument?["favoriteSong"],
-          playlist: argument?["playlistComeFromPreviousPage"],
-        ));
-
-      case RouterName.listOfSongsLocalSongsToAddToAddToPlaylist:
+      //**********List Of Songs Local Songs To Add To Playlist**********/
+      case RouterName.listOfSongsLocalSongsToAddToPlaylist:
         return _buildRoute(SongsLocalToAddToPlaylist(
           playlistComeFromPreviousPage:
               argument?["playlistComeFromPreviousPage"],
@@ -88,11 +93,21 @@ abstract class AppRouter {
           playlist: argument?["playlistComeFromPreviousPage"],
         ));
 
-      case RouterName.listOfSongsPlaylistSongsToAddToAddToPlaylist:
+      //**********List Of Songs Playlist Songs To Add To Playlist**********/
+      case RouterName.listOfSongsPlaylistSongsToAddToPlaylist:
         return _buildRoute(SongsPlaylistToAddToPlaylist(
           playlistComeFromPreviousPage:
               argument?["playlistComeFromPreviousPage"],
           playlist: argument?["playlist"],
+        ));
+
+      //**********List Of Songs Favorite To Add To Playlist**********/
+      case RouterName.listOfSongsFavoriteToAddToPlaylist:
+        return _buildRoute(SongsFavoriteToAddToPlaylist(
+          playlistComeFromPreviousPage:
+              argument?["playlistComeFromPreviousPage"],
+          favoriteSong: argument?["favoriteSong"],
+          playlist: argument?["playlistComeFromPreviousPage"],
         ));
     }
     // When route does not exist

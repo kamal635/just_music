@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_back.dart';
 import '../../../../../../core/helpers/navigation.dart';
 import '../../../../../../core/shared_widgets/custom_elvated_button.dart';
 import '../../../../../../core/shared_widgets/custom_icon_buttons.dart';
@@ -35,14 +36,17 @@ class ListOfSongs extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: AppColor.primary,
         surfaceTintColor: AppColor.primary,
+
+        // title
         title: Text(
           title,
           style: AppFonts.medium_16,
         ),
-        leading: CustomIconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: AppIcon.arrowBack,
-        ),
+
+        // leading
+        leading: const CustomIconBack(),
+
+        // action
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 12.w),
@@ -56,6 +60,8 @@ class ListOfSongs extends StatelessWidget {
           )
         ],
       ),
+
+      // body page
       body: BlocBuilder<PlaylistBloc, PlaylistState>(
         builder: (context, state) {
           // Find the updated playlist from the state

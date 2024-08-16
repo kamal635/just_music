@@ -3,6 +3,7 @@
 abstract class AppStrings {
   static const String addSongs = "Add Songs";
   static const String unknown = "<unknown>";
+  static const String settings = "settings";
   static const String playAll = "Play All";
   static const String library = "Library";
   static const String confirm = "Confirm";
@@ -34,25 +35,28 @@ abstract class AppStrings {
   static const String songs = "Songs";
   static const String home = "Home";
 
-  static const String localSongs = "Local songs";
-  static const String folders = "Folders";
-
   static const String addToFavorite = "Add To Favorite";
   static const String favoriteSongs = "Favorite songs";
   static const String favorites = "Favorites";
   static const String favorite = "Favorite";
-
-  static const String searchByName = "Search for songs on device";
-  static const String emptySongs = "No items here yet.";
-  static const String search = "Search";
 
   static const String recentlyPlayedSongs = "Recently played songs";
   static const String mostPlayedSongs = "Most played songs";
   static const String recentlyPlayed = "Recently Played";
   static const String mostPlayed = "Most Played";
 
+  static const String searchByName = "Search for songs on device";
+  static const String emptySongs = "No items here yet.";
+  static const String search = "Search";
+
+  static const String localSongs = "Local songs";
+  static const String folders = "Folders";
+
   static const String featuredArtists = "Featured Artists";
   static const String featuredAlbums = "Featured Albums";
+
+  static const String privacy = "Privacy policy";
+  static const String terms = "Terms of use";
 
   static const String featuredSongs = "Featured Songs";
 
@@ -89,4 +93,11 @@ abstract class AppArguments {
   static const String songs = "songs";
   static const String playlistComeFromPreviousPage =
       "playlistComeFromPreviousPage";
+}
+
+//*******************App Links Url***********************/
+//******************************************************/
+abstract class AppLinksUrl {
+  static const String privacy = "https://www.google.com";
+  static const String terms = "https://www.google.com";
 }

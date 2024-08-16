@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/helpers/navigation.dart';
-import '../../../../../../core/shared_widgets/custom_icon_buttons.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_back.dart';
 import '../../../../../../core/styling/app_colors.dart';
-import '../../../../../../core/constant/app_icon.dart';
 import '../../../../data/model/playlist_model.dart';
 import 'action_button_playlist_songs.dart';
 
@@ -23,12 +21,7 @@ class AppBarPlaylistSongsBody extends StatelessWidget
       ],
 
       //* Leading Icon
-      leading: CustomIconButton(
-        onPressed: () {
-          context.pop();
-        },
-        icon: AppIcon.arrowBack,
-      ),
+      leading: const CustomIconBack(),
     );
   }
 
