@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../helpers/navigation.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_back.dart';
 import '../helpers/spacer.dart';
-import 'custom_icon_buttons.dart';
 import 'custom_shuffle_and_play_all_buttons.dart';
 import 'image_empty_list.dart';
 import '../styling/app_colors.dart';
 import '../styling/app_fonts.dart';
-import '../constant/app_icon.dart';
 import '../constant/app_images.dart';
 import '../../features/songs/data/model/song.dart';
 import '../../features/songs/logic/audio_player/audio_player_bloc.dart';
@@ -64,12 +62,7 @@ class CustomSongsView extends StatelessWidget {
               surfaceTintColor: AppColor.primary,
 
               // Leading
-              leading: CustomIconButton(
-                onPressed: () {
-                  context.pop();
-                },
-                icon: AppIcon.arrowBack,
-              ),
+              leading: const CustomIconBack(),
 
               flexibleSpace: LayoutBuilder(
                 builder: (BuildContext context, BoxConstraints constraints) {

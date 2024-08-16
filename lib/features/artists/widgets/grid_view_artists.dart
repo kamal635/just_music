@@ -44,7 +44,7 @@ class _GridViewArtistsState extends State<GridViewArtists> {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    context.pushNamed(RouterName.songsArtist, arguments: {
+                    context.pushNamed(RouterName.artistSongs, arguments: {
                       AppArguments.artist: artist,
                     });
                   },

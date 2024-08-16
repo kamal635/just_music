@@ -12,8 +12,8 @@ import 'section_songs_album.dart';
 import 'sliver_appbar_songs_album.dart';
 import '../../../songs/widgets/music_track/music_track_player.dart';
 
-class SongsAlbum extends StatelessWidget {
-  const SongsAlbum({super.key, required this.album});
+class AlbumSongs extends StatelessWidget {
+  const AlbumSongs({super.key, required this.album});
   final Album album;
   @override
   Widget build(BuildContext context) {

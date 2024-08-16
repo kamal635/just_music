@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../../../../../core/helpers/navigation.dart';
-import '../../../../../../core/shared_widgets/custom_icon_buttons.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_back.dart';
 import '../../../../../../core/styling/app_colors.dart';
 import '../../../../../../core/styling/app_fonts.dart';
-import '../../../../../../core/constant/app_icon.dart';
 import '../../../../../../core/constant/app_strings.dart';
 
 class AppBarAddSongsToPlaylist extends StatelessWidget
@@ -21,12 +19,7 @@ class AppBarAddSongsToPlaylist extends StatelessWidget
         style: AppFonts.medium_18,
       ),
       //* Leading Icon
-      leading: CustomIconButton(
-        onPressed: () {
-          context.pop();
-        },
-        icon: AppIcon.arrowBack,
-      ),
+      leading: const CustomIconBack(),
     );
   }
 

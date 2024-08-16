@@ -13,8 +13,8 @@ import 'section_songs_artist.dart';
 import 'sliver_appbar_songs_artist.dart';
 import '../../../songs/widgets/music_track/music_track_player.dart';
 
-class SongsArtist extends StatelessWidget {
-  const SongsArtist({super.key, required this.artist});
+class ArtistSong extends StatelessWidget {
+  const ArtistSong({super.key, required this.artist});
   final Artist artist;
   @override
   Widget build(BuildContext context) {

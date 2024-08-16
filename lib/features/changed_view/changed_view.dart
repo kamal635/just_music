@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:just_music/core/styling/app_fonts.dart';
+import 'package:just_music/features/settings/settings_view.dart';
 import '../../core/helpers/spacer.dart';
-import '../../core/shared_widgets/custom_icon_buttons.dart';
 import '../../core/shared_widgets/custom_loading.dart';
 import '../../core/constant/app_icon.dart';
 import '../../core/constant/app_strings.dart';
@@ -78,9 +77,8 @@ class _ChangedViewState extends State<ChangedView>
             backgroundColor: AppColor.primary,
             surfaceTintColor: AppColor.primary,
 
-            actions: [
-              CustomIconButton(
-                  onPressed: _onSettingsPressed, icon: AppIcon.settings),
+            actions: const [
+              SettingsView(),
             ],
           ),
           body: _views[state.currentPage],
@@ -181,10 +179,5 @@ class _ChangedViewState extends State<ChangedView>
       default:
         return AppStrings.home;
     }
-  }
-
-  //*** Icon Settings in appbar */
-  void _onSettingsPressed() {
-    // Handle settings button pressed
   }
 }

@@ -54,7 +54,7 @@ class HomeFeaturedAlbums extends StatelessWidget {
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent,
                         onTap: () {
-                          context.pushNamed(RouterName.songsAlbums, arguments: {
+                          context.pushNamed(RouterName.AlbumSongs, arguments: {
                             AppArguments.album: album,
                           });
                         },

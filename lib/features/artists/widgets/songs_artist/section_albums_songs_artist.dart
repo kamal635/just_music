@@ -53,7 +53,7 @@ class SectionAlbumsInSongsArtist extends StatelessWidget {
                           highlightColor: Colors.transparent,
                           onTap: () {
                             context
-                                .pushNamed(RouterName.songsAlbums, arguments: {
+                                .pushNamed(RouterName.AlbumSongs, arguments: {
                               AppArguments.album: album,
                             });
                           },
