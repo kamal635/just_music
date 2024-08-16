@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/styling/app_fonts.dart';
 import '../../core/helpers/spacer.dart';
 import '../../core/shared_widgets/custom_icon_buttons.dart';
 import '../../core/shared_widgets/custom_loading.dart';
@@ -139,7 +141,7 @@ class _ChangedViewState extends State<ChangedView>
                             spaceHeight(2),
                             Text(
                               _getLabelForIndex(index),
-                              style: TextStyle(color: color),
+                              style: AppFonts.normal_10.copyWith(color: color),
                             ),
                           ],
                         )),

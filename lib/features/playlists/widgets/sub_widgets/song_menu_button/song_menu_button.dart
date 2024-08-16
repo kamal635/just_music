@@ -14,8 +14,8 @@ import '../../../../songs/data/model/song.dart';
 
 class SongMenuButton extends StatelessWidget {
   const SongMenuButton(
-      {super.key, this.playlist, required this.song, this.hideIndex});
-  final Playlist? playlist;
+      {super.key, required this.playlist, required this.song, this.hideIndex});
+  final Playlist playlist;
   final Song song;
   final int? hideIndex;
   @override

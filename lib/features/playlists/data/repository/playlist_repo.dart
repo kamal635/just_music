@@ -123,7 +123,7 @@ class PlaylistRepoImpl implements PlaylistRepo {
     final key = box.keys.cast<int>().firstWhere((key) {
       final playlist = box.get(key) as Playlist;
       return playlist.id == playlistId;
-    });
+    }, orElse: () => 0);
 
     // Retrieve the playlist
     final playlist = box.get(key) as Playlist;
