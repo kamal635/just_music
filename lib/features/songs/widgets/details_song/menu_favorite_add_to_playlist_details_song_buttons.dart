@@ -41,6 +41,7 @@ class MenuAndFavoriteAndAddToPlaylistDetailsSongButtons
 
         //* Song Menu
         SongMenuButton(
+          playlist: Playlist(name: ""),
           song: song,
           hideIndex: 2,
         ),
