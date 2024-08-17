@@ -35,16 +35,20 @@ class SearchSongsBloc extends Bloc<SearchSongsEvent, SearchSongsState> {
 
     if (event.query.isNotEmpty) {
       final queryLower = event.query.toLowerCase();
+
       final filterSongs = _allSongs.where((song) {
         return song.title.toLowerCase().contains(queryLower);
       }).toList(growable: false); // Avoid growing the list after filtering
 
       // Emit only if the result changes
-      if (filterSongs != state.songs ||
-          state.searchStatus != SearchStatus.loaded) {
+      if (filterSongs.isNotEmpty) {
         emit(state.copyWith(
           songs: filterSongs,
           searchStatus: SearchStatus.loaded,
+        ));
+      } else {
+        emit(state.copyWith(
+          searchStatus: SearchStatus.notResault,
         ));
       }
     } else {

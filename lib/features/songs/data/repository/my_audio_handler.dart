@@ -44,10 +44,6 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     _player.loopModeStream.listen((_) {
       _updateController.add(_player.playbackEvent);
     });
-
-    _player.processingStateStream.listen((state) {
-      if (state == ProcessingState.idle) skipToNext();
-    });
   }
 
   ///********************** Play ************************/

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:just_music/core/constant/app_images.dart';
+import 'package:just_music/core/constant/app_strings.dart';
+import 'package:just_music/core/shared_widgets/image_empty_list.dart';
 import '../../../../core/helpers/navigation.dart';
 import '../../../../core/helpers/spacer.dart';
 import '../../../../core/shared_widgets/custom_loading.dart';
@@ -20,6 +23,7 @@ class ListOfSongsSearch extends StatelessWidget {
         final songs = state.songs;
         final loading = state.searchStatus == SearchStatus.loading;
         final loaded = state.searchStatus == SearchStatus.loaded;
+        final notReasult = state.searchStatus == SearchStatus.notResault;
 
         // Loading
         if (loading) {
@@ -31,6 +35,13 @@ class ListOfSongsSearch extends StatelessWidget {
           return const Center(child: Text(""));
         }
 
+        // Not Resault
+        if (notReasult) {
+          return const ImageEmptyList(
+            image: AppImages.emptySearch,
+            title: AppStrings.noResault,
+          );
+        }
         // Loaded
         if (loaded) {
           return Expanded(

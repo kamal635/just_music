@@ -22,7 +22,7 @@ class SearchViewBody extends StatelessWidget {
             spaceHeight(15),
 
             // List Of Songs
-            const ListOfSongsSearch(),
+            const Expanded(child: ListOfSongsSearch()),
           ],
         ),
       ),

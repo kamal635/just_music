@@ -92,14 +92,9 @@ class SectionAlbumsInSongsArtist extends StatelessWidget {
                                         ),
                                       ),
                                       spaceWidth(10),
-                                      Container(
-                                        height: 20.h,
-                                        width: 20.h,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(40.r),
-                                          color: AppColor.primary,
-                                        ),
+                                      CircleAvatar(
+                                        maxRadius: 13.r,
+                                        backgroundColor: AppColor.primary,
                                         child: IconButton(
                                           icon: Icon(
                                             AppIcon.play,

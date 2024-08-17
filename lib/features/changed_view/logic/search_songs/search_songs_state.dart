@@ -1,6 +1,6 @@
 part of 'search_songs_bloc.dart';
 
-enum SearchStatus { initial, loading, loaded, failure }
+enum SearchStatus { initial, loading, loaded, notResault, failure }
 
 class SearchSongsState extends Equatable {
   final List<Song>? songs;

@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/functions/flutter_toast.dart';
 import '../../../core/helpers/spacer.dart';
 import '../../../core/shared_widgets/custom_loading.dart';
-import '../../../core/shared_widgets/list_view_songs.dart';
+import 'list_view_songs.dart';
 import '../logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 import '../../../core/shared_widgets/image_empty_list.dart';
 import '../../../core/constant/app_images.dart';
@@ -62,7 +62,7 @@ class SongsViewBody extends StatelessWidget {
                 ),
 
                 // padding
-                sliverPadding(60),
+                sliverPadding(80),
               ],
             ),
           );

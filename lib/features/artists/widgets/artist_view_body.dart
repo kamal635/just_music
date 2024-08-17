@@ -23,7 +23,7 @@ class ArtistsViewBody extends StatelessWidget {
         if (state.artistsStatus == ArtistsStatus.loaded) {
           final artists = state.artists;
           if (artists.isEmpty) {
-            return const ImageEmptyList(image: AppImages.emptySongs);
+            return const ImageEmptyList(image: AppImages.emptyArtists);
           }
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -45,6 +45,8 @@ class ArtistsViewBody extends StatelessWidget {
                 GridViewArtists(
                   artists: state.artists,
                 ),
+
+                sliverPadding(80),
               ],
             ),
           );
