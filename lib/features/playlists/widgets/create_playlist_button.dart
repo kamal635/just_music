@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/alert_dialog/alert_dialog_body.dart';
+import '../../../core/shared_widgets/custom_elvated_button.dart';
+import '../../../core/shared_widgets/custom_icon_buttons.dart';
+import '../../../core/styling/app_colors.dart';
+import '../../../core/styling/app_fonts.dart';
+import '../../../core/constant/app_icon.dart';
+import '../../../core/constant/app_strings.dart';
+import '../logic/playlist/playlist_bloc.dart';
+import 'sub_widgets/alert_dialog/alert_dialog_body.dart';
 
 class CreatePlaylistButton extends StatelessWidget {
   const CreatePlaylistButton({

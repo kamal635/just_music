@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/artists/data/model/artists.dart';
+import '../../../core/helpers/navigation.dart';
+import '../../../core/helpers/spacer.dart';
+import '../../../core/routes/string_route.dart';
+import '../../../core/shared_widgets/custom_art_work.dart';
+import '../../../core/styling/app_colors.dart';
+import '../../../core/styling/app_fonts.dart';
+import '../../../core/constant/app_icon.dart';
+import '../../../core/constant/app_images.dart';
+import '../../../core/constant/app_strings.dart';
+import '../data/model/artists.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class GridViewArtists extends StatefulWidget {
@@ -43,7 +44,7 @@ class _GridViewArtistsState extends State<GridViewArtists> {
               Expanded(
                 child: InkWell(
                   onTap: () {
-                    context.pushNamed(RouterName.songsArtist, arguments: {
+                    context.pushNamed(RouterName.artistSongs, arguments: {
                       AppArguments.artist: artist,
                     });
                   },
@@ -66,6 +67,8 @@ class _GridViewArtistsState extends State<GridViewArtists> {
                             id: artist.id,
                             iconSize: 66.h,
                             artworkType: ArtworkType.ARTIST,
+                            isNullImage: true,
+                            nullArtworkWidget: AppImages.artist,
                           ),
 
                           //*icon as image

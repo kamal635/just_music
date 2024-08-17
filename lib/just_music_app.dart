@@ -2,18 +2,19 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/dependencey_injection.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/features/artists/logic/artists/artists_bloc.dart';
-import 'package:just_music/features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/routes/app_router.dart';
-import 'package:just_music/features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
-import 'package:just_music/features/changed_view/logic/search_songs/search_songs_bloc.dart';
+import 'core/helpers/dependencey_injection.dart';
+import 'core/routes/string_route.dart';
+import 'features/albums/logic/albums/albums_bloc.dart';
+import 'features/artists/logic/artists/artists_bloc.dart';
+import 'features/changed_view/logic/nav_bottom_bar/nav_bottom_bar_bloc.dart';
+import 'features/playlists/logic/playlist/playlist_bloc.dart';
+import 'features/songs/logic/check_permission/check_permission_bloc.dart';
+import 'core/styling/app_colors.dart';
+import 'core/routes/app_router.dart';
+import 'features/favorites/logic/favorite_songs/favorite_songs_bloc.dart';
+import 'features/songs/logic/audio_player/audio_player_bloc.dart';
+import 'features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
+import 'features/changed_view/logic/search_songs/search_songs_bloc.dart';
 
 class JustMusicApp extends StatelessWidget {
   const JustMusicApp({super.key, required this.audioHandler});
@@ -71,6 +72,11 @@ class JustMusicApp extends StatelessWidget {
           //* Artists Bloc
           BlocProvider(
             create: (context) => di<ArtistsBloc>()..add(LoadArtistEvent()),
+          ),
+
+          //* Albums Bloc
+          BlocProvider(
+            create: (context) => di<AlbumsBloc>()..add(LoadAlbumsEvent()),
           ),
 
           //* Playlist Bloc

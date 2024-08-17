@@ -2,14 +2,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/widgets/details_song/control_song_details_song_buttons.dart';
-import 'package:just_music/features/songs/widgets/details_song/image_title_details_song.dart';
-import 'package:just_music/features/songs/widgets/details_song/seekbar_details_song.dart';
-import 'package:just_music/features/songs/widgets/details_song/menu_favorite_add_to_playlist_details_song_buttons.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/shared_widgets/custom_art_work.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../logic/audio_player/audio_player_bloc.dart';
+import 'control_song_details_song_buttons.dart';
+import 'image_title_details_song.dart';
+import 'seekbar_details_song.dart';
+import 'menu_favorite_add_to_playlist_details_song_buttons.dart';
 
 Future<void> detailsSong({
   required BuildContext context,

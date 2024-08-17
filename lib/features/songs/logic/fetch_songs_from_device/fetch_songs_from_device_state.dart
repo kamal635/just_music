@@ -1,22 +1,23 @@
 part of 'fetch_songs_from_device_bloc.dart';
 
-enum FetchSongsStatus { initial, loading, loaded, failure }
+enum FetchSongsStatus { initial, loading, loadingMore, loaded, failure, empty }
 
-@immutable
 class FetchSongsFromDeviceState extends Equatable {
   final FetchSongsStatus fetchSongsStatus;
-  final List<Song>? songs;
+  final List<Song> songs;
   final String? errorMessage;
 
   const FetchSongsFromDeviceState({
     this.fetchSongsStatus = FetchSongsStatus.initial,
-    this.songs,
+    this.songs = const [],
     this.errorMessage,
   });
 
   FetchSongsFromDeviceState copyWith({
     FetchSongsStatus? fetchSongsStatus,
     List<Song>? songs,
+    int? lastLoadedSongId,
+    bool? hasMoreSongs,
     String? errorMessage,
   }) {
     return FetchSongsFromDeviceState(

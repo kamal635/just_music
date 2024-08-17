@@ -2,12 +2,12 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/functions/flutter_toast.dart';
-import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
+import '../../../../core/functions/flutter_toast.dart';
+import '../../../../core/shared_widgets/custom_icon_buttons.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../../../core/constant/app_icon.dart';
+import '../../data/model/song.dart';
+import '../../logic/audio_player/audio_player_bloc.dart';
 
 class ControlSongDetailsSongButtons extends StatelessWidget {
   const ControlSongDetailsSongButtons({

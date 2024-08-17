@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:just_music/core/functions/flutter_toast.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/song_menu_button/abstract_class_actions_song_menu.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/playlists/widgets/create_playlist_button.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/card_add_songs_to_playlist.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../../../../../core/functions/flutter_toast.dart';
+import '../../../../../../core/helpers/navigation.dart';
+import '../../../../../../core/helpers/spacer.dart';
+import '../abstract_class_actions_song_menu.dart';
+import '../../../../../../core/styling/app_colors.dart';
+import '../../../../../../core/styling/app_fonts.dart';
+import '../../../../../../core/constant/app_strings.dart';
+import '../../../../data/model/playlist_model.dart';
+import '../../../../logic/playlist/playlist_bloc.dart';
+import '../../../create_playlist_button.dart';
+import '../../playlist_content/add_songs_to_playlist/card_add_songs_to_playlist.dart';
+import '../../../../../songs/data/model/song.dart';
 
 //************** Add To Playlist Action  */
 class AddToPlaylistAction implements SongMenuAction {

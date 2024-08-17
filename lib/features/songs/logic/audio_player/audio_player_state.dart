@@ -7,6 +7,7 @@ enum AudioPlayerStatus {
   paused,
   shuffle,
   repeate,
+  failure,
 }
 
 class AudioPlayerState {

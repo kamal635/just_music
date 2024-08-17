@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchSongsFromDeviceRepo {
@@ -14,7 +14,7 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
 
   @override
   Future<List<Song>> fetchSongsFromDevice() async {
-    // fetch songs from device by on_audio_query package
+    // Fetch all songs but filter them manually to get only the next batch
     final listSongs = await audioQuery.querySongs(
       sortType: SongSortType.DATE_ADDED,
       orderType: OrderType.ASC_OR_SMALLER,
@@ -22,25 +22,22 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
       ignoreCase: true,
     );
 
-    // list of Song to add song after filttering
     final listSongsMp3 = <Song>[];
 
-    // Process songs asynchronously
-    await Future.forEach(listSongs, (song) async {
-      // Storage file song
-      final file = File(song.data);
+    // // Filter the songs starting from the last loaded song
+    // final filteredSongs =
+    //     listSongs.where((song) => song.id > lastId).take(batchSize);
 
-      // Check if file exists and other conditions
-      if (await file.exists() &&
+    for (var song in listSongs) {
+      File file = File(song.data);
+      if (file.existsSync() &&
           song.fileExtension == "mp3" &&
           song.duration != 0) {
-        // Fetch artwork for the song
         final artwork =
             await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
-        // Add song to list of songs
         listSongsMp3.add(Song.fromDevice(song, artwork));
       }
-    });
+    }
 
     return listSongsMp3;
   }

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../../../core/styling/app_fonts.dart';
+import '../../../../core/constant/app_icon.dart';
+import '../../../../core/constant/app_strings.dart';
 
 class CustomCardShuffleAndFavoriteHomeView extends StatelessWidget {
   const CustomCardShuffleAndFavoriteHomeView(

@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../../../core/constant/app_strings.dart';
+import '../model/playlist_model.dart';
+import '../../../songs/data/model/song.dart';
 
 abstract class PlaylistRepo {
   //* Open Box
@@ -123,7 +123,7 @@ class PlaylistRepoImpl implements PlaylistRepo {
     final key = box.keys.cast<int>().firstWhere((key) {
       final playlist = box.get(key) as Playlist;
       return playlist.id == playlistId;
-    });
+    }, orElse: () => 0);
 
     // Retrieve the playlist
     final playlist = box.get(key) as Playlist;

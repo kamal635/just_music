@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_back.dart';
+import '../../../../../../core/helpers/navigation.dart';
+import '../../../../../../core/shared_widgets/custom_elvated_button.dart';
+import '../../../../../../core/shared_widgets/custom_icon_buttons.dart';
+import '../../../../../../core/styling/app_colors.dart';
+import '../../../../../../core/styling/app_fonts.dart';
+import '../../../../../../core/constant/app_icon.dart';
+import '../../../../../../core/constant/app_strings.dart';
+import '../../../../data/model/playlist_model.dart';
+import '../../../../logic/playlist/playlist_bloc.dart';
+import '../../../../../songs/data/model/song.dart';
 
 class ListOfSongs extends StatelessWidget {
   final String title;
@@ -35,14 +36,17 @@ class ListOfSongs extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: AppColor.primary,
         surfaceTintColor: AppColor.primary,
+
+        // title
         title: Text(
           title,
           style: AppFonts.medium_16,
         ),
-        leading: CustomIconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: AppIcon.arrowBack,
-        ),
+
+        // leading
+        leading: const CustomIconBack(),
+
+        // action
         actions: [
           Padding(
             padding: EdgeInsets.only(right: 12.w),
@@ -56,6 +60,8 @@ class ListOfSongs extends StatelessWidget {
           )
         ],
       ),
+
+      // body page
       body: BlocBuilder<PlaylistBloc, PlaylistState>(
         builder: (context, state) {
           // Find the updated playlist from the state

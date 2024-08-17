@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/card_add_songs_to_playlist.dart';
-import 'package:just_music/features/songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
+import '../../../../../../core/helpers/navigation.dart';
+import '../../../../../../core/routes/string_route.dart';
+import '../../../../../../core/styling/app_colors.dart';
+import '../../../../../../core/constant/app_icon.dart';
+import '../../../../../../core/constant/app_strings.dart';
+import '../../../../data/model/playlist_model.dart';
+import 'card_add_songs_to_playlist.dart';
+import '../../../../../songs/logic/fetch_songs_from_device/fetch_songs_from_device_bloc.dart';
 
 class SectionLocalSongsAddSongsToPlaylist extends StatelessWidget {
   const SectionLocalSongsAddSongsToPlaylist(
@@ -19,8 +19,7 @@ class SectionLocalSongsAddSongsToPlaylist extends StatelessWidget {
       builder: (context, state) {
         return InkWell(
           onTap: () {
-            context.pushNamed(
-                RouterName.listOfSongsLocalSongsToAddToAddToPlaylist,
+            context.pushNamed(RouterName.listOfSongsLocalSongsToAddToPlaylist,
                 arguments: {
                   AppArguments.songs: state.songs,
                   AppArguments.playlistComeFromPreviousPage:
@@ -33,7 +32,7 @@ class SectionLocalSongsAddSongsToPlaylist extends StatelessWidget {
             colorIcon: AppColor.lightBlue,
             title: AppStrings.localSongs,
             isTrailing: true,
-            subtitle: state.songs?.length ?? 0,
+            subtitle: state.songs.length,
           ),
         );
       },

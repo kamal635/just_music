@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/songs/logic/check_permission/check_permission_bloc.dart';
+import '../../../core/helpers/spacer.dart';
+import '../../../core/shared_widgets/custom_elvated_button.dart';
+import '../../../core/styling/app_fonts.dart';
+import '../../../core/constant/app_strings.dart';
+import '../logic/check_permission/check_permission_bloc.dart';
 
 class GrantPermission extends StatelessWidget {
   const GrantPermission({

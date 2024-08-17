@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/shared_widgets/custom_art_work.dart';
-import 'package:just_music/core/shared_widgets/custom_icon_buttons.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/features/artists/data/model/artists.dart';
+import 'package:just_music/core/shared_widgets/custom_icon_back.dart';
+import '../../../../core/shared_widgets/custom_art_work.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../../../core/styling/app_fonts.dart';
+import '../../../../core/constant/app_images.dart';
+import '../../data/model/artists.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class SliverAppBarSongsArtist extends StatelessWidget {
@@ -25,12 +24,7 @@ class SliverAppBarSongsArtist extends StatelessWidget {
       surfaceTintColor: AppColor.primary,
 
       // Leading
-      leading: CustomIconButton(
-        onPressed: () {
-          context.pop();
-        },
-        icon: AppIcon.arrowBack,
-      ),
+      leading: const CustomIconBack(),
 
       flexibleSpace: LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
@@ -67,6 +61,8 @@ class SliverAppBarSongsArtist extends StatelessWidget {
                   id: artist.id,
                   iconSize: 66.h,
                   artworkType: ArtworkType.ARTIST,
+                  isNullImage: true,
+                  nullArtworkWidget: AppImages.artist,
                 ),
                 Container(
                   color: AppColor.primary.withAlpha(80),

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/appbar_add_song_to_playlist.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/section_favorite_songs_add_songs_to_playlist.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/section_local_songs_add_songs_to_playlist.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/section_playlists_add_songs_to_playlist.dart';
+import '../../../../../../core/helpers/spacer.dart';
+import '../../../../data/model/playlist_model.dart';
+import 'appbar_add_song_to_playlist.dart';
+import 'section_favorite_songs_add_songs_to_playlist.dart';
+import 'section_local_songs_add_songs_to_playlist.dart';
+import 'section_playlists_add_songs_to_playlist.dart';
 
 class AddSongsToPlayListsBody extends StatelessWidget {
   const AddSongsToPlayListsBody(

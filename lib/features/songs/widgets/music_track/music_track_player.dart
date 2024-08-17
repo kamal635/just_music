@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/songs/widgets/details_song/body_details.dart';
-import 'package:just_music/features/songs/widgets/music_track/button_music_track.dart';
-import 'package:just_music/features/songs/widgets/music_track/seek_bar.dart';
-import 'package:just_music/features/songs/widgets/music_track/title_and_image_music_track.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../logic/audio_player/audio_player_bloc.dart';
+import '../details_song/body_details.dart';
+import 'button_music_track.dart';
+import 'seek_bar.dart';
+import 'title_and_image_music_track.dart';
 
 class MusicTrackPlayer extends StatelessWidget {
   const MusicTrackPlayer({super.key});

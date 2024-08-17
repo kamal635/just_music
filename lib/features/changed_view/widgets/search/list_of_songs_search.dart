@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_loading.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
-import 'package:just_music/features/changed_view/logic/search_songs/search_songs_bloc.dart';
+import 'package:just_music/core/constant/app_images.dart';
+import 'package:just_music/core/constant/app_strings.dart';
+import 'package:just_music/core/shared_widgets/image_empty_list.dart';
+import '../../../../core/helpers/navigation.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/shared_widgets/custom_loading.dart';
+import '../../../../core/styling/app_colors.dart';
+import '../../../../core/styling/app_fonts.dart';
+import '../../../songs/logic/audio_player/audio_player_bloc.dart';
+import '../../logic/search_songs/search_songs_bloc.dart';
 
 class ListOfSongsSearch extends StatelessWidget {
   const ListOfSongsSearch({super.key});
@@ -20,6 +23,7 @@ class ListOfSongsSearch extends StatelessWidget {
         final songs = state.songs;
         final loading = state.searchStatus == SearchStatus.loading;
         final loaded = state.searchStatus == SearchStatus.loaded;
+        final notReasult = state.searchStatus == SearchStatus.notResault;
 
         // Loading
         if (loading) {
@@ -31,6 +35,13 @@ class ListOfSongsSearch extends StatelessWidget {
           return const Center(child: Text(""));
         }
 
+        // Not Resault
+        if (notReasult) {
+          return const ImageEmptyList(
+            image: AppImages.emptySearch,
+            title: AppStrings.noResault,
+          );
+        }
         // Loaded
         if (loaded) {
           return Expanded(

@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/home/widgets/custom_title_feature_home_view.dart';
-import 'package:just_music/features/home/widgets/most_played/card_most_played.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
+import '../../../../core/helpers/navigation.dart';
+import '../../../../core/helpers/spacer.dart';
+import '../../../../core/routes/string_route.dart';
+import '../../../../core/constant/app_strings.dart';
+import '../custom_title_feature_home_view.dart';
+import 'card_most_played.dart';
+import '../../../songs/logic/audio_player/audio_player_bloc.dart';
 
-class HomeMostPlayed extends StatelessWidget {
+class HomeMostPlayed extends StatefulWidget {
   const HomeMostPlayed({super.key});
+
+  @override
+  State<HomeMostPlayed> createState() => _HomeMostPlayedState();
+}
+
+class _HomeMostPlayedState extends State<HomeMostPlayed>
+    with SingleTickerProviderStateMixin {
+  double _opacity = 0.0;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      setState(() {
+        _opacity = 1.0;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,44 +47,48 @@ class HomeMostPlayed extends StatelessWidget {
           if (state.mostPlayed.isEmpty) {
             return const SizedBox();
           }
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // title And icon more
-              CustomTitleFeatureHomeView(
-                title: AppStrings.mostPlayed,
-                onTap: () {
-                  context.pushNamed(RouterName.mostPlayedView, arguments: {
-                    AppArguments.songs: songs,
-                  });
-                },
-              ),
-
-              spaceHeight(10),
-
-              // List of Most Played
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                clipBehavior: Clip.none,
-                child: Row(
-                  children: List.generate(subList.length, (index) {
-                    return InkWell(
-                      splashColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () {
-                        context
-                            .read<AudioPlayerBloc>()
-                            .add(SetAudioEvent(songs: songs, index: index));
-                      },
-                      child: CardMostPlayed(
-                        mostPlayedModel: subList[index],
-                      ),
-                    );
-                  }),
+          return AnimatedOpacity(
+            opacity: _opacity,
+            duration: const Duration(milliseconds: 500),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // title And icon more
+                CustomTitleFeatureHomeView(
+                  title: AppStrings.mostPlayed,
+                  onTap: () {
+                    context.pushNamed(RouterName.mostPlayedView, arguments: {
+                      AppArguments.songs: songs,
+                    });
+                  },
                 ),
-              ),
-              spaceHeight(30),
-            ],
+
+                spaceHeight(10),
+
+                // List of Most Played
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  clipBehavior: Clip.none,
+                  child: Row(
+                    children: List.generate(subList.length, (index) {
+                      return InkWell(
+                        splashColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () {
+                          context
+                              .read<AudioPlayerBloc>()
+                              .add(SetAudioEvent(songs: songs, index: index));
+                        },
+                        child: CardMostPlayed(
+                          mostPlayedModel: subList[index],
+                        ),
+                      );
+                    }),
+                  ),
+                ),
+                spaceHeight(30),
+              ],
+            ),
           );
         },
       ),

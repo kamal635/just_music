@@ -2,13 +2,13 @@ import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
-import 'package:just_music/features/songs/logic/audio_player/audio_player_bloc.dart';
+import '../helpers/spacer.dart';
+import 'custom_elvated_button.dart';
+import '../styling/app_colors.dart';
+import '../constant/app_icon.dart';
+import '../constant/app_strings.dart';
+import '../../features/songs/data/model/song.dart';
+import '../../features/songs/logic/audio_player/audio_player_bloc.dart';
 
 class CustomShuffleAndPlayAllButtons extends StatelessWidget {
   const CustomShuffleAndPlayAllButtons({super.key, required this.songs});

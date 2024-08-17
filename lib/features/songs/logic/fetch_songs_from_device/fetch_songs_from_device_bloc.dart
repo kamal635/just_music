@@ -1,17 +1,14 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
-import 'package:just_music/features/songs/data/repository/fetch_songs_repo.dart';
+import '../../data/model/song.dart';
+import '../../data/repository/fetch_songs_repo.dart';
 import 'package:meta/meta.dart';
 
 part 'fetch_songs_from_device_event.dart';
 part 'fetch_songs_from_device_state.dart';
 
-// BlocProvider instance in :
-// lib\features\home\widgets\list_view_card_song.dart
 class FetchSongsFromDeviceBloc
     extends Bloc<FetchSongsFromDeviceEvent, FetchSongsFromDeviceState> {
-  // final StoreSongsLocalRepoImpl storeSongsLocalRepoImpl;
   final FetchSongsFromDeviceRepoImpl fetchSongsFromDeviceRepoImpl;
 
   FetchSongsFromDeviceBloc({required this.fetchSongsFromDeviceRepoImpl})

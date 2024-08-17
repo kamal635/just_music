@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:hive/hive.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
+import '../../../../core/constant/app_strings.dart';
+import '../../../songs/data/model/song.dart';
 
 abstract class FavoriteRepo {
   Future<Box> openBox();
@@ -27,6 +29,22 @@ class FavoriteRepoImpl implements FavoriteRepo {
 
   @override
   List<Song> getSongs(Box box) {
-    return box.values.toList().cast<Song>();
+    // Fetch the current list of songs
+    final favoriteSongs = box.values.toList().cast<Song>();
+
+    // Filter the list to remove songs whose file path doesn't exist
+    final filteredList = favoriteSongs.where((song) {
+      final file = File(song.audioUrl!);
+      return file.existsSync(); // Keep only the songs whose file exists
+    }).toList();
+
+    // If there are any changes (songs removed), update the Hive box
+    if (filteredList.length != favoriteSongs.length) {
+      box.clear(); // Clear the existing entries
+      box.addAll(filteredList); // Add back the filtered list
+    }
+
+    // Return only the top 10 items
+    return filteredList.toList();
   }
 }

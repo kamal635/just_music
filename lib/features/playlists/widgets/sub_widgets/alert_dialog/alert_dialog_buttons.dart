@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:just_music/core/functions/flutter_toast.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
+import '../../../../../core/functions/flutter_toast.dart';
+import '../../../../../core/helpers/navigation.dart';
+import '../../../../../core/shared_widgets/custom_elvated_button.dart';
+import '../../../../../core/styling/app_colors.dart';
+import '../../../../../core/constant/app_strings.dart';
+import '../../../logic/playlist/playlist_bloc.dart';
 
 class ButtonsAlertDialog extends StatefulWidget {
   const ButtonsAlertDialog({super.key, required this.controller});

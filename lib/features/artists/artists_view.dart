@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/features/artists/widgets/artist_view_body.dart';
+import 'widgets/artist_view_body.dart';
 
 class ArtistsView extends StatelessWidget {
   const ArtistsView({super.key});

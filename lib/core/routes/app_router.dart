@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/features/artists/widgets/songs_artist/body_songs_artist.dart';
-import 'package:just_music/features/changed_view/changed_view.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/features/favorites/favorite_view.dart';
-import 'package:just_music/features/home/home_view.dart';
-import 'package:just_music/features/home/widgets/most_played/most_played_view.dart';
-import 'package:just_music/features/home/widgets/recently_played/recently_palyed_view.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/add_songs_to_playlist_body.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/extends_classes_from_list_of_songs.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/playlist_content/content_playlist_body.dart';
-import 'package:just_music/features/songs/songs_view.dart';
-import 'package:just_music/features/playlists/playlist_view.dart';
-import 'package:just_music/features/changed_view/widgets/search/search_view_body.dart';
+import 'package:just_music/features/settings/settings_view.dart';
+import '../../features/albums/widgets/songs_album/body_songs_album.dart';
+import '../../features/artists/widgets/songs_artist/body_songs_artist.dart';
+import '../../features/changed_view/changed_view.dart';
+import 'string_route.dart';
+import '../../features/favorites/favorite_view.dart';
+import '../../features/home/home_view.dart';
+import '../../features/home/widgets/most_played/most_played_view.dart';
+import '../../features/home/widgets/recently_played/recently_palyed_view.dart';
+import '../../features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/add_songs_to_playlist_body.dart';
+import '../../features/playlists/widgets/sub_widgets/playlist_content/add_songs_to_playlist/extends_classes_from_list_of_songs.dart';
+import '../../features/playlists/widgets/sub_widgets/playlist_content/content_playlist_body.dart';
+import '../../features/songs/songs_view.dart';
+import '../../features/playlists/playlist_view.dart';
+import '../../features/changed_view/widgets/search/search_view_body.dart';
 
 abstract class AppRouter {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -19,57 +21,71 @@ abstract class AppRouter {
     final argument = settings.arguments as Map?;
 
     switch (settings.name) {
+      //**********Initial View**********/
       case RouterName.changedView:
         return _buildRoute(const ChangedView());
 
-      case RouterName.recentlyPlayedView:
-        return _buildRoute(RecentlyPlayedView(
-          recentlyPlayed: argument?["songs"],
-        ));
-
-      case RouterName.mostPlayedView:
-        return _buildRoute(MostPlayedView(
-          songs: argument?["songs"],
-        ));
+      //**********Home View**********/
       case RouterName.homeView:
         return _buildRoute(const HomeView());
-      case RouterName.songsArtist:
-        return _buildRoute(SongsArtist(
-          artist: argument?["artist"],
-        ));
 
+      //**********Songs View**********/
       case RouterName.songsView:
         return _buildRoute(const SongsView());
 
-      case RouterName.playListView:
-        return _buildRoute(const PlayListView());
+      //**********Settings View**********/
+      case RouterName.settingsView:
+        return _buildRoute(const SettingsView());
 
+      //**********Favorite View**********/
       case RouterName.favoriteView:
         return _buildRoute(const FavoriteView());
 
-      case RouterName.listOfSongsView:
-        return _buildRoute(const SearchViewBody());
+      //**********Playlist View**********/
+      case RouterName.playListView:
+        return _buildRoute(const PlayListView());
 
+      //**********Artist Songs View**********/
+      case RouterName.artistSongs:
+        return _buildRoute(ArtistSong(
+          artist: argument?["artist"],
+        ));
+
+      //**********Album View**********/
+      case RouterName.AlbumSongs:
+        return _buildRoute(AlbumSongs(
+          album: argument?["album"],
+        ));
+
+      //**********Content Playlist Body**********/
       case RouterName.contentPlaylistBody:
         return _buildRoute(ContentPlaylistBody(
           index: argument?["index"],
           playlist: argument?["playlist"],
         ));
 
+      //**********Recently Played View**********/
+      case RouterName.recentlyPlayedView:
+        return _buildRoute(RecentlyPlayedView(
+          recentlyPlayed: argument?["songs"],
+        ));
+
+      //**********Most Played View**********/
+      case RouterName.mostPlayedView:
+        return _buildRoute(MostPlayedView(
+          songs: argument?["songs"],
+        ));
+
+      //**********List Of Songs View**********/
+      case RouterName.listOfSongsView:
+        return _buildRoute(const SearchViewBody());
       case RouterName.addSongsToPlayListsBody:
         return _buildRoute(AddSongsToPlayListsBody(
           playlistComeFromPreviousPage: argument?["playlist"],
         ));
 
-      case RouterName.listOfSongsFavoriteToAddToAddToPlaylist:
-        return _buildRoute(SongsFavoriteToAddToPlaylist(
-          playlistComeFromPreviousPage:
-              argument?["playlistComeFromPreviousPage"],
-          favoriteSong: argument?["favoriteSong"],
-          playlist: argument?["playlistComeFromPreviousPage"],
-        ));
-
-      case RouterName.listOfSongsLocalSongsToAddToAddToPlaylist:
+      //**********List Of Songs Local Songs To Add To Playlist**********/
+      case RouterName.listOfSongsLocalSongsToAddToPlaylist:
         return _buildRoute(SongsLocalToAddToPlaylist(
           playlistComeFromPreviousPage:
               argument?["playlistComeFromPreviousPage"],
@@ -77,11 +93,21 @@ abstract class AppRouter {
           playlist: argument?["playlistComeFromPreviousPage"],
         ));
 
-      case RouterName.listOfSongsPlaylistSongsToAddToAddToPlaylist:
+      //**********List Of Songs Playlist Songs To Add To Playlist**********/
+      case RouterName.listOfSongsPlaylistSongsToAddToPlaylist:
         return _buildRoute(SongsPlaylistToAddToPlaylist(
           playlistComeFromPreviousPage:
               argument?["playlistComeFromPreviousPage"],
           playlist: argument?["playlist"],
+        ));
+
+      //**********List Of Songs Favorite To Add To Playlist**********/
+      case RouterName.listOfSongsFavoriteToAddToPlaylist:
+        return _buildRoute(SongsFavoriteToAddToPlaylist(
+          playlistComeFromPreviousPage:
+              argument?["playlistComeFromPreviousPage"],
+          favoriteSong: argument?["favoriteSong"],
+          playlist: argument?["playlistComeFromPreviousPage"],
         ));
     }
     // When route does not exist

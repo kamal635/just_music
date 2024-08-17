@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:just_music/core/functions/flutter_toast.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/helpers/spacer.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/shared_widgets/custom_text_form_field.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
-import 'package:just_music/features/playlists/logic/playlist/playlist_bloc.dart';
+import '../../../../../../core/functions/flutter_toast.dart';
+import '../../../../../../core/helpers/navigation.dart';
+import '../../../../../../core/helpers/spacer.dart';
+import '../../../../../../core/shared_widgets/custom_elvated_button.dart';
+import '../../../../../../core/shared_widgets/custom_text_form_field.dart';
+import '../../../../../../core/styling/app_colors.dart';
+import '../../../../../../core/styling/app_fonts.dart';
+import '../../../../../../core/constant/app_strings.dart';
+import '../../../../data/model/playlist_model.dart';
+import '../../../../logic/playlist/playlist_bloc.dart';
 
 class ActionButtonAppBarPlaylistSongs extends StatelessWidget {
   const ActionButtonAppBarPlaylistSongs({super.key, required this.playlist});

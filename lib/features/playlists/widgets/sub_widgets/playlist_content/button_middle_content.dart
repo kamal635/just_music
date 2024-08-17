@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:just_music/core/helpers/navigation.dart';
-import 'package:just_music/core/routes/string_route.dart';
-import 'package:just_music/core/shared_widgets/custom_elvated_button.dart';
-import 'package:just_music/core/utils/app_icon.dart';
-import 'package:just_music/core/utils/app_strings.dart';
-import 'package:just_music/features/playlists/data/model/playlist_model.dart';
+import '../../../../../core/helpers/navigation.dart';
+import '../../../../../core/routes/string_route.dart';
+import '../../../../../core/shared_widgets/custom_elvated_button.dart';
+import '../../../../../core/constant/app_icon.dart';
+import '../../../../../core/constant/app_strings.dart';
+import '../../../data/model/playlist_model.dart';
 
 class ButtonMiddleContentPlaylist extends StatelessWidget {
   const ButtonMiddleContentPlaylist({super.key, required this.playlist});

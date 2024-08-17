@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:just_music/core/styling/app_colors.dart';
-import 'package:just_music/core/styling/app_fonts.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/alert_dialog/alert_dialog_buttons.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/alert_dialog/alert_dialog_content.dart';
-import 'package:just_music/features/playlists/widgets/sub_widgets/alert_dialog/alert_dialog_title.dart';
+import '../../../../../core/styling/app_colors.dart';
+import '../../../../../core/styling/app_fonts.dart';
+import 'alert_dialog_buttons.dart';
+import 'alert_dialog_content.dart';
+import 'alert_dialog_title.dart';
 
 class AlertDialogBody extends StatelessWidget {
   const AlertDialogBody({

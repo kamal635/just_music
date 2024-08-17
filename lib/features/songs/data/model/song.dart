@@ -4,7 +4,7 @@ import 'dart:typed_data';
 import 'package:audio_service/audio_service.dart';
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-import 'package:just_music/core/utils/app_strings.dart';
+import '../../../../core/constant/app_strings.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 part 'song.g.dart';

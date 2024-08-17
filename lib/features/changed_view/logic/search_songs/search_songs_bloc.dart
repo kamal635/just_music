@@ -1,18 +1,21 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:just_music/features/songs/data/model/song.dart';
-import 'package:just_music/features/songs/data/repository/fetch_songs_repo.dart';
+import '../../../songs/data/model/song.dart';
+import '../../../songs/data/repository/fetch_songs_repo.dart';
+import 'package:rxdart/rxdart.dart';
 
 part 'search_songs_event.dart';
 part 'search_songs_state.dart';
 
 class SearchSongsBloc extends Bloc<SearchSongsEvent, SearchSongsState> {
   final FetchSongsFromDeviceRepoImpl fetchSongsFromDeviceRepoImpl;
-  final List<Song> _allSongs = [];
+  List<Song> _allSongs = [];
+  bool _isFetched = false; // To check if songs are already fetched
 
   SearchSongsBloc({required this.fetchSongsFromDeviceRepoImpl})
       : super(const SearchSongsState()) {
-    on<SearchEvent>(_onSearchEvent);
+    on<SearchEvent>(_onSearchEvent,
+        transformer: debounce(const Duration(milliseconds: 300)));
     on<ResetSearchEvent>(_onResetSearchEvent);
   }
 
@@ -20,32 +23,43 @@ class SearchSongsBloc extends Bloc<SearchSongsEvent, SearchSongsState> {
     SearchEvent event,
     Emitter<SearchSongsState> emit,
   ) async {
-    // Emit a loading state while the search is being performed
-    emit(state.copyWith(
-      searchStatus: SearchStatus.loading,
-    ));
+    // Emit loading state only if the search is new and not cached
+    if (!_isFetched) {
+      emit(state.copyWith(
+        searchStatus: SearchStatus.loading,
+      ));
 
-    final songs = await fetchSongsFromDeviceRepoImpl.fetchSongsFromDevice();
-    _allSongs.addAll(songs);
-    // Check if the search query is not empty
+      _allSongs = await fetchSongsFromDeviceRepoImpl.fetchSongsFromDevice();
+      _isFetched = true; // Mark as fetched to avoid redundant fetches
+    }
+
     if (event.query.isNotEmpty) {
-      final queryLower = event.query
-          .toLowerCase(); // Convert the query to lowercase for case-insensitive search
-      final filterSongs = _allSongs.where((song) {
-        return song.title
-            .toLowerCase()
-            .contains(queryLower); // Filter songs based on the query
-      }).toList();
+      final queryLower = event.query.toLowerCase();
 
-      emit(state.copyWith(
-        songs: filterSongs,
-        searchStatus: SearchStatus.loaded,
-      ));
+      final filterSongs = _allSongs.where((song) {
+        return song.title.toLowerCase().contains(queryLower);
+      }).toList(growable: false); // Avoid growing the list after filtering
+
+      // Emit only if the result changes
+      if (filterSongs.isNotEmpty) {
+        emit(state.copyWith(
+          songs: filterSongs,
+          searchStatus: SearchStatus.loaded,
+        ));
+      } else {
+        emit(state.copyWith(
+          searchStatus: SearchStatus.notResault,
+        ));
+      }
     } else {
-      emit(state.copyWith(
-        songs: [],
-        searchStatus: SearchStatus.loaded,
-      ));
+      // Clear search results only if it’s necessary
+      if (state.songs!.isNotEmpty ||
+          state.searchStatus != SearchStatus.loaded) {
+        emit(state.copyWith(
+          songs: [],
+          searchStatus: SearchStatus.loaded,
+        ));
+      }
     }
   }
 
@@ -57,5 +71,9 @@ class SearchSongsBloc extends Bloc<SearchSongsEvent, SearchSongsState> {
       songs: [],
       searchStatus: SearchStatus.initial,
     ));
+  }
+
+  EventTransformer<SearchEvent> debounce<SearchEvent>(Duration duration) {
+    return (events, mapper) => events.debounceTime(duration).switchMap(mapper);
   }
 }
