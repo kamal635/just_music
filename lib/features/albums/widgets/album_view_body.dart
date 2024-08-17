@@ -23,7 +23,7 @@ class AlbumsViewBody extends StatelessWidget {
         if (state.albumsStatus == AlbumsStatus.loaded) {
           final albums = state.albums;
           if (albums.isEmpty) {
-            return const ImageEmptyList(image: AppImages.emptySongs);
+            return const ImageEmptyList(image: AppImages.emptyAlbums);
           }
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 12.w),
@@ -45,6 +45,7 @@ class AlbumsViewBody extends StatelessWidget {
                 GridViewAlbums(
                   albums: state.albums,
                 ),
+                sliverPadding(80),
               ],
             ),
           );

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:hive/hive.dart';
 import '../../../core/constant/app_strings.dart';
 import '../models/most_played_model.dart';
@@ -63,16 +65,28 @@ class MostPlayedRepoImpl implements MostPlayedRepo {
 
   ///*****************Get Songs*******************/
   //////*****************************************/
+
   @override
   List<MostPlayedModel> getSongs(Box box) {
+    // Fetch the current list of songs
     final listMostPlayed = box.values.toList().cast<MostPlayedModel>();
 
+    // Filter the list to remove songs whose file path doesn't exist
+    final filteredList = listMostPlayed.where((msp) {
+      final file = File(msp.song.audioUrl!);
+      return file.existsSync(); // Keep only the songs whose file exists
+    }).toList();
+
+    // If there are any changes (songs removed), update the Hive box
+    if (filteredList.length != listMostPlayed.length) {
+      box.clear(); // Clear the existing entries
+      box.addAll(filteredList); // Add back the filtered list
+    }
+
     // Ensure the list is sorted by play count in descending order
-    listMostPlayed.sort(
-      (a, b) => b.playCount.compareTo(a.playCount),
-    );
+    filteredList.sort((a, b) => b.playCount.compareTo(a.playCount));
 
     // Return only the top 10 items
-    return listMostPlayed.take(10).toList();
+    return filteredList.take(10).toList();
   }
 }

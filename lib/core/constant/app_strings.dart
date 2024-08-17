@@ -1,6 +1,7 @@
 //*********************App Strings***********************/
 //******************************************************/
 abstract class AppStrings {
+  static const String noResault = "No Resault";
   static const String addSongs = "Add Songs";
   static const String unknown = "<unknown>";
   static const String settings = "settings";

@@ -23,9 +23,10 @@ class CardFeaturedHomeView extends StatelessWidget {
         children: [
           // Art Work
           SizedBox(
+            width: 40.w,
+            height: 40.h,
             child: CustomArtWork(
               id: song.id,
-              radius: 12.r,
             ),
           ),
 

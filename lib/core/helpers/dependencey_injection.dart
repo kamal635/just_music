@@ -1,5 +1,6 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:get_it/get_it.dart';
+import 'package:just_music/core/helpers/cached_song.dart';
 import '../../features/albums/data/repo/fetch_albums.dart';
 import '../../features/albums/data/repo/fetch_songs_album.dart';
 import '../../features/albums/logic/albums/albums_bloc.dart';
@@ -54,12 +55,13 @@ Future<void> setUpDependincy() async {
   di.registerFactory<ArtistsBloc>(
       () => ArtistsBloc(fetchArtistsRepoImpl: di()));
   di.registerFactory<SongsArtistBloc>(
-      () => SongsArtistBloc(fetchSongsArtistImpl: di()));
+      () => SongsArtistBloc(fetchSongsArtistImpl: di(), cachedSongs: di()));
   di.registerFactory<AlbumsBloc>(() => AlbumsBloc(fetchAlbumsRepo: di()));
   di.registerFactory<SongsAlbumsBloc>(
-      () => SongsAlbumsBloc(fetchSongsAlbumImpl: di()));
+      () => SongsAlbumsBloc(fetchSongsAlbumImpl: di(), cachedSongs: di()));
   //======================= External Package ======================
   di.registerFactory<OnAudioQuery>(() => OnAudioQuery());
+  di.registerFactory<CachedSongs>(() => CachedSongs());
 
   //======================= AudioPlayerBloc ======================
   di.registerFactoryParam<AudioPlayerBloc, AudioHandler, void>(

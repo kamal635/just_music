@@ -6,8 +6,9 @@ import '../styling/app_fonts.dart';
 import '../constant/app_strings.dart';
 
 class ImageEmptyList extends StatelessWidget {
-  const ImageEmptyList({super.key, required this.image});
+  const ImageEmptyList({super.key, required this.image, this.title});
   final String image;
+  final String? title;
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -18,11 +19,11 @@ class ImageEmptyList extends StatelessWidget {
           children: [
             Image.asset(
               image,
-              height: 50.h,
+              height: 60.h,
             ),
             spaceHeight(10),
             Text(
-              AppStrings.emptySongs,
+              title ?? AppStrings.emptySongs,
               style: AppFonts.normal_12
                   .copyWith(color: AppColor.white.withAlpha(160)),
             ),
