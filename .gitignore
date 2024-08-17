@@ -79,3 +79,5 @@ ios/Runner/Assets.xcassets/
 ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
 ios/Runner/Info.plist
 web/splash/img/
+.dart_tool/package_config.json
+.dart_tool/package_config.json
