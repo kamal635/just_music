@@ -28,22 +28,6 @@ class CustomSongsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    Map<int, double> paddingMap = {
-      0: screenHeight,
-      1: screenHeight / 2,
-      2: screenHeight / 2,
-      3: screenHeight / 2,
-      4: screenHeight / 2.8,
-      5: screenHeight / 2.8,
-      6: screenHeight / 2.8,
-      7: screenHeight / 2.8,
-      8: screenHeight / 7.2,
-      9: screenHeight / 7.2,
-    };
-
-    double calculatePadding(int lenght) {
-      return paddingMap[lenght] ?? screenHeight / 8;
-    }
 
     return Scaffold(
       floatingActionButton: const MusicTrackPlayer(),
@@ -99,19 +83,27 @@ class CustomSongsView extends StatelessWidget {
                 },
               ),
             ),
+
             sliverPadding(20),
+
+            // Buttons
             SliverToBoxAdapter(
               child: Padding(
                 padding: EdgeInsets.only(right: 12.w),
                 child: CustomShuffleAndPlayAllButtons(songs: songs),
               ),
             ),
+
             sliverPadding(20),
+
+            // Image
             if (songs == null || songs!.isEmpty)
               SliverToBoxAdapter(
                 child: ImageEmptyList(image: image ?? AppImages.emptyFavorites),
               )
             else
+
+              // list of songs
               SliverList.builder(
                 itemCount: songs?.length,
                 itemBuilder: (context, index) {
@@ -128,7 +120,7 @@ class CustomSongsView extends StatelessWidget {
                   );
                 },
               ),
-            sliverPadding(calculatePadding(songs?.length ?? 0)),
+            sliverPadding(screenHeight / 1.4),
           ],
         ),
       ),

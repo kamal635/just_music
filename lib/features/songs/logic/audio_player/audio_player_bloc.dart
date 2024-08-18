@@ -167,6 +167,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   ) async {
     await _audioHandler.skipToNext();
     emit(state.copyWith(status: AudioPlayerStatus.playing));
+    add(AddToRecentlyAndMostPlayedEvent());
   }
 
   ///**************Skip To Previous Song*****************/
@@ -177,6 +178,7 @@ class AudioPlayerBloc extends Bloc<AudioPlayerEvent, AudioPlayerState> {
   ) async {
     await _audioHandler.skipToPrevious();
     emit(state.copyWith(status: AudioPlayerStatus.playing));
+    add(AddToRecentlyAndMostPlayedEvent());
   }
 
   ///*******************Skip by index********************/
