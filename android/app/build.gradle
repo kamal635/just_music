@@ -23,7 +23,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace "com.example.just_music"
+    namespace "com.techinnovators.justmusic"
     compileSdkVersion 34
     ndkVersion flutter.ndkVersion
 
@@ -41,21 +41,39 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId "com.example.just_music"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://docs.flutter.dev/deployment/android#reviewing-the-gradle-build-configuration.
+        applicationId "com.techinnovators.justmusic"
         minSdkVersion 21
-        targetSdkVersion flutter.targetSdkVersion
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
 
+    signingConfigs {
+        release {
+            keyAlias 'kamal ibrahim'
+            keyPassword '214635214635kK'
+            storeFile file('C:/Users/Lenovo/my-release-key.jks')
+            storePassword '214635214635kK'
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release // Correct reference to signingConfig
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    bundle {
+        language {
+            enableSplit = false // This is optional, disable language splits if not needed
+        }
+        density {
+            enableSplit = true // Enable screen density splits
+        }
+        abi {
+            enableSplit = true // Enable ABI splits (e.g., arm64, x86)
         }
     }
 }
