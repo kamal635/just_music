@@ -2,6 +2,7 @@ flutter_native_splash:
 # Android 12 below
   color: "#0C2530"
   image: assets/images/splash-screen-android-below-12.png
+  # Android 12 Above
   android_12:
     color: "#0C2530"
     image: assets/images/splash-screen-android-above-12.png

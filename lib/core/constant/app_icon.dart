@@ -26,6 +26,7 @@ abstract class AppIcon {
 
   static const IconData threeDotVertical = Icons.more_vert;
   static const IconData menu = Icons.notes;
+  static const IconData location = Icons.api;
 
   static const IconData settings = Icons.settings;
 

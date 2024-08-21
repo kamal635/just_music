@@ -10,10 +10,18 @@ part 'fetch_songs_from_device_state.dart';
 class FetchSongsFromDeviceBloc
     extends Bloc<FetchSongsFromDeviceEvent, FetchSongsFromDeviceState> {
   final FetchSongsFromDeviceRepoImpl fetchSongsFromDeviceRepoImpl;
+  final List<Song> _allSongs = [];
 
   FetchSongsFromDeviceBloc({required this.fetchSongsFromDeviceRepoImpl})
       : super(const FetchSongsFromDeviceState()) {
     on<LoadSongsFromDeviceEvent>(_onLoadSongsFromDeviceEvent);
+    on<LoadFixedSongsFromDeviceEvent>(_onLoadFixedSongsFromDeviceEvent);
+    _preloadSongs();
+  }
+
+  Future<void> _preloadSongs() async {
+    final songs = await fetchSongsFromDeviceRepoImpl.fetchSongs();
+    _allSongs.addAll(songs);
   }
 
   void _onLoadSongsFromDeviceEvent(
@@ -23,17 +31,35 @@ class FetchSongsFromDeviceBloc
     emit(state.copyWith(fetchSongsStatus: FetchSongsStatus.loading));
 
     try {
-      List<Song> songs =
-          await fetchSongsFromDeviceRepoImpl.fetchSongsFromDevice();
-
       emit(state.copyWith(
+        songs: _allSongs,
         fetchSongsStatus: FetchSongsStatus.loaded,
-        songs: songs,
       ));
     } catch (err) {
       emit(state.copyWith(
-          fetchSongsStatus: FetchSongsStatus.failure,
-          errorMessage: err.toString()));
+        fetchSongsStatus: FetchSongsStatus.failure,
+        errorMessage: err.toString(),
+      ));
+    }
+  }
+
+  void _onLoadFixedSongsFromDeviceEvent(
+    LoadFixedSongsFromDeviceEvent event,
+    Emitter<FetchSongsFromDeviceState> emit,
+  ) async {
+    emit(state.copyWith(fetchSongsStatus: FetchSongsStatus.loading));
+
+    try {
+      final fixedSongs = await fetchSongsFromDeviceRepoImpl.fetchFixedSongs();
+      emit(state.copyWith(
+        fixedSongs: fixedSongs,
+        fetchSongsStatus: FetchSongsStatus.loaded,
+      ));
+    } catch (err) {
+      emit(state.copyWith(
+        fetchSongsStatus: FetchSongsStatus.failure,
+        errorMessage: err.toString(),
+      ));
     }
   }
 }

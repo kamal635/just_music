@@ -4,7 +4,8 @@ import '../model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 abstract class FetchSongsFromDeviceRepo {
-  Future<List<Song>> fetchSongsFromDevice();
+  Future<List<Song>> fetchSongs();
+  Future<List<Song>> fetchFixedSongs();
 }
 
 class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
@@ -13,32 +14,54 @@ class FetchSongsFromDeviceRepoImpl implements FetchSongsFromDeviceRepo {
   FetchSongsFromDeviceRepoImpl({required this.audioQuery});
 
   @override
-  Future<List<Song>> fetchSongsFromDevice() async {
-    // Fetch all songs but filter them manually to get only the next batch
-    final listSongs = await audioQuery.querySongs(
+  Future<List<Song>> fetchSongs() async {
+    final songsModel = await audioQuery.querySongs(
       sortType: SongSortType.DATE_ADDED,
       orderType: OrderType.ASC_OR_SMALLER,
       uriType: UriType.EXTERNAL,
       ignoreCase: true,
     );
 
-    final listSongsMp3 = <Song>[];
-
-    // // Filter the songs starting from the last loaded song
-    // final filteredSongs =
-    //     listSongs.where((song) => song.id > lastId).take(batchSize);
-
-    for (var song in listSongs) {
-      File file = File(song.data);
-      if (file.existsSync() &&
-          song.fileExtension == "mp3" &&
-          song.duration != 0) {
+    final songs = await Future.wait(
+      songsModel
+          .where((song) =>
+              song.fileExtension == "mp3" &&
+              File(song.data).existsSync() &&
+              song.duration != 0)
+          .map((song) async {
         final artwork =
             await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
-        listSongsMp3.add(Song.fromDevice(song, artwork));
-      }
-    }
+        return Song.fromDevice(song, artwork);
+      }).toList(),
+    );
 
-    return listSongsMp3;
+    return songs;
+  }
+
+  @override
+  Future<List<Song>> fetchFixedSongs() async {
+    final songsModel = await audioQuery.querySongs(
+      sortType: SongSortType.DATE_ADDED,
+      orderType: OrderType.ASC_OR_SMALLER,
+      uriType: UriType.EXTERNAL,
+      ignoreCase: true,
+    );
+
+    final paginatedSongs = songsModel.take(50).toList();
+
+    final songs = await Future.wait(
+      paginatedSongs
+          .where((song) =>
+              song.fileExtension == "mp3" &&
+              File(song.data).existsSync() &&
+              song.duration != 0)
+          .map((song) async {
+        final artwork =
+            await audioQuery.queryArtwork(song.id, ArtworkType.AUDIO);
+        return Song.fromDevice(song, artwork);
+      }).toList(),
+    );
+
+    return songs;
   }
 }

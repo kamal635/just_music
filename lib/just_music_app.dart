@@ -40,15 +40,16 @@ class JustMusicApp extends StatelessWidget {
                 di<CheckPermissionBloc>()..add(StatusPermissionEvent()),
           ),
 
+          //* Search Bloc
           BlocProvider(
             create: (context) => di<SearchSongsBloc>(),
           ),
 
           //* Fetch Songs From Device Bloc
           BlocProvider(
-            create: (context) =>
-                di<FetchSongsFromDeviceBloc>()..add(LoadSongsFromDeviceEvent()),
-          ),
+              create: (context) => di<FetchSongsFromDeviceBloc>()
+                ..add(LoadFixedSongsFromDeviceEvent())
+                ..add(LoadSongsFromDeviceEvent())),
 
           //* Audio Player Bloc
           BlocProvider(

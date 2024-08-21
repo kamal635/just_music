@@ -35,10 +35,10 @@ class _HomeFeaturedSongsState extends State<HomeFeaturedSongs>
     return SliverToBoxAdapter(
       child: BlocBuilder<FetchSongsFromDeviceBloc, FetchSongsFromDeviceState>(
         builder: (context, state) {
-          if (state.songs.isEmpty) {
+          if (state.fixedSongs.isEmpty) {
             return const SizedBox();
           }
-          final songs = state.songs;
+          final songs = state.fixedSongs;
           final subSongs = songs.take(12).toList();
           return AnimatedOpacity(
             opacity: _opacity,

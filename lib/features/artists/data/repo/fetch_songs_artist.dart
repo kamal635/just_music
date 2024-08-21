@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../../../songs/data/model/song.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -13,7 +15,7 @@ class FetchSongsArtistImpl implements FetchSongsArtist {
 
   @override
   Future<List<Song>> fetchSongsArtist(int artistId) async {
-    final listSongsArtist = await _onAudioQuery.queryAudiosFrom(
+    final songsArtist = await _onAudioQuery.queryAudiosFrom(
       AudiosFromType.ARTIST_ID,
       artistId,
       sortType: SongSortType.DATE_ADDED,
@@ -21,14 +23,19 @@ class FetchSongsArtistImpl implements FetchSongsArtist {
       ignoreCase: true,
     );
 
-    List<Song> listSongs = [];
+    final songs = await Future.wait(
+      songsArtist
+          .where((song) =>
+              song.fileExtension == "mp3" &&
+              File(song.data).existsSync() &&
+              song.duration != 0)
+          .map((song) async {
+        final artwork =
+            await _onAudioQuery.queryArtwork(song.id, ArtworkType.ARTIST);
+        return Song.fromDevice(song, artwork);
+      }).toList(),
+    );
 
-    for (var song in listSongsArtist) {
-      final artwork =
-          await _onAudioQuery.queryArtwork(artistId, ArtworkType.ARTIST);
-      listSongs.add(Song.fromDevice(song, artwork));
-    }
-
-    return listSongs;
+    return songs;
   }
 }
