@@ -7,3 +7,5 @@ sealed class FetchSongsFromDeviceEvent extends Equatable {
 }
 
 class LoadSongsFromDeviceEvent extends FetchSongsFromDeviceEvent {}
+
+class LoadFixedSongsFromDeviceEvent extends FetchSongsFromDeviceEvent {}

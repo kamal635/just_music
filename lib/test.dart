@@ -1,77 +1,46 @@
-// // import 'package:flutter/material.dart';
-// // import 'package:just_music/core/utils/app_images.dart';
+import 'package:flutter/material.dart';
 
-// import 'package:flutter/material.dart';
+class TestSongs extends StatefulWidget {
+  const TestSongs({super.key});
 
-// import 'package:flutter/material.dart';
+  @override
+  State<TestSongs> createState() => _TestSongsState();
+}
 
-// import 'package:flutter/material.dart';
+class _TestSongsState extends State<TestSongs> {
+  late ScrollController _scrollController;
+  int itemCount = 80;
+  @override
+  void initState() {
+    _scrollController = ScrollController();
+    _scrollController.addListener(_onScroll);
+    super.initState();
+  }
 
-// import 'package:flutter/material.dart';
+  void _onScroll() {
+    final currentPosition = _scrollController.position.pixels;
+    final maxPosition = _scrollController.position.maxScrollExtent;
+    if (currentPosition >= maxPosition / 2) {
+      itemCount += 80;
+      setState(() {});
+    }
+  }
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       home: MyHomePage(),
-//     );
-//   }
-// }
-
-// class MyHomePage extends StatefulWidget {
-//   const MyHomePage({super.key});
-
-//   @override
-//   _MyHomePageState createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   final List<String> items = List.generate(1, (index) => 'Item ${index + 1}');
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       body: LayoutBuilder(
-//         builder: (BuildContext context, BoxConstraints constraints) {
-//           final double screenHeight = constraints.maxHeight;
-//           const double appBarHeight = 200.0; // Height of the SliverAppBar
-//           final double listHeight =
-//               items.length * 35; // Approximate height of list items
-
-//           return CustomScrollView(
-//             slivers: <Widget>[
-//               SliverAppBar(
-//                 title: const Text('SliverAppBar'),
-//                 floating: true,
-//                 pinned: true,
-//                 expandedHeight: appBarHeight,
-//                 flexibleSpace: FlexibleSpaceBar(
-//                   background: Container(color: Colors.blue),
-//                 ),
-//               ),
-//               SliverList(
-//                 delegate: SliverChildBuilderDelegate(
-//                   (BuildContext context, int index) {
-//                     return ListTile(
-//                       title: Text(items[index]),
-//                     );
-//                   },
-//                   childCount: items.length,
-//                 ),
-//               ),
-//               if (listHeight < screenHeight - appBarHeight)
-//                 SliverToBoxAdapter(
-//                   child: Container(
-//                     height: screenHeight - appBarHeight - listHeight,
-//                     color: Colors.transparent,
-//                   ),
-//                 ),
-//             ],
-//           );
-//         },
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        body: ListView.builder(
+      controller: _scrollController,
+      itemCount: itemCount,
+      itemBuilder: (context, index) {
+        return Text("$itemCount");
+      },
+    ));
+  }
+}

@@ -7,8 +7,6 @@ sealed class SearchSongsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class ResetSearchEvent extends SearchSongsEvent {}
-
 class SearchEvent extends SearchSongsEvent {
   final String query;
 
@@ -16,3 +14,5 @@ class SearchEvent extends SearchSongsEvent {
   @override
   List<Object> get props => [query];
 }
+
+class ResetSearchEvent extends SearchSongsEvent {}

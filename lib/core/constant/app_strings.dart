@@ -99,6 +99,8 @@ abstract class AppArguments {
 //*******************App Links Url***********************/
 //******************************************************/
 abstract class AppLinksUrl {
-  static const String privacy = "https://www.google.com";
-  static const String terms = "https://www.google.com";
+  static const String privacy =
+      "https://alaamhna3354.github.io/just-music/privacy-policy.html";
+  static const String terms =
+      "https://alaamhna3354.github.io/just-music/terms-of-use.html";
 }

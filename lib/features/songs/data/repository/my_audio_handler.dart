@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
@@ -10,9 +11,8 @@ Future<AudioHandler> initMyAudioHandler() async {
     config: const AudioServiceConfig(
       androidNotificationChannelId: 'com.mycompany.myapp.channel.audio',
       androidNotificationChannelName: 'Music playback',
-      androidNotificationOngoing:
-          false, // Allow the notification to be dismissed
-      androidStopForegroundOnPause: true, // Stop foreground service on pause
+      androidNotificationOngoing: false,
+      androidStopForegroundOnPause: true,
     ),
   );
 }
@@ -22,21 +22,16 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
   final _queue = ConcatenatingAudioSource(children: []);
   final _updateController = StreamController<PlaybackEvent>.broadcast();
 
-  ///*********** Constractor My AudioHandler ************/
-  ///***************************************************/
   MyAudioHandler() {
     _loadEmptyPlaylist();
     _listenForDurationChanges();
 
-    // Redirect events from the update controller to the playback state
     _updateController.stream.map(_transformEvent).pipe(playbackState);
 
-    // Listen to player events and add them to the update controller
     _player.playbackEventStream.listen((event) {
       _updateController.add(event);
     });
 
-    // Listen to shuffle mode changes
     _player.shuffleModeEnabledStream.listen((_) {
       _updateController.add(_player.playbackEvent);
     });
@@ -46,26 +41,17 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     });
   }
 
-  ///********************** Play ************************/
-  ///***************************************************/
   @override
   Future<void> play() => _player.play();
 
-  ///********************** Pause ***********************/
-  ///***************************************************/
   @override
   Future<void> pause() => _player.pause();
 
-  ///******************** Stop **************************/
-  ///***************************************************/
   @override
   Future<void> stop() async {
     await _player.stop();
     await super.stop();
   }
-
-  ///****************** Skip To Next ********************/
-  ///***************************************************/
 
   @override
   Future<void> skipToNext() async {
@@ -78,8 +64,6 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     }
   }
 
-  ///***************** Skip To Previous *****************/
-  ///***************************************************/
   @override
   Future<void> skipToPrevious() async {
     if (_player.loopMode == LoopMode.one) {
@@ -91,13 +75,9 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     }
   }
 
-  ///***************** Seek Duration ********************/
-  ///***************************************************/
   @override
   Future<void> seek(Duration position) => _player.seek(position);
 
-  ///**************** Set Shuffle Mode ******************/
-  ///***************************************************/
   @override
   Future<void> setShuffleMode(AudioServiceShuffleMode shuffleMode) async {
     final enabled = shuffleMode == AudioServiceShuffleMode.all;
@@ -109,53 +89,63 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     _updateController.add(_player.playbackEvent);
   }
 
-  ///**************** Set Repeat Mode ******************/
-  ///***************************************************/
   @override
   Future<void> setRepeatMode(AudioServiceRepeatMode repeatMode) async {
     switch (repeatMode) {
       case AudioServiceRepeatMode.none:
         _player.setLoopMode(LoopMode.off);
+        break;
       case AudioServiceRepeatMode.one:
         _player.setLoopMode(LoopMode.one);
+        break;
       case AudioServiceRepeatMode.all:
         _player.setLoopMode(LoopMode.all);
+        break;
       case AudioServiceRepeatMode.group:
         return;
     }
     _updateController.add(_player.playbackEvent);
   }
 
-  ///***************** Skip To Queue Item ***************/
-  ///***************************************************/
   @override
   Future<void> skipToQueueItem(int index) =>
       _player.seek(Duration.zero, index: index);
 
-  ///***************** Add Queue Items ******************/
-  ///***************************************************/
   @override
   Future<void> addQueueItems(List<MediaItem> mediaItems) async {
-    // Clear the existing _queue
-    await _queue.clear();
+    try {
+      await _queue.clear();
 
-    // Map mediaItems to audioSources
-    final audioSources = mediaItems
-        .map((mediaItem) => AudioSource.uri(
-              Uri.parse(mediaItem.extras!['audioUrl'] as String),
-              tag: mediaItem,
-            ))
-        .toList();
+      final audioSources = mediaItems
+          .where((mediaItem) {
+            final filePath = mediaItem.extras!['audioUrl'] as String;
+            final fileExists = File(filePath).existsSync();
+            if (!fileExists) {
+              debugPrint("File not found: $filePath");
+            }
+            return fileExists;
+          })
+          .map((mediaItem) => AudioSource.uri(
+                Uri.parse(mediaItem.extras!['audioUrl'] as String),
+                tag: mediaItem,
+              ))
+          .toList();
 
-    // Add new audioSources to the queue
-    _queue.addAll(audioSources);
+      if (audioSources.isEmpty) {
+        debugPrint("No valid audio files to play.");
+        return;
+      }
 
-    final newQueue = queue.value..addAll(mediaItems);
-    queue.add(newQueue);
+      _queue.addAll(audioSources);
+
+      final newQueue = queue.value..addAll(mediaItems);
+      queue.add(newQueue);
+    } catch (e) {
+      debugPrint("Error in add queue items: ${e.toString()}");
+      skipToNext();
+    }
   }
 
-  ///************** Load Empty Playlist *****************/
-  ///***************************************************/
   Future<void> _loadEmptyPlaylist() async {
     try {
       await _player.setAudioSource(_queue);
@@ -164,17 +154,14 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     }
   }
 
-  //** [durationStream] this give us an update every time the duration
-  //** of the song that the audio player is currently playing changes
   void _listenForDurationChanges() {
     _player.durationStream.listen((duration) {
-      var index =
-          _player.currentIndex; // Index of the current song being played
-      final newQueue = queue.value; // current playback queue
+      var index = _player.currentIndex;
+      final newQueue = queue.value;
 
-      if (index == null || newQueue.isEmpty) return; // there is no song
+      if (index == null || newQueue.isEmpty) return;
 
-      if (index <= newQueue.length) {
+      if (index < newQueue.length) {
         final oldMediaItem = newQueue[index];
         final newMediaItem = oldMediaItem.copyWith(duration: duration);
         newQueue[index] = newMediaItem;
@@ -184,8 +171,6 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     });
   }
 
-  ///**************** Transform Event *******************/
-  ///***************************************************/
   PlaybackState _transformEvent(PlaybackEvent event) {
     return PlaybackState(
       playing: _player.playing,
@@ -212,8 +197,8 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       controls: [
         MediaControl.skipToPrevious,
         if (_player.playing) MediaControl.pause else MediaControl.play,
+        MediaControl.stop,
         MediaControl.skipToNext,
-        closeControl
       ],
       systemActions: {
         MediaAction.seek,
@@ -222,12 +207,6 @@ class MyAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
       },
     );
   }
-
-  final MediaControl closeControl = const MediaControl(
-    androidIcon: 'drawable/ic_stat_close',
-    label: 'close',
-    action: MediaAction.stop,
-  );
 
   void closeListeners() {
     _updateController.close();
