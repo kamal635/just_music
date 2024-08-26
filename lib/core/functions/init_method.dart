@@ -34,7 +34,7 @@ Future<void> initMethod() async {
     systemNavigationBarColor: AppColor.navBottomBar,
   ));
 
-  // SystemChrome.setPreferredOrientations([
-  //   DeviceOrientation.portraitUp,
-  // ]);
+  SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+  ]);
 }
